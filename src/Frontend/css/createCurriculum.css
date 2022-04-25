@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
+
+/* Início BackGroundImage Cadatro */
 .bodyCreateCurriculum {
     margin: 0px;
 }
@@ -37,3 +39,58 @@
         background-image: url('../images/imageForTextTeste.png');
     }
 }
+
+/* Fim BackGroundImage Cadatro */
+
+/* Inicio NavBar */
+
+nav{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+}
+.navbar-nav{
+margin-left: auto;
+}
+
+.nav-item a{
+font-size: 16px;
+color: #280044;
+text-transform: uppercase;
+text-decoration: none;
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f8f9fa;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+}
+
+.dropdown-content a {
+padding: 12px 16px;
+display: block;
+}
+
+.dropdown-content a:hover {
+background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+.custom-toggler .navbar-toggler-icon {
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.custom-toggler.navbar-toggler {
+border-color: #ddd;
+}
+
+/* Fim NavBar */
