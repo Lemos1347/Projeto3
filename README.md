@@ -8,13 +8,13 @@
 
 ## Nome do Grupo
 
-## Integrantes: <a href="https://www.linkedin.com/in/victorbarq/">Goku Sayajin</a>, <a href="https://www.linkedin.com/in/victorbarq/">Saitama One</a>, <a href="https://www.linkedin.com/in/victorbarq/">Ikki de Fenix</a>, <a href="https://www.linkedin.com/in/victorbarq/">Yusuke Urameshi</a>, <a href="https://www.linkedin.com/in/victorbarq/">Roronoa Zoro</a>
+## Integrantes: <a href="https://www.linkedin.com/in/victorbarq/">Gustavo Ferreira De Oliveira</a>, <a href="https://www.linkedin.com/in/victorbarq/">Henrique Lemos</a>, <a href="https://www.linkedin.com/in/victorbarq/">Pedro Hagge Baptista</a>, <a href="https://www.linkedin.com/in/victorbarq/">Gabriel Yin</a>, <a href="https://www.linkedin.com/in/victorbarq/">Mike Rahmoun Mouadeb</a>, <a href="https://www.linkedin.com/in/victorbarq/">Rafael Cabral</a>
 
 ## Descrição
 
 📜 Descrição curta sobre o que seu projeto faz.
 <br><br>
-Meu projeto é um exemplo de como utilizar o github.
+Nosso projeto é um site para a BIT (Brazilians In Tech) cujo o objetivo é ajudar mulheres que tenham interesse em ingressar no mercado de trabalho da tecnologia, sendo assim, nesse projeto temos o objetivo de primeiramante efetuar uma padronização no nome das vagas já existentes no sistema da BIT, garantindo então uma facilidade para as usuárias enquanto essas estiverem buscando por vagas desejáveis, ademais nós também temos como prioridade criar um novo sistema para o site da BIT que será responsável por encontrar, após o cadastro da usuária, as vagas que mais se assemelham com o perfil daquela usuária que acabou de se cadatrar, isso através das soft-skills, hobbies, interesses, etc. 
 <br><br>
 <p align="center">
 <img src="https://pix4free.org/assets/library/2021-01-20/originals/game.jpg" alt="NOME DO JOGO" border="0">
