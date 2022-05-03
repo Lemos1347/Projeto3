@@ -1,3 +1,13 @@
+:root {
+  --roxo-padrao: #530084;
+  --roxo-hover: #280044;
+  --amarelo-padrao: #F3C42E;
+  --amarelo-hover: #F89F4F;
+  --branco-padrao: #FFFFFF;
+  --preto-padrao: #000000;
+  --cinza-claro-fundo: #EFEFEF;
+}
+
 @font-face {
     font-family: 'nunito';
     src: url('../fonts/Nunito-Regular.ttf');
@@ -184,4 +194,24 @@ h1{
 }
 .btnSaveCurriculum:hover{
   background-color: #280044;
+}
+
+.alertContainer {
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  display: none;
+}
+
+.alertDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  width: 78%;
+  height: 40px;
+  border-radius: 12px;
+  gap: 5px;
+  color: white;
 }

@@ -97,6 +97,14 @@
         <div class="col-12">
           <h1>Cadastro Currículo</h1>
         </div>
+        <!-- Alert -->
+        <div class="col-sm-12 alertContainer" id = "alertContainer">
+          <div class="alertDiv">
+            <img src="../images/iconError.png" style="width: 30px; height: 30px; color: white;">
+            <p style="margin-bottom: 0px;">Lorem Ipsum</p>
+          </div>
+        </div>
+        <!-- Alert -->
         <div class="col-sm-12 col-md-6 listaInputs">
           <div class="row inputDiv">
             <div class="col-10 ">
@@ -148,7 +156,7 @@
           </div>
         </div>
         <div class="col-12 listaInputs">
-          <button class="btnSaveCurriculum">Salvar Currículo</button>
+          <button class="btnSaveCurriculum" onclick="verifyInfos()">Salvar Currículo</button>
         </div>
       </div>
     </div>
@@ -211,6 +219,9 @@
     </div>
   </footer>
   <!-- Footer -->
+
+  <!-- JavaScript File -->
+  <script src="../js/createCurriculum.js"></script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>
