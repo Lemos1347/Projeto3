@@ -6,6 +6,7 @@
   --branco-padrao: #FFFFFF;
   --preto-padrao: #000000;
   --cinza-claro-fundo: #EFEFEF;
+  --cinza-fundo: #C4C4C4;
 }
 
 @font-face {
@@ -133,6 +134,11 @@ h1{
   margin-top: 25px;
 }
 
+.bodyHubVagas {
+  margin-top: 25px;
+  text-align: center;
+}
+
 .bodyCadastroCurriculo h1 {
   color: #280044;
   justify-content: center;
@@ -223,4 +229,45 @@ h1{
   border-radius: 12px;
   gap: 5px;
   color: white;
+}
+
+.listFilters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.searchIcon {
+  position: absolute;
+  margin-left: -165px;
+}
+
+.inputSearchHubVagas {
+  background-color: var(--cinza-fundo);
+  height: 40px;
+  border-radius: 8px;
+  border: 0;
+  outline: 0;
+  padding-left: 45px;
+  font-family: 'nunito';
+  color: var(--roxo-padrao);
+}
+
+.inputSearchHubVagas::placeholder {
+  font-family: 'nunito';
+  color: var(--roxo-padrao);
+}
+
+.btnForFiltrarIcon {
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+.btnForFiltrarIcon:focus {
+  outline: 0;
+  border: 0;
+  background-color: transparent;
 }
