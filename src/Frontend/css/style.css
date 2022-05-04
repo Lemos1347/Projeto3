@@ -408,3 +408,29 @@ font-size: 12pt;
   color: white;
   font-family: "nunito";
 }
+/* Style ADM  vaga cadastro*/
+
+.newUserButtonADM{
+  width: 80%;
+  height: 45px;
+  border-radius: 23px;
+  background-color: var(--amarelo-padrao);
+  font-family: "Nunito";
+  color: var(--branco-padrao);
+  border-color: var(--amarelo-padrao);
+  border: 0;
+  font-size: 18pt;
+}
+
+.newCompanyADM{
+  width: 80%;
+  height: 45px;
+  border-radius: 23px;
+  background-color: var(--roxo-padrao);
+  font-family: "Nunito";
+  color: var(--branco-padrao);
+  border-color: var(--roxo-padrao);
+  border: 0;
+  font-size: 18pt;
+  margin-top: 3%;
+}
