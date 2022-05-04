@@ -7,6 +7,9 @@
   --preto-padrao: #000000;
   --cinza-claro-fundo: #EFEFEF;
   --cinza-fundo: #C4C4C4;
+  --shadow-green: #347601;
+  --shadow-yellow: #EAD200;
+  --shadow-red: #760101;
 }
 
 @font-face {
@@ -270,4 +273,74 @@ h1{
   outline: 0;
   border: 0;
   background-color: transparent;
+}
+
+/* Início HubVagasComponent */
+.divRightHubVagasComponent{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.divRightHubVagasComponent p{
+  text-align: start;
+  height: 50px;
+}
+
+.divBtnSeeMore {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.vagaComponent {
+  width: 90%;
+  height: 110px;
+  background-color: #AAAAAA;
+  border-radius: 10px;
+}
+
+.bodyVagaComponent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 110px;
+  margin-top: 40px;
+}
+
+.btnSeeMore {
+  background-color: var(--amarelo-padrao);
+  height: 25px;
+  width: 85px;
+  border-radius: 22px;
+  font-size: 10pt;
+  color: var(--branco-padrao);
+  border: 0px;
+  outline: 0px;
+  margin-right: 10px;
+}
+
+.btnSeeMore:hover {
+  background-color: var(--amarelo-hover);
+}
+
+.btnSeeMore:focus {
+  outline: 0;
+}
+
+.bodyHubVagas {
+  margin-bottom: 150px;
+}
+
+.bodyFiltersHubVagas {
+  background-color: var(--cinza-fundo);
+  width: 80%;
+  height: 450px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  border-radius: 12px;
+  display: none;
+  justify-content: center;
+  align-content: center;
 }

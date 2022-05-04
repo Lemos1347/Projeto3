@@ -92,23 +92,45 @@
     <!-- Main-->
     <main>
         <div class="container">
-            <div class="row d-flex justify-content-center bodyHubVagas">
+            <div class="row d-flex justify-content-center bodyHubVagas" id = 'containerOfAll'>
                 <div class="col-sm-12">
                     <h1>Vagas</h1>
                 </div>
                 <div class="col-sm-12 mt-2">
                     <div class = 'listFilters'>
-                        <button class="btnForFiltrarIcon"><img src = '../images/filtrarIcon.png' style="height: 40px; width: 40px;"></button>
+                        <button class="btnForFiltrarIcon" onclick="popUpVisibility(true)"><img src = '../images/filtrarIcon.png' style="height: 40px; width: 40px;"></button>
                         <img src = '../images/searchIcon.png' class="searchIcon">
                         <input type = 'text' placeholder="Pesquise..." class="inputSearchHubVagas">
                     </div>
                 </div>
-                <div>
-                    
+                <!-- Example Component Vaga
+                <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = 'margin-top: 20px;'>
+                    <div class = 'vagaComponent'>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-5">
+                                <img src = '../images/userTest.png'>
+                            </div>
+                            <div class="col-7">
+                                <div class="divRightHubVagasComponent">
+                                    <p>Lorem Ipsum</p>
+                                    <div class = 'divBtnSeeMore'>
+                                        <button class="btnSeeMore">Ver Mais</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                -->
             </div>
-        </div>
+        </div>  
     </main>
+    <!-- Filter-->
+    <section class="bodyFiltersHubVagas">
+        <div>
+            Teste
+        </div>
+    </section>
     <!-- Footer-->
     <footer class="footer mt-auto">
         <div class="container">
@@ -169,7 +191,7 @@
     <!-- Footer -->
     
     <!-- JavaScript File -->
-    <script src="../js/createCurriculum.js"></script>
+    <script src="../js/hubVagas.js"></script>
     
     <!-- Bootstrap core JavaScript -->
     <script src="../vendor/jquery/jquery.min.js"></script>
