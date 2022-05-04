@@ -434,3 +434,22 @@ font-size: 12pt;
   font-size: 18pt;
   margin-top: 3%;
 }
+.span-login{
+  float: left;
+}
+
+.space{
+  margin-top: 50px;
+}
+
+.back-input{
+  background: var(--cinza-fundo);
+  margin-left:8%;
+  margin-right:8%;
+}
+
+input::placeholder{
+  color: var(--roxo-padrao) !important;
+  font-family: 'nunito-italic';
+  src: url('../fonts/Nunito-Italic.ttf');
+}
