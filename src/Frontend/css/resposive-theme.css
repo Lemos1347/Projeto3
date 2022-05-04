@@ -14,3 +14,12 @@
         margin-bottom: 140px;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .bodyFiltersHubVagas {
+        transform: translate(-50%, -100%);
+        top: 45%;
+        width: 70%;
+        height: 350px;
+    }
+}
