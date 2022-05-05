@@ -22,4 +22,11 @@
         width: 70%;
         height: 350px;
     }
+    .newCompanyADM{
+        margin-top: 3%;
+    }
+    .btnToApplyFiltro {
+        width: 240px;
+        margin-top: 0px;
+    }
 }
