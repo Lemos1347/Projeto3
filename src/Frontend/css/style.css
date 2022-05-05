@@ -6,7 +6,7 @@
   --branco-padrao: #FFFFFF;
   --preto-padrao: #000000;
   --cinza-claro-fundo: #EFEFEF;
-  --cinza-fundo: #C4C4C4;
+  --cinza-fundo: rgba(196, 196, 196, 0.4);
   --shadow-green: #347601;
   --shadow-yellow: #EAD200;
   --shadow-red: #760101;
