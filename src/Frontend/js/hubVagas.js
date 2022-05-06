@@ -44,7 +44,7 @@ function checkVagas() {
         document.getElementById('containerOfAll').innerHTML += `
         <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
             <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
-                <div class="row" style="margin-top: 20px;">
+                <div class="row" style="margin-top: 10px;">
                     <div class="col-5">
                         <img src = '../images/userTest.png'>
                     </div>
@@ -69,21 +69,15 @@ function generateRandomNumber() {
 
 function popUpVisibility(visible) {
 
-    console.log('Foi')
-    console.log(visible)
-
-    let displayToEdit = ''
+    let display = ''
 
     if(visible == true) {
-        document.getElementById('bodyFiltersHubVagas').style.display = 'flex'
-
-        document.getElementById('toScroll').scrollIntoView();
+        display = 'flex'
     } else {
-        displayToEdit = 'none'
-        document.getElementById('bodyFiltersHubVagas').style.display = 'none'
+        display = 'false'
     }
 
-    
+    document.getElementById('bodyFiltersHubVagas').display = display
 }
 
 checkVagas()
