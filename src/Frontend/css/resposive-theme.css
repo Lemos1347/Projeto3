@@ -1,0 +1,32 @@
+@media only screen and (min-width: 1200px) {
+    main{
+        margin-bottom: 25px;
+    }
+}
+@media only screen and (max-width: 1199px) {
+    main {
+        margin-bottom: 100px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    main {
+        margin-bottom: 140px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .bodyFiltersHubVagas {
+        transform: translate(-50%, -100%);
+        top: 45%;
+        width: 90%;
+        height: 500px;
+    }
+    .newCompanyADM{
+        margin-top: 3%;
+    }
+    .btnToApplyFiltro {
+        width: 240px;
+        margin-top: 80px;
+    }
+}
