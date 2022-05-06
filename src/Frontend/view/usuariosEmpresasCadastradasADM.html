@@ -94,19 +94,21 @@
         <div class="container">
             <div class="row d-flex justify-content-center bodyHubVagas" id = 'containerOfAll'>
                 <div class="col-sm-12">
-                    <h1>Vagas</h1>
+                    <h1>Usuários</h1>
                 </div>
                 <div class="col-sm-12 mt-2">
                     <div class = 'listFilters'>
-                        <button class="btnForFiltrarIcon" onclick="popUpVisibility(true)"><img src = '../images/filtrarIcon.png' style="height: 40px; width: 40px;"></button>
-                        <img src = '../images/searchIcon.png' class="searchIcon">
-                        <input type = 'text' placeholder="Pesquise..." class="inputSearchHubVagas">
+                        <button class = "newUserButtonADM">+ Novo Usuário</button>
                     </div>
                 </div>
-                <!-- Example Component Vaga
+                <div class="col-sm-12 mt-2">
+                    <div class = 'listFilters'>
+                        <button class="newCompanyADM">+ Nova Empresa</button>
+                    </div>
+                </div>
                 <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = 'margin-top: 20px;'>
                     <div class = 'vagaComponent'>
-                        <div class="row" style="margin-top: 20px;">
+                        <div class="row" style="margin-top: 10px;">
                             <div class="col-5">
                                 <img src = '../images/userTest.png'>
                             </div>
@@ -121,34 +123,13 @@
                         </div>
                     </div>
                 </div>
-                -->
             </div>
         </div>  
     </main>
     <!-- Filter-->
-    <section class="bodyFiltersHubVagas" id = 'bodyFiltersHubVagas'>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 btnForFiltroHubVagas">
-                    <button class="btnToCloseFilter" onclick="popUpVisibility(false)">
-                        <img src="../images/closeIcon.png" style="height: 25px; width: 25px;">
-                    </button>
-                </div>
-                <div class="col-sm-12 titleFiltroHubVagas">
-                    <h1>Filtro</h1>
-                </div>
-                <div class="col-sm-12 d-flex justify-content-center" style="gap: 60px; margin-top: 20px;">
-                    <button class="btnForFiltro">A - Z</button>
-                    <button class="btnForFiltro">Z - A</button>
-                </div>
-                <div class="col-sm-12 d-flex justify-content-center" style="gap: 60px; margin-top: 50px;">
-                    <button class="btnForFiltro">+Recentes</button>
-                    <button class="btnForFiltro">+Antigas</button>
-                </div>
-                <div class="col-sm-12 d-flex justify-content-center" style="margin-top: 60px;">
-                    <button class="btnToApplyFiltro">Aplicar</button>
-                </div>
-            </div>
+    <section class="bodyFiltersHubVagas">
+        <div>
+            Teste
         </div>
     </section>
     <!-- Footer-->
@@ -211,7 +192,7 @@
     <!-- Footer -->
     
     <!-- JavaScript File -->
-    <script src="../js/hubVagas.js"></script>
+    <!-- <script src="../js/hubVagas.js"></script> -->
     
     <!-- Bootstrap core JavaScript -->
     <script src="../vendor/jquery/jquery.min.js"></script>
