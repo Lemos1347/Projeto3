@@ -297,6 +297,8 @@ h1{
   width: 90%;
   height: 110px;
   background-color: #AAAAAA;
+  height: 130px;
+  background-color: var(--cinza-fundo);
   border-radius: 10px;
 }
 
@@ -335,6 +337,8 @@ h1{
 .bodyFiltersHubVagas {
   background-color: var(--cinza-fundo);
   width: 80%;
+  background-color: #AAAAAA;
+  width: 60%;
   height: 450px;
   position: absolute;
   top: 40%;
@@ -408,3 +412,117 @@ font-size: 12pt;
   color: white;
   font-family: "nunito";
 }
+/* Style ADM  vaga cadastro*/
+
+.newUserButtonADM{
+  width: 80%;
+  height: 45px;
+  border-radius: 23px;
+  background-color: var(--amarelo-padrao);
+  font-family: "Nunito";
+  color: var(--branco-padrao);
+  border-color: var(--amarelo-padrao);
+  border: 0;
+  font-size: 18pt;
+}
+
+.newCompanyADM{
+  width: 80%;
+  height: 45px;
+  border-radius: 23px;
+  background-color: var(--roxo-padrao);
+  font-family: "Nunito";
+  color: var(--branco-padrao);
+  border-color: var(--roxo-padrao);
+  border: 0;
+  font-size: 18pt;
+  margin-top: 1%;
+}
+.span-login{
+  float: left;
+}
+
+.space{
+  margin-top: 50px;
+}
+
+.back-input{
+  background: var(--cinza-fundo);
+  margin-left:8%;
+  margin-right:8%;
+}
+
+input::placeholder{
+  color: var(--roxo-padrao) !important;
+  font-family: 'nunito-italic';
+  src: url('../fonts/Nunito-Italic.ttf');
+}
+
+/* Início Filtro Hub Vagas */
+
+.btnForFiltroHubVagas {
+  text-align: end;
+}
+
+.titleFiltroHubVagas {
+  text-align: center;
+}
+
+.btnForFiltro {
+  width: 160px;
+  height: 50px;
+  background-color: var(--amarelo-padrao);
+  border-radius: 12px;
+  border: 0;
+  outline: 0;
+  color: var(--branco-padrao);
+  font-family: 'nunito-bold';
+  font-size: 12pt;
+}
+
+.btnForFiltro:hover {
+  background-color: var(--amarelo-hover);
+  outline: 0;
+}
+
+.btnForFiltro:focus {
+  background-color: var(--amarelo-hover);
+  outline: 0;
+}
+
+.btnToCloseFilter {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.btnToCloseFilter:hover {
+  outline: 0;
+}
+
+.btnToCloseFilter:focus {
+  outline: 0;
+}
+
+.btnToApplyFiltro {
+  width: 380px;
+  background-color: var(--roxo-padrao);
+  height: 45px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--branco-padrao);
+  font-family: 'nunito-bold';
+  margin-top: 60px;
+}
+
+.btnToApplyFiltro:hover {
+  outline: 0;
+  background-color: var(--roxo-hover);
+}
+
+.btnToApplyFiltro:focus {
+  outline: 0;
+  background-color: var(--roxo-hover);
+}
+
+/* Fim Filtro Hub Vagas */
