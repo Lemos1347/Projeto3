@@ -217,7 +217,7 @@ h1 {
   margin-bottom: 25px;
 }
 
-.btnSaveCurriculum {
+.btnSaveCurriculum, .btnUpdateCurriculum {
   height: 60px;
   width: 80%;
   border-radius: 30px;
@@ -228,6 +228,7 @@ h1 {
   margin-top: 20px;
   margin-bottom: 20px;
   font-family: 'nunito';
+  line-height: auto;
 }
 
 .btnSaveCurriculum:hover {
@@ -545,19 +546,21 @@ input::placeholder {
 /* Fim Filtro Hub Vagas */
 
 /*Perfil*/
-.imgBx {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  width: auto;
+.imgBox {
+  width: 100%;
+  background-color: var(--cinza-claro-fundo);
+  min-height: 160px;
+  max-height: 500px;
+  border-radius: 5%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
 }
 
 .imgPerfil {
-  position: relative;
-  width: 300px;
+  width: 100%;
+  max-width: 260px;
   border-radius: 10%;
   align-items: center;
-  margin-top: 20px;
+  border-radius: 50px;
 }
 
 .descricao {
@@ -594,11 +597,6 @@ input::placeholder {
 
 .textPerfil {
   text-align: justify;
-}
-
-.tituloPerfil {
-  font-size: medium;
-  margin: 20px;
 }
 
 .labeleditarvagas {
