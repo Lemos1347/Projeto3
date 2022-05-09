@@ -523,3 +523,95 @@ input::placeholder{
 }
 
 /* Fim Filtro Hub Vagas */
+
+/*Perfil*/
+.imgBx {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: auto;
+}
+
+.imgPerfil {
+  position: relative;
+  width: 300px;
+  border-radius: 10%;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.descricao {
+  margin-top: 50px;
+  width: max-content;
+}
+.imgBxIcon{
+  margin-left: auto;
+  font-size: 30px;
+  margin-top: 40px;
+  width: max-content;
+}
+
+.hyphenate {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+.fa-edit {
+  color: rgb(243, 196, 46);
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.textPerfil{
+  text-align: justify;
+}
+
+.tituloPerfil{
+  font-size: medium;
+  margin: 20px;
+}
+
+.labeleditarvagas
+{
+  display: inline-block;
+  margin-bottom: 5px;
+  color:#530084;
+  border-bottom: 2px solid gold;
+  margin: 20px;
+  text-align: justify;
+
+}
+
+.inputeditarvagas
+{
+width: 100%;
+padding: 10px 20px;
+background-color:#EFEFEF;
+color:#530084;
+border: none;
+border-radius: 15px;
+font-family: "nunito";
+font-size: 12pt;
+}
+.fundoBotao
+{
+  background-color: transparent;
+  align-items: center;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+.editarCurriculo
+{
+  margin: 20px;
+}
+/* Fim perfil*/
