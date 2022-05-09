@@ -92,36 +92,46 @@
   </nav>
   <!-- Form-->
   <main>
-    <div class="container d-flex justify-content-center bodyCadastroCurriculo">
+    <div class="container justify-content-center bodyCadastroCurriculo">
       <div class="row">
         <div class="col-12">
           <h1>Cadastro Currículo</h1>
         </div>
-         <!-- Alert -->
-        <div class="col-sm-12 alertContainer" id = "alertContainer">
-          <div class="alertDiv">
-            <img src="../images/iconErro.png" style="width: 30px; height: 30px; color: white;">
-            <p style="margin-bottom: 0px;">Lorem Ipsum</p>
+      </div>
+      <!-- Alert -->
+      <div class="col-sm-12 alertContainer" id="alertContainer">
+        <div class="alertDiv">
+          <img src="../images/iconErro.png" style="width: 30px; height: 30px; color: white;">
+          <p style="margin-bottom: 0px;">Lorem Ipsum</p>
+        </div>
+      </div>
+      <!-- Alert -->
+      <form action="">
+        <div class="row">
+          <div class="col-10 offset-1">
+            <div class="d-flex">
+              <i class="far fa-user"></i>
+              <h2 class="titulo-dados-pessoais"> Dados pessoais</h2>
+            </div>
           </div>
         </div>
-        <!-- Alert -->
         <div class="col-sm-12 col-md-6 listaInputs">
           <div class="row inputDiv">
             <div class="col-10 ">
-              <span class="textGeneralInput">Lorem<span class="neededInput">*</span></span>
+              <span class="textGeneralInput">Nome completo<span class="neededInput">*</span></span>
             </div>
             <div class="col-10">
-              <input class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+              <input class="generalInput" type="text" placeholder="digite o seu nome completo"></input>
             </div>
           </div>
         </div>
         <div class="col-sm-12 col-md-6 listaInputs">
           <div class="row inputDiv">
             <div class="col-10 ">
-              <span class="textGeneralInput">Lorem<span class="neededInput">*</span></span>
+              <span class="textGeneralInput">E-mail<span class="neededInput">*</span></span>
             </div>
             <div class="col-10">
-              <input class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+              <input class="generalInput" type="text" placeholder="digite o seu e-mail"></input>
             </div>
           </div>
         </div>
@@ -156,10 +166,11 @@
           </div>
         </div>
         <div class="col-12 listaInputs">
-          <button class="btnSaveCurriculum" onclick="verifyInfos()">Salvar Currículo</button>
+          <button class="btnSaveCurriculum" onclick="verifyInfos()">Salvar</button>
         </div>
-      </div>
+      </form>
     </div>
+
   </main>
   <!-- Footer-->
   <footer class="footer mt-auto">
