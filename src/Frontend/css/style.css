@@ -346,6 +346,9 @@ h1{
   justify-content: center;
   align-content: center;
 }
+
+/* Fim HubVagas */
+
 .bodygeralcadastrarvagas {
   box-sizing: border-box;
 }
@@ -615,3 +618,76 @@ font-size: 12pt;
   margin: 20px;
 }
 /* Fim perfil*/
+
+/* Início Login */
+
+.inputLogin {
+  height: 50px;
+  border-radius: 12px;
+  width: 80%;
+  border: 2px solid var(--roxo-padrao);
+  padding-left: 20px;
+  font-family: 'Nunito';
+  background-color: var(--cinza-claro-fundo);
+}
+
+.checkbox {
+  width: 15px;
+  height: 15px;
+}
+
+.inputLogin::placeholder {
+  font-family: 'Nunito';
+}
+
+.inputLogin:focus {
+  border: 2px solid var(--amarelo-padrao);
+}
+
+.connectedSpan {
+  font-size: 10pt;
+}
+
+.forgetSpan {
+  font-size: 11pt;
+}
+
+.divOptionsLogin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.linkForgetPassword {
+  list-style: none;
+  text-decoration: none;
+  outline: 0;
+  color: var(--roxo-padrao);
+}
+
+.linkForgetPassword:hover {
+  color: var(--roxo-hover);
+}
+
+.btnEntrarLogin {
+  width: 80%;
+  height: 50px;
+  background-color: var(--amarelo-padrao);
+  outline: 0;
+  border: 0px;
+  border-radius: 23px;
+  color: var(--branco-padrao);
+  font-family: 'Nunito';
+}
+
+.btnEntrarLogin:hover {
+  outline: 0;
+  background-color: var(--amarelo-hover);
+}
+
+.lineForLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
