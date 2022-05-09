@@ -13,13 +13,18 @@
 }
 
 @font-face {
-    font-family: 'nunito';
-    src: url('../fonts/Nunito-Regular.ttf');
+  font-family: 'nunito';
+  src: url('../fonts/Nunito-Regular.ttf');
 }
 
 @font-face {
-    font-family: 'nunito-bold';
-    src: url('../fonts/Nunito-Bold.ttf');
+  font-family: 'nunito-bold';
+  src: url('../fonts/Nunito-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'nunito-semibold';
+  src: url('../fonts/Nunito-SemiBold.ttf');
 }
 
 @font-face {
@@ -28,27 +33,27 @@
 }
 
 body {
-    font-size: 20px;
-    color: var(--roxo-padrao);
-    background-position: center;
-    padding-top: 75px;
-    /* distÃ¢ncia do nav fixo */
-    position: relative;
-    padding-bottom: 122px;
-    /* distÃ¢ncia do footer */
-    min-height: auto;
+  font-size: 20px;
+  color: var(--roxo-padrao);
+  background-position: center;
+  padding-top: 75px;
+  /* distÃ¢ncia do nav fixo */
+  position: relative;
+  padding-bottom: 122px;
+  /* distÃ¢ncia do footer */
+  min-height: auto;
 }
 
 /* Navbar */
-nav{
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+nav {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-nav{
+.navbar-nav {
   margin-left: auto;
 }
 
-.nav-item a{
+.nav-item a {
   font-size: 16px;
   color: #280044;
   text-transform: uppercase;
@@ -65,7 +70,7 @@ nav{
   position: absolute;
   background-color: #f8f9fa;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -89,6 +94,7 @@ nav{
 .custom-toggler.navbar-toggler {
   border-color: none;
 }
+
 /* Fim Navbar */
 
 /* Footer */
@@ -110,8 +116,8 @@ footer a {
   font-family: 'nunito';
 }
 
-footer a:hover{
-  color:#F3C42E;
+footer a:hover {
+  color: #F3C42E;
 }
 
 footer .copyright {
@@ -124,8 +130,13 @@ footer .copyright {
 /* Fim Footer */
 
 /* Início Formulário */
-h1{
+h1 {
   font-family: 'nunito-bold';
+  color: var(--roxo-padrao);
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 25px;
+
 }
 
 .bodyCadastroCurriculo {
@@ -142,12 +153,7 @@ h1{
   text-align: center;
 }
 
-.bodyCadastroCurriculo h1 {
-  color: #280044;
-  justify-content: center;
-  text-align: center;
-  margin-bottom: 25px;
-}
+
 
 .bodyVagaExpandida h1 {
   color: #280044;
@@ -167,8 +173,8 @@ h1{
   justify-content: center;
 }
 
-.textGeneralInput{
-  font-family: 'nunito';
+.textGeneralInput {
+  font-family: 'nunito-semibold';
   font-weight: bold;
   font-size: 17pt;
   float: left;
@@ -178,24 +184,37 @@ h1{
   width: 100%;
   height: 55px;
   border-radius: 10px;
-  background-color: rgba(196, 196, 196, 0.4);
+  background-color: var(--cinza-claro-fundo);
   border: 0;
   outline: 0;
   margin-bottom: 15px;
   padding-left: 20px;
-  color: #280044;
+  color: var(--roxo-padrao);
   font-size: 14pt;
+  border: 2px solid var(--roxo-padrao);
 }
 
 .neededInput {
   color: #F3C42E;
 }
 
-.generalInput::placeholder{
+.generalInput::placeholder {
   font-family: 'nunito-italic';
   font-size: 14pt;
   font-style: normal;
   color: #280044;
+}
+
+.fa-user {
+  color: var(--roxo-padrao);
+  font-size: 30px;
+  margin-left: 10px;
+}
+
+.titulo-dados-pessoais {
+  font-family: "nunito-bold";
+  margin-left: 10px;
+  margin-bottom: 25px;
 }
 
 .btnSaveCurriculum {
@@ -210,7 +229,8 @@ h1{
   margin-bottom: 20px;
   font-family: 'nunito';
 }
-.btnSaveCurriculum:hover{
+
+.btnSaveCurriculum:hover {
   background-color: #280044;
 }
 
@@ -277,14 +297,14 @@ h1{
 }
 
 /* Início HubVagasComponent */
-.divRightHubVagasComponent{
+.divRightHubVagasComponent {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
 }
 
-.divRightHubVagasComponent p{
+.divRightHubVagasComponent p {
   text-align: start;
   height: 50px;
 }
@@ -364,44 +384,39 @@ h1{
 
 .h1cadastrarvagas {
   text-align: center;
-  color:#530084;
+  color: var(--roxo-padrao);
   font-size: 50px;
   margin-bottom: 30px;
 }
 
-.inputBoxcadastrarvagas 
-{
+.inputBoxcadastrarvagas {
   margin-bottom: 20px;
 }
 
-.labelcadastrarvagas
-{
+.labelcadastrarvagas {
   display: inline-block;
   margin-bottom: 5px;
-  color:#530084;
+  color: #530084;
   border-bottom: 2px solid gold;
 
 }
 
-.inputcadastrarvagas
-{
-width: 100%;
-padding: 10px 20px;
-background-color:#EFEFEF;
-color:#530084;
-border: none;
-border-radius: 15px;
-font-family: "nunito";
-font-size: 12pt;
+.inputcadastrarvagas {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #EFEFEF;
+  color: #530084;
+  border: none;
+  border-radius: 15px;
+  font-family: "nunito";
+  font-size: 12pt;
 }
 
-.inputcadastrarvagas::placeholder 
-{
-  color:#530084;
+.inputcadastrarvagas::placeholder {
+  color: #530084;
 }
 
-.button
-{
+.button {
   width: 100%;
   padding: 15px;
   text-align: center;
@@ -412,9 +427,10 @@ font-size: 12pt;
   color: white;
   font-family: "nunito";
 }
+
 /* Style ADM  vaga cadastro*/
 
-.newUserButtonADM{
+.newUserButtonADM {
   width: 80%;
   height: 45px;
   border-radius: 23px;
@@ -426,7 +442,7 @@ font-size: 12pt;
   font-size: 18pt;
 }
 
-.newCompanyADM{
+.newCompanyADM {
   width: 80%;
   height: 45px;
   border-radius: 23px;
@@ -438,21 +454,22 @@ font-size: 12pt;
   font-size: 18pt;
   margin-top: 1%;
 }
-.span-login{
+
+.span-login {
   float: left;
 }
 
-.space{
+.space {
   margin-top: 50px;
 }
 
-.back-input{
+.back-input {
   background: var(--cinza-fundo);
-  margin-left:8%;
-  margin-right:8%;
+  margin-left: 8%;
+  margin-right: 8%;
 }
 
-input::placeholder{
+input::placeholder {
   color: var(--roxo-padrao) !important;
   font-family: 'nunito-italic';
   src: url('../fonts/Nunito-Italic.ttf');
@@ -547,7 +564,8 @@ input::placeholder{
   margin-top: 50px;
   width: max-content;
 }
-.imgBxIcon{
+
+.imgBxIcon {
   margin-left: auto;
   font-size: 30px;
   margin-top: 40px;
@@ -574,49 +592,47 @@ input::placeholder{
   float: right;
 }
 
-.textPerfil{
+.textPerfil {
   text-align: justify;
 }
 
-.tituloPerfil{
+.tituloPerfil {
   font-size: medium;
   margin: 20px;
 }
 
-.labeleditarvagas
-{
+.labeleditarvagas {
   display: inline-block;
   margin-bottom: 5px;
-  color:#530084;
+  color: #530084;
   border-bottom: 2px solid gold;
   margin: 20px;
   text-align: justify;
 
 }
 
-.inputeditarvagas
-{
-width: 100%;
-padding: 10px 20px;
-background-color:#EFEFEF;
-color:#530084;
-border: none;
-border-radius: 15px;
-font-family: "nunito";
-font-size: 12pt;
+.inputeditarvagas {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #EFEFEF;
+  color: #530084;
+  border: none;
+  border-radius: 15px;
+  font-family: "nunito";
+  font-size: 12pt;
 }
-.fundoBotao
-{
+
+.fundoBotao {
   background-color: transparent;
   align-items: center;
   margin-top: 2px;
   margin-bottom: 5px;
 }
 
-.editarCurriculo
-{
+.editarCurriculo {
   margin: 20px;
 }
+
 /* Fim perfil*/
 
 /* Início Login */
