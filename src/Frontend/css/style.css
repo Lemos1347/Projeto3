@@ -302,11 +302,39 @@ h1 {
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: center;
 }
 
 .divRightHubVagasComponent p {
   text-align: start;
+}
+
+.divRightHubVagasComponent p img{
+  padding-right: 10px;
+}
+
+.imgHubVagas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainWidGet {
+  height: 100%;
+  display: flex;
+  align-content: center;
+}
+
+.pForHubVagas {
+  font-size: 12pt;
+  height: 20px;
+}
+
+.nomeVagaHubVagas {
+  font-size: 13pt;
   height: 50px;
+  margin-bottom: 0px;
+  text-align: start;
 }
 
 .divBtnSeeMore {
@@ -316,7 +344,7 @@ h1 {
 
 .vagaComponent {
   width: 90%;
-  height: 160px;
+  height: 165px;
   background-color: var(--cinza-fundo);
   border-radius: 10px;
 }
@@ -325,7 +353,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 160px;
+  height: 165px;
   margin-top: 40px;
 }
 
@@ -442,6 +470,11 @@ h1 {
   font-size: 18pt;
 }
 
+.newUserButtonADM:hover {
+  outline: 0;
+  background-color: var(--amarelo-hover);
+}
+
 .newCompanyADM {
   width: 80%;
   height: 45px;
@@ -454,6 +487,12 @@ h1 {
   font-size: 18pt;
   margin-top: 1%;
 }
+
+.newCompanyADM:hover {
+  outline: 0;
+  background-color: var(--roxo-hover);
+}
+
 
 .span-login {
   float: left;

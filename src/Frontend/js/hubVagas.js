@@ -42,15 +42,17 @@ function checkVagas() {
         }
 
         document.getElementById('containerOfAll').innerHTML += `
-        <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
+        <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = "margin-top: 40px;">
             <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col-5">
-                        <img src = '../images/userTest.png'>
+                <div class="row mainWidGet">
+                    <div class="col-5 imgHubVagas">
+                        <img src = '../images/userTest.png' style = "width: 100px;">
                     </div>
                     <div class="col-7">
                         <div class="divRightHubVagasComponent">
-                            <p>${vaga.nome}</p>
+                            <h1 class="nomeVagaHubVagas">${vaga.nome}</h1>
+                            <p class="pForHubVagas"><img src="../images/locationIcon.png" style="height: 25px; width: 35px;">São Paulo</p>
+                            <p class="pForHubVagas"><img src="../images/workIcon.png" style="height: 25px; width: 35px;">Presencial</p>
                             <div class = 'divBtnSeeMore'>
                                 <button class="btnSeeMore">Ver Mais</button>
                             </div>
