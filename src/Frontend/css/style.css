@@ -667,6 +667,9 @@ input::placeholder {
   width: 15px;
   height: 15px;
 }
+.asterisco{
+  color: var(--amarelo-padrao);
+}
 
 .inputLogin::placeholder {
   font-family: 'Nunito';
@@ -690,11 +693,19 @@ input::placeholder {
   justify-content: space-between;
 }
 
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 15px;
+}
+
 .linkForgetPassword {
   list-style: none;
   text-decoration: none;
   outline: 0;
   color: var(--roxo-padrao);
+  margin-right: 15px;
 }
 
 .linkForgetPassword:hover {
