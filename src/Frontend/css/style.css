@@ -301,8 +301,7 @@ h1 {
 .divRightHubVagasComponent {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
+  height: 100%;
 }
 
 .divRightHubVagasComponent p {
@@ -317,7 +316,7 @@ h1 {
 
 .vagaComponent {
   width: 90%;
-  height: 130px;
+  height: 160px;
   background-color: var(--cinza-fundo);
   border-radius: 10px;
 }
@@ -326,7 +325,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 110px;
+  height: 160px;
   margin-top: 40px;
 }
 
@@ -564,8 +563,9 @@ input::placeholder {
 }
 
 .descricao {
-  margin-top: 50px;
+  margin-top: 20px;
   width: max-content;
+  font-family: 'Nunito';
 }
 
 .imgBxIcon {
@@ -618,13 +618,27 @@ input::placeholder {
   border-radius: 15px;
   font-family: "nunito";
   font-size: 12pt;
+  border: 2px solid var(--roxo-padrao);
+}
+
+.inputeditarvagas:focus {
+  border: 2px solid var(--amarelo-padrao);
 }
 
 .fundoBotao {
   background-color: transparent;
   align-items: center;
-  margin-top: 2px;
+  margin-top: 5px;
   margin-bottom: 5px;
+  width: 170px;
+  height: 45px;
+  border: 0;
+  border-bottom: 5px solid var(--amarelo-padrao);
+  border-radius: 4px;
+}
+
+.fundoBotao:hover {
+  border-bottom: 5px solid var(--amarelo-hover);
 }
 
 .editarCurriculo {
