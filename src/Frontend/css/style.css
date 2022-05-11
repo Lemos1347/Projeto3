@@ -546,6 +546,7 @@ input::placeholder {
 
 /*Perfil*/
 .imgBox {
+  margin-top: 20px;
   width: 100%;
   background-color: var(--cinza-claro-fundo);
   min-height: 160px;
@@ -571,7 +572,7 @@ input::placeholder {
 .imgBxIcon {
   margin-left: auto;
   font-size: 30px;
-  margin-top: 40px;
+  margin-top: 22px;
   width: max-content;
 }
 
@@ -643,6 +644,9 @@ input::placeholder {
 
 .editarCurriculo {
   margin: 20px;
+}
+.excluirPerfil{
+  font-size: 12pt;
 }
 
 /* Fim perfil*/
