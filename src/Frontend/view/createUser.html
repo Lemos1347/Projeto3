@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/resposive-theme.css">
   <link rel="icon" href="../images/favicon.png">
-  
+
 </head>
 
 <body>
@@ -96,7 +96,7 @@
     <div class="container justify-content-center bodyCadastroCurriculo">
       <div class="row">
         <div class="col-12">
-          <h1>Cadastro Usuário</h1>
+          <h1>Cadastro de Usuário</h1>
         </div>
       </div>
       <!-- Alert -->
@@ -116,72 +116,90 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-md-6 listaInputs">
-          <div class="row inputDiv">
-            <div class="col-10 ">
-              <span class="textGeneralInput">Nome completo<span class="neededInput">*</span></span>
-            </div>
-            <div class="col-10">
-              <input class="generalInput" type="text" placeholder="digite o seu nome completo"></input>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6 listaInputs">
-          <div class="row inputDiv">
-            <div class="col-10 ">
-              <span class="textGeneralInput">E-mail<span class="neededInput">*</span></span>
-            </div>
-            <div class="col-10">
-              <input class="generalInput" type="text" placeholder="digite o seu e-mail"></input>
+        <div class="row mt-4">
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
+                <span class="textGeneralInput">Nome completo<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10">
+                <input class="generalInput" type="text" placeholder="digite o seu nome completo"></input>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-12 col-md-6 listaInputs">
-          <div class="row inputDiv">
-            <div class="col-10 ">
-              <span class="textGeneralInput">Data de Nascimento<span class="neededInput">*</span></span>
-            </div>
-            <div class="col-10">
-              <input class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
+                <span class="textGeneralInput">E-mail<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10">
+                <input class="generalInput" type="text" placeholder="digite o seu e-mail"></input>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-12 col-md-6 listaInputs">
-          <div class="row inputDiv">
-            <div class="col-10 ">
-              <span class="textGeneralInput">Gênero<span class="neededInput">*</span></span>
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
+                <span class="textGeneralInput">Data de Nascimento<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10">
+                <input class="generalInput" type="date" placeholder="Lorem Ipsum"></input>
+              </div>
             </div>
-            <div class="col-10">
-                <select class = 'generalInput' name = 'Gênero'>
-                    <option value="Gênero" disabled selected >Gênero</option>
-                    <option value="valor2">Homen Cis</option>
-                    <option value="valor2">Homen Trans</option>
-                    <option value="valor2">Mulher Cis</option>
-                    <option value="valor2">Mulher Trans</option>
-                    <option value="valor2">Não Binário</option>
-                    <option value="valor2">Prefiro não responder</option>
+          </div>
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
+                <span class="textGeneralInput">Gênero<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10">
+                <select class='generalInput' name='Gênero'>
+                  <option value="Gênero" disabled selected>Gênero</option>
+                  <option value="valor2">Homen Cis</option>
+                  <option value="valor2">Homen Trans</option>
+                  <option value="valor2">Mulher Cis</option>
+                  <option value="valor2">Mulher Trans</option>
+                  <option value="valor2">Não Binário</option>
+                  <option value="valor2">Prefiro não responder</option>
                 </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-12 col-md-6 listaInputs">
-          <div class="row inputDiv">
-            <div class="col-10 ">
-              <span class="textGeneralInput">Lorem<span class="neededInput">*</span></span>
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
+                <span class="textGeneralInput">CPF<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10">
+                <input class="generalInput" type="date" placeholder="Lorem Ipsum"></input>
+              </div>
             </div>
-            <div class="col-10 d-flex gap-4 gap-md-5">
+          </div>
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
+                <span class="textGeneralInput">Número de Telefone<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10 d-flex gap-4 gap-md-5">
                 <div class="col-3">
-                    <input class="generalInput" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" placeholder="+00"></input>
+                  <input class="generalInput" type="number"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    maxlength="2" placeholder="+00"></input>
                 </div>
                 <div class="col-8 col-md-8">
-                    <input class="generalInput" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="11" placeholder="(00) 0000-0000"></input>
+                  <input class="generalInput" type="number"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    maxlength="11" placeholder="(00) 0000-0000"></input>
                 </div>
-              
+
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-12 listaInputs">
-          <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button>
+        <div class="row">
+          <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4 listaInputs">
+            <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button>
+          </div>
         </div>
       </form>
     </div>

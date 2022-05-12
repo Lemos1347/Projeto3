@@ -161,6 +161,9 @@ h1, h2 {
   text-align: start;
   margin-bottom: 25px;
 }
+.img-perfil {
+  width: 100%;
+}
 
 .inputDiv {
   width: 100%;
@@ -712,7 +715,7 @@ input::placeholder {
   hyphens: auto;
 }
 
-.fa-edit, .fa-map-marker {
+.fa-edit, .fa-map-marker, .fa-building {
   color: var(--amarelo-padrao);
   font-size: 25px;
   margin-right: 15px;
