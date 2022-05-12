@@ -7,6 +7,7 @@
   --preto-padrao: #000000;
   --cinza-claro-fundo: #EFEFEF;
   --cinza-fundo: rgba(196, 196, 196, 0.4);
+  --shadow-black: rgba(0, 0, 0, 0.1);
   --shadow-green: #347601;
   --shadow-yellow: #EAD200;
   --shadow-red: #760101;
@@ -379,7 +380,7 @@ h1, h2 {
 
 .vagaComponent {
   width: 90%;
-  height: 165px;
+  height: max-content;
   background-color: var(--cinza-fundo);
   border-radius: 10px;
 }
@@ -388,7 +389,7 @@ h1, h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 165px;
+  height: max-content;
   margin-top: 40px;
 }
 
@@ -668,7 +669,7 @@ input::placeholder {
   margin-top: 10px;
 }
 
-.briefcase-yellow {
+.briefcase-yellow, .info-circle-yellow {
   color: var(--amarelo-padrao);
   font-size: 20px;
   margin-right: 10px;
