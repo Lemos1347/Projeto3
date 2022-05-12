@@ -99,6 +99,14 @@
                     <h1>Olá novamente!</h1>
                     <div>Bem-vinda de volta,</div>
                     <div>sentimos a sua falta!</div>
+                    <!-- Alert -->
+                    <div class="col-sm-12 alertContainer" id="alertContainer">
+                        <div class="alertDiv">
+                          <img src="../images/iconErro.png" style="width: 30px; height: 30px; color: white;">
+                          <p id = 'contentError' style="margin-bottom: 0px;">Lorem Ipsum</p>
+                        </div>
+                    </div>
+                    <!-- Alert -->
                     <div class="row">
                         <div class="col-10 offset-1 space">
                             <span class="span-login" style="margin-left: 8px;">
@@ -106,7 +114,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3 justify-content-center">
-                            <input placeholder="digite o seu email" type="text" class="inputLogin"
+                            <input placeholder="digite o seu email" type="text" id = "email" class="inputLogin"
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                         <div>
@@ -116,7 +124,7 @@
                                 </span>
                             </div>
                             <div class="input-group mb-3 justify-content-center">
-                                <input placeholder="digite a sua senha" type="text" class="inputLogin"
+                                <input placeholder="digite a sua senha" type="text" id = 'passWord' class="inputLogin"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                         </div>
@@ -132,7 +140,7 @@
                         </div>
                         <div class="col-sm-12 mt-4 justify-content-center">
                             <div class="col-sm-10" style="width: 100%;">
-                                <button class="btnEntrarLogin">Entrar</button>
+                                <button id = 'btnEntrarLogin' class="btnEntrarLogin" type="button" onclick="verifyLogin()">Entrar</button>
                             </div>
                         </div>
                         <div class="col-12 mt-4">
@@ -214,7 +222,7 @@
     <!-- Footer -->
 
     <!-- JavaScript File -->
-    <script src="../js/createCurriculum.js"></script>
+    <script src="../js/Login.js"></script>
 
     <!-- Bootstrap core JavaScript -->
     <script src="../vendor/jquery/jquery.min.js"></script>

@@ -106,25 +106,39 @@
       </div>
     </section>
     <!-- detalhes da vaga -->
-    <section class="container mb-4">
-        <ul class="list-group">
-          <li class="d-flex"><img src="../images/favicon.png" alt=""><p class="mb-0">Lorem Ipsum<p></li>
-          <li class="d-flex"><img src="../images/favicon.png" alt=""><p class="mb-0">Local</p></li>
-          <li class="d-flex"><img src="../images/favicon.png" alt=""><p class="mb-0">Presencial</p></li>
-        </ul>
+    <section class="container mb-4 cardForVagaExpandida">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center mt-4">
+          <img src="../images/userTest.png" style="width: 160px;">
+        </div>
+      </div>
+      <div class="col-12 mt-2 listaInfosVagaExpandida">
+          <div class="d-flex justify-content-center align-items-center gap-3">
+            <img src="../images/workIcon.png" width="30px">
+            <h1 class="mb-0">Lorem Ipsum</h1>
+          </div>
+          <div class="d-flex justify-content-center align-items-center gap-3">
+            <img src="../images/workIcon.png" width="30px">
+            <h1 class="mb-0">Lorem Ipsum</h1>
+          </div>
+          <div class="d-flex justify-content-center align-items-center gap-3">
+            <img src="../images/workIcon.png" width="30px">
+            <h1 class="mb-0">Lorem Ipsum</h1>
+          </div> 
+      </div>
     </section>
     <!-- descricao da vaga -->
     <section class="container mb-4">
       <div>
         <h1 class="mb-0">Descricao</h1>
-        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.</p>
+        <p style="margin-left: 20px;">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.</p>
       </div>
     </section>
     <!-- requisitos da vaga -->
     <section class="container mb-0 pb-4">
       <div>
         <h1 class="mb-0">Requisitos</h1>
-        <ul class="mb-0 pb-0">
+        <ul class="mb-0 pb-0 listaVagaExpandida">
           <li>Lorem Ipsum</li>
           <li>Lorem Ipsum</li>
           <li>Lorem Ipsum</li>
@@ -136,7 +150,7 @@
     <section class="container mb-0 pb-4">
       <div>
         <h1 class="mb-0">Skills</h1>
-        <ul class="mb-0 pb-0">
+        <ul class="mb-0 pb-0 listaVagaExpandida">
           <li>Lorem Ipsum</li>
           <li>Lorem Ipsum</li>
           <li>Lorem Ipsum</li>
@@ -147,8 +161,14 @@
     <!-- botoes -->
     <section class="container mb-0 pb-4">
       <div>
-        <button class="w-100 mb-3 rounded-3 py-1">Candidatar-se</button>
-        <button class="w-100 rounded-3 py-1">Remover Candidatura</button>
+        <div class="col-12 d-flex justify-content-center">
+          <button class="candidatarBtn">Candidatar-se</button>
+        </div>
+        
+        <div class="col-12 mt-2 d-flex justify-content-center">
+          <button class="removeCandidatarBtn">Remover Candidatura</button>
+        </div>
+        
       </div>
     </section>
     </div>

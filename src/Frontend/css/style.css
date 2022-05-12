@@ -157,7 +157,8 @@ h1, h2 {
 
 
 .bodyVagaExpandida h1 {
-  color: #280044;
+  color: var(--roxo-padrao);
+  text-align: start;
   margin-bottom: 25px;
 }
 
@@ -250,6 +251,64 @@ h1, h2 {
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
+}
+
+.removeCandidatarBtn {
+  background-color: transparent;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 90%;
+  height: 55px;
+  border: 0;
+  background-color: var(--roxo-padrao);
+  border-bottom: 2px solid var(--roxo-padrao);
+  border-radius: 28px;
+  color: var(--branco-padrao);
+  font: 'Nunito';
+  font-weight: bold;
+  font-size: 16pt;
+}
+
+.candidatarBtn {
+  background-color: transparent;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 90%;
+  height: 55px;
+  border: 0;
+  background-color: var(--amarelo-padrao);
+  border-bottom: 2px solid var(--amarelo-padrao);
+  border-radius: 28px;
+  color: var(--branco-padrao);
+  font: 'Nunito';
+  font-weight: bold;
+  font-size: 16pt;
+}
+
+.cardForVagaExpandida {
+  width: 85%;
+  height: 350px;
+  background-color: #c4c4c4;
+  border-radius: 20px;
+}
+
+.listaVagaExpandida {
+  margin-left: 20px;
+}
+
+.listaVagaExpandida li::marker{
+  color: var(--amarelo-padrao);
+  font-size: 22pt;
+}
+
+.listaInfosVagaExpandida {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .btnSaveCurriculum, .btnUpdateCurriculum {

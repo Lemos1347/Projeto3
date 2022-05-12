@@ -1,27 +1,34 @@
 const vagas = [
     {
         'nome': 'Analista de Sistemas 1',
-        'matchPer': 60
+        'matchPer': 60,
+        'id': 1
     },
     {
         'nome': 'Analista de Sistemas 2',
-        'matchPer': 60
+        'matchPer': 60,
+        'id': 2
+        
     },
     {
         'nome': 'Analista de Sistemas 3',
-        'matchPer': 50
+        'matchPer': 50,
+        'id': 3
     },
     {
         'nome': 'Engenheiro de Software',
-        'matchPer': 10
+        'matchPer': 10,
+        'id': 4
     },
     {
         'nome': 'Engenheiro da Computação',
-        'matchPer': 20
+        'matchPer': 20,
+        'id': 5
     },
     {
         'nome': 'Analista de DB',
-        'matchPer': 50
+        'matchPer': 50,
+        'id': 6
     },
 ]
 
@@ -54,7 +61,7 @@ function checkVagas() {
                             <p class="pForHubVagas"><i class="fa fa-map-marker" aria-hidden="true"></i>São Paulo</p>
                             <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>Presencial</p>
                             <div class = 'divBtnSeeMore'>
-                                <button class="btnSeeMore">Ver Mais</button>
+                                <button class="btnSeeMore" onclick = "redirectToVagaId(${vaga.id})">Ver Mais</button>
                             </div>
                         </div>
                     </div>
@@ -63,6 +70,10 @@ function checkVagas() {
         </div>
     `
     })
+}
+
+function redirectToVagaId(param) {
+    document.location.href = `../view/vagaExpandida.html?id=${param}`
 }
 
 function generateRandomNumber() {
