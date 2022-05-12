@@ -51,8 +51,8 @@ function checkVagas() {
                     <div class="col-7">
                         <div class="divRightHubVagasComponent">
                             <h1 class="nomeVagaHubVagas">${vaga.nome}</h1>
-                            <p class="pForHubVagas"><img src="../images/locationIcon.png" style="height: 25px; width: 35px;">São Paulo</p>
-                            <p class="pForHubVagas"><img src="../images/workIcon.png" style="height: 25px; width: 35px;">Presencial</p>
+                            <p class="pForHubVagas"><i class="fa fa-map-marker" aria-hidden="true"></i>São Paulo</p>
+                            <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>Presencial</p>
                             <div class = 'divBtnSeeMore'>
                                 <button class="btnSeeMore">Ver Mais</button>
                             </div>
