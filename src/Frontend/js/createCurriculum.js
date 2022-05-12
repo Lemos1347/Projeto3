@@ -1,5 +1,6 @@
 function verifyInfos() {
-    document.getElementById('alertContainer').style.display = 'flex'
+    document.getElementById('alertContainer').style.display = 'flex';
+    console.log("passei aqui!");
 
     document.getElementById('alertContainer').scrollIntoView();
     window.scroll(0, -150)
