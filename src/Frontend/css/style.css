@@ -205,7 +205,7 @@ h1 {
   color: #280044;
 }
 
-.fa-user, .fa-graduation-cap, .fa-briefcase, .fa-puzzle-piece {
+.fa-user, .fa-graduation-cap, .fa-briefcase, .fa-puzzle-piece, .fa-info-circle {
   color: var(--roxo-padrao);
   font-size: 30px;
   margin-left: 10px;
