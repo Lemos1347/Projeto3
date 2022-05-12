@@ -243,17 +243,30 @@ h1, h2 {
   margin-top: 5px;
 }
 
-.balao-skill a {
+.balao-skill button {
   font-family: "nunito";
   font-size: 16px;
   margin-top: 3px;
   color: var(--branco-padrao) !important;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5px;
+  background-color: transparent;
+  border: 0;
+}
+
+.balao-skill button:focus {
+  outline: 0;
 }
 
 .skills {
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .removeCandidatarBtn {

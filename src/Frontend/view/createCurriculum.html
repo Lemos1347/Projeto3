@@ -109,7 +109,7 @@
         </div>
       </div>
       <!-- Alert -->
-      <form action="">
+      <div>
         <div class="row mt-5">
           <div class="col-10 offset-1">
             <div class="d-flex">
@@ -241,7 +241,9 @@
                     </div>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+                    <form action="javascript:addCards(document.getElementById('inputForCard').value);">
+                       <input id = 'inputForCard' class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -251,7 +253,7 @@
         <div class="col-sm-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4 listaInputs">
           <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button>
         </div>
-      </form>
+      </div>
     </div>
 
   </main>

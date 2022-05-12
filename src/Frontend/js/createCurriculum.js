@@ -12,6 +12,9 @@ let cards = [
 
 
 function addCards(message) {
+
+    document.getElementById('inputForCard').value = ''
+   
     let lastCard = cards.slice(-1)
 
     if (lastCard == '') {
@@ -20,23 +23,35 @@ function addCards(message) {
         var lastId = lastCard[0].id
         var id = lastId + 1
         cards.push({'message': message, 'id': id})
+        console.log(cards)
     }
+
     renderCards()
-    console.log(cards)
 }
 
 function deleteCard(id) {
+    console.log(id)
+
     var cardDeleted = cards.filter((card) => {
-        card.id != id        
+        return card.id == id        
     })
 
-    cards = cardDeleted
+    const index = cards.indexOf(cardDeleted[0]);
+
+    if (index > -1) {
+        cards.splice(index, 1); // 2nd parameter means remove one item only
+    }
 
     renderCards()
 }
 
 function renderCards() {
+    document.getElementById('skillCard').innerHTML = ''
+
     cards.map((card) => {
+
+        console.log('teste') 
+
         document.getElementById('skillCard').innerHTML += `
         <div class="balao-skill d-flex">
             <p>${card.message}</p><button type = 'button' onclick = deleteCard(${card.id})>x</button>
@@ -44,9 +59,6 @@ function renderCards() {
         `
     })
 }
-
-addCards('Testeeeee')
-addCards('Testeeeee2')
 
 // function updateCards() {
 //     cards.map((card) => {
