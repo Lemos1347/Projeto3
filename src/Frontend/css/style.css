@@ -205,23 +205,56 @@ h1 {
   color: #280044;
 }
 
-.fa-user {
+.fa-user, .fa-graduation-cap, .fa-briefcase, .fa-puzzle-piece {
   color: var(--roxo-padrao);
   font-size: 30px;
   margin-left: 10px;
+  align-items: center;
+  display: flex;
+  margin-right: 10px;
 }
 
 .titulo-dados-pessoais {
   font-family: "nunito-bold";
-  margin-left: 10px;
   margin-bottom: 25px;
+  text-align: center;
+  display: contents;
+}
+
+.balao-skill {
+  width: max-content;
+  background-color: var(--amarelo-padrao);
+  padding: 0px 14px;
+  height: 30px;
+  border-radius: 20px;
+}
+
+.balao-skill p {
+  font-family: "nunito-italic";
+  font-size: 14px;
+  color: var(--branco-padrao);
+  align-items: center;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.balao-skill a{
+  font-family: "nunito";
+  font-size: 16px;
+  margin-top: 3px;
+  color: var(--branco-padrao) !important;
+}
+
+.skills{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .btnSaveCurriculum, .btnUpdateCurriculum {
   height: 60px;
   width: 80%;
   border-radius: 30px;
-  background-color: #F3C42E;
+  background-color: var(--amarelo-padrao);
   color: white;
   border: 0px;
   font-size: 18pt;
@@ -231,8 +264,8 @@ h1 {
   line-height: auto;
 }
 
-.btnSaveCurriculum:hover {
-  background-color: #280044;
+.btnSaveCurriculum:hover, .btnUpdateCurriculum:hover {
+  background-color: var(--amarelo-hover);
 }
 
 
@@ -309,7 +342,7 @@ h1 {
   text-align: start;
 }
 
-.divRightHubVagasComponent p img{
+.divRightHubVagasComponent p img {
   padding-right: 10px;
 }
 
@@ -406,15 +439,8 @@ h1 {
 }
 
 .containercadastrarvagas {
-  width: 30%;
+  width: 100%;
   margin: 50px auto;
-}
-
-.h1cadastrarvagas {
-  text-align: center;
-  color: var(--roxo-padrao);
-  font-size: 50px;
-  margin-bottom: 30px;
 }
 
 .inputBoxcadastrarvagas {
@@ -684,7 +710,8 @@ input::placeholder {
 .editarCurriculo {
   margin: 20px;
 }
-.excluirPerfil{
+
+.excluirPerfil {
   font-size: 12pt;
 }
 
@@ -706,7 +733,8 @@ input::placeholder {
   width: 15px;
   height: 15px;
 }
-.asterisco{
+
+.asterisco {
   color: var(--amarelo-padrao);
 }
 
