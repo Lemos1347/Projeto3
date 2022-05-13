@@ -171,7 +171,7 @@
                 <span class="textGeneralInput">CPF<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" type="date" placeholder="Lorem Ipsum"></input>
+                <input class="generalInput" id = 'numberInput' maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" style="-webkit-appearance: none;" placeholder="Lorem Ipsum"></input>
               </div>
             </div>
           </div>
@@ -184,12 +184,12 @@
                 <div class="col-3">
                   <input class="generalInput" type="number"
                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    maxlength="2" placeholder="+00"></input>
+                    maxlength="2" placeholder="+00" id="numberInput"></input>
                 </div>
                 <div class="col-8 col-md-8">
                   <input class="generalInput" type="number"
                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    maxlength="11" placeholder="(00) 0000-0000"></input>
+                    maxlength="11" placeholder="(00) 0000-0000" id="numberInput"></input>
                 </div>
 
               </div>

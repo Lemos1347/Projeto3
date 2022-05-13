@@ -580,6 +580,10 @@ h1, h2 {
   background-color: var(--amarelo-hover);
 }
 
+.newUserButtonADM:focus {
+  outline: 0;
+}
+
 .newCompanyADM {
   width: 80%;
   height: 45px;
@@ -598,6 +602,9 @@ h1, h2 {
   background-color: var(--roxo-hover);
 }
 
+.newCompanyADM:focus {
+  outline: 0;
+}
 
 .span-login {
   float: left;
@@ -898,4 +905,9 @@ input::placeholder {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+#numberInput::-webkit-outer-spin-button,
+#numberInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
