@@ -47,7 +47,12 @@ body {
 
 /* Navbar */
 nav {
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 8px 16px 0px var(--shadow-black);
+}
+
+.nav-img-user{
+  width: 40px;
+  margin-left: 10px;
 }
 
 .navbar-nav {
@@ -137,7 +142,9 @@ h1, h2 {
   justify-content: center;
   text-align: center;
   margin-bottom: 25px;
-
+}
+h2{
+  width: max-content;
 }
 
 .bodyCadastroCurriculo {
@@ -154,13 +161,6 @@ h1, h2 {
   text-align: center;
 }
 
-
-
-.bodyVagaExpandida h1 {
-  color: var(--roxo-padrao);
-  text-align: start;
-  margin-bottom: 25px;
-}
 .img-perfil {
   width: 100%;
 }
@@ -305,16 +305,22 @@ h1, h2 {
 
 .cardForVagaExpandida {
   width: 85%;
-  height: 350px;
-  background-color: #c4c4c4;
+  height: max-content;
+  background-color: var(--cinza-claro-fundo);
+  padding: 15px;
   border-radius: 20px;
+}
+
+.imgVagaExpandida {
+  width: 100%;
+  max-width: 230px;
 }
 
 .listaVagaExpandida {
   margin-left: 20px;
 }
 
-.listaVagaExpandida li::marker{
+.listaVagaExpandida li::marker {
   color: var(--amarelo-padrao);
   font-size: 22pt;
 }
@@ -322,9 +328,12 @@ h1, h2 {
 .listaInfosVagaExpandida {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
   gap: 10px;
+  width: max-content;
 }
 
 .btnSaveCurriculum, .btnUpdateCurriculum {
@@ -458,6 +467,7 @@ h1, h2 {
   height: max-content;
   background-color: var(--cinza-fundo);
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .bodyVagaComponent {
@@ -594,7 +604,6 @@ h1, h2 {
   border-color: var(--roxo-padrao);
   border: 0;
   font-size: 18pt;
-  margin-top: 1%;
 }
 
 .newCompanyADM:hover {
@@ -703,7 +712,8 @@ input::placeholder {
   min-height: 160px;
   max-height: 500px;
   border-radius: 5%;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 10%);
+  padding: 30px 0px;
 }
 
 .imgPerfil {
@@ -723,7 +733,6 @@ input::placeholder {
 .imgBxIcon {
   margin-left: auto;
   font-size: 30px;
-  margin-top: 22px;
   width: max-content;
 }
 
@@ -823,7 +832,19 @@ input::placeholder {
 /* Fim perfil*/
 
 /* Início Login */
-
+.login-white-background{
+  background-color: var(--branco-padrao);
+  height: 100%;
+}
+body#background-login{
+  background-image: url("../images/Background.png");
+  min-height: 100vh;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover !important;
+}
 .inputLogin {
   height: 50px;
   border-radius: 12px;
@@ -911,3 +932,37 @@ input::placeholder {
 #numberInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+/*Iinicio Container ver perfil na vaga*/
+
+.container-ver-vaga-perfil{
+  width: 100%;
+  background-color: var(--cinza-claro-fundo);
+  height: max-content;
+ box-shadow: 0px 8px 16px 0px var(--shadow-black);
+ border-radius: 10px;
+ padding: 10px 20px;
+ margin-bottom: 20px;
+}
+
+.container-ver-vaga-perfil div{
+  color: var(--roxo-padrao);
+  font-size: 20px;
+  font-family: "nunito-semibold";
+}
+
+.btn-ver{
+  color: var(--branco-padrao);
+  background-color: var(--amarelo-padrao);
+  width: 30px;
+  height: 30px;
+  border-radius:10px ;
+  margin-left: auto;
+}
+
+.btn-ver i{
+  font-size: 20px;
+  text-align: center;
+  align-items: center;
+  margin-left: 5px;
+}
+/*Fim*/

@@ -45,7 +45,7 @@ function checkVagas() {
 
         document.getElementById('containerOfAll').innerHTML += `
         <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
-            <div class = 'vagaComponent mt-3' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
+            <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
                 <div class="row mainWidGet">
                     <div class="col-5 imgHubVagas">
                         <img src = '../images/userTest.png' style = "width: 100px;">
