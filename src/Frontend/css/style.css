@@ -1062,6 +1062,7 @@ body#background-login{
   font-weight: bolder;
   margin-top: 20px;
   transition: 1s;
+  background-color: transparent !important;
 }
 
 .btnBackSoftSkillTest:hover {

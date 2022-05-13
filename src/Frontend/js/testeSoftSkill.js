@@ -165,7 +165,10 @@ function changeBtns(visible) {
         document.getElementById('finalizarBtnSoftSkill').style.display = 'inline';
         document.getElementById('passarBtnSoftSkill').style.display = 'none';
         document.getElementById('voltarBtnSoftSkill').style.display = 'inline';
+        document.getElementById('colunaPassarBtn').style.display = 'none';
     } else if (forBtns == true) {
+        document.getElementById('colunaPassarBtn').style.display = 'inline';
+
         document.getElementById('finalizarBtnSoftSkill').style.display = 'none';
         document.getElementById('passarBtnSoftSkill').style.display = 'inline';
         document.getElementById('voltarBtnSoftSkill').style.display = 'inline';

@@ -11,7 +11,7 @@
   <meta name="description"
     content="Ache oportunidades de emprego para mulheres em STEM e tecnologia, no Brasil e no mundo.">
 
-  <title>Brazilians in Tech | Cadastrar Currículo</title>
+  <title>Brazilians in Tech | Teste Soft Skills</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -34,18 +34,18 @@
 
 <body>
 
-    <nav class="navbar fixed-top navbar-expand-lg bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="hubVagas.html">
-                <img src="../images/logo.png" width="100" height="50" alt="Logo Brazilians in Tech">
-            </a>
+  <nav class="navbar fixed-top navbar-expand-lg bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="hubVagas.html">
+        <img src="../images/logo.png" width="100" height="50" alt="Logo Brazilians in Tech">
+      </a>
 
-            <!-- <button class="navbar-toggler custom-toggler collapsed" type="button" data-toggle="collapse"
+      <!-- <button class="navbar-toggler custom-toggler collapsed" type="button" data-toggle="collapse"
                 data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Abrir Navegação">
                 <span class="navbar-toggler-icon"></span>
             </button> -->
 
-            <!-- <div class="navbar-collapse collapse" id="navbarText">
+      <!-- <div class="navbar-collapse collapse" id="navbarText">
                 <ul class="navbar-nav">
 
                     <li class="nav-item">
@@ -77,8 +77,8 @@
 
                 </ul>
             </div> -->
-        </div>
-    </nav>
+    </div>
+  </nav>
   <!-- Form-->
   <main>
     <div class="container justify-content-center bodyCadastroCurriculo">
@@ -107,62 +107,71 @@
         <div class="col-sm-12 listaInputs">
           <div class="row inputDiv">
             <div class="col-12">
-                <p class="questionNumber" id = "questionNumber">Null</p>
+              <p class="questionNumber" id="questionNumber">Null</p>
             </div>
             <div class="col-12">
-                <p class="questionMessage" id = "questionMessage">Null</p>
+              <p class="questionMessage" id="questionMessage">Null</p>
             </div>
             <div class="col-12">
-                <form>
-                    <div class="divForRadioSoftSkill">
-                        <input class="inputForSoftSkill" type="radio" name="teste" id="concTotal">
-                        <label for="concTotal" class = 'labelForSoftSkill'>Concordo Totalmente</label>
-                    </div>
-                    <div class="divForRadioSoftSkill">
-                        <input class="inputForSoftSkill" type="radio" name="teste" id="concParc">
-                        <label for="concParc" class = 'labelForSoftSkill'>Concordo Parcialmente</label>
-                    </div>
-                    <div class="divForRadioSoftSkill">
-                        <input class="inputForSoftSkill" type="radio" name="teste" id="meio">
-                        <label for="meio" class = 'labelForSoftSkill'>Não concordo, nem discordo</label>
-                    </div>
-                    <div class="divForRadioSoftSkill">
-                        <input class="inputForSoftSkill" type="radio" name="teste" id="disParc">
-                        <label for="disParc" class = 'labelForSoftSkill'>Discordo Parcialmente</label>
-                    </div>
-                    <div class="divForRadioSoftSkill">
-                        <input class="inputForSoftSkill" type="radio" name="teste" id="disTotal">
-                        <label for="disTotal" class = 'labelForSoftSkill'>Discordo Totalmente</label>
-                    </div> 
-                </form>
+              <form>
+                <div class="divForRadioSoftSkill">
+                  <input class="inputForSoftSkill" type="radio" name="teste" id="concTotal">
+                  <label for="concTotal" class='labelForSoftSkill'>Concordo Totalmente</label>
+                </div>
+                <div class="divForRadioSoftSkill">
+                  <input class="inputForSoftSkill" type="radio" name="teste" id="concParc">
+                  <label for="concParc" class='labelForSoftSkill'>Concordo Parcialmente</label>
+                </div>
+                <div class="divForRadioSoftSkill">
+                  <input class="inputForSoftSkill" type="radio" name="teste" id="meio">
+                  <label for="meio" class='labelForSoftSkill'>Não concordo, nem discordo</label>
+                </div>
+                <div class="divForRadioSoftSkill">
+                  <input class="inputForSoftSkill" type="radio" name="teste" id="disParc">
+                  <label for="disParc" class='labelForSoftSkill'>Discordo Parcialmente</label>
+                </div>
+                <div class="divForRadioSoftSkill">
+                  <input class="inputForSoftSkill" type="radio" name="teste" id="disTotal">
+                  <label for="disTotal" class='labelForSoftSkill'>Discordo Totalmente</label>
+                </div>
+              </form>
             </div>
-            <div class="col-12">
-                <button class="btnPassSoftSkillTest" id = 'passarBtnSoftSkill' type="button" onclick = 'passPage("pass")'>Próximo</button>
-            </div>
-            <div class="col-12">
-                <button class="btnPassSoftSkillTest" id = 'finalizarBtnSoftSkill' type="button" onclick = 'finalizarTeste("")'>Finalizar</button>
-            </div>
-            <div class="col-12">
-                <button class="btnBackSoftSkillTest" id = 'voltarBtnSoftSkill' type="button" onclick = 'passPage("back")'>Voltar</button>
-            </div>
-            <div class="col-12 containerModalConfirm" id = 'containerModalConfirm'>
-                <section class="modalConfirm">
-                    <div class="row">
-                      <div class="col-12">
-                          <h1>Você realmente deseja finalizar o teste?</h1>
-                      </div>
-                      <div class="col-12 d-flex justify-content-center">
-                          <div class="col-6 col-md-3">
-                              <button class="confirmBtn" type="button" onclick = 'finalizarTeste("sim")' style="background-color: var(--confirm);">Sim</button>
-                          </div>
-                          <div class="col-6 col-md-3">
-                              <button class="confirmBtn" type="button" onclick = 'finalizarTeste("nao")' style="background-color: var(--error);">Não</button>
-                          </div>
-                      </div>
-                    </div>
-                </section>
-            </div>
+
             
+            <div class="row">
+              <div class="col-sm-12 col-md-4 col-lg-3">
+                <button class="btnBackSoftSkillTest" id='voltarBtnSoftSkill' type="button"
+                  onclick='passPage("back")'>Voltar</button>
+              </div>
+              <div class="col-sm-12 col-md-6 offset-md-2 col-lg-4 offset-lg-5" id="colunaPassarBtn">
+                <button class="btnPassSoftSkillTest" id='passarBtnSoftSkill' type="button"
+                  onclick='passPage("pass")'>Próximo</button>
+              </div>
+              <div class="col-sm-12 col-md-6 offset-md-2 col-lg-4 offset-lg-5">
+                <button class="btnPassSoftSkillTest" id='finalizarBtnSoftSkill' type="button"
+                  onclick='finalizarTeste("")'>Finalizar</button>
+              </div>
+            </div>
+            <div class="col-12 containerModalConfirm" id='containerModalConfirm'>
+              <section class="modalConfirm">
+                <div class="row">
+                  <div class="col-12">
+                    <h1>Você realmente deseja finalizar o teste?</h1>
+                  </div>
+                  <div class="col-12 d-flex justify-content-center">
+                    <div class="col-6 col-md-3">
+                      <button class="confirmBtn" type="button" onclick='finalizarTeste("sim")'
+                        style="background-color: var(--confirm);">Sim</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                      <button class="confirmBtn" type="button" onclick='finalizarTeste("nao")'
+                        style="background-color: var(--error);">Não</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
           </div>
         </div>
       </form>
