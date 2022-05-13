@@ -61,7 +61,14 @@ const Perguntas = [
 
 //Chamado toda vez que um dos botões é pressionado
 function passPage(operationType) {
+
     let numQuestion = window.localStorage.getItem('question')
+        
+    if (Number(numQuestion) + 1 == 9 && operationType == 'pass') {
+        changeBtns(true)
+    } else {
+        changeBtns(false)
+    }
 
     if (numQuestion == '0') {
         if (operationType == 'back') {
@@ -139,4 +146,30 @@ function resetAnswers() {
     document.getElementById('meio').checked = false
     document.getElementById('disParc').checked = false
     document.getElementById('disTotal').checked = false
+}
+
+function changeBtns(visible) {
+
+    let forFinalizar
+    let forBtns
+
+    if(visible == true) {
+        forFinalizar = true
+        forBtns = false
+    } else {
+        forFinalizar = false
+        forBtns = true
+    }
+
+    if(forFinalizar == true) {
+        document.getElementById('finalizarBtnSoftSkill').style.display = 'inline';
+        document.getElementById('passarBtnSoftSkill').style.display = 'none';
+        document.getElementById('voltarBtnSoftSkill').style.display = 'inline';
+    } else if (forBtns == true) {
+        document.getElementById('finalizarBtnSoftSkill').style.display = 'none';
+        document.getElementById('passarBtnSoftSkill').style.display = 'inline';
+        document.getElementById('voltarBtnSoftSkill').style.display = 'inline';
+    }
+
+    
 }

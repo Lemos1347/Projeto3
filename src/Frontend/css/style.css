@@ -1071,4 +1071,8 @@ body#background-login{
   outline: 0;
 }
 
+#finalizarBtnSoftSkill {
+  display: none;
+}
+
 /* Fim Teste SoftSkill */

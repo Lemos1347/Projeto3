@@ -33,7 +33,7 @@
 </head>
 
 <body>
-
+    
   <nav class="navbar fixed-top navbar-expand-lg bg-light">
     <div class="container">
       <a class="navbar-brand" href="/">
@@ -91,6 +91,22 @@
     </div>
   </nav>
   <!-- Form-->
+  <!-- <section class="container modalConfirm">
+      <div class="row">
+        <div class="col-12">
+            <h1>Você deseja finalizar o teste?</h1>
+        </div>
+        <div class="col-12">
+            <div class="col-6">
+                <button></button>
+            </div>
+            <div class="col-6">
+                <button></button>
+            </div>
+        </div>
+      </div>
+    
+  </section> -->
   <main>
     <div class="container justify-content-center bodyCadastroCurriculo">
       <div class="row">
@@ -148,10 +164,13 @@
                 </form>
             </div>
             <div class="col-12">
-                <button class="btnPassSoftSkillTest" type="button" onclick = 'passPage("pass")'>Próximo</button>
+                <button class="btnPassSoftSkillTest" id = 'passarBtnSoftSkill' type="button" onclick = 'passPage("pass")'>Próximo</button>
             </div>
             <div class="col-12">
-                <button class="btnBackSoftSkillTest" type="button" onclick = 'passPage("back")'>Voltar</button>
+                <button class="btnPassSoftSkillTest" id = 'finalizarBtnSoftSkill' type="button">Finalizar</button>
+            </div>
+            <div class="col-12">
+                <button class="btnBackSoftSkillTest" id = 'voltarBtnSoftSkill' type="button" onclick = 'passPage("back")'>Voltar</button>
             </div>
           </div>
         </div>
