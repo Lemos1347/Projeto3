@@ -11,51 +11,51 @@ const Perguntas = [
     {
         'id': 0,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 1 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 1 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 1,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 2 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 2 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 2,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 3 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 3 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 3,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 4 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 4 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 4,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 5 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 5 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 5,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 6 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 6 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 6,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 7 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 7 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },{
         'id': 7,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 8 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 8 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 8,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 9 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 9 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 9,
         'selectedAnswer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 10 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionadno corretamente, para que de tude de bom na apresentação :)'
+        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 10 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
 ]
 
