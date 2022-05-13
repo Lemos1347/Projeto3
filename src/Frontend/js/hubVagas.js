@@ -1,3 +1,15 @@
+/* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+        var name = window.localStorage.getItem('userName')
+        if (name != null && name != undefined && name != ''){
+            document.getElementById('userNameNavBar').innerHTML = `${name}`
+        } else {
+            document.getElementById('userNameNavBar').innerHTML = `Null`
+        }
+    }
+}
+
 const vagas = [
     {
         'nome': 'Analista de Sistemas 1',
