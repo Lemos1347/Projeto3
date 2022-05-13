@@ -11,6 +11,8 @@
   --shadow-green: #347601;
   --shadow-yellow: #EAD200;
   --shadow-red: #760101;
+  --confirm: #008000;
+  --error: #DF0033;
 }
 
 @font-face {
@@ -1073,6 +1075,31 @@ body#background-login{
 
 #finalizarBtnSoftSkill {
   display: none;
+}
+
+.modalConfirm {
+  height: 200px;
+  width: 90%;
+}
+
+.containerModalConfirm {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  display: none;
+}
+
+.confirmBtn {
+  width: 100px;
+  height: 50px;
+  border: 0;
+  border-radius: 12px;
+  transition: 1s;
+}
+
+.confirmBtn:hover {
+  width: 120px;
+  outline: 0;
 }
 
 /* Fim Teste SoftSkill */

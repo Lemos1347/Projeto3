@@ -170,6 +170,18 @@ function changeBtns(visible) {
         document.getElementById('passarBtnSoftSkill').style.display = 'inline';
         document.getElementById('voltarBtnSoftSkill').style.display = 'inline';
     }
+}
 
+function finalizarTeste(type) {
+    if(type == '') {
+        document.getElementById('containerModalConfirm').style.display = 'flex'
+        window.scroll(0, 300)
+    } else if (type == 'sim') {
+        window.location.href = '../view/hubVagas.html'
+    } else if (type == 'nao') {
+        document.getElementById('containerModalConfirm').style.display = 'none'
+    } else {
+        document.getElementById('containerModalConfirm').style.display = 'none'
+    }
     
 }

@@ -78,7 +78,7 @@ function verifyInfos() {
     var randomNumber = generateRandomNumber()
     console.log(randomNumber)
     if (randomNumber != 0) {
-        document.location.href = '../view/hubVagas.html'
+        document.location.href = '../view/testeSoftSkill.html'
     } else {
         document.getElementById('alertContainer').style.display = 'flex';
     
