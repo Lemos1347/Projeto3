@@ -20,6 +20,7 @@ function verifyLogin() {
 
     if (email == 'test@test.com' && password == 'abc123456') {
         document.location.href = '../view/createCurriculum.html'
+        window.localStorage.setItem('userName', 'Usuário Teste')
     } else {
         errorMessage('Usuário e/ou senha inválidos')
     }
