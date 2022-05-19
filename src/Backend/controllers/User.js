@@ -1,16 +1,25 @@
 const userService = require('../services/User')
+require('express-async-errors')
 
 const createUser = (req, res) => {
 
-    const { name, email, password } = req.body;
+    const { name, email, password, bornDate, gender, cpf, phoneNumber } = req.body;
 
-    const user = new userService.User(name, email, password);
+    const user = new userService.User(name, email, password, bornDate, gender, cpf, phoneNumber);
 
-    const resultado = user.generateUser();
+    console.log(user.email)
 
-    res.json({
-        message: resultado
-    })
+    user.generateUser().then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                message: resul.message
+            })
+        }
+    });
 
     return user
 }
