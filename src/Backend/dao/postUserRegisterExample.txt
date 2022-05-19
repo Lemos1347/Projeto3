@@ -1,0 +1,25 @@
+//MD5 HASH
+MATCHAGASFORBITMD5 --> 4b0d30a9f642b3bfff67d0b5b28371a9
+
+//Example Request POST --> /User/Register
+{
+    "email": "",
+    "name": "",
+    "password": "",
+    "bornDate": "",
+    "gender": "",
+    "cpf": "",
+    "phoneNumber": ""
+}
+
+//Example Request POST --> /User/Login
+{
+    "email": "",
+    "password": ""
+}
+
+//Example Request PUT --> /User/Update
+{
+    "id": "",
+    "...valores a serem modificados": ""
+}

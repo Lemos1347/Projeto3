@@ -1,11 +1,12 @@
 const configDb = require('../dao/configDb');
 const { v4: uuid } = require('uuid');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const sqlite3 = require('sqlite3').verbose();
 const sqlite = require('sqlite')
 
 class User {
-    constructor (name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser) {
+    constructor (name, email, password, bornDate, gender, cpf, phoneNumber) {
         if(!this.id) {
             this.id = uuid();
         }
@@ -19,17 +20,30 @@ class User {
     }
 
     async generateUser() {
-
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
-        const rows = await db.all(`SELECT * \ FROM users \ WHERE email = "${this.email}"`);
+        if(this.password) {
+            const hashedPassWord = await bcrypt.hash(this.password, 8) 
 
-        console.log(rows)
+            this.password = hashedPassWord
+        }
 
-        if (rows[0] != undefined) {
+        const rowsEmail = await db.all(`SELECT * \ FROM users \ WHERE email = "${this.email}"`);
+
+        const rowsCPF = await db.all(`SELECT * \ FROM users \ WHERE cpf = "${this.cpf}"`);
+
+        if (rowsEmail[0] != undefined) {
             const error = {
                 type: 'error',
                 message: 'User Already Exists'
+            }
+            return error
+        }
+
+        if (rowsCPF[0] != undefined) {
+            const error = {
+                type: 'error',
+                message: 'User Already Registered With This CPF'
             }
             return error
         }
@@ -90,7 +104,7 @@ class User {
             return error
         }
 
-        await db.run("INSERT INTO users (id, name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,'user',DateTime('now'),DateTime('now'))", [this.id, this.name, this.email , this.password, this.bornDate, this.gender, this.cpf, this.phoneNumber])
+        await db.run("INSERT INTO users (id, name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,'user',DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.email , this.password, this.bornDate, this.gender, this.cpf, this.phoneNumber])
 
         const sucess = {
             type: 'success',
@@ -101,89 +115,206 @@ class User {
             }
         }
         return sucess
-        // function setVal(value) {
-        //     emailAlredyExists = value;
-        //     console.log('1', value)
-        //     console.log('2', emailAlredyExists)
-            
-        // }
+    }
 
+    async Authentication(emailAuth, passwordAuth) {
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
-        // const query = await queryEmail(this.email)
+        //Requisição de busca na tabela "users" para verificar a existência de um usuário com o email indicado no LOGIN
+        const rowsEmail = await db.all(`SELECT * \ FROM users \ WHERE email = "${emailAuth}"`);
 
-        // db.get(`SELECT * \ FROM users \ WHERE email = "${this.email}"`, (err, result) => {
-        //     if(err) {
-        //         console.log(err)
-        //         console.log('testeee')
-        //     } else {
-        //         emailValidation = result
-        //     }
-        // }).then((valor) => {
-        //     console.log(query)
-        //     if (query) {
-        //         console.log('Teste')
-        //         throw new Error("User already exists with this email")
-        //     }
-        // })
+        //Verifica se o usuário existe
+        if (!rowsEmail[0]) {
+            const error = {
+                type: 'error',
+                message: 'Invalid Email or Password'
+            }
+            return error
+        }
 
-        // var emailValidation
+        //Verificar se a senha inserida corresponde a do usuário
+        const passwordMatch = await bcrypt.compare(passwordAuth, rowsEmail[0].password);
 
-        // await db.get(`SELECT * \ FROM users \ WHERE email = "${this.email}"`, (err, result) => {
-        //     if(err) {
-        //         console.log(err)
-        //         console.log('testeee')
-        //     } else {
-        //         emailValidation = result
-        //         console.log("Resposta aqui",result);
-        //         // if(rows.lengh()>=1)
-        //         // {
+        if(!passwordMatch) {
+            const error = {
+                type: 'error',
+                message: 'Invalid Email or Password'
+            }
+            return error
+        }
 
-        //         // }
-        //         // else
-        //         // {
-                    
-        //         // }
-        //         throw new Error("Teste")
-        //         return result.rows;
-        //     }
-        // })
+        //Gera o token de segurança do usuário, que possui tempo de expiração
+        const token = jwt.sign({
+            email: rowsEmail[0].email
+        }, "4b0d30a9f642b3bfff67d0b5b28371a9", {
+            subject: rowsEmail[0].id,
+            expiresIn: "1h"
+        });
 
-        // //console.log(query)
-        // // if (query) {
-        // //     console.log('Teste')
-        // //     throw new Error("User already exists with this email")
-        // // }
+        const sucess = {
+            type: 'sucess',
+            message: 'Validated Credentials. User Logged',
+            token: token
+        }
 
-        
-        // if (!this.email) {
-        //     throw new Error("Invalid Email")
-        // }
+        return sucess
+    }
 
-        // if (!this.name) {
-        //     throw new Error("Invalid Name")
-        // }
+    async updateUser(idUser, name, email, password, bornDate, gender, cpf, phoneNumber) {
 
-        // if (!this.password) {
-        //     throw new Error("Invalid PassWord")
-        // }
-        // const stmt = db.prepare("INSERT INTO lorem VALUES (?)");
-        // stmt.run("Ipsum " + i);
-        // db.run("INSERT INTO users (id, name, email, password, created_at, updated_at) VALUES (?,?,?,?,DateTime('now'),DateTime('now'))", 
-        // [this.id, this.name, this.email , this.password],
-        // (err, result) => {
-        //     if(err) {
-        //         console.log('aqui')
-        //     } else {
-        //         console.log('Valores inseridos')
-        //         return("Usuário cadastrado com sucesso!")
-        //     }
-        // });
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
-        // return "Usuário cadastrado com sucesso!"
+        //Verificar se o usuário passado é válido
+        if (!idUser) {
+            const error = {
+                type: 'error',
+                message: 'Any ID of user (to update) was passed'
+            }
+            return error
+        }
+
+        const rowsId = await db.all(`SELECT * \ FROM users \ WHERE id = "${idUser}"`);
+
+        if (!rowsId[0]){
+            const error = {
+                type: 'error',
+                message: 'User not found'
+            }
+            return error
+        }
+
+        //Verificar qual ou quais informação que o usuário deseja atualizar
+        if(name) {
+            const nameUpdate = await db.run(`UPDATE users SET name="${name}" WHERE id="${idUser}"`)
+            if (nameUpdate.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+        }
+        if(email) {
+            const emailUpdate = await db.run(`UPDATE users SET email="${email}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
+            if (emailUpdate.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+        }
+
+        if(password) {
+            const passwordHashed = await bcrypt.hash(password, 8)
+            const passwordUpdate = await db.run(`UPDATE users SET password="${passwordHashed}" WHERE id="${idUser}"`)
+            if (passwordUpdate.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+        }
+        if(bornDate) {
+            const bornDateUpdate = await db.run(`UPDATE users SET bornDate="${bornDate}" WHERE id="${idUser}"`)
+            if (bornDateUpdate.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+        }
+        if(gender) {
+            const genderUpdate = await db.run(`UPDATE users SET gender="${gender}" WHERE id="${idUser}"`)
+            if (genderUpdate.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+        }
+        if(cpf) {
+            const cpfUpdate = await db.run(`UPDATE users SET cpf="${cpf}" WHERE id="${idUser}"`)
+            if (cpfUpdate.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+        }
+        if(phoneNumber) {
+            const phoneNumberUpdate = await db.run(`UPDATE users SET phoneNumber="${phoneNumber}" WHERE id="${idUser}"`)
+            if (phoneNumberUpdate.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+        }
+        //Validar se nenhuma informação foi enviada ao servidor
+        if (!name && !email && !password && !bornDate && !gender && !cpf && !phoneNumber) {
+            const error = {
+                type: 'error',
+                message: 'Any Information was passed to Update'
+            }
+            return error
+        }
+        //Informa a atualização
+        const sucess = {
+            type: 'sucess',
+            message: 'Informations Updated',
+        }
+
+        return sucess
+    }
+
+    async deleteUser(id) {
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Verificar se o usuário passado é válido
+        if (!id) {
+            const error = {
+                type: 'error',
+                message: 'Any ID of user (to delete) was passed'
+            }
+            return error
+        }
+
+        const rowsId = await db.all(`SELECT * \ FROM users \ WHERE id = "${id}"`);
+
+        if (!rowsId[0]){
+            const error = {
+                type: 'error',
+                message: 'User not found'
+            }
+            return error
+        }
+
+        //Efetua a deleção
+        const deletedUser = await db.run(`DELETE FROM users WHERE id="${id}"`)
+        //Verifica se a chamada para o DB ocorreu sem problemas
+        if (deletedUser.changes == 0) {
+            const error = {
+                type: 'error',
+                message: 'Database Error, please try again later'
+            }
+            return error
+        }
+        //Mostra a validação de que o usuário foi deletado
+        const sucess = {
+            type: 'sucess',
+            message: 'Informations Deleted',
+        }
+
+        return sucess
+
     }
 }
-
-// export { User }
 
 module.exports = {
     User
