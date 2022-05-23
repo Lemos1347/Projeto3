@@ -42,10 +42,11 @@ body {
   padding-top: 75px;
   /* distÃ¢ncia do nav fixo */
   position: relative;
-  padding-bottom: 122px;
+   padding-bottom: 122px; 
   /* distÃ¢ncia do footer */
   min-height: auto;
 }
+
 
 /* Navbar */
 nav {
@@ -839,7 +840,11 @@ input::placeholder {
   background-color: var(--branco-padrao);
   height: 100%;
 }
-body#background-login{
+.logo-login{
+  margin-top: 20px;
+}
+
+body#login{
   background-image: url("../images/Background.png");
   min-height: 100vh;
   width: 100%;
