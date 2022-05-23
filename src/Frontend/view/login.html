@@ -32,7 +32,7 @@
     <link rel="icon" href="../images/favicon.png">
 </head>
 
-<body>
+<body id="login">
 
     <nav class="navbar fixed-top navbar-expand-lg bg-light">
         <div class="container">
@@ -92,73 +92,81 @@
     </nav>
     <!-- Main-->
     <main>
-        <div class="container">
-            <div class="row d-flex justify-content-center bodyHubVagas">
-                <div class="col-sm-12 col-lg-6 col-lg-offset-4 col-md-8 col-md-offset-2">
-                    <img src="../images/logoMenor.png">
-                    <h1>Olá novamente!</h1>
-                    <div>Bem-vinda de volta,</div>
-                    <div>sentimos a sua falta!</div>
-                    <!-- Alert -->
-                    <div class="col-sm-12 alertContainer" id="alertContainer">
-                        <div class="alertDiv">
-                          <img src="../images/iconErro.png" style="width: 30px; height: 30px; color: white;">
-                          <p id = 'contentError' style="margin-bottom: 0px;">Lorem Ipsum</p>
+        <div class="container" id="container-login" style="margin-left: 0 !important;">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 login-white-background">
+                    <div class="container text-center">
+                        <img class="logo-login" src="../images/logoMenor.png">
+                        <h1>Olá novamente!</h1>
+                        <div>Bem-vinda de volta,</div>
+                        <div>sentimos a sua falta!</div>
+                        <!-- Alert -->
+                        <div class="col-sm-12 alertContainer" id="alertContainer">
+                            <div class="alertDiv">
+                                <img src="../images/iconErro.png" style="width: 30px; height: 30px; color: white;">
+                                <p id='contentError' style="margin-bottom: 0px;">Lorem Ipsum</p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Alert -->
-                    <div class="row">
-                        <div class="col-10 offset-1 space">
-                            <span class="span-login" style="margin-left: 8px;">
-                                <h3>email<span class="asterisco">*</span></h3>
-                            </span>
-                        </div>
-                        <div class="input-group mb-3 justify-content-center">
-                            <input placeholder="digite o seu email" type="text" id = "email" class="inputLogin"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                        </div>
-                        <div>
-                            <div class="col-10 offset-1 mt-2">
+                        <!-- Alert -->
+                        <div class="row">
+                            <div class="col-10 offset-1 space">
                                 <span class="span-login" style="margin-left: 8px;">
-                                    <h3>senha<span class="asterisco">*</span></h3>
+                                    <h3>email<span class="asterisco">*</span></h3>
                                 </span>
                             </div>
                             <div class="input-group mb-3 justify-content-center">
-                                <input placeholder="digite a sua senha" type="password" id = 'passWord' class="inputLogin"
+                                <input placeholder="digite o seu email" type="text" id="email" class="inputLogin"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
-                        </div>
-                        <div style="margin-top: -15px;">
-                            <div class="col-10 offset-1 divOptionsLogin">
-                                <div class="remember-me">
-                                    <input type="checkbox">
-                                    <span class="connectedSpan">manter-me logado</span>
+                            <div>
+                                <div class="col-10 offset-1 mt-2">
+                                    <span class="span-login" style="margin-left: 8px;">
+                                        <h3>senha<span class="asterisco">*</span></h3>
+                                    </span>
                                 </div>
-                                <a href="/" class="linkForgetPassword"><span class="forgetSpan"
-                                        style="line-height: 40px;">esqueci a senha?</span></a>
+                                <div class="input-group mb-3 justify-content-center">
+                                    <input placeholder="digite a sua senha" type="password" id='passWord'
+                                        class="inputLogin" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-default">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12 mt-4 justify-content-center">
-                            <div class="col-sm-10" style="width: 100%;">
-                                <button id = 'btnEntrarLogin' class="btnEntrarLogin" type="button" onclick="verifyLogin()">Entrar</button>
+                            <div style="margin-top: -15px;">
+                                <div class="col-10 offset-1 divOptionsLogin">
+                                    <div class="remember-me">
+                                        <input type="checkbox">
+                                        <span class="connectedSpan">manter-me logado</span>
+                                    </div>
+                                    <a href="/" class="linkForgetPassword"><span class="forgetSpan"
+                                            style="line-height: 40px;">esqueci a senha?</span></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 mt-4">
-                            <div class="lineForLogin">
-                                <hr style="height: 1px; background-color: rgb(0, 0, 0); border: none; width: 20%;">
-                                <span style="padding-bottom: 7px;">ou continue com</span>
-                                <hr style="width: 20%; background-color: black;">
+                            <div class="col-sm-12 mt-4 justify-content-center">
+                                <div class="col-sm-10" style="width: 100%;">
+                                    <button id='btnEntrarLogin' class="btnEntrarLogin" type="button"
+                                        onclick="verifyLogin()">Entrar</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12 mt-4 d-flex flex-direction-row justify-content-center" style="gap: 30px;">
-                            <div>
-                                <img src="../images/Logo-Gmail.png" width="55px" height="55px">
+                            <div class="col-12 mt-4">
+                                <div class="lineForLogin">
+                                    <hr style="height: 1px; background-color: rgb(0, 0, 0); border: none; width: 20%;">
+                                    <span style="padding-bottom: 7px;">ou continue com</span>
+                                    <hr style="width: 20%; background-color: black;">
+                                </div>
                             </div>
-                            <div>
-                                <img src="../images/Logo-Facebook.png" width="55px" height="55px">
+                            <div class="col-sm-12 mt-4 d-flex flex-direction-row justify-content-center"
+                                style="gap: 30px;margin-bottom: 40px;">
+                                <div>
+                                    <img src="../images/Logo-Gmail.png" width="55px" height="55px">
+                                </div>
+                                <div>
+                                    <img src="../images/Logo-Facebook.png" width="55px" height="55px">
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="d-md-none d-sm-none col-lg-6 col-xl-6">
+
                 </div>
             </div>
     </main>
