@@ -27,3 +27,14 @@ VALIDTOKEN --> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlcGVoYWdnZWJA
 
 JSON stringfy example Curriculum
 {"estudo":"{"LoremIpsum":"LoremIpsum","LoremIpsum":"LoremIpsum","LoremIpsum":"LoremIpsum","LoremIpsum":"LoremIpsum"}","experiencia":"{"LoremIpsum": "LoremIpsum","LoremIpsum": "LoremIpsum","LoremIpsum":"LoremIpsum","LoremIpsum":"LoremIpsum"}","hardSkills":"["Lorem Ipsum","Lorem Ipsum","Lorem Ipsum","Lorem Ipsum","Lorem Ipsum"]","softSkills":"{"LoremIpsum": "LoremIpsum","LoremIpsum":"LoremIpsum","LoremIpsum":"LoremIpsum","LoremIpsum":"LoremIpsum"}"}
+
+SIMPLE BACKUP ==> {
+    const bornDateUpdate = await db.run(`UPDATE users SET bornDate="${bornDate}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
+    if (bornDateUpdate.changes == 0) {
+    const error = {
+        type: 'error',
+        message: 'Database Error, please try again later'
+        }
+        return error
+    }
+}
