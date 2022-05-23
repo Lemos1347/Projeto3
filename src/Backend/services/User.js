@@ -198,6 +198,8 @@ class User {
 
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
+        let queryComponent = []
+
         //Verificar se o usuário passado é válido
         if (!idUser) {
             const error = {
@@ -219,104 +221,54 @@ class User {
 
         //Verificar qual ou quais informação que o usuário deseja atualizar
         if(name) {
-            const nameUpdate = await db.run(`UPDATE users SET name="${name}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
-            if (nameUpdate.changes == 0) {
-                const error = {
-                    type: 'error',
-                    message: 'Database Error, please try again later'
-                }
-                return error
-            }
+            queryComponent.push(`name="${name}"`)
         }
         if(email) {
-            const emailUpdate = await db.run(`UPDATE users SET email="${email}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
-            if (emailUpdate.changes == 0) {
-                const error = {
-                    type: 'error',
-                    message: 'Database Error, please try again later'
-                }
-                return error
-            }
+            queryComponent.push(`email="${email}"`)
         }
 
         if(password) {
             const passwordHashed = await bcrypt.hash(password, 8)
-            const passwordUpdate = await db.run(`UPDATE users SET password="${passwordHashed}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
-            if (passwordUpdate.changes == 0) {
-                const error = {
-                    type: 'error',
-                    message: 'Database Error, please try again later'
-                }
-                return error
-            }
+            queryComponent.push(`password="${passwordHashed}"`)
         }
         if(bornDate) {
-            const bornDateUpdate = await db.run(`UPDATE users SET bornDate="${bornDate}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
-            if (bornDateUpdate.changes == 0) {
-                const error = {
-                    type: 'error',
-                    message: 'Database Error, please try again later'
-                }
-                return error
-            }
+            queryComponent.push(`bornDate="${bornDate}"`)
         }
         if(gender) {
-            const genderUpdate = await db.run(`UPDATE users SET gender="${gender}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
-            if (genderUpdate.changes == 0) {
-                const error = {
-                    type: 'error',
-                    message: 'Database Error, please try again later'
-                }
-                return error
-            }
+            queryComponent.push(`gender="${gender}"`)
         }
         if(cpf) {
-            const cpfUpdate = await db.run(`UPDATE users SET cpf="${cpf}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
-            if (cpfUpdate.changes == 0) {
-                const error = {
-                    type: 'error',
-                    message: 'Database Error, please try again later'
-                }
-                return error
-            }
+            queryComponent.push(`cpf="${cpf}"`)
         }
         if(phoneNumber) {
-            const phoneNumberUpdate = await db.run(`UPDATE users SET phoneNumber="${phoneNumber}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
-            if (phoneNumberUpdate.changes == 0) {
-                const error = {
-                    type: 'error',
-                    message: 'Database Error, please try again later'
-                }
-                return error
-            }
+            queryComponent.push(`phoneNumber="${phoneNumber}"`)
         }
 
         if(curriculum) {
-            const curriculumUpdate = await db.run(`UPDATE users SET curriculum='${curriculum}', updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
-            if (curriculumUpdate.changes == 0) {
-                const error = {
-                    type: 'error',
-                    message: 'Database Error, please try again later'
-                }
-                return error
-            }
+            queryComponent.push(`curriculum="${curriculum}"`)
         }
 
         if(typeOfUser) {
-            const typeOfUserUpdate = await db.run(`UPDATE users SET typeOfUser='${typeOfUser}', updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
-            if (typeOfUserUpdate.changes == 0) {
-                const error = {
-                    type: 'error',
-                    message: 'Database Error, please try again later'
-                }
-                return error
-            }
+            queryComponent.push(`typeOfUser="${typeOfUser}"`)
         }
         //Validar se nenhuma informação foi enviada ao servidor
         if (!name && !email && !password && !bornDate && !gender && !cpf && !phoneNumber && !curriculum && !typeOfUser) {
             const error = {
                 type: 'error',
                 message: 'Any Information was passed to Update'
+            }
+            return error
+        }
+
+        //Junto todas as informações que foram solicitada a alteração
+        const queryJoined = queryComponent.join(',')
+
+        //Efetua a chamada para o DB, fazendo a atualização
+        const Update = await db.run(`UPDATE users SET ${queryJoined}, updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
+        if (Update.changes == 0) {
+            const error = {
+                type: 'error',
+                message: 'Database Error, please try again later'
             }
             return error
         }

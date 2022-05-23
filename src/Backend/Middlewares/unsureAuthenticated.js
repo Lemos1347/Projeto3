@@ -8,11 +8,10 @@ const unsureAuthenticated = (req, res, next) => {
     //Valida se o token está preenchido
 
     if (!authToken) {
-        const error = {
-            type: 'error',
-            message: 'Token are required to access the services'
-        }
-        return error
+        res.status(401).json({
+            message: "You need a token to access this action"
+        })
+        return
     }
 
     //Valida se o token é válido
