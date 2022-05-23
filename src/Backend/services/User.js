@@ -1,4 +1,3 @@
-const configDb = require('../dao/configDb');
 const { v4: uuid } = require('uuid');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -6,7 +5,7 @@ const sqlite3 = require('sqlite3').verbose();
 const sqlite = require('sqlite')
 
 class User {
-    constructor (name, email, password, bornDate, gender, cpf, phoneNumber) {
+    constructor (name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser) {
         if(!this.id) {
             this.id = uuid();
         }
@@ -17,16 +16,22 @@ class User {
         this.gender = gender;
         this.cpf = cpf;
         this.phoneNumber = phoneNumber;
+        this.typeOfUser = typeOfUser
+        this.curriculum = "";
     }
 
     async generateUser() {
+        //Instanciação do DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
+        //Verificação de senha != "", e HASH da mesma
         if(this.password) {
             const hashedPassWord = await bcrypt.hash(this.password, 8) 
 
             this.password = hashedPassWord
         }
+
+        //Verificação da existência de um usuário com o mesmo EMAIL ou CPF
 
         const rowsEmail = await db.all(`SELECT * \ FROM users \ WHERE email = "${this.email}"`);
 
@@ -47,6 +52,8 @@ class User {
             }
             return error
         }
+
+        //Validação se nenhum dado passado foi igual a ""
 
         if (!this.email) {
             const error = {
@@ -104,8 +111,17 @@ class User {
             return error
         }
 
-        await db.run("INSERT INTO users (id, name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,'user',DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.email , this.password, this.bornDate, this.gender, this.cpf, this.phoneNumber])
-
+        //Inserção das informações dentro do DB
+        const inserction = await db.run("INSERT INTO users (id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.email , this.password, this.bornDate, this.gender, this.cpf, this.phoneNumber, this.curriculum, this.typeOfUser])
+        
+        //Verifica se a inserção foi bem sucedido e assim retorna SUCESSO ou ERRO ao usuário
+        if (inserction.changes === 0) {
+            const error = {
+                type: 'error',
+                message: 'Database Error, please try again later'
+            }
+            return error
+        }
         const sucess = {
             type: 'success',
             message: {
@@ -118,6 +134,24 @@ class User {
     }
 
     async Authentication(emailAuth, passwordAuth) {
+
+        //Validar os dados passados
+        if (!emailAuth) {
+            const error = {
+                type: 'error',
+                message: 'Email are required'
+            }
+            return error
+        }
+
+        if (!passwordAuth) {
+            const error = {
+                type: 'error',
+                message: 'Password are required'
+            }
+            return error
+        }
+
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
         //Requisição de busca na tabela "users" para verificar a existência de um usuário com o email indicado no LOGIN
@@ -160,7 +194,7 @@ class User {
         return sucess
     }
 
-    async updateUser(idUser, name, email, password, bornDate, gender, cpf, phoneNumber) {
+    async updateUser(idUser, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser) {
 
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
@@ -185,7 +219,7 @@ class User {
 
         //Verificar qual ou quais informação que o usuário deseja atualizar
         if(name) {
-            const nameUpdate = await db.run(`UPDATE users SET name="${name}" WHERE id="${idUser}"`)
+            const nameUpdate = await db.run(`UPDATE users SET name="${name}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
             if (nameUpdate.changes == 0) {
                 const error = {
                     type: 'error',
@@ -207,7 +241,7 @@ class User {
 
         if(password) {
             const passwordHashed = await bcrypt.hash(password, 8)
-            const passwordUpdate = await db.run(`UPDATE users SET password="${passwordHashed}" WHERE id="${idUser}"`)
+            const passwordUpdate = await db.run(`UPDATE users SET password="${passwordHashed}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
             if (passwordUpdate.changes == 0) {
                 const error = {
                     type: 'error',
@@ -217,7 +251,7 @@ class User {
             }
         }
         if(bornDate) {
-            const bornDateUpdate = await db.run(`UPDATE users SET bornDate="${bornDate}" WHERE id="${idUser}"`)
+            const bornDateUpdate = await db.run(`UPDATE users SET bornDate="${bornDate}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
             if (bornDateUpdate.changes == 0) {
                 const error = {
                     type: 'error',
@@ -227,7 +261,7 @@ class User {
             }
         }
         if(gender) {
-            const genderUpdate = await db.run(`UPDATE users SET gender="${gender}" WHERE id="${idUser}"`)
+            const genderUpdate = await db.run(`UPDATE users SET gender="${gender}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
             if (genderUpdate.changes == 0) {
                 const error = {
                     type: 'error',
@@ -237,7 +271,7 @@ class User {
             }
         }
         if(cpf) {
-            const cpfUpdate = await db.run(`UPDATE users SET cpf="${cpf}" WHERE id="${idUser}"`)
+            const cpfUpdate = await db.run(`UPDATE users SET cpf="${cpf}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
             if (cpfUpdate.changes == 0) {
                 const error = {
                     type: 'error',
@@ -247,7 +281,7 @@ class User {
             }
         }
         if(phoneNumber) {
-            const phoneNumberUpdate = await db.run(`UPDATE users SET phoneNumber="${phoneNumber}" WHERE id="${idUser}"`)
+            const phoneNumberUpdate = await db.run(`UPDATE users SET phoneNumber="${phoneNumber}", updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
             if (phoneNumberUpdate.changes == 0) {
                 const error = {
                     type: 'error',
@@ -256,8 +290,30 @@ class User {
                 return error
             }
         }
+
+        if(curriculum) {
+            const curriculumUpdate = await db.run(`UPDATE users SET curriculum='${curriculum}', updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
+            if (curriculumUpdate.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+        }
+
+        if(typeOfUser) {
+            const typeOfUserUpdate = await db.run(`UPDATE users SET typeOfUser='${typeOfUser}', updated_at=DateTime('now','localtime') WHERE id="${idUser}"`)
+            if (typeOfUserUpdate.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+        }
         //Validar se nenhuma informação foi enviada ao servidor
-        if (!name && !email && !password && !bornDate && !gender && !cpf && !phoneNumber) {
+        if (!name && !email && !password && !bornDate && !gender && !cpf && !phoneNumber && !curriculum && !typeOfUser) {
             const error = {
                 type: 'error',
                 message: 'Any Information was passed to Update'
@@ -313,6 +369,100 @@ class User {
 
         return sucess
 
+    }
+
+    async verifyCurriculum(id) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Verificar se um ID foi passado
+        if (!id) {
+            const error = {
+                type: 'error',
+                message: 'Needed ID to do this check'
+            }
+            return error
+        }
+
+        //Verificar se o ID passado existe
+        const rowsId = await db.all(`SELECT * \ FROM users \ WHERE id = "${id}"`);
+
+        if (!rowsId[0]) {
+            const error = {
+                type: 'error',
+                message: 'Any users with this ID'
+            }
+            return error
+        }
+
+        //Verificar se existe currículo cadastrado para aquele ID
+        const curriculum = rowsId[0].curriculum
+
+        if(curriculum === "") {
+            const success = {
+                type: 'success',
+                message: "User exists, but don't have a curriculum",
+                haveCurriculum: false
+            }
+            return success
+        }
+
+        const success = {
+            type: 'success',
+            message: "User exists, and have a curriculum",
+            haveCurriculum: true
+        }
+        return success
+    }
+
+    async changeUserPermission(id, isAdmin) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Verificar se um ID foi passado e se um isAdmin também
+        if (!id) {
+            const error = {
+                type: 'error',
+                message: 'Needed ID to do this check'
+            }
+            return error
+        }
+
+        if (!isAdmin) {
+            const error = {
+                type: 'error',
+                message: 'Needed a permission to user'
+            }
+            return error
+        }
+
+        //Verfica se o ID pertence a algum Usuário
+        const rowsId = await db.all(`SELECT * \ FROM users \ WHERE id = "${id}"`);
+
+        if (!rowsId[0]) {
+            const error = {
+                type: 'error',
+                message: 'Any users with this ID'
+            }
+            return error
+        }
+
+        //Altera o tipo de permissão do Usuário
+        const isAdminUpdate = await db.run(`UPDATE users SET isAdmin='${isAdmin}', updated_at=DateTime('now','localtime') WHERE id="${id}"`)
+        if (isAdminUpdate.changes == 0) {
+            const error = {
+                type: 'error',
+                message: 'Database Error, please try again later'
+            }
+            return error
+        }
+        //Informa a atualização
+        const sucess = {
+            type: 'sucess',
+            message: 'Informations Updated',
+        }
+
+        return sucess
     }
 }
 
