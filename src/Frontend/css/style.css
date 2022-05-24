@@ -207,7 +207,7 @@ h2{
 }
 
 .generalInput::placeholder {
-  font-family: 'nunito-italic';
+  font-family: 'nunito-bold';
   font-size: 14pt;
   font-style: normal;
   color: #280044;
@@ -621,6 +621,8 @@ h2{
 
 .span-login {
   float: left;
+  font-family: "nunito-semibold";
+  font-size: calc(1.3rem + .6vw);
 }
 
 .space {
@@ -873,7 +875,7 @@ body#login{
 }
 
 .inputLogin::placeholder {
-  font-family: 'Nunito';
+  font-family: 'nunito-italic';
 }
 
 .inputLogin:focus {
@@ -940,6 +942,66 @@ body#login{
 #numberInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+p#cadastrar{
+  font-family: "nunito-italic" !important;
+  color: var(--roxo-padrao);
+  font-size: 16px;
+  margin-top: 10px;
+}
+p#cadastrar a{
+  text-decoration: underline;
+  color: var(--roxo-padrao);
+}
+p#cadastrar a:hover{
+  color: var(--roxo-hover);
+}
+
+/*Inicio Criar Conta*/
+.background-create-account{
+  background-color: var(--roxo-padrao);
+  height: 100%;
+
+}
+.create-account-img{
+  width: 100%;
+  margin-top: 20px;
+}
+.title-create-account{
+  margin-top: 20px;
+  text-align: left !important;
+}
+.btn-type{
+  width: 100%;
+  height: max-content;
+  padding: 20px;
+  background-color: var(--cinza-fundo);
+  border: 3px solid var(--roxo-padrao);
+  border-radius: 10px;
+}
+.btn-type-fundo{
+  background-color: var(--roxo-padrao);
+  align-items: center;
+  width: max-content;
+  height: max-content;
+  padding: 10px;
+  border-radius: 10px;
+}
+.fa-building-o{
+  color: var(--branco-padrao);
+  font-size: 80px;
+}
+.description{
+padding: 10px;
+margin-left: 20px;
+font-family: "nunito-semibold";
+}
+.description hr{
+  background-color: var(--amarelo-padrao) !important;
+  height: 3px !important;
+  margin-top: -10px;
+}
+/*Fim Criar Conta*/
+
 /*Iinicio Container ver perfil na vaga*/
 
 .container-ver-vaga-perfil{
