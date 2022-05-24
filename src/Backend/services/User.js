@@ -33,14 +33,15 @@ class User {
 
         //Verificação da existência de um usuário com o mesmo EMAIL ou CPF
 
-        const rowsEmail = await db.all(`SELECT * \ FROM users \ WHERE email = "${this.email}"`);
+        const rowsEmailUserTable = await db.all(`SELECT * \ FROM users \ WHERE email = "${this.email}"`);
+        const rowsEmailCompanyTable = await db.all(`SELECT * \ FROM TB_COMPANY \ WHERE email = "${this.email}"`);
 
         const rowsCPF = await db.all(`SELECT * \ FROM users \ WHERE cpf = "${this.cpf}"`);
 
-        if (rowsEmail[0] != undefined) {
+        if (rowsEmailUserTable[0] != undefined && rowsEmailCompanyTable[0] != undefined) {
             const error = {
                 type: 'error',
-                message: 'User Already Exists'
+                message: 'Email already in use'
             }
             return error
         }
@@ -155,10 +156,11 @@ class User {
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
         //Requisição de busca na tabela "users" para verificar a existência de um usuário com o email indicado no LOGIN
-        const rowsEmail = await db.all(`SELECT * \ FROM users \ WHERE email = "${emailAuth}"`);
+        const rowsEmailTableUser = await db.all(`SELECT * \ FROM users \ WHERE email = "${emailAuth}"`);
+        const rowsEmailTableCompany = await db.all(`SELECT * \ FROM TB_COMPANY \ WHERE email = "${emailAuth}"`);
 
         //Verifica se o usuário existe
-        if (!rowsEmail[0]) {
+        if (!rowsEmailTableUser[0] && !rowsEmailTableCompany[0]) {
             const error = {
                 type: 'error',
                 message: 'Invalid Email or Password'
@@ -167,7 +169,15 @@ class User {
         }
 
         //Verificar se a senha inserida corresponde a do usuário
-        const passwordMatch = await bcrypt.compare(passwordAuth, rowsEmail[0].password);
+        let passwordMatch
+        if (rowsEmailTableUser[0]) {
+            console.log('User')
+            passwordMatch = await bcrypt.compare(passwordAuth, rowsEmailTableUser[0].password);
+        } else {
+            console.log('Company')
+            passwordMatch = await bcrypt.compare(passwordAuth, rowsEmailTableCompany[0].password);
+        }
+        
 
         if(!passwordMatch) {
             const error = {
@@ -178,13 +188,22 @@ class User {
         }
 
         //Gera o token de segurança do usuário, que possui tempo de expiração
-        const token = jwt.sign({
-            email: rowsEmail[0].email
-        }, "4b0d30a9f642b3bfff67d0b5b28371a9", {
-            subject: rowsEmail[0].id,
-            expiresIn: "1h"
-        });
-
+        let token
+        if (rowsEmailTableUser[0]) {
+            token = jwt.sign({
+                email: rowsEmailTableUser[0].email
+            }, "4b0d30a9f642b3bfff67d0b5b28371a9", {
+                subject: rowsEmailTableUser[0].id,
+                expiresIn: "1h"
+            });
+        } else {
+            token = jwt.sign({
+                email: rowsEmailTableCompany[0].email
+            }, "4b0d30a9f642b3bfff67d0b5b28371a9", {
+                subject: rowsEmailTableCompany[0].id,
+                expiresIn: "1h"
+            });
+        }
         const sucess = {
             type: 'sucess',
             message: 'Validated Credentials. User Logged',
