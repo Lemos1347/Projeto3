@@ -5,7 +5,7 @@ const sqlite3 = require('sqlite3').verbose();
 const sqlite = require('sqlite')
 
 class Company {
-    constructor (name, email, password, cnpj, phoneNumber) {
+    constructor (name, email, password, cnpj, phoneNumber, logo) {
         if(!this.id) {
             this.id = uuid();
         }
@@ -15,6 +15,7 @@ class Company {
         this.cnpj = cnpj;
         this.phoneNumber = phoneNumber;
         this.typeOfUser = "company";
+        this.logo = logo
     }
 
     async generateCompany() {
@@ -94,7 +95,7 @@ class Company {
         }
 
         //Inserção das informações dentro do DB
-        const inserction = await db.run("INSERT INTO TB_COMPANY (id, name, email, password, cnpj, phoneNumber, typeOfUser, created_at, updated_at) VALUES (?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.email , this.password, this.cnpj, this.phoneNumber, this.typeOfUser])
+        const inserction = await db.run("INSERT INTO TB_COMPANY (id, name, email, password, cnpj, phoneNumber, typeOfUser, logo, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.email , this.password, this.cnpj, this.phoneNumber, this.typeOfUser, this.logo])
         
         //Verifica se a inserção foi bem sucedido e assim retorna SUCESSO ou ERRO ao usuário
         if (inserction.changes === 0) {
@@ -115,7 +116,7 @@ class Company {
         return sucess
     }
 
-async updateCompany(idCompany, name, email, password, cnpj, phoneNumber) {
+async updateCompany(idCompany, name, email, password, cnpj, phoneNumber, logo) {
 
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
@@ -157,9 +158,12 @@ async updateCompany(idCompany, name, email, password, cnpj, phoneNumber) {
         if(phoneNumber) {
             queryComponent.push(`phoneNumber="${phoneNumber}"`)
         }
+        if(logo) {
+            queryComponent.push(`logo="${logo}"`)
+        }
 
         //Validar se nenhuma informação foi enviada ao servidor
-        if (!name && !email && !password && !cnpj && !phoneNumber) {
+        if (!name && !email && !password && !cnpj && !phoneNumber && !logo) {
             const error = {
                 type: 'error',
                 message: 'Any Information was passed to Update'

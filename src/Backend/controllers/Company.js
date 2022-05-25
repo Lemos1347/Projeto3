@@ -3,9 +3,9 @@ require('express-async-errors')
 
 const createCompany = (req, res) => {
 
-    const { name, email, password, cnpj, phoneNumber } = req.body;
+    const { name, email, password, cnpj, phoneNumber, logo } = req.body;
 
-    const company = new companyService.Company(name, email, password, cnpj, phoneNumber);
+    const company = new companyService.Company(name, email, password, cnpj, phoneNumber, logo);
 
     company.generateCompany().then((resul) => {
         if(resul.type === "error") {
@@ -23,11 +23,11 @@ const createCompany = (req, res) => {
 }
 
 const updateCompany = (req, res) => {
-    const { id, name, email, password, cnpj, phoneNumber } = req.body;
+    const { id, name, email, password, cnpj, phoneNumber, logo } = req.body;
 
     const user = new companyService.Company();
 
-    user.updateCompany(id, name, email, password, cnpj, phoneNumber).then((resul) => {
+    user.updateCompany(id, name, email, password, cnpj, phoneNumber, logo).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
