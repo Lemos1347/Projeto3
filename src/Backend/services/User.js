@@ -445,6 +445,81 @@ class User {
 
         return sucess
     }
+
+    async getUser(id) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Validação infos passadas na REQ
+        if (!id) {
+            const error = {
+                type: 'error',
+                message: 'ID is needed to this action'
+            }
+            return error
+        }
+
+        //Verfica se o ID pertence a algum Usuário
+        const rowsId = await db.all(`SELECT * \ FROM users \ WHERE id = "${id}"`);
+
+        //Verifica se o usuário existe
+        if (!rowsId[0]) {
+            const error = {
+                type: 'error',
+                message: 'User not found'
+            }
+            return error
+        }
+
+        //Retorna infos ao client
+        const sucess = {
+            type: 'sucess',
+            user: rowsId[0]
+        }
+
+        return sucess
+
+    }
+
+    //SOMENTE PARA O TOKEN, JAMAIS FAÇA REQUISIÇÃO AQUI
+    async getInfosTemp(idUser) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Valida se o ID está preenchido
+        if (!idUser) {
+            const error = {
+                type: 'error',
+                message: 'Invalid ID'
+            }
+            return error
+        }
+
+        //Verfica se o ID pertence a algum Usuário
+        const rowsId = await db.all(`SELECT * \ FROM users \ WHERE id = "${idUser}"`);
+
+        //Verifica se o usuário existe
+        if (!rowsId[0]) {
+            const error = {
+                type: 'error',
+                message: 'User not found'
+            }
+            return error
+        }
+
+        //Captura as informações do DB
+        const { id, name, email } = rowsId[0]
+
+        //Retorna infos ao client
+        const sucess = {
+            type: 'sucess',
+            name: name,
+            id: idUser,
+            email: email
+        }
+
+        return sucess
+    }
 }
 
 module.exports = {

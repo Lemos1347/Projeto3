@@ -10,6 +10,8 @@ router.post('/Login', userController.AuthUser)
 router.put('/Update', userAuth.unsureAuthenticated, userController.UpdateUser)
 router.delete('/Delete', userAuth.unsureAuthenticated, userController.deleteUser)
 router.get('/Verify/Curriculum', userAuth.unsureAuthenticated, userController.verifyCurriculum)
+router.post('/User', userAuth.unsureAuthenticated, userController.getUser)
+router.get('/Verify/Infos', userAuth.unsureAuthenticated, userController.getInfos)
 router.put('/Update/Permission', userAuth.unsureAuthenticated, adminAuth.ensureAdmin, userController.updatePermission)
 
 module.exports = router

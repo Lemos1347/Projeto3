@@ -37,6 +37,22 @@ const deleteOffer = (req, res) => {
     });
 }
 
+const getOffers = (req, res) => {
+    const offer = new jobOfferService.jobOffer()
+
+    offer.getOffers().then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                offers: resul.offers
+            })
+        }
+    });
+}
+
 module.exports = {
-    createJobOffer, deleteOffer
+    createJobOffer, deleteOffer, getOffers
 }

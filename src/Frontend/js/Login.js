@@ -6,18 +6,15 @@
 //         alert(email);
 //     });
 
-
-// document.getElementById('btnEntrarLogin').onclick(
-    
-// )
-
 function verifyLogin() {
     $.post("http://localhost:3001/User/Login",
     {"email" : $("#email").val(), 
     "password" : $("#passWord").val()}
     , function(msg){
         if(msg.token) {
-            document.location.href = '../view/createCurriculum.html'
+            console.log('teste')
+            // document.location.href = '../view/createCurriculum.html'
+            setInfos(msg.id, msg.name, msg.email, msg.token)
         }
     }).fail(function(err) {
         errorMessage(err.responseJSON.error)

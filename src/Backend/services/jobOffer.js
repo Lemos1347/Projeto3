@@ -195,6 +195,9 @@ class jobOffer {
     }
 
     async deleteOffer(idOffer) {
+        //Instanciação do DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
         //Verifica se o ID da vaga foi passado
         if(!idOffer) {
             const error = {
@@ -309,6 +312,21 @@ class jobOffer {
         }
 
         return sucess
+    }
+
+    async getOffers() {
+        //Instanciação do DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        const query = await db.all("SELECT * \ FROM TB_JOBOFFER")
+
+        const sucess = {
+            type: 'sucess',
+            offers: query
+        }
+
+        return sucess
+
     }
 }
 

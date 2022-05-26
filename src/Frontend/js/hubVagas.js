@@ -1,16 +1,28 @@
+let nome
+let email
+let id
+
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
-document.onreadystatechange = function () {
+document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
-        var name = window.localStorage.getItem('userName')
-        if (name != null && name != undefined && name != ''){
-            document.getElementById('userNameNavBar').innerHTML = `${name}`
-        } else {
-            document.getElementById('userNameNavBar').innerHTML = `Null`
-        }
+        $.ajax({
+            url: "http://localhost:3001/User/Verify/Infos",
+            headers: {"Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY1MzUzNzQ5OCwiZXhwIjoxNjUzNTQxMDk4LCJzdWIiOiI5ZWNkZGM0NC04NDA5LTRlMTktYjc2Yi0xOTVlZjg0Mzk2NWIifQ.ztTqmDdke_wiWp1i0-wtgY6TXiBhYH1m656RftACIjw`},
+            success: function(resul) { 
+                console.log(resul)
+                nome = resul.name
+                email = resul.email,
+                id = resul.id
+                document.getElementById('userNameNavBar').innerHTML = `${nome}`
+                checkVagas()
+            }
+        }).fail(function(err) {
+            console.log(err.responseJSON.message)
+        })
     }
 }
 
-const vagas = [
+let vagas = [
     {
         'nome': 'Analista de Sistemas 1',
         'matchPer': 60,
@@ -44,7 +56,19 @@ const vagas = [
     },
 ]
 
-function checkVagas() {
+async function checkVagas() {
+
+    await $.ajax({
+        url: "http://localhost:3001/Offer/Offers",
+        headers: {"Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY1MzUzNzQ5OCwiZXhwIjoxNjUzNTQxMDk4LCJzdWIiOiI5ZWNkZGM0NC04NDA5LTRlMTktYjc2Yi0xOTVlZjg0Mzk2NWIifQ.ztTqmDdke_wiWp1i0-wtgY6TXiBhYH1m656RftACIjw`},
+        success: function(resul) { 
+            vagas = resul.offers
+        }
+    }).fail(function(err) {
+        console.log(err.responseJSON.message)
+    })
+
+    console.log(nome, id, email)
 
     vagas.map((vaga) => {
 
@@ -69,11 +93,11 @@ function checkVagas() {
                     </div>
                     <div class="col-7">
                         <div class="divRightHubVagasComponent">
-                            <h1 class="nomeVagaHubVagas">${vaga.nome}</h1>
-                            <p class="pForHubVagas"><i class="fa fa-map-marker" aria-hidden="true"></i>São Paulo</p>
-                            <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>Presencial</p>
+                            <h1 class="nomeVagaHubVagas">${vaga.name}</h1>
+                            <p class="pForHubVagas"><i class="fa fa-map-marker" aria-hidden="true"></i>${vaga.location}</p>
+                            <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>${vaga.type}</p>
                             <div class = 'divBtnSeeMore'>
-                                <button class="btnSeeMore" onclick = "redirectToVagaId(${vaga.id})">Ver Mais</button>
+                                <button class="btnSeeMore" onclick = "redirectToVagaId('${vaga.id}')">Ver Mais</button>
                             </div>
                         </div>
                     </div>
@@ -110,5 +134,3 @@ function popUpVisibility(visible) {
 
     
 }
-
-checkVagas()

@@ -8,5 +8,6 @@ const companyAuth = require('../Middlewares/unsureCompany')
 
 router.post('/Create', userAuth.unsureAuthenticated, companyAuth.ensureCompany, offerController.createJobOffer)
 router.post('/Delete', offerController.deleteOffer)
+router.get('/Offers', offerController.getOffers)
 
 module.exports = router

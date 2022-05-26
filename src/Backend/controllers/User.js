@@ -118,6 +118,44 @@ const updatePermission = (req, res) => {
     })
 }
 
+const getUser = (req, res) => {
+    const { id } = req.body
+
+    const user = new userService.User();
+
+    user.getUser(id).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                message: resul.message
+            })
+        } else {
+            res.status(200).json({
+                user: resul.user
+            })
+        }
+    })
+}
+
+const getInfos = (req, res) => {
+    const { user_id } = req
+
+    const user = new userService.User();
+
+    user.getInfosTemp(user_id).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                name: resul.name,
+                id: resul.id,
+                email: resul.email
+            })
+        }
+    })
+}
+
 module.exports = {
-    createUser, AuthUser, UpdateUser, deleteUser, verifyCurriculum, updatePermission
+    createUser, AuthUser, UpdateUser, deleteUser, verifyCurriculum, updatePermission, getUser, getInfos
 }
