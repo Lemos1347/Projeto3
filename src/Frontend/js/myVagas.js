@@ -1,4 +1,32 @@
-const vagas = [
+let nome
+let email
+let id
+
+let auth = window.sessionStorage.getItem('auth')
+
+/* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
+document.onreadystatechange = async function () {
+    if (document.readyState == "complete") {
+        $.ajax({
+            url: "http://localhost:3001/User/Verify/Infos",
+            type: "GET",
+            headers: {"Authorization": `Bearer ${auth}`},
+            success: function(resul) { 
+                console.log(resul)
+                nome = resul.name
+                email = resul.email,
+                id = resul.id
+                document.getElementById('userNameNavBar').innerHTML = `${nome}`
+                checkVagas()
+            }
+        }).fail(function(err) {
+            console.log(err.responseJSON.message)
+            window.location.href = '../view/login.html'
+        })
+    }
+}
+
+let vagas = [
     {
         'nome': 'Analista de Sistemas 1',
         'matchPer': 60,
@@ -37,7 +65,23 @@ const vagas = [
     },
 ]
 
-function checkVagas() {
+async function checkVagas() {
+
+    console.log(auth)
+
+    await $.ajax({
+        url: "http://localhost:3001/Offer/OfferUser",
+        headers: {"authorization": `Bearer ${auth}`},
+        success: function(resul) { 
+            console.log(resul)
+            vagas = resul.offers
+        }
+    }).fail(function(err) {
+        console.log('teste')
+        console.log(err.responseJSON.message)
+    })
+
+    console.log(nome, id, email)
 
     vagas.map((vaga) => {
 
@@ -52,12 +96,12 @@ function checkVagas() {
                     </div>
                     <div class="col-7">
                         <div class="divRightHubVagasComponent">
-                            <h1 class="nomeVagaHubVagas">${vaga.nome}</h1>
+                            <h1 class="nomeVagaHubVagas">${vaga.name}</h1>
                             <p class="pForHubVagas"><i class="fa fa-map-marker" aria-hidden="true"></i>São Paulo</p>
-                            <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>${vaga.modelo}</p>
+                            <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>${vaga.type}</p>
                             <p class="pForHubVagas d-flex"><i class="fa fa-info-circle info-circle-yellow" aria-hidden="true"></i>${vaga.status}</p>
                             <div class = 'divBtnSeeMore'>
-                                <button class="btnSeeMore">Ver Mais</button>
+                                <button class="btnSeeMore" type="button" onclick="redirectToVagaId('${vaga.id}')">Ver Mais</button>
                             </div>
                         </div>
                     </div>
@@ -66,6 +110,10 @@ function checkVagas() {
         </div>
     `
     })
+}
+
+function redirectToVagaId(param) {
+    document.location.href = `../view/vagaExpandida.html?id=${param}`
 }
 
 function generateRandomNumber() {
@@ -87,8 +135,4 @@ function popUpVisibility(visible) {
         displayToEdit = 'none'
         document.getElementById('bodyFiltersHubVagas').style.display = 'none'
     }
-
-    
 }
-
-checkVagas()

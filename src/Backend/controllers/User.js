@@ -38,9 +38,6 @@ const AuthUser = (req, res) => {
             res.status(200).json({
                 message: resul.message,
                 token: resul.token,
-                name: resul.name,
-                email: resul.email,
-                id: resul.id
             })
         }
     });
@@ -82,11 +79,11 @@ const deleteUser = (req, res) => {
 }
 
 const verifyCurriculum = (req, res) => {
-    const { id } = req.body;
+    const { user_id } = req
 
     const user = new userService.User();
 
-    user.verifyCurriculum(id).then((resul) => {
+    user.verifyCurriculum(user_id).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message

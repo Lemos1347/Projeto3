@@ -282,7 +282,7 @@ class jobOffer {
         }
 
         //Verifica do ID da empresa
-        const forId = await db.run(`SELECT * \ FROM TB_JOBOFFER \ WHERE id = "${idVaga}"`)
+        const forId = await db.all(`SELECT * \ FROM TB_JOBOFFER \ WHERE id = "${idVaga}"`)
 
         if (!forId[0]) {
             const error = {
@@ -295,7 +295,7 @@ class jobOffer {
         const idCompany = forId[0].id_company
 
         //Adiciona a aplicação
-        const insertApllicant = await db.run("INSERT INTO TB_JOBOFFER_USERS (id, idVaga, id_users, id_company) VALUES (?,?,?,?)", [idApplicant, idVaga, idUser, idCompany]);
+        const insertApllicant = await db.run("INSERT INTO TB_JOBOFFER_USERS (id, id_vaga, id_users, id_company) VALUES (?,?,?,?)", [idApplicant, idVaga, idUser, idCompany]);
 
         if (insertApllicant.changes === 0) {
             const error = {
@@ -312,6 +312,52 @@ class jobOffer {
         }
 
         return sucess
+    }
+
+    async getOffer(id) {
+        //Instanciação do DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        console.log(id)
+
+        //Verifica se o ID foi passado
+        if (!id) {
+            const error = {
+                type: 'error',
+                message: "ID was not passed"
+            }
+            return error
+        }
+
+        //Verifica em quais vagas o usuário está
+        const query = await db.all(`SELECT * \ FROM TB_JOBOFFER_USERS WHERE id_users="${id}"`)
+
+        if (!query) {
+            const error = {
+                type: 'error',
+                message: "User don't have any apply"
+            }
+            return error
+        }
+
+        let vagas = []
+
+        let count = 0
+        while (count < query.length) {
+            await db.all(`SELECT * \ FROM TB_JOBOFFER \ WHERE id = "${query[count].id_vaga}"`).then((res) => {
+                res[0].status = query[0].status
+                vagas.push(res[0])
+            })
+            count++
+        }
+
+        const sucess = {
+            type: 'sucess',
+            vagas: vagas
+        }
+
+        return sucess
+
     }
 
     async getOffers() {

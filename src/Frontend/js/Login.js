@@ -12,9 +12,8 @@ function verifyLogin() {
     "password" : $("#passWord").val()}
     , function(msg){
         if(msg.token) {
-            console.log('teste')
-            // document.location.href = '../view/createCurriculum.html'
-            setInfos(msg.id, msg.name, msg.email, msg.token)
+            //document.location.href = '../view/createCurriculum.html'
+            window.sessionStorage.setItem('auth', msg.token)
         }
     }).fail(function(err) {
         errorMessage(err.responseJSON.error)

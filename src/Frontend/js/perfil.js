@@ -2,12 +2,14 @@ let nome
 let email
 let id
 
+const auth = window.sessionStorage.getItem('auth')
+
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
             url: "http://localhost:3001/User/Verify/Infos",
-            headers: {"Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY1MzUzNzQ5OCwiZXhwIjoxNjUzNTQxMDk4LCJzdWIiOiI5ZWNkZGM0NC04NDA5LTRlMTktYjc2Yi0xOTVlZjg0Mzk2NWIifQ.ztTqmDdke_wiWp1i0-wtgY6TXiBhYH1m656RftACIjw`},
+            headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 console.log(resul)
                 nome = resul.name
@@ -34,7 +36,7 @@ async function checkUser() {
         data: { 
             id: id
         },
-        headers: {"Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY1MzUzNzQ5OCwiZXhwIjoxNjUzNTQxMDk4LCJzdWIiOiI5ZWNkZGM0NC04NDA5LTRlMTktYjc2Yi0xOTVlZjg0Mzk2NWIifQ.ztTqmDdke_wiWp1i0-wtgY6TXiBhYH1m656RftACIjw`},
+        headers: {"Authorization": `Bearer ${auth}`},
         success: function(resul) { 
             User = resul.user
         }

@@ -187,13 +187,8 @@ class User {
 
         //Gera o token de segurança do usuário, que possui tempo de expiração
         let token
-        let name
-        let email
-        let id
+
         if (rowsEmailTableUser[0]) {
-            name = rowsEmailTableUser[0].name;
-            email = rowsEmailTableUser[0].email;
-            id = rowsEmailTableUser[0].id;
             token = jwt.sign({
                 email: rowsEmailTableUser[0].email
             }, "4b0d30a9f642b3bfff67d0b5b28371a9", {
@@ -201,9 +196,6 @@ class User {
                 expiresIn: "1h"
             });
         } else {
-            name = rowsEmailTableCompany[0].name;
-            email = rowsEmailTableCompany[0].email;
-            id = rowsEmailTableCompany[0].id;
             token = jwt.sign({
                 email: rowsEmailTableCompany[0].email
             }, "4b0d30a9f642b3bfff67d0b5b28371a9", {
@@ -215,9 +207,6 @@ class User {
             type: 'sucess',
             message: 'Validated Credentials. User Logged',
             token: token,
-            name: name,
-            email: email,
-            id: id
         }
 
         return sucess
@@ -519,6 +508,26 @@ class User {
         }
 
         return sucess
+    }
+
+    async getVagasAplicadas(id) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Verfica se o ID pertence a algum Usuário
+        const rowsId = await db.all(`SELECT * \ FROM users \ WHERE id = "${id}"`);
+
+        //Verifica se o usuário existe
+        if (!rowsId[0]) {
+            const error = {
+                type: 'error',
+                message: 'User not found'
+            }
+            return error
+        }
+
+        //Carrega todas as vagas para as quais os usuários se aplicaram
+        
     }
 }
 
