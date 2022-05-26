@@ -6,24 +6,29 @@
 //         alert(email);
 //     });
 
+
 // document.getElementById('btnEntrarLogin').onclick(
     
 // )
 
 function verifyLogin() {
+    $.post("http://localhost:3001/User/Login",
+    {"email" : $("#email").val(), 
+    "password" : $("#passWord").val()}
+    , function(msg){
+        if(msg.token) {
+            document.location.href = '../view/createCurriculum.html'
+        }
+    }).fail(function(err) {
+        errorMessage(err.responseJSON.error)
+    })
 
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("passWord").value;
-
-    console.log(email)
-    console.log(password)
-
-    if (email == 'test@test.com' && password == 'abc123456') {
-        document.location.href = '../view/createCurriculum.html'
-        window.localStorage.setItem('userName', 'Usuário Teste')
-    } else {
-        errorMessage('Usuário e/ou senha inválidos')
-    }
+    // if (email == 'test@test.com' && password == 'abc123456') {
+    //     document.location.href = '../view/createCurriculum.html'
+    //     window.localStorage.setItem('userName', 'Usuário Teste')
+    // } else {
+    //     errorMessage('Usuário e/ou senha inválidos')
+    // }
 }
 
 function errorMessage(content) {

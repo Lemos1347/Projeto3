@@ -171,10 +171,8 @@ class User {
         //Verificar se a senha inserida corresponde a do usuário
         let passwordMatch
         if (rowsEmailTableUser[0]) {
-            console.log('User')
             passwordMatch = await bcrypt.compare(passwordAuth, rowsEmailTableUser[0].password);
         } else {
-            console.log('Company')
             passwordMatch = await bcrypt.compare(passwordAuth, rowsEmailTableCompany[0].password);
         }
         
@@ -189,7 +187,13 @@ class User {
 
         //Gera o token de segurança do usuário, que possui tempo de expiração
         let token
+        let name
+        let email
+        let id
         if (rowsEmailTableUser[0]) {
+            name = rowsEmailTableUser[0].name;
+            email = rowsEmailTableUser[0].email;
+            id = rowsEmailTableUser[0].id;
             token = jwt.sign({
                 email: rowsEmailTableUser[0].email
             }, "4b0d30a9f642b3bfff67d0b5b28371a9", {
@@ -197,6 +201,9 @@ class User {
                 expiresIn: "1h"
             });
         } else {
+            name = rowsEmailTableCompany[0].name;
+            email = rowsEmailTableCompany[0].email;
+            id = rowsEmailTableCompany[0].id;
             token = jwt.sign({
                 email: rowsEmailTableCompany[0].email
             }, "4b0d30a9f642b3bfff67d0b5b28371a9", {
@@ -207,7 +214,10 @@ class User {
         const sucess = {
             type: 'sucess',
             message: 'Validated Credentials. User Logged',
-            token: token
+            token: token,
+            name: name,
+            email: email,
+            id: id
         }
 
         return sucess

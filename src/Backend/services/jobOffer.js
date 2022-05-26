@@ -20,7 +20,7 @@ class jobOffer {
         this.idCompany = id_company
     }
 
-    createOffer() {
+    async createOffer() {
         //Instanciação do DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
         
@@ -67,14 +67,14 @@ class jobOffer {
             }
             return error
         }
-        if(!this.name_company) {
+        if(!this.nameCompany) {
             const error = {
                 type: 'error',
                 message: 'Incorrect Company Name'
             }
             return error
         }
-        if(!this.id_company) {
+        if(!this.idCompany) {
             const error = {
                 type: 'error',
                 message: 'Incorrect Company ID'
@@ -94,7 +94,7 @@ class jobOffer {
         }
         
         //Inserção de infos passadas no DB
-        const inserction = await db.run("INSERT INTO TB_JOBOFFER (id, name, type, local, description, requirements, sofSkills, nameCompany, idCompany, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.type , this.local, this.description, this.requirements, this.softSkills, this.nameCompany, this.idCompany]);
+        const inserction = await db.run("INSERT INTO TB_JOBOFFER (id, name, type, location, description, requirements, skills, name_company, id_company, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.type , this.local, this.description, this.requirements, this.skills, this.nameCompany, this.idCompany]);
 
         if (inserction.changes === 0) {
             const error = {
@@ -107,7 +107,7 @@ class jobOffer {
         //Informa a adição
         const sucess = {
             type: 'sucess',
-            message: 'Informations Updated',
+            message: 'Informations Added',
         }
         return sucess
     }
@@ -235,18 +235,11 @@ class jobOffer {
         return sucess
     }
 
-    async applyOffer(idCompany, idUser, idVaga) {
+    async applyOffer(idUser, idVaga) {
         //Instanciação do DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
         //Validação dos dados passados
-        if (!idCompany) {
-            const error = {
-                type: 'error',
-                message: 'ID of an company is needed'
-            }
-            return error
-        }
         if (!idUser) {
             const error = {
                 type: 'error',
@@ -284,6 +277,19 @@ class jobOffer {
             }
             return error
         }
+
+        //Verifica do ID da empresa
+        const forId = await db.run(`SELECT * \ FROM TB_JOBOFFER \ WHERE id = "${idVaga}"`)
+
+        if (!forId[0]) {
+            const error = {
+                type: 'error',
+                message: 'Any Offer was found with this ID'
+            }
+            return error
+        }
+
+        const idCompany = forId[0].id_company
 
         //Adiciona a aplicação
         const insertApllicant = await db.run("INSERT INTO TB_JOBOFFER_USERS (id, idVaga, id_users, id_company) VALUES (?,?,?,?)", [idApplicant, idVaga, idUser, idCompany]);

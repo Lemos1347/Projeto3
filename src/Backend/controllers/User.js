@@ -37,7 +37,10 @@ const AuthUser = (req, res) => {
         } else {
             res.status(200).json({
                 message: resul.message,
-                token: resul.token
+                token: resul.token,
+                name: resul.name,
+                email: resul.email,
+                id: resul.id
             })
         }
     });

@@ -1,13 +1,11 @@
 const express = require('express');
 require('express-async-errors');
 require('dotenv').config();
-var bodyParser = require('body-parser')
-// import { openDB } from './dao/configDb';
-
-// const configDb = require('./dao/configDb')
+var bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express()
-
+app.use(cors());
 app.use(express.json()) //Irá suportar JSON
 app.use(bodyParser.urlencoded({ // Irá suportar urlenconded
     extended: true
@@ -17,9 +15,11 @@ const PORT = process.env.PORT || 3001;
 
 const UserRouter = require('./Routes/User')
 const CompanyRouter = require('./Routes/Company')
+const OfferRouter = require('./Routes/jobOffer')
 
 app.use('/User', UserRouter);
 app.use('/Company', CompanyRouter);
+app.use('/Offer', OfferRouter);
 
 app.use((err, req, res, next) => {    
     if (err instanceof Error) {
