@@ -265,15 +265,6 @@ class jobOffer {
         const rowsIdApplicant = await db.all(`SELECT * \ FROM TB_JOBOFFER_USERS \ WHERE id = "${idApplicant}"`);
 
         if(rowsIdApplicant[0]) {
-            // idApplicant = uuid();
-            // rowsIdApplicant = await db.all(`SELECT * \ FROM TB_JOBOFFER_USERS \ WHERE id = "${idApplicant}"`);
-            // if(rowsIdApplicant[0]) {
-            //     const error = {
-            //         type: 'error',
-            //         message: 'Internal Server Error'
-            //     }
-            //     return error
-            // }  
             const error = {
                 type: 'error',
                 message: 'Internal Server Error'
@@ -288,6 +279,17 @@ class jobOffer {
             const error = {
                 type: 'error',
                 message: 'Any Offer was found with this ID'
+            }
+            return error
+        }
+
+        //Valida se o usuário já aplicou para essa vaga
+        const alreadyExists = await db.all(`SELECT * \ FROM TB_JOBOFFER_USERS \ WHERE id_vaga = "${idVaga}" AND id_users = "${idUser}"`)
+
+        if (alreadyExists != "") {
+            const error = {
+                type: 'error',
+                message: 'User already applied to that Offer'
             }
             return error
         }
@@ -314,11 +316,106 @@ class jobOffer {
         return sucess
     }
 
-    async getOffer(id) {
+    async removeApply(idUser, idVaga) {
         //Instanciação do DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
-        console.log(id)
+        //Validar se informações passadas != nula
+        if (!idUser) {
+            const error = {
+                type: 'error',
+                message: 'ID of user is needed to this action'
+            }
+            return error
+        }
+
+        if (!idVaga) {
+            const error = {
+                type: 'error',
+                message: 'ID of offer is needed to this action'
+            }
+            return error
+        }
+
+        //Valida se o usuário está aplicado para a vaga
+        const isApplied = await db.all(`SELECT * \ FROM TB_JOBOFFER_USERS \ WHERE id_vaga = "${idVaga}" AND id_users = "${idUser}"`)
+
+        if (isApplied == "") {
+            const error = {
+                type: 'error',
+                message: 'User are not aplied to that offer'
+            }
+            return error
+        }
+
+        //Efetua a remoção da aplicação
+        const delecao = await db.run(`DELETE FROM TB_JOBOFFER_USERS WHERE id_vaga = "${idVaga}" AND id_users = "${idUser}"`)
+
+        if (delecao.changes == 0) {
+            const error = {
+                type: 'error',
+                message: 'Database Error, please try again later'
+            }
+            return error
+        }
+
+        //Confirma a deleção
+        const sucess = {
+            type: 'sucess',
+            message: 'Applicant Removed',
+        }
+
+        return sucess
+    }
+
+    async verifyApply(idUser, idVaga) {
+        //Instanciação do DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Valida se informações passadas são != null
+        if (!idUser) {
+            const error = {
+                type: 'error',
+                message: 'ID of user is needed to this action'
+            }
+            return error
+        }
+
+        if (!idVaga) {
+            const error = {
+                type: 'error',
+                message: 'ID of offer is needed to this action'
+            }
+            return error
+        }
+
+        //Verifica se o usuário está candidatado ou não
+        const verificacao = await db.all(`SELECT * FROM TB_JOBOFFER_USERS WHERE id_vaga = "${idVaga}" AND id_users = "${idUser}"`)
+
+        if(verificacao == '') {
+            //Confirma a informação
+            const sucess = {
+                type: 'sucess',
+                message: 'User not applied',
+                applied: false,
+            }
+
+            return sucess
+        } else {
+            //Confirma a informação
+            const sucess = {
+                type: 'sucess',
+                message: 'User applied',
+                applied: true,
+            }
+
+            return sucess
+        }
+    }
+
+    async getOffer(id) {
+        //Instanciação do DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
         //Verifica se o ID foi passado
         if (!id) {
@@ -369,6 +466,42 @@ class jobOffer {
         const sucess = {
             type: 'sucess',
             offers: query
+        }
+
+        return sucess
+
+    }
+
+    async offerExpanded(idVaga) {
+        //Instanciação do DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Valida se existe um ID da vaga
+        if(!idVaga) {
+            const error = {
+                type: 'error',
+                message: "Offer ID is nedded to this action"
+            }
+            return error
+        }
+
+        //Recupera as infos da vaga
+        const vaga = await db.all(`SELECT * \ FROM TB_JOBOFFER \ WHERE id="${idVaga}"`);
+
+        //Valida a existência de uma vaga
+        if(!vaga) {
+            const error = {
+                type: 'error',
+                message: "Offer was not found with this ID"
+            }
+            return error
+        }
+
+        //Retorna a vaga para o usuário
+
+        const sucess = {
+            type: 'sucess',
+            offer: vaga
         }
 
         return sucess

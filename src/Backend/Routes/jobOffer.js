@@ -11,5 +11,8 @@ router.post('/Delete', offerController.deleteOffer)
 router.get('/getOffers', offerController.getOffers)
 router.get('/OfferUser', userAuth.unsureAuthenticated, offerController.getOffer)
 router.post('/Apply',userAuth.unsureAuthenticated, offerController.applyOffer)
+router.delete('/RemoveApply',userAuth.unsureAuthenticated, offerController.removeApply)
+router.post('/VerifyApply',userAuth.unsureAuthenticated, offerController.verifyApply)
+router.post('/offerExpanded',userAuth.unsureAuthenticated, offerController.offerExpanded)
 
 module.exports = router

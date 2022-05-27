@@ -19,7 +19,8 @@ document.onreadystatechange = async function () {
                 checkUser()
             }
         }).fail(function(err) {
-            console.log(err.responseJSON.message)
+            console.log(err.responseJSON.message);
+            window.location.href = '../view/login.html'
         })
     }
 }
@@ -45,4 +46,9 @@ async function checkUser() {
     })
 
     document.getElementById('descricaoUser').innerHTML = User.name
+}
+
+function logOut() {
+    window.sessionStorage.removeItem('auth')
+    window.location.href = '../view/Login.html'
 }

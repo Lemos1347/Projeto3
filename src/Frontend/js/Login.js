@@ -12,19 +12,26 @@ function verifyLogin() {
     "password" : $("#passWord").val()}
     , function(msg){
         if(msg.token) {
-            //document.location.href = '../view/createCurriculum.html'
+            $.ajax({
+                url: "http://localhost:3001/User/Verify/Curriculum",
+                type: "GET",
+                headers: {"Authorization": `Bearer ${msg.token}`},
+                success: function(resul) {
+                    if (resul.haveCurriculum === true) {
+                        document.location.href = '../view/hubVagas.html'
+                    } else {
+                        document.location.href = '../view/createCurriculum.html'
+                    }
+                }
+            }).fail(function(err) {
+                console.log(err.responseJSON.error)
+                errorMessage(err.responseJSON.error)
+            })
             window.sessionStorage.setItem('auth', msg.token)
         }
     }).fail(function(err) {
         errorMessage(err.responseJSON.error)
     })
-
-    // if (email == 'test@test.com' && password == 'abc123456') {
-    //     document.location.href = '../view/createCurriculum.html'
-    //     window.localStorage.setItem('userName', 'Usuário Teste')
-    // } else {
-    //     errorMessage('Usuário e/ou senha inválidos')
-    // }
 }
 
 function errorMessage(content) {
