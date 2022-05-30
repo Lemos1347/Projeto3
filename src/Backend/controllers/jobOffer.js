@@ -2,10 +2,13 @@ const jobOfferService = require('../services/jobOffer')
 require('express-async-errors')
 
 const createJobOffer = ( req, res ) => {
+    //Pega as infos da requisição
     const { name, type, local, description, requirements, skills, name_company, id_company } = req.body;
 
+    //Instancia a classe criando uma vaga
     const offer = new jobOfferService.jobOffer(name, type, local, description, requirements, skills, name_company, id_company);
 
+    //Tratamento das respostas do método da classe
     offer.createOffer().then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
@@ -20,10 +23,13 @@ const createJobOffer = ( req, res ) => {
 }
 
 const deleteOffer = (req, res) => {
+    //Pega as infos da requisição
     const { id } = req.body;
 
+    //Instancia a classe criando uma vaga
     const offer = new jobOfferService.jobOffer()
 
+    //Tratamento das respostas do método da classe
     offer.deleteOffer(id).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
@@ -38,8 +44,10 @@ const deleteOffer = (req, res) => {
 }
 
 const getOffers = (req, res) => {
+    //Instancia a classe criando uma vaga
     const offer = new jobOfferService.jobOffer()
 
+    //Tratamento das respostas do método da classe
     offer.getOffers().then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
@@ -54,10 +62,13 @@ const getOffers = (req, res) => {
 }
 
 const getOffer = (req, res) => {
+    //Pega as infos da requisição
     const {user_id} = req
 
+    //Instancia a classe criando uma vaga
     const offer = new jobOfferService.jobOffer()
 
+    //Tratamento das respostas do método da classe
     offer.getOffer(user_id).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
@@ -72,10 +83,13 @@ const getOffer = (req, res) => {
 }
 
 const offerExpanded = (req, res) => {
+    //Pega as infos da requisição
     const { id } = req.body
 
+    //Instancia a classe criando uma vaga
     const offer = new jobOfferService.jobOffer()
 
+    //Tratamento das respostas do método da classe
     offer.offerExpanded(id).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
@@ -90,13 +104,16 @@ const offerExpanded = (req, res) => {
 }
 
 const applyOffer = (req, res) => {
-    debugger
+    //Pega as infos da requisição
     const {user_id} = req
 
+    //Pega as infos da requisição
     const { idVaga } = req.body;
 
+    //Instancia a classe criando uma vaga
     const offer = new jobOfferService.jobOffer()
 
+    //Tratamento das respostas do método da classe
     offer.applyOffer(user_id, idVaga).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
@@ -111,13 +128,16 @@ const applyOffer = (req, res) => {
 }
 
 const removeApply = (req, res) => {
-
+    //Pega as infos da requisição
     const {user_id} = req
 
+    //Pega as infos da requisição
     const { idVaga } = req.body;
 
+    //Instancia a classe criando uma vaga
     const offer = new jobOfferService.jobOffer()
 
+    //Tratamento das respostas do método da classe
     offer.removeApply(user_id, idVaga).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
@@ -132,13 +152,16 @@ const removeApply = (req, res) => {
 }
 
 const verifyApply = (req, res) => {
-
+    //Pega as infos da requisição
     const {user_id} = req
 
+    //Pega as infos da requisição
     const { idVaga } = req.body;
 
+    //Instancia a classe criando uma vaga
     const offer = new jobOfferService.jobOffer()
 
+    //Tratamento das respostas do método da classe
     offer.verifyApply(user_id, idVaga).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
@@ -153,6 +176,7 @@ const verifyApply = (req, res) => {
     });
 }
 
+//Exporta as funções do controller para o ROUTER
 module.exports = {
     createJobOffer, deleteOffer, getOffers, getOffer, applyOffer, offerExpanded, removeApply, verifyApply
 }

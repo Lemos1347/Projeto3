@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+//Importações necessárias
 const userController = require('../controllers/User')
 const userAuth = require('../Middlewares/unsureAuthenticated')
 const adminAuth = require('../Middlewares/unsureAdmin')
 
+//ROUTAS com seus respectivos controlers e middlewares
 router.post('/Register', userController.createUser)
 router.post('/Login', userController.AuthUser)
 router.put('/Update', userAuth.unsureAuthenticated, userController.UpdateUser)
@@ -14,4 +16,5 @@ router.post('/User', userAuth.unsureAuthenticated, userController.getUser)
 router.get('/Verify/Infos', userAuth.unsureAuthenticated, userController.getInfos)
 router.put('/Update/Permission', userAuth.unsureAuthenticated, adminAuth.ensureAdmin, userController.updatePermission)
 
+//Exporta o ROUTER
 module.exports = router

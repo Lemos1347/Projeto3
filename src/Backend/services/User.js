@@ -38,7 +38,7 @@ class User {
 
         const rowsCPF = await db.all(`SELECT * \ FROM users \ WHERE cpf = "${this.cpf}"`);
 
-        if (rowsEmailUserTable[0] != undefined && rowsEmailCompanyTable[0] != undefined) {
+        if (rowsEmailUserTable[0] != "" && rowsEmailCompanyTable[0] != "") {
             const error = {
                 type: 'error',
                 message: 'Email already in use'

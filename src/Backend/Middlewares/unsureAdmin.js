@@ -11,7 +11,7 @@ const ensureAdmin = async (req, res, next) => {
 
     const rowsAdmin = await db.all(`SELECT * \ FROM users \ WHERE id = "${user_id}"`);
 
-    //Usuário existe mas não é um Admin]
+    //Usuário existe mas não é um Admin
     if(rowsAdmin[0].isAdmin != 1) {
         res.status(401).json({
             message: "You don't have permission to this action"
@@ -22,4 +22,5 @@ const ensureAdmin = async (req, res, next) => {
     return next()
 }
 
+//Exporta como MIDDLEWARE
 module.exports = {ensureAdmin}

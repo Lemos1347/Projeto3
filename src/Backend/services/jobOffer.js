@@ -461,8 +461,10 @@ class jobOffer {
         //Instanciação do DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
+        //Retorna todas as informações do DB
         const query = await db.all("SELECT * \ FROM TB_JOBOFFER")
 
+        //Retorna as infos pro usuário
         const sucess = {
             type: 'sucess',
             offers: query

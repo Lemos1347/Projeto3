@@ -6,7 +6,6 @@ const unsureAuthenticated = (req, res, next) => {
     const authToken = req.headers.authorization;
 
     //Valida se o token está preenchido
-
     if (!authToken) {
         res.status(401).json({
             message: "You need a token to access this action"
@@ -14,10 +13,10 @@ const unsureAuthenticated = (req, res, next) => {
         return
     }
 
-    //Valida se o token é válido
-
+    //Desestrutura o header "Bearer 'token'"
     [, token] = authToken.split(" ")
 
+    //Valida se o token é válido
     try {
         //Verifica o Token
         const { sub } = jwt.verify(token, "4b0d30a9f642b3bfff67d0b5b28371a9")
@@ -26,6 +25,7 @@ const unsureAuthenticated = (req, res, next) => {
         req.user_id = sub
         return next();
     } catch(err) {
+        //Retorna o erro caso o token não seja válido
         res.status(401).json({
             message: "Token is not valid"
         })
@@ -33,6 +33,8 @@ const unsureAuthenticated = (req, res, next) => {
     }
 }
 
+
+//Exporta como um MIDDLEWARE
 module.exports = {
     unsureAuthenticated
 }

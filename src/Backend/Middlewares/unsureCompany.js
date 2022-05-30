@@ -9,11 +9,12 @@ const ensureCompany = async ( req, res, next ) => {
     //Verifica se é uma empresa
     const { user_id } = req
 
+    //Faz uma requisição no DB, verificando a existência do usuário
     const rowsInUser = await db.all(`SELECT * \ FROM users \ WHERE id = "${user_id}"`);
     const rowsInCompany = await db.all(`SELECT * \ FROM TB_COMPANY \ WHERE id = "${user_id}"`);
 
+    //Verifica se o usuário encontrado é um admin, se for libera
     if (rowsInUser[0]) {
-        console.log('Aqui')
         if (rowsInUser[0].isAdmin != 1) {
             res.status(401).json({
                 "message": "You don't have permission to this action"
@@ -23,14 +24,18 @@ const ensureCompany = async ( req, res, next ) => {
         return next();
     }
 
+    //Verifica se é uma empresa, se for libera
     if (rowsInCompany[0]) {
         return next();
     }
 
+
+    //Qualquer outro problema
     res.status(401).json({
         "message": "Sorry try again later"
     })
     return
 }
 
+//Exporta como MIDDLEWARE
 module.exports = {ensureCompany}
