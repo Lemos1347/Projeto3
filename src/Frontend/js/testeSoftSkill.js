@@ -84,21 +84,33 @@ function passPage(operationType) {
         window.localStorage.setItem('question', 0)
         passPage()
     } else if (operationType === 'pass') {
-        numQuestion = Number(numQuestion)
-        var newNumQuestion = numQuestion + 1;
-        window.localStorage.setItem('question', newNumQuestion)
-        let answer = verifyAnswer()
-        recordAnswer(numQuestion, answer)
-        resetAnswers()
-        renderQuestion(newNumQuestion)
+        document.getElementById('divLoadingTeste').style.display = 'flex'
+        setTimeout(() => {
+            document.getElementById('divLoadingTeste').style.display = 'none'
+            window.scroll(0, -5000)
+            numQuestion = Number(numQuestion)
+            var newNumQuestion = numQuestion + 1;
+            window.localStorage.setItem('question', newNumQuestion)
+            let answer = verifyAnswer()
+            recordAnswer(numQuestion, answer)
+            resetAnswers()
+            renderQuestion(newNumQuestion)
+        }, "1000")
+        
     } else if (operationType === 'back') {
-        numQuestion = Number(numQuestion)
-        var newNumQuestion = numQuestion - 1;
-        window.localStorage.setItem('question', newNumQuestion)
-        let answer = verifyAnswer()
-        recordAnswer(numQuestion, answer)
-        resetAnswers()
-        renderQuestion(newNumQuestion)
+        document.getElementById('divLoadingTeste').style.display = 'flex'
+        setTimeout(() => {
+            document.getElementById('divLoadingTeste').style.display = 'none'
+            window.scroll(0, -5000)
+            numQuestion = Number(numQuestion)
+            var newNumQuestion = numQuestion - 1;
+            window.localStorage.setItem('question', newNumQuestion)
+            let answer = verifyAnswer()
+            recordAnswer(numQuestion, answer)
+            resetAnswers()
+            renderQuestion(newNumQuestion)
+        }, "500")
+        
     }
 }
 

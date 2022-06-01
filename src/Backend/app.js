@@ -16,10 +16,12 @@ const PORT = process.env.PORT || 3001;
 const UserRouter = require('./Routes/User')
 const CompanyRouter = require('./Routes/Company')
 const OfferRouter = require('./Routes/jobOffer')
+const MatchRouter = require('./Routes/Match')
 
 app.use('/User', UserRouter);
 app.use('/Company', CompanyRouter);
 app.use('/Offer', OfferRouter);
+app.use('/Match', MatchRouter);
 
 app.use((err, req, res, next) => {    
     if (err instanceof Error) {
