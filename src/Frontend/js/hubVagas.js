@@ -86,11 +86,13 @@ async function checkVagas() {
         } else if (randomNumber = 50) {
             color = 'yellow'
         }
+        
+        console.log(vaga)
 
         document.getElementById('containerOfAll').innerHTML += `
         <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = "margin-top: 40px;">
             <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
-            <h3 class="empresaVagaHubVagas">Empresa</h3>
+            <h3 class="empresaVagaHubVagas">${vaga.name_company}</h3>
                 <div class="row mainWidGet">
                     <div class="col-5 imgHubVagas">
                         <img src = '../images/userTest.png' style = "width: 100px;">

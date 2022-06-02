@@ -53,7 +53,7 @@ async function checkVaga() {
         }
     }).fail(function(err) {
         console.log(err.responseJSON.error)
-        alert((err.responseJSON.error))
+        alert(err.responseJSON.error)
     })
 
     await $.ajax({
@@ -93,7 +93,15 @@ async function checkVaga() {
     })
 }
 
-function applyOffer() {
+async function applyOffer() {
+    await Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: "Candidatado",
+        showConfirmButton: false,
+        timer: 1500
+    })
+
     $.ajax({
         url: "http://localhost:3001/Offer/Apply",
         type: "POST",
@@ -101,16 +109,24 @@ function applyOffer() {
             idVaga: idOffer
         },
         headers: {"Authorization": `Bearer ${auth}`},
-        success: function(resul) { 
-            alert(resul.message)
+        success: function(resul) {
+            console.log(resul.message)
+        },
+        error: function(err) {
+            console.log(err.responseJSON.error)
         }
-    }).fail(function(err) {
-        console.log(err.responseJSON.error)
-        alert((err.responseJSON.error))
     })
 }
 
-function removeOffer() {
+async function removeOffer() {
+    await Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: "Remoção da Candidatura",
+        showConfirmButton: false,
+        timer: 1500
+    })
+
     $.ajax({
         url: "http://localhost:3001/Offer/RemoveApply",
         type: "DELETE",
