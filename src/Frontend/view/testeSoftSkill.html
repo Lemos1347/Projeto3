@@ -159,13 +159,41 @@
                 <button class="btnBackSoftSkillTest" id='voltarBtnSoftSkill' type="button"
                   onclick='passPage("back")'>Voltar</button>
               </div>
-              <div class="col-sm-12 col-md-6 offset-md-2 col-lg-4 offset-lg-5" id="colunaPassarBtn">
+              <!-- Botão antigo -->
+              <!-- <div class="col-sm-12 col-md-6 offset-md-2 col-lg-4 offset-lg-5" id="colunaPassarBtn">
                 <button class="btnPassSoftSkillTest" id='passarBtnSoftSkill' type="button"
                   onclick='passPage("pass")'>Próximo</button>
+              </div> -->
+              <!-- Fim botão antigo -->
+              <div class="col-sm-12 col-md-6 offset-md-2 col-lg-4 offset-lg-5 d-flex justify-content-center" id="colunaPassarBtn">
+                <button class="btnSoft" id='passarBtnSoftSkill' type="button"
+                onclick='passPage("pass")'>
+                  <span>Próximo</span>
+                  <svg viewBox="0 0 13 10" height="10px" width="15px">
+                    <path d="M1,5 L11,5"></path>
+                    <polyline points="8 1 12 5 8 9"></polyline>
+                  </svg>
+                </button>
+                <button class="btnSoft" id='finalizarBtnSoftSkill' type="button"
+                onclick='finalizarTeste("")'>
+                  <span>Finalizar</span>
+                  <svg viewBox="0 0 13 10" height="10px" width="15px">
+                    <path d="M1,5 L11,5"></path>
+                    <polyline points="8 1 12 5 8 9"></polyline>
+                  </svg>
+                </button>
               </div>
               <div class="col-sm-12 col-md-6 offset-md-2 col-lg-4 offset-lg-5">
-                <button class="btnPassSoftSkillTest" id='finalizarBtnSoftSkill' type="button"
-                  onclick='finalizarTeste("")'>Finalizar</button>
+                <!-- <button class="btnPassSoftSkillTest" id='finalizarBtnSoftSkill' type="button"
+                  onclick='finalizarTeste("")'>Finalizar</button> -->
+                <button class="btnSoft" id='finalizarBtnSoftSkill' type="button"
+                onclick='finalizarTeste("")'>
+                  <span>Finalizar</span>
+                  <svg viewBox="0 0 13 10" height="10px" width="15px">
+                    <path d="M1,5 L11,5"></path>
+                    <polyline points="8 1 12 5 8 9"></polyline>
+                  </svg>
+                </button>
               </div>
             </div>
             <div class="col-12 containerModalConfirm" id='containerModalConfirm'>

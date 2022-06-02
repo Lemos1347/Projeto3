@@ -184,6 +184,7 @@ function changeBtns(visible) {
         document.getElementById('passarBtnSoftSkill').style.display = 'none';
         document.getElementById('voltarBtnSoftSkill').style.display = 'inline';
         document.getElementById('colunaPassarBtn').style.display = 'none';
+        console.log('teste')
     } else if (forBtns == true) {
         document.getElementById('colunaPassarBtn').style.display = 'inline';
 

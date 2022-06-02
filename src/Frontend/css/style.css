@@ -316,6 +316,10 @@ h2 {
   font-size: 16pt;
 }
 
+.removeCandidatarBtn:hover{
+  background-color: var(--roxo-hover);
+}
+
 .candidatarBtn {
   background-color: transparent;
   align-items: center;
@@ -331,6 +335,10 @@ h2 {
   font: 'Nunito';
   font-weight: bold;
   font-size: 16pt;
+}
+
+.candidatarBtn:hover{
+  background-color: var(--amarelo-hover)
 }
 
 .cardForVagaExpandida {
@@ -573,6 +581,13 @@ to {
   align-items: center;
   height: max-content;
   margin-top: 40px;
+  transition: all 0.5s;
+}
+
+
+.bodyVagaComponent:hover {
+  transition: all 0.5s;
+  transform: translateY(-10px) scale(1.05);
 }
 
 .btnSeeMore {
@@ -916,11 +931,118 @@ input::placeholder {
   border: 0;
   border-bottom: 5px solid var(--amarelo-padrao);
   border-radius: 4px;
+  transition: 0.5s;
 }
 
-.fundoBotao:hover {
-  border-bottom: 5px solid var(--amarelo-hover);
+.fundoBotao:hover{
+  transition: 0.5s;
+  transform: scale(1.07);
+  border: 5px solid var(--error);
+  border-radius: 23px;
+  background-color: var(--error);
+  color: #ddd;
 }
+
+/* Button Delete Account */
+.buttonDeleteAccount {
+  position: relative;
+  padding: 1em 1.8em;
+  outline: none;
+  border: 1px solid white;
+  background: white;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 15px;
+  overflow: hidden;
+  transition: 0.2s;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  border-bottom: 3px solid #DF0033;
+ }
+ 
+ .buttonDeleteAccount:hover {
+  box-shadow: 0 0 10px #DF0033, 0 0 25px #F3C42E, 0 0 50px #DF0033;
+  transition-delay: 0.6s;
+  border-bottom: 0px;
+ }
+ 
+ .buttonDeleteAccount span {
+  position: absolute;
+ }
+ 
+ .buttonDeleteAccount span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #DF0033);
+ }
+ 
+ .buttonDeleteAccount:hover span:nth-child(1) {
+  left: 100%;
+  transition: 0.7s;
+ }
+ 
+ .buttonDeleteAccount span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #DF0033);
+ }
+ 
+ .buttonDeleteAccount:hover span:nth-child(3) {
+  right: 100%;
+  transition: 0.7s;
+  transition-delay: 0.35s;
+ }
+ 
+ .buttonDeleteAccount span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #DF0033);
+ }
+ 
+ .buttonDeleteAccount:hover span:nth-child(2) {
+  top: 100%;
+  transition: 0.7s;
+  transition-delay: 0.17s;
+ }
+ 
+ .buttonDeleteAccount span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #DF0033);
+ }
+ 
+ .buttonDeleteAccount:hover span:nth-child(4) {
+  bottom: 100%;
+  transition: 0.7s;
+  transition-delay: 0.52s;
+ }
+ 
+ .buttonDeleteAccount:active {
+  background: #DF0033;
+  background: linear-gradient(to top right, #DF0033, #F3C42E);
+  color: #bfbfbf;
+  box-shadow: 0 0 8px #DF0033, 0 0 8px #F3C42E, 0 0 8px #DF0033;
+  transition: 0.1s;
+ }
+ 
+ .buttonDeleteAccount:active span:nth-child(1) 
+ span:nth-child(2) 
+ span:nth-child(2) 
+ span:nth-child(2) {
+  transition: none;
+  transition-delay: none;
+ }
+ 
 
 .editarCurriculo {
   margin: 20px;
@@ -1211,6 +1333,11 @@ p.create-account-frase{
   align-items: center;
 }
 
+.labelForSoftSkill:hover {
+  background-color: var(--amarelo-padrao);
+  color: var(--branco-padrao);
+}
+
 .labelForSoftSkill:before {
   position: absolute;
   content: '';
@@ -1232,6 +1359,80 @@ p.create-account-frase{
   background-color: var(--roxo-hover);
 }
 
+/* Inicio botão novo */
+/* From uiverse.io by @alexmaracinaru */
+.btnSoft {
+  position: relative;
+  margin: auto;
+  padding: 12px 18px;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  height: 60px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+
+ .btnSoft:focus {
+  outline: 0;
+ }
+ 
+ .btnSoft:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 50px;
+  background-color: var(--amarelo-padrao);
+  width: 60px;
+  height: 60px;
+  transition: all 0.3s ease;
+ }
+ 
+ .btnSoft span {
+  position: relative;
+  font-family: "nunito", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--roxo-padrao);
+  transition: 0.5s;
+ }
+ 
+ .btnSoft svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: var(--roxo-padrao);
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+ }
+ 
+ .btnSoft:hover:before {
+  width: 100%;
+  background: var(--amarelo-padrao);
+ }
+ 
+ .btnSoft:hover svg {
+  transform: translateX(20px);
+  transform: scale(2);
+ }
+
+ .btnSoft:hover span {
+  font-size: 28px;
+ }
+ 
+ .btnSoft:active {
+  transform: scale(0.95);
+ }
+/* Fim botão novo */
 .btnPassSoftSkillTest {
   width: 100%;
   background-color: var(--amarelo-padrao);
@@ -1316,8 +1517,8 @@ p.create-account-frase{
 /* Loading Teste */
 #divLoadingTeste {
   position: absolute;
-  top: 82.5%;
-  left: 62%;
+  top: 79%;
+  left: 60%;
   transform: translate(-50%, -50%);
   display: none;
 }
