@@ -75,6 +75,7 @@ function passPage(operationType) {
             operationType = ''
         }
     } else if (numQuestion == '9') {
+        console.log('caiu')
         if (operationType == 'pass') {
             operationType = ''
         } 
@@ -92,6 +93,7 @@ function passPage(operationType) {
             var newNumQuestion = numQuestion + 1;
             window.localStorage.setItem('question', newNumQuestion)
             let answer = verifyAnswer()
+            console.log('deu')
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
@@ -106,6 +108,7 @@ function passPage(operationType) {
             var newNumQuestion = numQuestion - 1;
             window.localStorage.setItem('question', newNumQuestion)
             let answer = verifyAnswer()
+            console.log('deu')
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
@@ -132,19 +135,19 @@ function recordAnswer(number, answer) {
 
 function verifyAnswer() {
     if (document.getElementById('concTotal').checked == true) {
-        let answer = 'concTotal'
+        let answer = '4'
         return answer
     } else if (document.getElementById('concParc').checked == true) {
-        let answer = 'concParc'
+        let answer = '3'
         return answer
     } else if (document.getElementById('meio').checked == true) {
-        let answer = 'meio'
+        let answer = '2'
         return answer
     } else if (document.getElementById('disParc').checked == true) {
-        let answer = 'disParc'
+        let answer = '1'
         return answer
     } else if (document.getElementById('disTotal').checked == true) {
-        let answer = 'disTotal'
+        let answer = '0'
         return answer
     } else {
         let answer = ''
@@ -161,6 +164,9 @@ function resetAnswers() {
 }
 
 function changeBtns(visible) {
+
+    let answer = verifyAnswer();
+    recordAnswer(9, answer)
 
     let forFinalizar
     let forBtns
@@ -194,6 +200,7 @@ function finalizarTeste(type) {
     } else if (type == 'sim') {
         window.location.href = '../view/hubVagas.html'
     } else if (type == 'nao') {
+        console.log(Perguntas)
         document.getElementById('containerModalConfirm').style.display = 'none'
     } else {
         document.getElementById('containerModalConfirm').style.display = 'none'
