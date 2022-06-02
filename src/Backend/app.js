@@ -22,7 +22,7 @@ app.use('/User', UserRouter);
 app.use('/Company', CompanyRouter);
 app.use('/Offer', OfferRouter);
 app.use('/Match', MatchRouter);
-
+app.use(express.static("../Frontend"))
 app.use((err, req, res, next) => {    
     if (err instanceof Error) {
         console.log()

@@ -406,6 +406,64 @@ h2 {
   padding: 10px;
 }
 
+/*Button Curriculum */
+.btnSendCurriculum {
+font-family: inherit;
+font-size: 20px;
+background: var(--amarelo-padrao);
+color: white;
+padding: 0.7em 1em;
+padding-left: 0.9em;
+display: flex;
+align-items: center;
+border: none;
+border-radius: 28px;
+overflow: hidden;
+transition: all 0.2s;
+width: 400px;
+}
+
+.btnSendCurriculum span {
+display: block;
+margin-left: 0.3em;
+transition: all 0.3s ease-in-out;
+}
+
+.btnSendCurriculum svg {
+display: block;
+margin-left: 150px;
+transform-origin: center center;
+transition: transform 0.3s ease-in-out;
+}
+
+.btnSendCurriculum:hover .svg-wrapper {
+animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.btnSendCurriculum:hover svg {
+transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.btnSendCurriculum:hover span {
+transform: translateX(10.5em);
+}
+
+.btnSendCurriculum:active {
+transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+from {
+  transform: translateY(0.1em);
+}
+
+to {
+  transform: translateY(-0.1em);
+}
+}
+ 
+ 
+
 .listFilters {
   display: flex;
   flex-direction: row;

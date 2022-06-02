@@ -93,15 +93,7 @@ async function checkVaga() {
     })
 }
 
-async function applyOffer() {
-    await Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: "Candidatado",
-        showConfirmButton: false,
-        timer: 1500
-    })
-
+function applyOffer() {
     $.ajax({
         url: "http://localhost:3001/Offer/Apply",
         type: "POST",
@@ -109,8 +101,16 @@ async function applyOffer() {
             idVaga: idOffer
         },
         headers: {"Authorization": `Bearer ${auth}`},
-        success: function(resul) {
+        success: async function(resul) {
             console.log(resul.message)
+            await Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: resul.message,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            window.location.reload()
         },
         error: function(err) {
             console.log(err.responseJSON.error)
@@ -118,15 +118,7 @@ async function applyOffer() {
     })
 }
 
-async function removeOffer() {
-    await Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: "Remoção da Candidatura",
-        showConfirmButton: false,
-        timer: 1500
-    })
-
+function removeOffer() {
     $.ajax({
         url: "http://localhost:3001/Offer/RemoveApply",
         type: "DELETE",
@@ -134,8 +126,16 @@ async function removeOffer() {
             idVaga: idOffer
         },
         headers: {"Authorization": `Bearer ${auth}`},
-        success: function(resul) { 
-            alert(resul.message)
+        success: async function(resul) { 
+            console.log(resul.message)
+            await Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: resul.message,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            window.location.reload()
         }
     }).fail(function(err) {
         console.log(err.responseJSON.error)

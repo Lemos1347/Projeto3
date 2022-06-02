@@ -113,7 +113,17 @@
                 <span class="textGeneralInput">Nome completo<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" type="text" placeholder="digite o seu nome completo"></input>
+                <input class="generalInput" id = "nomeUserCreateForm" type="text" placeholder="digite o seu nome completo"></input>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
+                <span class="textGeneralInput">Senha<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10">
+                <input class="generalInput" id = "senhaUserCreateForm" type="password" placeholder="digite sua senha"></input>
               </div>
             </div>
           </div>
@@ -123,7 +133,7 @@
                 <span class="textGeneralInput">E-mail<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" type="text" placeholder="digite o seu e-mail"></input>
+                <input class="generalInput" id = "emailUserCreateForm" type="text" placeholder="digite o seu e-mail"></input>
               </div>
             </div>
           </div>
@@ -133,7 +143,7 @@
                 <span class="textGeneralInput">Data de Nascimento<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" type="date" placeholder="Lorem Ipsum"></input>
+                <input class="generalInput" id = "bornDateUserCreateForm" type="date" placeholder="Lorem Ipsum"></input>
               </div>
             </div>
           </div>
@@ -143,14 +153,14 @@
                 <span class="textGeneralInput">Gênero<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <select class='generalInput' name='Gênero'>
+                <select class='generalInput' id = "genderUserCreateForm" name='Gênero'>
                   <option value="Gênero" disabled selected>Gênero</option>
-                  <option value="valor2">Homen Cis</option>
-                  <option value="valor2">Homen Trans</option>
-                  <option value="valor2">Mulher Cis</option>
-                  <option value="valor2">Mulher Trans</option>
-                  <option value="valor2">Não Binário</option>
-                  <option value="valor2">Prefiro não responder</option>
+                  <option value="Homem Cis">Homen Cis</option>
+                  <option value="Homem Trans">Homen Trans</option>
+                  <option value="Mulher Cis">Mulher Cis</option>
+                  <option value="Mulher Trans">Mulher Trans</option>
+                  <option value="Não Binário">Não Binário</option>
+                  <option value="Não Respondeu">Prefiro não responder</option>
                 </select>
               </div>
             </div>
@@ -161,7 +171,7 @@
                 <span class="textGeneralInput">CPF<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" id = 'numberInput' maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" style="-webkit-appearance: none;" placeholder="Lorem Ipsum"></input>
+                <input class="generalInput" id = "cpfUserCreateForm" maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" style="-webkit-appearance: none;" placeholder="Lorem Ipsum"></input>
               </div>
             </div>
           </div>
@@ -174,21 +184,32 @@
                 <div class="col-3">
                   <input class="generalInput" type="number"
                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    maxlength="2" placeholder="+00" id="numberInput"></input>
+                    maxlength="2" placeholder="+00" id="number55Input"></input>
                 </div>
                 <div class="col-8 col-md-8">
-                  <input class="generalInput" type="number"
-                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    maxlength="11" placeholder="(00) 0000-0000" id="numberInput"></input>
+                  <input id="number11Input" class="generalInput" type="text"
+                    onkeydown="numberFormat()"
+                    maxlength="15" placeholder="(00) 0000-0000"></input>
                 </div>
-
+                <!-- oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" -->
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4 listaInputs">
-            <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button>
+          <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4 mt-5 listaInputs">
+            <!-- <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button> -->
+            <button onclick="verifyUserInfos()" type="button" class="btnSendCurriculum">
+              <div class="svg-wrapper-1">
+                <div class="svg-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                  </svg>
+                </div>
+              </div>
+              <span>Salvar</span>
+            </button>
           </div>
         </div>
       </form>
@@ -255,7 +276,7 @@
   <!-- Footer -->
 
   <!-- JavaScript File -->
-  <script src="../js/createCurriculum.js"></script>
+  <script src="../js/createUser.js"></script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>
