@@ -25,6 +25,8 @@
     <link
         href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
         rel='stylesheet' type='text/css'>
+    <!-- FontAwesomo 4-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
@@ -52,7 +54,7 @@
                         <a class="nav-link" href="perfil.html">MEU PERFIL</a>
                     </li>
 
-                    
+
 
                     <li class="nav-item">
                         <a class="nav-link" href="myVagas.html">MINHAS VAGAS</a>
@@ -65,12 +67,13 @@
                         <div class="dropdown">
                             <div class="d-flex">
                                 <img class="nav-img-user" src="../images/userTest.png">
-                            <a class="nav-link dropdown-toggle" href="/oportunidades/">USUÁRIO</a>
-                        </div>
+                                <a class="nav-link dropdown-toggle" href="/oportunidades/">USUÁRIO</a>
+                            </div>
                             <div class="dropdown-content">
                                 <a href="/oportunidades/empregos">Empregos</a>
                                 <a href="/oportunidades/estagios">Estágios</a>
                                 <a href="/oportunidades/estudos">Estudos</a>
+                                <a href="#" onclick="logOut()">Logout</a>
                             </div>
                         </div>
                     </li>
@@ -80,23 +83,31 @@
         </div>
     </nav>
     <!-- Main-->
-    <main class="py-5">
+    <main>
         <div class="container">
-            <div class="row d-flex justify-content-center bodyHubVagas" id='containerOfAll'>
+            <div class="row nav-location">
+                <div class="col-12 align-items-center">
+                    <div class="d-flex">
+                        <a href="perfil.html">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </a>
+                        <a href="hubVagas.html">// Painel Usuários</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex bodyHubVagas" id='containerOfAll'>
                 <div class="col-sm-12">
                     <h1>Usuários</h1>
                 </div>
-
-
                 <div class="row">
                     <div class="col-sm-12 col-md-6 pull-left col-lg-4 mt-2">
                         <div class='listFilters'>
-                            <button class="newUserButtonADM">+ Novo Usuário</button>
+                            <a href="createUser.html" class="newUserButtonADM">+ Novo Usuário</a>
                         </div>
                     </div>
                     <div class="col-sm-12 offset-lg-4 pull-right col-md-6 col-lg-4 mt-2">
                         <div class='listFilters'>
-                            <button class="newCompanyADM">+ Nova Empresa</button>
+                            <a href="createCurriculum.html" class="newCompanyADM">+ Nova Empresa</a>
                         </div>
                     </div>
                 </div>
@@ -124,7 +135,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
-                    <div class='vagaComponent' >
+                    <div class='vagaComponent'>
                         <div class="row mainWidGet">
                             <div class="col-5 imgHubVagas">
                                 <img src='../images/userTest.png'>
@@ -141,7 +152,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
-                    <div class='vagaComponent' >
+                    <div class='vagaComponent'>
                         <div class="row mainWidGet">
                             <div class="col-5 imgHubVagas">
                                 <img src='../images/userTest.png'>
@@ -158,7 +169,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
-                    <div class='vagaComponent' >
+                    <div class='vagaComponent'>
                         <div class="row mainWidGet">
                             <div class="col-5 imgHubVagas">
                                 <img src='../images/userTest.png'>
@@ -244,7 +255,7 @@
 
     <!-- JavaScript File -->
     <script src="../js/adminHub.js"></script>
-    
+
     <!-- <script src="../js/hubVagas.js"></script> -->
 
     <!-- Bootstrap core JavaScript -->

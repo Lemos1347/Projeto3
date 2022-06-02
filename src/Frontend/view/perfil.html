@@ -29,6 +29,9 @@
         href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
         rel='stylesheet' type='text/css'>
 
+    <!-- FontAwesomo 4-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/resposive-theme.css">
@@ -55,7 +58,7 @@
                         <a class="nav-link" href="perfil.html">MEU PERFIL</a>
                     </li>
 
-                    
+
 
                     <li class="nav-item">
                         <a class="nav-link" href="myVagas.html">MINHAS VAGAS</a>
@@ -68,12 +71,14 @@
                         <div class="dropdown">
                             <div class="d-flex">
                                 <img class="nav-img-user" src="../images/userTest.png">
-                            <a class="nav-link dropdown-toggle" id="userNameNavBar" href="/oportunidades/">USUÁRIO</a>
-                        </div>
+                                <a class="nav-link dropdown-toggle" id="userNameNavBar"
+                                    href="/oportunidades/">USUÁRIO</a>
+                            </div>
                             <div class="dropdown-content">
                                 <a href="/oportunidades/empregos">Empregos</a>
                                 <a href="/oportunidades/estagios">Estágios</a>
                                 <a href="/oportunidades/estudos">Estudos</a>
+                                <a href="#" onclick="logOut()">Logout</a>
                             </div>
                         </div>
                     </li>
@@ -84,8 +89,17 @@
     </nav>
 
     <!-- Main-->
-    <main class="py-5">
+    <main>
         <div class="container justify-content-center bodyCadastroCurriculo">
+            <div class="row nav-location">
+                <div class="col-12 align-items-center">
+                    <div class="d-flex">
+                        <a href="perfil.html">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="row justify-content-center bodyHubVagas">
                 <div class="col-12">
                     <h1>Perfil</h1>
@@ -113,7 +127,8 @@
                                     <i class="far fa-edit"></i>
                                 </div>
 
-                                <p id = 'descricaoUser'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                <p id='descricaoUser'>Lorem Ipsum is simply dummy text of the printing and typesetting
+                                    industry. Lorem
                                     Ipsum has been the industry's standard dummy text ever since the 1500s, when an
                                     unknown printer took a galley of type and scrambled it to make a type specimen book.
                                 </p>
@@ -130,7 +145,7 @@
                                     <i class="far fa-edit"></i>
                                 </div>
 
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                <p id='descricaoUser'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                                     Ipsum has been the industry's standard dummy text ever since the 1500s, when an
                                     unknown printer took a galley of type and scrambled it to make a type specimen book.
                                 </p>
@@ -177,11 +192,6 @@
                     <div>
                         <button type="button" class="tituloPerfil fundoBotao">
                             <h3 class="excluirPerfil">Excluir Conta</h3>
-                        </button>
-                    </div>
-                    <div style="padding-top: 40px;">
-                        <button type="button" class="tituloPerfil fundoBotao">
-                            <h3 class="excluirPerfil" onclick="logOut()">LogOut</h3>
                         </button>
                     </div>
                 </div>

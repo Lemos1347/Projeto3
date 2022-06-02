@@ -55,7 +55,7 @@
                         <a class="nav-link" href="perfil.html">MEU PERFIL</a>
                     </li>
 
-                    
+
 
                     <li class="nav-item">
                         <a class="nav-link" href="myVagas.html">MINHAS VAGAS</a>
@@ -68,12 +68,13 @@
                         <div class="dropdown">
                             <div class="d-flex">
                                 <img class="nav-img-user" src="../images/userTest.png">
-                            <a class="nav-link dropdown-toggle" id="userNameNavBar" href="/oportunidades/">Null</a>
-                        </div>
+                                <a class="nav-link dropdown-toggle" id="userNameNavBar" href="/oportunidades/">Null</a>
+                            </div>
                             <div class="dropdown-content">
                                 <a href="/oportunidades/empregos">Empregos</a>
                                 <a href="/oportunidades/estagios">Estágios</a>
                                 <a href="/oportunidades/estudos">Estudos</a>
+                                <a href="#" onclick="logOut()">Logout</a>
                             </div>
                         </div>
                     </li>
@@ -83,8 +84,19 @@
         </div>
     </nav>
     <!-- Main-->
+    <div class="container">
+        
     <main>
-        <div class="container">
+        <div class="row nav-location">
+            <div class="col-12 align-items-center">
+                <div class="d-flex">
+                    <a href="perfil.html">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                    </a>
+                    <a href="hubVagas.html">// Vagas</a>
+                </div>
+            </div>
+        </div>
             <div class="row d-flex justify-content-center bodyHubVagas" id='containerOfAll'>
                 <div class="col-sm-12">
                     <h1>Vagas</h1>
@@ -97,25 +109,6 @@
                         <input type='text' placeholder="Pesquise..." class="inputSearchHubVagas">
                     </div>
                 </div>
-                <!-- <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = "margin-top: 20px;">
-                    <div class = 'vagaComponent'>
-                        <div class="row mainWidGet">
-                            <div class="col-5 imgHubVagas">
-                                <img src = '../images/userTest.png'>
-                            </div>
-                            <div class="col-7">
-                                <div class="divRightHubVagasComponent">
-                                    <p>Lorem Ipsum</p>
-                                    <p class="pForHubVagas"><img src="../images/locationIcon.png" style="height: 25px; width: 30px;">São Paulo</p>
-                                    <p class="pForHubVagas"><img src="../images/workIcon.png" style="height: 25px; width: 30px;">Presencial</p>
-                                    <div class = 'divBtnSeeMore'>
-                                        <button class="btnSeeMore" onclick="redirectToVagaId('1')">Ver Mais</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </main>

@@ -25,8 +25,10 @@
     <link
         href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
         rel='stylesheet' type='text/css'>
+        
     <!-- FontAwesomo 4-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/resposive-theme.css">
@@ -74,6 +76,7 @@
                                 <a href="/oportunidades/empregos">Empregos</a>
                                 <a href="/oportunidades/estagios">Estágios</a>
                                 <a href="/oportunidades/estudos">Estudos</a>
+                                <a href="#" onclick="logOut()">Logout</a>
                             </div>
                         </div>
                     </li>
@@ -83,8 +86,18 @@
         </div>
     </nav>
     <!-- Main-->
-    <main class="py-5">
+    <main>
         <div class="container">
+            <div class="row nav-location">
+                <div class="col-12 align-items-center">
+                    <div class="d-flex">
+                        <a href="perfil.html">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </a>
+                        <a href="myVagas.html">// Minhas vagas</a>
+                    </div>
+                </div>
+            </div>
             <div class="row d-flex justify-content-center bodyHubVagas" id='containerOfAll'>
                 <div class="col-sm-12">
                     <h1>Minhas Vagas</h1>
