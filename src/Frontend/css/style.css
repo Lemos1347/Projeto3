@@ -1517,7 +1517,7 @@ p.create-account-frase{
 /* Loading Teste */
 #divLoadingTeste {
   position: absolute;
-  top: 79%;
+  top: 80%;
   left: 60%;
   transform: translate(-50%, -50%);
   display: none;

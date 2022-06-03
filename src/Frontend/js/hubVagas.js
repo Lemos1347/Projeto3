@@ -11,7 +11,6 @@ document.onreadystatechange = async function () {
             url: "http://localhost:3001/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
-                console.log(resul)
                 nome = resul.name
                 email = resul.email,
                 id = resul.id
@@ -71,8 +70,6 @@ async function checkVagas() {
         console.log(err.responseJSON.message)
     })
 
-    console.log(nome, id, email)
-
     vagas.map((vaga) => {
 
         let color = ''
@@ -86,8 +83,6 @@ async function checkVagas() {
         } else if (randomNumber = 50) {
             color = 'yellow'
         }
-        
-        console.log(vaga)
 
         document.getElementById('containerOfAll').innerHTML += `
         <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = "margin-top: 40px;">

@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/resposive-theme.css">
   <link rel="icon" href="../images/favicon.png">
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -171,7 +171,7 @@
                 <span class="textGeneralInput">CPF<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" id = "cpfUserCreateForm" maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" style="-webkit-appearance: none;" placeholder="Lorem Ipsum"></input>
+                <input class="generalInput" id = "cpfUserCreateForm" oninput="cpfFormat(this)" maxlength="11" type="text" style="-webkit-appearance: none;" placeholder="Digite seu CPF"></input>
               </div>
             </div>
           </div>

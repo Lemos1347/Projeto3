@@ -41,6 +41,7 @@ const AuthUser = (req, res) => {
             res.status(200).json({
                 message: resul.message,
                 token: resul.token,
+                typeOfUser: resul.typeOfUser,
             })
         }
     });

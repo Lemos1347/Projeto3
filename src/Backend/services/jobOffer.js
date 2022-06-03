@@ -258,6 +258,16 @@ class jobOffer {
             return error
         }
 
+        const rowsId = await db.all(`SELECT * \ FROM TB_COMPANY \ WHERE id = "${idUser}"`);
+
+        if(rowsId[0]) {
+            const error = {
+                type: 'error',
+                message: 'Companies cannot apply'
+            }
+            return error
+        }
+
         //Criação de ID para identificar a aplicação
         const idApplicant = uuid();
 

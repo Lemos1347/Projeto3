@@ -12,21 +12,26 @@ function verifyLogin() {
     "password" : $("#passWord").val()}
     , function(msg){
         if(msg.token) {
-            $.ajax({
-                url: "http://localhost:3001/User/Verify/Curriculum",
-                type: "GET",
-                headers: {"Authorization": `Bearer ${msg.token}`},
-                success: function(resul) {
-                    if (resul.haveCurriculum === true) {
-                        document.location.href = '../view/hubVagas.html'
-                    } else {
-                        document.location.href = '../view/createCurriculum.html'
+            if (msg.typeOfUser == 'user') {
+                $.ajax({
+                    url: "http://localhost:3001/User/Verify/Curriculum",
+                    type: "GET",
+                    headers: {"Authorization": `Bearer ${msg.token}`},
+                    success: function(resul) {
+                        if (resul.haveCurriculum === true) {
+                            document.location.href = '../view/hubVagas.html'
+                        } else {
+                            document.location.href = '../view/createCurriculum.html'
+                        }
                     }
-                }
-            }).fail(function(err) {
-                console.log(err.responseJSON.error)
-                errorMessage(err.responseJSON.error)
-            })
+                }).fail(function(err) {
+                    console.log(err.responseJSON.error)
+                    errorMessage(err.responseJSON.error)
+                })
+            } else {
+                document.location.href = '../view/hubVagas.html'
+            }
+            
             window.sessionStorage.setItem('auth', msg.token)
         }
     }).fail(function(err) {

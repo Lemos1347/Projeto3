@@ -38,7 +38,8 @@ class User {
 
         const rowsCPF = await db.all(`SELECT * \ FROM users \ WHERE cpf = "${this.cpf}"`);
 
-        if (rowsEmailUserTable[0] != "" && rowsEmailCompanyTable[0] != "") {
+        if (rowsEmailUserTable[0] || rowsEmailCompanyTable[0] ) {
+            console.log('testte')
             const error = {
                 type: 'error',
                 message: 'Email already in use'
@@ -187,6 +188,7 @@ class User {
 
         //Gera o token de segurança do usuário, que possui tempo de expiração
         let token
+        let typeOfUser
 
         if (rowsEmailTableUser[0]) {
             token = jwt.sign({
@@ -195,6 +197,7 @@ class User {
                 subject: rowsEmailTableUser[0].id,
                 expiresIn: "1h"
             });
+            typeOfUser = rowsEmailTableUser[0].typeOfUser
         } else {
             token = jwt.sign({
                 email: rowsEmailTableCompany[0].email
@@ -202,11 +205,13 @@ class User {
                 subject: rowsEmailTableCompany[0].id,
                 expiresIn: "1h"
             });
+            typeOfUser = rowsEmailTableCompany[0].typeOfUser
         }
         const sucess = {
             type: 'sucess',
             message: 'Validated Credentials. User Logged',
             token: token,
+            typeOfUser: typeOfUser
         }
 
         return sucess

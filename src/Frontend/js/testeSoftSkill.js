@@ -11,57 +11,66 @@ const Perguntas = [
     {
         'id': 0,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 1 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 1,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 2 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 2,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 3 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 3,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 4 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 4,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 5 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 5,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 6 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 6,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 7 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },{
         'id': 7,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 8 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 8,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 9 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
     {
         'id': 9,
         'selectedAnswer': '',
+        'answer': '',
         'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 10 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
     },
 ]
 
 //Chamado toda vez que um dos botões é pressionado
 function passPage(operationType) {
-
     let numQuestion = window.localStorage.getItem('question')
         
     if (Number(numQuestion) + 1 == 9 && operationType == 'pass') {
@@ -93,11 +102,10 @@ function passPage(operationType) {
             var newNumQuestion = numQuestion + 1;
             window.localStorage.setItem('question', newNumQuestion)
             let answer = verifyAnswer()
-            console.log('deu')
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
-        }, "1000")
+        }, "1500")
         
     } else if (operationType === 'back') {
         document.getElementById('divLoadingTeste').style.display = 'flex'
@@ -108,7 +116,6 @@ function passPage(operationType) {
             var newNumQuestion = numQuestion - 1;
             window.localStorage.setItem('question', newNumQuestion)
             let answer = verifyAnswer()
-            console.log('deu')
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
@@ -130,28 +137,35 @@ function renderQuestion(number) {
 }
 
 function recordAnswer(number, answer) {
-    Perguntas[number].selectedAnswer = answer
+    Perguntas[number].selectedAnswer = answer.selectedAnswer
+    Perguntas[number].answer = answer.answer
 }
 
 function verifyAnswer() {
     if (document.getElementById('concTotal').checked == true) {
+        let selectedAnswer = 'concTotal'
         let answer = '4'
-        return answer
+        return {selectedAnswer: selectedAnswer,answer: answer}
     } else if (document.getElementById('concParc').checked == true) {
+        let selectedAnswer = 'concParc'
         let answer = '3'
-        return answer
+        return {selectedAnswer: selectedAnswer, answer: answer}
     } else if (document.getElementById('meio').checked == true) {
+        let selectedAnswer = 'meio'
         let answer = '2'
-        return answer
+        return {selectedAnswer: selectedAnswer,answer: answer}
     } else if (document.getElementById('disParc').checked == true) {
+        let selectedAnswer = 'disParc'
         let answer = '1'
-        return answer
+        return {selectedAnswer: selectedAnswer,answer: answer}
     } else if (document.getElementById('disTotal').checked == true) {
+        let selectedAnswer = 'disTotal'
         let answer = '0'
-        return answer
+        return {selectedAnswer: selectedAnswer,answer: answer}
     } else {
+        let selectedAnswer = ''
         let answer = ''
-        return answer
+        return {selectedAnswer: selectedAnswer,answer: answer}
     }
 }
 
@@ -165,8 +179,8 @@ function resetAnswers() {
 
 function changeBtns(visible) {
 
-    let answer = verifyAnswer();
-    recordAnswer(9, answer)
+    // let answer = verifyAnswer();
+    // recordAnswer(9, answer)
 
     let forFinalizar
     let forBtns
@@ -177,6 +191,7 @@ function changeBtns(visible) {
     } else {
         forFinalizar = false
         forBtns = true
+        document.getElementById('containerModalConfirm').style.display = 'none'
     }
 
     if(forFinalizar == true) {
@@ -184,7 +199,6 @@ function changeBtns(visible) {
         document.getElementById('passarBtnSoftSkill').style.display = 'none';
         document.getElementById('voltarBtnSoftSkill').style.display = 'inline';
         document.getElementById('colunaPassarBtn').style.display = 'none';
-        console.log('teste')
     } else if (forBtns == true) {
         document.getElementById('colunaPassarBtn').style.display = 'inline';
 
@@ -196,12 +210,37 @@ function changeBtns(visible) {
 
 function finalizarTeste(type) {
     if(type == '') {
+        let answer = verifyAnswer();
+        recordAnswer(9, answer)
         document.getElementById('containerModalConfirm').style.display = 'flex'
         window.scroll(0, 300)
     } else if (type == 'sim') {
-        window.location.href = '../view/hubVagas.html'
+        let notResponded = []
+        Perguntas.map((value) => {
+            if (value.selectedAnswer === '' || value.answer === '') {
+                console.log('Questões não preenchidas')
+                notResponded.push((value.id) + 1)
+            }
+        })
+        notResponded = notResponded.join()
+        if (notResponded != '') {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: `Questões não respondida -> ${notResponded}`,
+                showConfirmButton: false,
+                timer: 5000
+            })
+            document.getElementById('containerModalConfirm').style.display = 'none'
+            changeBtns(false)
+            resetAnswers()
+            window.localStorage.setItem("question", Number(notResponded[0]) - 1)
+            renderQuestion(Number(notResponded[0]) - 1)
+        } else {
+            window.location.href = '../view/hubVagas.html'
+            window.localStorage.removeItem('question')
+        }
     } else if (type == 'nao') {
-        console.log(Perguntas)
         document.getElementById('containerModalConfirm').style.display = 'none'
     } else {
         document.getElementById('containerModalConfirm').style.display = 'none'
