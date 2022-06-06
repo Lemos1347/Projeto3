@@ -1204,6 +1204,7 @@ p#cadastrar a:hover {
   width: 100%;
   height: max-content;
   padding: 20px;
+  text-decoration: none;
   background-color: var(--cinza-fundo);
   border: 3px solid var(--roxo-padrao);
   border-radius: 10px;
@@ -1227,8 +1228,14 @@ p#cadastrar a:hover {
 
 .description {
   padding: 10px;
-  margin-left: 20px;
+  align-items: center;
   font-family: "nunito-semibold";
+  height: 60px;
+  color: #530084;
+}
+.center{
+  text-align: center;
+  background-color: white;
 }
 
 .description div h3 {
