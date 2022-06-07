@@ -5,19 +5,10 @@ const matchGenerate = require('../services/Match')
 const match = (req, res) => {
     let { userSoft, offerSoft, userHard, offerHard } = req.body;
     //Substitui todos os elementos indesejáveis e formata as variáveis em um array
-    userSoft = userSoft.replaceAll('[', "")
-    userSoft = userSoft.replaceAll(']', "")
-    offerSoft = offerSoft.replaceAll('[', "")
-    offerSoft = offerSoft.replaceAll(']', "")
-    userHard = userHard.replaceAll('[', "")
-    userHard = userHard.replaceAll(']', "")
-    offerHard = offerHard.replaceAll('[', "")
-    offerHard = offerHard.replaceAll(']', "")
-    //Remove as vígulas de cada elemento de cada array
-    userSoft = userSoft.split(", ")
-    userHard = userHard.split(", ")
-    offerSoft = offerSoft.split(", ")
-    offerHard = offerHard.split(", ")
+    userSoft = userSoft.split(",")
+    userHard = userHard.split(",")
+    offerSoft = offerSoft.split(",")
+    offerHard = offerHard.split(",")
 
     //Instancia a classe match exportada
     var matchCreate = new matchGenerate.Match(userSoft, offerSoft, userHard, offerHard);
