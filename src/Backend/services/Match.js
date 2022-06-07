@@ -69,6 +69,7 @@ class Match {
                 if (String(x).toLowerCase() == String(hard).toLowerCase()) {
                     //Se for, variável "equals" recebe + 1
                     equals ++
+                    break
                 }
             }
         }
