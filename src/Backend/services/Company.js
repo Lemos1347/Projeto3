@@ -234,6 +234,28 @@ async updateCompany(idCompany, name, email, password, cnpj, phoneNumber, logo) {
 
         return sucess
     }
+
+    async getCompanies() {
+        //Instancia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Pega do banco de dados todas as empresas cadastradas
+        const getCompanies = await db.all("SELECT * FROM TB_COMPANY")
+
+        if (getCompanies == '') {
+            const error = {
+                type: 'error',
+                message: 'Não há nenhuma empresa cadastrada'
+            }
+        }
+
+        const sucess = {
+            type: 'sucess',
+            message: getCompanies,
+        }
+
+        return sucess
+    }
 }
 
 module.exports = {

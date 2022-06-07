@@ -422,7 +422,11 @@ h2 {
   border-radius: 28px;
   overflow: hidden;
   transition: all 0.2s;
-  width: 400px;
+  width: 100%;
+}
+
+.btnSendCurriculum:focus{
+  outline: 0;
 }
 
 .btnSendCurriculum span {
@@ -432,9 +436,9 @@ h2 {
 }
 
 .btnSendCurriculum svg {
-display: block;
-transform-origin: center center;
-transition: transform 0.3s ease-in-out;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
 }
 
 .btnSendCurriculum:hover .svg-wrapper {
@@ -446,7 +450,7 @@ transition: transform 0.3s ease-in-out;
 }
 
 .btnSendCurriculum:hover span {
-  transform: translateX(10.5em);
+  transform: translateX(12.5em);
 }
 
 .btnSendCurriculum:active {
@@ -1630,6 +1634,7 @@ p.create-account-frase {
   display: flex;
   text-decoration: none;
   color: var(--roxo-padrao);
+  gap: 5px;
 }
 .arrow-forgot-password:hover{
 color: var(--roxo-hover);

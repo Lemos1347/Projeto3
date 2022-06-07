@@ -53,7 +53,7 @@ const deleteCompany = (req, res) => {
     const user = new userService.User();
 
     //Tratamento das respostas do método da classe
-    user.deleteUser(id).then((resul) => {
+    user.deleteCompany(id).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -65,8 +65,26 @@ const deleteCompany = (req, res) => {
     })
 }
 
+const getCompanies = (req, res) => {
+    //Instancia a classe criando uma compania
+    const user = new userService.User();
+
+    //Tratamento das respostas do método da classe
+    user.getCompanies().then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).send({
+                message: resul.message
+            })
+        }
+    })
+}
+
 
 //Exporta as funções do controller para o ROUTER
 module.exports = {
-    createCompany, updateCompany, deleteCompany
+    createCompany, updateCompany, deleteCompany, getCompanies
 }
