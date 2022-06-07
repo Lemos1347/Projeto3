@@ -3,9 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const sqlite3 = require('sqlite3').verbose();
 const sqlite = require('sqlite')
-// const mailgun = require("mailgun-js");
-// const DOMAIN = 'sandboxb8c9575c96c74237a2bbdd0307a70215.mailgun.org';
-// const mg = mailgun({apiKey: process.env.EMAIL_API_KEY, domain: DOMAIN});
+const nodemailer = require('nodemailer')
+const SMTP_CONFIG = require('../dao/smtp')
 
 class User {
     constructor (name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser) {
@@ -557,6 +556,29 @@ class User {
         var resetCode = Math.floor(1000 + Math.random() * 9000);
         console.log(resetCode);
 
+        //Envia o email ao usuário
+        const transporter = nodemailer.createTransport({
+            host: SMTP_CONFIG.host,
+            port: SMTP_CONFIG.port,
+            secure: false,
+            auth: {
+                user: SMTP_CONFIG.user,
+                pass: SMTP_CONFIG.pass
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        })
+
+        const mailSent = await transporter.sendMail({
+            text: 'Texto do Email',
+            subject: 'Assunto da mensagem',
+            from: "Matchagas <matchagasBit@gmail.com>",
+            to: ['email@email.com']
+        })
+
+        console.log(mailSent)
+
         //Salva o código enviado para o usuário no Banco de Dados
         const setResetCode = await db.run(`UPDATE users SET resetPassCode="${resetCode}" WHERE email = "${email}"`);
 
@@ -579,6 +601,17 @@ class User {
         return sucess
     }
 }
+
+// async function run() {
+//     const mailSent = transporter.sendMail({
+//         text: 'Texto do Email',
+//         subject: 'Assunto da mensagem',
+//         from: "Matchagas <matchagasBit@gmail.com>",
+//         to: ['email@email.com']
+//     })
+
+//     console.log(mailSent)
+// }
 
 module.exports = {
     User
