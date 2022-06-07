@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const sqlite3 = require('sqlite3').verbose();
 const sqlite = require('sqlite')
+// const mailgun = require("mailgun-js");
+// const DOMAIN = 'sandboxb8c9575c96c74237a2bbdd0307a70215.mailgun.org';
+// const mg = mailgun({apiKey: process.env.EMAIL_API_KEY, domain: DOMAIN});
 
 class User {
     constructor (name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser) {
@@ -39,7 +42,6 @@ class User {
         const rowsCPF = await db.all(`SELECT * \ FROM users \ WHERE cpf = "${this.cpf}"`);
 
         if (rowsEmailUserTable[0] || rowsEmailCompanyTable[0] ) {
-            console.log('testte')
             const error = {
                 type: 'error',
                 message: 'Email already in use'
@@ -533,6 +535,48 @@ class User {
 
         //Carrega todas as vagas para as quais os usuários se aplicaram
         
+    }
+
+    async forgetPassword(email) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Verfica se o usuário com o EMAIL passado
+        const rowsEmail = await db.all(`SELECT * \ FROM users \ WHERE email = "${email}"`);
+
+        if (rowsEmail == "") {
+            const error = {
+                type: 'success',
+                message: 'Email verification was sent',
+                trueMessage: 'User not found with this email'
+            }
+            return error
+        }
+
+        //Gera um código para troca de senha
+        var resetCode = Math.floor(1000 + Math.random() * 9000);
+        console.log(resetCode);
+
+        //Salva o código enviado para o usuário no Banco de Dados
+        const setResetCode = await db.run(`UPDATE users SET resetPassCode="${resetCode}" WHERE email = "${email}"`);
+
+        if (setResetCode.changes == 0) {
+            const error = {
+                type: 'error',
+                message: 'Database Error, please try again later'
+            }
+            return error
+        }
+
+        
+
+        //Retorna infos ao client
+        const sucess = {
+            type: 'sucess',
+            message: "Instruções enviadas por email"
+        }
+
+        return sucess
     }
 }
 
