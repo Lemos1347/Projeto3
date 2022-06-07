@@ -12,6 +12,7 @@ function verifyLogin() {
     "password" : $("#passWord").val()}
     , function(msg){
         if(msg.token) {
+            window.sessionStorage.setItem('auth', msg.token)
             if (msg.typeOfUser == 'user') {
                 $.ajax({
                     url: "http://localhost:3001/User/Verify/Curriculum",
@@ -31,8 +32,6 @@ function verifyLogin() {
             } else {
                 document.location.href = '../view/hubVagas.html'
             }
-            
-            window.sessionStorage.setItem('auth', msg.token)
         }
     }).fail(function(err) {
         errorMessage(err.responseJSON.error)

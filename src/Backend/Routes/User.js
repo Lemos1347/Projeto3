@@ -15,6 +15,8 @@ router.get('/Verify/Curriculum', userAuth.unsureAuthenticated, userController.ve
 router.post('/User', userAuth.unsureAuthenticated, userController.getUser)
 router.get('/Verify/Infos', userAuth.unsureAuthenticated, userController.getInfos)
 router.put('/Update/Permission', userAuth.unsureAuthenticated, adminAuth.ensureAdmin, userController.updatePermission)
+router.post('/Reset/Password', userController.resetPassWord)
+router.put('/Redefine/Password', userController.redefinePassWord)
 
 //Exporta o ROUTER
 module.exports = router

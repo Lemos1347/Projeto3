@@ -49,13 +49,15 @@ const AuthUser = (req, res) => {
 
 const UpdateUser = (req, res) => {
     //Pega as infos da requisição
-    const { id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser } = req.body;
+    const { name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills } = req.body;
+
+    const { user_id } = req
 
     //Instancia a classe criando uma vaga
     const user = new userService.User();
 
     //Tratamento das respostas do método da classe
-    user.updateUser(id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser).then((resul) => {
+    user.updateUser(user_id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -175,28 +177,50 @@ const getInfos = (req, res) => {
     })
 }
 
-// const resetPassWord = (req, res) => {
-//     //Pega as infos da requisição
-//     const { email } = req.body
+const resetPassWord = (req, res) => {
+    //Pega as infos da requisição
+    const { email } = req.body
 
-//     //Instancia a classe criando uma vaga
-//     const user = new userService.User();
+    //Instancia a classe criando uma vaga
+    const user = new userService.User();
 
-//     //Tratamento das respostas do método da classe
-//     user.forgetPassword(email).then((resul) => {
-//         if(resul.type === "error") {
-//             res.status(500).json({
-//                 error: resul.message
-//             })
-//         } else {
-//             res.status(200).json({
-//                 message: resul.message
-//             })
-//         }
-//     })
-// }
+    //Tratamento das respostas do método da classe
+    user.forgetPassword(email).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                message: resul.message
+            })
+        }
+    })
+}
+
+const redefinePassWord = (req, res) => {
+    //Pega as infos da requisição
+    const { email, code } = req.body
+
+    //Instancia a classe criando uma vaga
+    const user = new userService.User();
+
+    //Tratamento das respostas do método da classe
+    user.resetPasswordByCode(email, code).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                message: resul.message,
+                validation: resul.validation
+            })
+        }
+    })
+}
 
 //Exporta as funções do controller para o ROUTER
 module.exports = {
-    createUser, AuthUser, UpdateUser, deleteUser, verifyCurriculum, updatePermission, getUser, getInfos
+    createUser, AuthUser, UpdateUser, deleteUser, verifyCurriculum, updatePermission, getUser, getInfos, resetPassWord, redefinePassWord
 }

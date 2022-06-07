@@ -1,9 +1,12 @@
+let auth;
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = function () {
     if (document.readyState == "complete") {
         window.localStorage.setItem('question', 0)
         document.getElementById('questionNumber').innerHTML = 'Questão 1/10'
         document.getElementById('questionMessage').innerHTML = Perguntas[0].pergunta
+        auth = window.sessionStorage.getItem('auth')
+        console.log(auth)
     }
 }
 
@@ -209,6 +212,7 @@ function changeBtns(visible) {
 }
 
 function finalizarTeste(type) {
+    console.log(auth)
     if(type == '') {
         let answer = verifyAnswer();
         recordAnswer(9, answer)
@@ -237,13 +241,54 @@ function finalizarTeste(type) {
             window.localStorage.setItem("question", Number(notResponded[0]) - 1)
             renderQuestion(Number(notResponded[0]) - 1)
         } else {
-            window.location.href = '../view/hubVagas.html'
-            window.localStorage.removeItem('question')
+            console.log('sim')
+            var answers = []
+            Perguntas.map((element) => {
+                answers.push(element.answer)
+            })
+            console.log(auth)
+            $.ajax({
+                url: "http://localhost:3001/User/Update",
+                headers: {"Authorization": `Bearer ${auth}`},
+                type: "PUT",
+                data: { 
+                    softSkills: answers
+                },
+                success: async function(resul) {
+                    console.log(resul.message)
+                    await Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: "Teste salvo com sucesso!",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    window.location.href = '../view/hubvagas.html'
+                    window.localStorage.removeItem('question')
+                },
+                error: function(err) {
+                    console.log(err.responseJSON.error)
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: err.responseJSON.error,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            })
+            console.log(answers)
+            
         }
     } else if (type == 'nao') {
+        console.log(Perguntas)
         document.getElementById('containerModalConfirm').style.display = 'none'
     } else {
         document.getElementById('containerModalConfirm').style.display = 'none'
     }
     
+}
+
+function updateSoftSkills() {
+
 }
