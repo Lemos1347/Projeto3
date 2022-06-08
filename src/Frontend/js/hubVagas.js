@@ -80,7 +80,7 @@ async function checkVagas() {
             color = 'red'
         } else if (randomNumber > 50) {
             color = 'green'
-        } else if (randomNumber = 50) {
+        } else if (randomNumber == 50) {
             color = 'yellow'
         }
 
