@@ -1617,3 +1617,14 @@ p.create-account-frase{
 }
 
 /* Fim Teste SoftSkill */
+
+/* Botões criar currículo */
+.newButton{
+  border-radius: 10px;
+  background-color: var(--cinza-claro-fundo);
+  border: 0;
+  outline: 0;
+  color: var(--roxo-padrao);
+  font-size: 14pt;
+  border: 2px solid var(--roxo-padrao);
+}

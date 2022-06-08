@@ -95,3 +95,56 @@ function generateRandomNumber() {
     return Math.floor(Math.random() * 300)
 }
 
+/* Criar campo para uma nova formação */
+function novaFormacao(){
+    document.getElementById("newFormation").innerHTML +=
+    `<div class="row">
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Formação<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" type="text" placeholder="Instituição de Ensino"></input>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Curso<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" type="text" placeholder="Formação acadêmica"></input>
+        </div>
+      </div>
+    </div>
+  </div>`
+}
+
+/* Criar campo para uma nova experiência */
+function novaExperiencia(){
+    document.getElementById("newExperience").innerHTML +=
+    `<div class="row">
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Empresa<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" type="text" placeholder="Empresa em que trabalhava"></input>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Cargo<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" type="text" placeholder="Cargo na empresa"></input>
+        </div>
+      </div>
+    </div>
+  </div>`
+}
