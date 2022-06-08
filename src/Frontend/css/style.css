@@ -17,22 +17,22 @@
 
 @font-face {
   font-family: 'nunito';
-  src: url('../fonts/Nunito-Regular.ttf');
+  src: url('../fonts/nunito-Regular.ttf');
 }
 
 @font-face {
   font-family: 'nunito-bold';
-  src: url('../fonts/Nunito-Bold.ttf');
+  src: url('../fonts/nunito-Bold.ttf');
 }
 
 @font-face {
   font-family: 'nunito-semibold';
-  src: url('../fonts/Nunito-SemiBold.ttf');
+  src: url('../fonts/nunito-SemiBold.ttf');
 }
 
 @font-face {
   font-family: 'nunito-italic';
-  src: url('../fonts/Nunito-Italic.ttf');
+  src: url('../fonts/nunito-Italic.ttf');
 }
 
 body {
@@ -233,12 +233,6 @@ h2 {
   color: #F3C42E;
 }
 
-.generalInput::placeholder {
-  font-family: 'nunito-bold';
-  font-size: 14pt;
-  font-style: normal;
-  color: #280044;
-}
 
 .fa-user, .fa-graduation-cap, .fa-briefcase, .fa-puzzle-piece, .fa-info-circle {
   color: var(--roxo-padrao);
@@ -311,12 +305,12 @@ h2 {
   border-bottom: 2px solid var(--roxo-padrao);
   border-radius: 28px;
   color: var(--branco-padrao);
-  font: 'Nunito';
+  font: 'nunito';
   font-weight: bold;
   font-size: 16pt;
 }
 
-.removeCandidatarBtn:hover{
+.removeCandidatarBtn:hover {
   background-color: var(--roxo-hover);
 }
 
@@ -332,12 +326,12 @@ h2 {
   border-bottom: 2px solid var(--amarelo-padrao);
   border-radius: 28px;
   color: var(--branco-padrao);
-  font: 'Nunito';
+  font: 'nunito';
   font-weight: bold;
   font-size: 16pt;
 }
 
-.candidatarBtn:hover{
+.candidatarBtn:hover {
   background-color: var(--amarelo-hover)
 }
 
@@ -416,61 +410,72 @@ h2 {
 
 /*Button Curriculum */
 .btnSendCurriculum {
-font-family: inherit;
-font-size: 20px;
-background: var(--amarelo-padrao);
-color: white;
-padding: 0.7em 1em;
-padding-left: 0.9em;
-display: flex;
-align-items: center;
-border: none;
-border-radius: 28px;
-overflow: hidden;
-transition: all 0.2s;
-width: 400px;
+  font-family: inherit;
+  font-size: 20px;
+  background: var(--amarelo-padrao);
+  color: white;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 28px;
+  overflow: hidden;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.btnSendCurriculum:focus{
+  outline: 0;
+}
+
+.svg-wrapper-1 {
+  margin-left: auto;
 }
 
 .btnSendCurriculum span {
-display: block;
-margin-left: 0.3em;
-transition: all 0.3s ease-in-out;
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+  margin-right: auto;
 }
 
 .btnSendCurriculum svg {
-display: block;
-margin-left: 150px;
-transform-origin: center center;
-transition: transform 0.3s ease-in-out;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
 }
 
 .btnSendCurriculum:hover .svg-wrapper {
-animation: fly-1 0.6s ease-in-out infinite alternate;
+  animation: fly-1 0.6s ease-in-out infinite alternate;
 }
 
 .btnSendCurriculum:hover svg {
-transform: translateX(1.2em) rotate(45deg) scale(1.1);
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
 }
 
 .btnSendCurriculum:hover span {
-transform: translateX(10.5em);
+  transform: translateX(12.5em);
 }
 
 .btnSendCurriculum:active {
-transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 @keyframes fly-1 {
-from {
-  transform: translateY(0.1em);
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
 }
 
-to {
-  transform: translateY(-0.1em);
-}
-}
- 
- 
+
 
 .listFilters {
   display: flex;
@@ -548,6 +553,12 @@ to {
   display: flex;
   align-content: center;
   padding: 20px;
+}
+
+.mainWidGetBackground {
+  background: linear-gradient(-45deg, #DADADA 40%, #F8F6F7 50%, #FAFAFA 52%, #F8F6F7 54%, #DADADA 60%);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
 }
 
 .pForHubVagas {
@@ -747,8 +758,17 @@ to {
 
 input::placeholder {
   color: var(--roxo-padrao) !important;
-  font-family: 'nunito-italic';
-  src: url('../fonts/Nunito-Italic.ttf');
+  font-family: 'nunito-italic' !important;
+  src: url('../fonts/nunito-Italic.ttf');
+}
+
+input {
+  color: var(--roxo-padrao) !important;
+}
+
+input:focus {
+  border-color: var(--amarelo-padrao) !important;
+  outline: 0;
 }
 
 /* Início Filtro Hub Vagas */
@@ -843,7 +863,7 @@ input::placeholder {
 .descricao {
   margin-top: 20px;
   width: max-content;
-  font-family: 'Nunito';
+  font-family: 'nunito';
 }
 
 .imgBxIcon {
@@ -858,6 +878,7 @@ input::placeholder {
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+  margin-bottom: 4rem;
 }
 
 .fa-edit, .fa-map-marker, .fa-building {
@@ -934,7 +955,7 @@ input::placeholder {
   transition: 0.5s;
 }
 
-.fundoBotao:hover{
+.fundoBotao:hover {
   transition: 0.5s;
   transform: scale(1.07);
   border: 5px solid var(--error);
@@ -960,90 +981,87 @@ input::placeholder {
   cursor: pointer;
   font-weight: bold;
   border-bottom: 3px solid #DF0033;
- }
- 
- .buttonDeleteAccount:hover {
+}
+
+.buttonDeleteAccount:hover {
   transition-delay: 0.6s;
   border-bottom: 0px;
   background: #DF0033;
   color: #EFEFEF;
- }
- 
- .buttonDeleteAccount span {
+}
+
+.buttonDeleteAccount span {
   position: absolute;
- }
- 
- .buttonDeleteAccount span:nth-child(1) {
+}
+
+.buttonDeleteAccount span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, transparent, #DF0033);
- }
- 
- .buttonDeleteAccount:hover span:nth-child(1) {
+}
+
+.buttonDeleteAccount:hover span:nth-child(1) {
   left: 100%;
   transition: 0.7s;
- }
- 
- .buttonDeleteAccount span:nth-child(3) {
+}
+
+.buttonDeleteAccount span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, transparent, #DF0033);
- }
- 
- .buttonDeleteAccount:hover span:nth-child(3) {
+}
+
+.buttonDeleteAccount:hover span:nth-child(3) {
   right: 100%;
   transition: 0.7s;
   transition-delay: 0.35s;
- }
- 
- .buttonDeleteAccount span:nth-child(2) {
+}
+
+.buttonDeleteAccount span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 4px;
   height: 100%;
   background: linear-gradient(180deg, transparent, #DF0033);
- }
- 
- .buttonDeleteAccount:hover span:nth-child(2) {
+}
+
+.buttonDeleteAccount:hover span:nth-child(2) {
   top: 100%;
   transition: 0.7s;
   transition-delay: 0.17s;
- }
- 
- .buttonDeleteAccount span:nth-child(4) {
+}
+
+.buttonDeleteAccount span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 4px;
   height: 100%;
   background: linear-gradient(360deg, transparent, #DF0033);
- }
- 
- .buttonDeleteAccount:hover span:nth-child(4) {
+}
+
+.buttonDeleteAccount:hover span:nth-child(4) {
   bottom: 100%;
   transition: 0.7s;
   transition-delay: 0.52s;
- }
- 
- .buttonDeleteAccount:active {
+}
+
+.buttonDeleteAccount:active {
   background: #DF0033;
   background: linear-gradient(to top right, #DF0033, #F3C42E);
   color: #bfbfbf;
   box-shadow: 0 0 8px #DF0033, 0 0 8px #F3C42E, 0 0 8px #DF0033;
   transition: 0.1s;
- }
- 
- .buttonDeleteAccount:active span:nth-child(1) 
- span:nth-child(2) 
- span:nth-child(2) 
- span:nth-child(2) {
+}
+
+.buttonDeleteAccount:active span:nth-child(1) span:nth-child(2) span:nth-child(2) span:nth-child(2) {
   transition: none;
   transition-delay: none;
- }
- 
+}
+
 
 .editarCurriculo {
   margin: 20px;
@@ -1063,6 +1081,8 @@ p#descricaoUser {
 .login-white-background {
   background-color: var(--branco-padrao);
   height: 100%;
+  min-height: 120vh;
+  margin-bottom: -50px;
 }
 
 .logo-login {
@@ -1085,7 +1105,7 @@ body#login {
   width: 80%;
   border: 2px solid var(--roxo-padrao);
   padding-left: 20px;
-  font-family: 'Nunito';
+  font-family: 'nunito';
   background-color: var(--cinza-claro-fundo);
 }
 
@@ -1098,12 +1118,11 @@ body#login {
   color: var(--amarelo-padrao);
 }
 
-.inputLogin::placeholder {
-  font-family: 'nunito-italic';
-}
 
-.inputLogin:focus {
-  border: 2px solid var(--amarelo-padrao);
+input:focus {
+  outline: none !important;
+  border: 1px solid red;
+
 }
 
 .connectedSpan {
@@ -1147,7 +1166,7 @@ body#login {
   border: 0px;
   border-radius: 23px;
   color: var(--branco-padrao);
-  font-family: 'Nunito';
+  font-family: 'nunito';
 }
 
 .btnEntrarLogin:hover {
@@ -1187,7 +1206,8 @@ p#cadastrar a:hover {
 .background-create-account {
   background-color: var(--roxo-padrao);
   height: 100%;
-  min-height: 110vh;
+  min-height: 140vh;
+  margin-bottom: -50px;
 }
 
 .create-account-img {
@@ -1233,7 +1253,8 @@ p#cadastrar a:hover {
   height: 60px;
   color: #530084;
 }
-.center{
+
+.center {
   text-align: center;
   background-color: white;
 }
@@ -1261,7 +1282,8 @@ h1.create-account-frase {
   text-align: left;
   margin-top: 25px;
 }
-p.create-account-frase{
+
+p.create-account-frase {
   margin-top: 40px;
   color: var(--branco-padrao);
   font-family: "nunito";
@@ -1269,6 +1291,7 @@ p.create-account-frase{
   text-align: left;
   line-height: 35px;
 }
+
 /*Fim Criar Conta*/
 
 /*Iinicio Container ver perfil na vaga*/
@@ -1329,7 +1352,7 @@ p.create-account-frase{
   position: relative;
   color: var(--roxo-padrao);
   background-color: var(--cinza-fundo);
-  font-family: 'Nunito';
+  font-family: 'nunito';
   font-size: 15pt;
   height: 65px;
   border-radius: 16px;
@@ -1380,13 +1403,13 @@ p.create-account-frase{
   display: flex;
   align-items: center;
   justify-content: center;
- }
+}
 
- .btnSoft:focus {
+.btnSoft:focus {
   outline: 0;
- }
- 
- .btnSoft:before {
+}
+
+.btnSoft:before {
   content: "";
   position: absolute;
   top: 0;
@@ -1397,9 +1420,9 @@ p.create-account-frase{
   width: 60px;
   height: 60px;
   transition: all 0.3s ease;
- }
- 
- .btnSoft span {
+}
+
+.btnSoft span {
   position: relative;
   font-family: "nunito", sans-serif;
   font-size: 24px;
@@ -1407,9 +1430,9 @@ p.create-account-frase{
   letter-spacing: 0.05em;
   color: var(--roxo-padrao);
   transition: 0.5s;
- }
- 
- .btnSoft svg {
+}
+
+.btnSoft svg {
   position: relative;
   top: 0;
   margin-left: 10px;
@@ -1420,25 +1443,26 @@ p.create-account-frase{
   stroke-width: 2;
   transform: translateX(-5px);
   transition: all 0.3s ease;
- }
- 
- .btnSoft:hover:before {
+}
+
+.btnSoft:hover:before {
   width: 100%;
   background: var(--amarelo-padrao);
- }
- 
- .btnSoft:hover svg {
+}
+
+.btnSoft:hover svg {
   transform: translateX(20px);
   transform: scale(2);
- }
+}
 
- .btnSoft:hover span {
+.btnSoft:hover span {
   font-size: 28px;
- }
- 
- .btnSoft:active {
+}
+
+.btnSoft:active {
   transform: scale(0.95);
- }
+}
+
 /* Fim botão novo softSkill */
 .btnPassSoftSkillTest {
   width: 100%;
@@ -1449,7 +1473,7 @@ p.create-account-frase{
   outline: 0;
   border: 0px;
   font-size: 18pt;
-  font-family: 'Nunito';
+  font-family: 'nunito';
   font-weight: bolder;
   margin-top: 10px;
   transition: 1s;
@@ -1474,7 +1498,7 @@ p.create-account-frase{
   border-radius: 3px;
   outline: 0;
   font-size: 18pt;
-  font-family: 'Nunito';
+  font-family: 'nunito';
   font-weight: bolder;
   margin-top: 20px;
   transition: 1s;
@@ -1628,3 +1652,122 @@ p.create-account-frase{
   font-size: 14pt;
   border: 2px solid var(--roxo-padrao);
 }
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Fim Teste SoftSkill */
+
+
+/*Inicio Esqueceu a Senha*/
+
+.text-forget-password {
+  text-align: left;
+  margin-left: 10%;
+  width: 80%;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.text-forget-password span{
+  font-family: "nunito-bold";
+}
+
+.arrow-forgot-password {
+  display: flex;
+  text-decoration: none;
+  color: var(--roxo-padrao);
+  gap: 5px;
+}
+
+.arrow-forgot-password:hover {
+  color: var(--roxo-hover);
+}
+
+/*Fim Esqueceu a Senha*/
+
+/*Inicio Trocar a senha*/
+
+.change-password-img{
+  width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    max-width: 150px;
+}
+
+.inputCode {
+  height: 50px;
+  border-radius: 12px;
+  width: 20%;
+  border: 2px solid var(--roxo-padrao);
+  padding-left: 20px;
+  font-family: 'nunito';
+  background-color: var(--cinza-claro-fundo);
+  text-align: center;
+}
+.inputCode::placeholder{
+  text-align: center;
+}
+.change-password-white-background {
+  background-color: var(--branco-padrao);
+  height: 100%;
+  min-height: 155vh;
+  margin-bottom: -50px;
+}
+/*Fim Esqueceu a Senha*/
+.containerGreyColor {
+  background-color: var(--cinza-claro-fundo);
+  box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 10%);
+  border-radius: 5%;
+  padding: 1.4rem;
+}
+
+.perfilCaixa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.perfilCaixa i {
+  color: var(--amarelo-padrao);
+}
+
+.perfilCaixa__caption {
+  font-size: 1.3rem;
+}
+
+.perfilSkillsBox {
+  background-color: var(--cinza-claro-fundo);
+  border-radius: 5%;
+  box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 10%);
+  margin: 2.5rem 0;
+  padding: 2rem;
+}
+
+.listaSkills li{
+  list-style: none;
+}
+
+.listaSkills li::before {
+  content: "\2022";
+    
+  color: var(--amarelo-padrao);
+    
+  display: inline-block;
+  width: 1rem;
+  margin-left: -1em;
+}
+
+/* Fim Teste SoftSkill */
+/*Fim Trocar a senha*/

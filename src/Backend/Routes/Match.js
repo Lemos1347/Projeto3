@@ -7,7 +7,7 @@ const userAuth = require('../Middlewares/unsureAuthenticated')
 const adminAuth = require('../Middlewares/unsureAdmin')
 
 //ROUTAS com seus respectivos controlers e middlewares
-router.post('/Match', matchController.match)
+router.post('/', matchController.match)
 
 //Exporta o ROUTER
 module.exports = router

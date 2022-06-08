@@ -27,15 +27,16 @@ async function verifyUserInfos() {
                 phoneNumber: number,
                 typeOfUser: "user"
             },
-            success: function(resul) {
+            success: async function(resul) {
                 console.log(resul.message)
-                Swal.fire({
+                await Swal.fire({
                     position: 'center',
                     icon: 'success',
                     title: "Conta criada com sucesso!",
                     showConfirmButton: false,
                     timer: 2000
                 })
+                window.location.href = '/view/login.html'
             },
             error: function(err) {
                 console.log(err.responseJSON.error)

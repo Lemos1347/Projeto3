@@ -39,50 +39,50 @@
 
   <nav class="navbar fixed-top navbar-expand-lg bg-light">
     <div class="container">
-        <a class="navbar-brand" href="hubVagas.html">
-            <img src="../images/logo.png" width="100" height="50" alt="Logo Brazilians in Tech">
-        </a>
+      <a class="navbar-brand" href="hubVagas.html">
+        <img src="../images/logo.png" width="100" height="50" alt="Logo Brazilians in Tech">
+      </a>
 
-        <button class="navbar-toggler custom-toggler collapsed" type="button" data-toggle="collapse"
-            data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Abrir Navegação">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler custom-toggler collapsed" type="button" data-toggle="collapse"
+        data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Abrir Navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="navbar-collapse collapse" id="navbarText">
-            <ul class="navbar-nav">
+      <div class="navbar-collapse collapse" id="navbarText">
+        <ul class="navbar-nav">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="perfil.html">MEU PERFIL</a>
-                </li>
+          <li class="nav-item">
+            <a class="nav-link" href="perfil.html">MEU PERFIL</a>
+          </li>
 
-                
 
-                <li class="nav-item">
-                    <a class="nav-link" href="myVagas.html">MINHAS VAGAS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="hubVagas.html">VAGAS</a>
-                </li>
 
-                <li class="nav-item dropdown">
-                    <div class="dropdown">
-                        <div class="d-flex">
-                            <img class="nav-img-user" src="../images/userTest.png">
-                        <a class="nav-link dropdown-toggle" href="/oportunidades/">USUÁRIO</a>
-                    </div>
-                        <div class="dropdown-content">
-                            <a href="/oportunidades/empregos">Empregos</a>
-                            <a href="/oportunidades/estagios">Estágios</a>
-                            <a href="/oportunidades/estudos">Estudos</a>
-                            <a href="#" onclick="logOut()">Logout</a>
-                        </div>
-                    </div>
-                </li>
+          <li class="nav-item">
+            <a class="nav-link" href="myVagas.html">MINHAS VAGAS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="hubVagas.html">VAGAS</a>
+          </li>
 
-            </ul>
-        </div>
+          <li class="nav-item dropdown">
+            <div class="dropdown">
+              <div class="d-flex">
+                <img class="nav-img-user" src="../images/userTest.png">
+                <a class="nav-link dropdown-toggle" href="/oportunidades/">USUÁRIO</a>
+              </div>
+              <div class="dropdown-content">
+                <a href="/oportunidades/empregos">Empregos</a>
+                <a href="/oportunidades/estagios">Estágios</a>
+                <a href="/oportunidades/estudos">Estudos</a>
+                <a href="#" onclick="logOut()">Logout</a>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
   <!-- Form-->
   <main>
     <div class="container justify-content-center bodyCadastroCurriculo">
@@ -193,14 +193,12 @@
                 <div class="row inputDiv">
                   <div class="col-10 ">
                     <div id="skillCard" class="skills">
-                      <!-- <div class="balao-skill d-flex">
-                        <p>Inglês</p><button>x</button>
-                      </div> -->
+
                     </div>
                   </div>
                   <div class="col-10">
                     <form action="javascript:addCards(document.getElementById('inputForCard').value);">
-                       <input id = 'inputForCard' class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+                      <input id='inputForCard' class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
                     </form>
                   </div>
                 </div>
@@ -210,17 +208,19 @@
         </div>
         <div class="col-sm-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4 mt-5 listaInputs">
           <!-- <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button> -->
-          <button class="btnSendCurriculum">
-          <div class="svg-wrapper-1">
-            <div class="svg-wrapper">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                <path fill="none" d="M0 0h24v24H0z"></path>
-                <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-              </svg>
+          <button class="btnSendCurriculum" onclick="verifyInfos()">
+            <div class="svg-wrapper-1">
+              <div class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path fill="currentColor"
+                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
+                  </path>
+                </svg>
+              </div>
             </div>
-          </div>
-          <span>Salvar</span>
-        </button>
+            <span>Salvar</span>
+          </button>
         </div>
       </div>
     </div>

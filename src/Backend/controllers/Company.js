@@ -29,10 +29,10 @@ const updateCompany = (req, res) => {
     const { id, name, email, password, cnpj, phoneNumber, logo } = req.body;
 
     //Instancia a classe criando uma compania
-    const user = new companyService.Company();
+    const company = new companyService.Company();
 
     //Tratamento das respostas do método da classe
-    user.updateCompany(id, name, email, password, cnpj, phoneNumber, logo).then((resul) => {
+    company.updateCompany(id, name, email, password, cnpj, phoneNumber, logo).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -50,10 +50,10 @@ const deleteCompany = (req, res) => {
     const { id } = req.body;
 
     //Instancia a classe criando uma compania
-    const user = new userService.User();
+    const company = new companyService.Company();
 
     //Tratamento das respostas do método da classe
-    user.deleteUser(id).then((resul) => {
+    company.deleteCompany(id).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -65,8 +65,26 @@ const deleteCompany = (req, res) => {
     })
 }
 
+const getCompanies = (req, res) => {
+    //Instancia a classe criando uma compania
+    const company = new companyService.Company();
+
+    //Tratamento das respostas do método da classe
+    company.getCompanies().then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).send({
+                message: resul.message
+            })
+        }
+    })
+}
+
 
 //Exporta as funções do controller para o ROUTER
 module.exports = {
-    createCompany, updateCompany, deleteCompany
+    createCompany, updateCompany, deleteCompany, getCompanies
 }
