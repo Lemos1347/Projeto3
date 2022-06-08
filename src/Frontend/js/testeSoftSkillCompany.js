@@ -15,60 +15,60 @@ const Perguntas = [
         'id': 0,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 1 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que quando se depara com um pedido de ajuda para uma tarefa mais complexa, mas pode atrasar a sua e você acaba aceitando.'
     },
     {
         'id': 1,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 2 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que decide estudar mais para contestar a sua ideia de resolver um problema.'
     },
     {
         'id': 2,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 3 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que costuma ser criativo nas atividades que entrego.'
     },
     {
         'id': 3,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 4 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que consegue gerir facilmente os membros de um time a fim de entregar um produto melhor.'
     },
     {
         'id': 4,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 5 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que não só lidere a tarefa designada, mas também outro simultâneo para solucionar problemas sociais decorrentes de tal.'
     },
     {
         'id': 5,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 6 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que elabora os projetos designados com bastante antecedência para poder entregar o mais inovador possível.'
     },
     {
         'id': 6,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 7 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que tem muita paciência para lidar com colegas de trabalho com pouca experiência e ficar até depois do horário padrão do expediente.'
     },{
         'id': 7,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 8 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que mesmo depois da ideia dele ser recusada por um superior, procura outros responsáveis para ter outras opiniões para que a ideia seja aceita.'
     },
     {
         'id': 8,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 9 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que gosto de se programar antes de qualquer atividade para não deixar nada para última hora.'
     },
     {
         'id': 9,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 10 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Você precisa de uma pessoa que goste de pegar projetos que não domino totalmente a área.'
     },
 ]
 

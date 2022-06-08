@@ -15,60 +15,60 @@ const Perguntas = [
         'id': 0,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 1 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Quando você se depara com um pedido de ajuda para uma tarefa mais complexa, mas pode atrasar a sua e você acaba aceitando.'
     },
     {
         'id': 1,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 2 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Seu chefe elaborou uma estratégia para contornar um problema. Você decidiu estudar mais e teve coragem de contestar seu chefe.'
     },
     {
         'id': 2,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 3 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Costumo ser criativo nas atividades que entrego.'
     },
     {
         'id': 3,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 4 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Seu chefe escolhe uma equipe onde possa trabalhar. Você consegue gerir facilmente pessoas, as quais não teve contato, a fim de entregar um produto melhor.'
     },
     {
         'id': 4,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 5 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Seu chefe te coloca em um projeto que compromete a saúde das pessoas do seu bairro. Você não só continua com o projeto, mas também lidera outro para solucionar o problema que criou.'
     },
     {
         'id': 5,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 6 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Costumo elaborar meus projetos designados com bastante antecedência para poder entregar o mais inovador possível.'
     },
     {
         'id': 6,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 7 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Costumo ter muita paciência para lidar com colegas de trabalho com pouca experiência e ficar até depois do horário padrão do expediente.'
     },{
         'id': 7,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 8 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Mesmos depois da minha ideia ser recusada por um superior, procuro outros responsáveis para ter outras opiniões para que minha ideia seja aceita.'
     },
     {
         'id': 8,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 9 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Gosto de me programar antes de qualquer atividade para não deixar nada para última hora.'
     },
     {
         'id': 9,
         'selectedAnswer': '',
         'answer': '',
-        'pergunta': 'Esse é um teste para a pergunta que irá vir na página de número 10 do nosso teste de SoftSkill, sendo assim conseguimos verificar se está tudo funcionando corretamente, para que de tudo de bom na apresentação :)'
+        'pergunta': 'Gosto de pegar projetos que não domino totalmente a área.'
     },
 ]
 
