@@ -97,8 +97,15 @@ function generateRandomNumber() {
 
 /* Criar campo para uma nova formação */
 var cont = 1
+if(cont <= 1){
+  document.getElementById("menos").style.display = "none"
+}
 function novaFormacao(){
     cont++
+    if(cont > 1){
+      console.log()
+      document.getElementById("menos").style.display = "inline"
+    }
     document.getElementById("newFormation").innerHTML +=
     `<div class="row" id=${cont}>
     <div class="col-sm-12 col-md-6 listaInputs">
@@ -123,11 +130,28 @@ function novaFormacao(){
     </div>
   </div>`
 }
+function menos(){
+  if(cont>1){
+    let a = document.getElementById(`${cont}`)
+    a.remove()
+    cont--
+    if(cont <= 1){
+      document.getElementById("menos").style.display = "none"
+    }
+  }
+}
 
 /* Criar campo para uma nova experiência */
 var cont1 = 1
+if(cont1 <= 1){
+  document.getElementById("menos1").style.display = "none"
+}
 function novaExperiencia(){
   cont1 ++
+  if(cont1 > 1){
+    console.log()
+    document.getElementById("menos1").style.display = "inline"
+  }
     document.getElementById("newExperience").innerHTML +=
     `<div class="row" id=${cont1}>
     <div class="col-sm-12 col-md-6 listaInputs">
@@ -151,4 +175,14 @@ function novaExperiencia(){
       </div>
     </div>
   </div>`
+}
+function menos1(){
+  if(cont1>1){
+    let a = document.getElementById(`${cont1}`)
+    a.remove()
+    cont1--
+    if(cont1 <= 1){
+      document.getElementById("menos1").style.display = "none"
+    }
+  }
 }
