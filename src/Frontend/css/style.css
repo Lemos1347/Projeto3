@@ -49,6 +49,7 @@ body {
 
 main {
   padding-bottom: 3rem !important;
+  min-height: 100vh;
 }
 
 /* Navbar */
@@ -128,6 +129,12 @@ nav {
 .fa-home {
   color: var(--amarelo-padrao);
   font-size: 25px;
+}
+
+.fa-sign-out {
+  color: var(--amarelo-padrao);
+  margin-left: 10px;
+  font-size: 20px !important;
 }
 
 /* Fim Navbar */
@@ -425,7 +432,7 @@ h2 {
   width: 100%;
 }
 
-.btnSendCurriculum:focus{
+.btnSendCurriculum:focus {
   outline: 0;
 }
 
@@ -756,7 +763,7 @@ h2 {
   margin-right: 8%;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
   color: var(--roxo-padrao) !important;
   font-family: 'nunito-italic' !important;
   src: url('../fonts/nunito-Italic.ttf');
@@ -1679,7 +1686,7 @@ p.create-account-frase {
   line-height: 14px;
 }
 
-.text-forget-password span{
+.text-forget-password span {
   font-family: "nunito-bold";
 }
 
@@ -1698,12 +1705,12 @@ p.create-account-frase {
 
 /*Inicio Trocar a senha*/
 
-.change-password-img{
+.change-password-img {
   width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    max-width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  max-width: 150px;
 }
 
 .inputCode {
@@ -1716,15 +1723,18 @@ p.create-account-frase {
   background-color: var(--cinza-claro-fundo);
   text-align: center;
 }
-.inputCode::placeholder{
+
+.inputCode::placeholder {
   text-align: center;
 }
+
 .change-password-white-background {
   background-color: var(--branco-padrao);
   height: 100%;
   min-height: 155vh;
   margin-bottom: -50px;
 }
+
 /*Fim Esqueceu a Senha*/
 .containerGreyColor {
   background-color: var(--cinza-claro-fundo);
@@ -1755,15 +1765,15 @@ p.create-account-frase {
   padding: 2rem;
 }
 
-.listaSkills li{
+.listaSkills li {
   list-style: none;
 }
 
 .listaSkills li::before {
   content: "\2022";
-    
+
   color: var(--amarelo-padrao);
-    
+
   display: inline-block;
   width: 1rem;
   margin-left: -1em;
@@ -1771,3 +1781,21 @@ p.create-account-frase {
 
 /* Fim Teste SoftSkill */
 /*Fim Trocar a senha*/
+
+/* Inicio Minhas vagas empresa*/
+.btnNewVaga {
+  margin-top: 20px;
+  width: 80%;
+  height: 45px;
+  border-radius: 23px;
+  background-color: var(--amarelo-padrao);
+  font-family: "nunito-semibold";
+  color: var(--branco-padrao);
+  border-color: var(--amarelo-padrao);
+  border: 0;
+  font-size: 20px;
+  text-decoration: none;
+  line-height: 45px;
+}
+
+/* Fim Minhas vagas empresa*/
