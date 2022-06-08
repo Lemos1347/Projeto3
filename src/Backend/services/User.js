@@ -730,8 +730,6 @@ class User {
 
         //Verifica qual o Código passado para o usuário
         const code = await db.all(`SELECT resetPassCode FROM users WHERE email="${email}"`)
-
-        console.log(code[0])
         if(code[0].resetPassCode == '') {
             const error = {
                 type: 'error',
@@ -740,7 +738,7 @@ class User {
             return error
         }
 
-        if (code[0].resetPassCode != resetCode) {
+        if (Number(code[0].resetPassCode) != resetCode) {
             const error = {
                 type: 'error',
                 message: "Código Inválido"

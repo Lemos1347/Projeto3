@@ -220,13 +220,13 @@ const resetPassWord = (req, res) => {
 
 const redefinePassWord = (req, res) => {
     //Pega as infos da requisição
-    const { email, code } = req.body
+    const { email, code, newPass } = req.body
 
     //Instancia a classe criando uma vaga
     const user = new userService.User();
 
     //Tratamento das respostas do método da classe
-    user.resetPasswordByCode(email, code).then((resul) => {
+    user.resetPasswordByCode(email, code, newPass).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
