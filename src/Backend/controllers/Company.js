@@ -83,8 +83,30 @@ const getCompanies = (req, res) => {
     })
 }
 
+const getCompany = (req, res) => {
+    //Instancia a classe criando uma compania
+    const company = new companyService.Company();
+
+    const { user_id } = req
+
+    //Tratamento das respostas do método da classe
+    company.getCompany(user_id).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message,
+                isCompany: resul.isCompany
+            })
+        } else {
+            res.status(200).send({
+                message: resul.message,
+                isCompany: resul.isCompany
+            })
+        }
+    })
+}
+
 
 //Exporta as funções do controller para o ROUTER
 module.exports = {
-    createCompany, updateCompany, deleteCompany, getCompanies
+    createCompany, updateCompany, deleteCompany, getCompanies, getCompany
 }

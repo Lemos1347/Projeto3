@@ -82,6 +82,27 @@ const getOffer = (req, res) => {
     });
 }
 
+const getOfferCompany = (req, res) => {
+    //Pega as infos da requisição
+    const {user_id} = req
+
+    //Instancia a classe criando uma vaga
+    const offer = new jobOfferService.jobOffer()
+
+    //Tratamento das respostas do método da classe
+    offer.getOfferCompany(user_id).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                offers: resul.vagas
+            })
+        }
+    });
+}
+
 const offerExpanded = (req, res) => {
     //Pega as infos da requisição
     const { id } = req.body
@@ -178,5 +199,5 @@ const verifyApply = (req, res) => {
 
 //Exporta as funções do controller para o ROUTER
 module.exports = {
-    createJobOffer, deleteOffer, getOffers, getOffer, applyOffer, offerExpanded, removeApply, verifyApply
+    createJobOffer, deleteOffer, getOffers, getOffer, getOfferCompany, applyOffer, offerExpanded, removeApply, verifyApply
 }

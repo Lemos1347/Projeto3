@@ -467,6 +467,51 @@ class jobOffer {
 
     }
 
+    async getOfferCompany(id) {
+        //Instanciação do DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Verifica se o ID foi passado
+        if (!id) {
+            const error = {
+                type: 'error',
+                message: "ID was not passed"
+            }
+            return error
+        }
+
+        //Verifica em quais vagas o usuário está
+        const query = await db.all(`SELECT * \ FROM TB_JOBOFFER WHERE id_company="${id}"`)
+
+        if (!query) {
+            const error = {
+                type: 'error',
+                message: "User don't have any apply"
+            }
+            return error
+        }
+
+        // let vagas = []
+
+        // let count = 0
+        // while (count < query.length) {
+        //     await db.all(`SELECT * \ FROM TB_JOBOFFER \ WHERE id = "${query[count].id_vaga}"`).then((res) => {
+        //         console.log(vagas)
+        //         //res[0].status = query[0].status
+        //         vagas.push(res[0])
+        //     })
+        //     count++
+        // }
+
+        const sucess = {
+            type: 'sucess',
+            vagas: query
+        }
+
+        return sucess
+
+    }
+
     async getOffers() {
         //Instanciação do DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });

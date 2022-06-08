@@ -235,6 +235,32 @@ async updateCompany(idCompany, name, email, password, cnpj, phoneNumber, logo) {
         return sucess
     }
 
+    async getCompany(id) {
+        //Instancia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Pega a empresa correspondente ao id passado
+        const getCompanies = await db.all(`SELECT * FROM TB_COMPANY WHERE id="${id}"`)
+
+        if (!getCompanies[0]) {
+            const error = {
+                type: 'error',
+                message: 'Empresa não encontrada',
+                isCompany: false
+            }
+
+            return error
+        }
+
+        //Mostra a validação de que o usuário foi deletado
+        const sucess = {
+            type: 'sucess',
+            message: 'Usuário é uma empresa',
+            isCompany: true
+        }
+        return sucess
+    }
+
     async getCompanies() {
         //Instancia o DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });

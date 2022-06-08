@@ -108,7 +108,7 @@ function passPage(operationType) {
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
-        }, "1500")
+        }, "1000")
         
     } else if (operationType === 'back') {
         document.getElementById('divLoadingTeste').style.display = 'flex'
@@ -136,7 +136,6 @@ function renderQuestion(number) {
     } else {
         document.getElementById(Perguntas[number].selectedAnswer).checked = true
     }
-    
 }
 
 function recordAnswer(number, answer) {

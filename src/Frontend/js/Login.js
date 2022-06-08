@@ -30,7 +30,7 @@ function verifyLogin() {
                     errorMessage(err.responseJSON.error)
                 })
             } else {
-                document.location.href = '../view/hubVagas.html'
+                document.location.href = '../view/myVagasCompany.html'
             }
         }
     }).fail(function(err) {
