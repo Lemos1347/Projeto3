@@ -171,7 +171,26 @@ const getInfos = (req, res) => {
             res.status(200).json({
                 name: resul.name,
                 id: resul.id,
-                email: resul.email
+                email: resul.email,
+                isAdmin: resul.isAdmin
+            })
+        }
+    })
+}
+
+const getUsers = (req, res) => {
+    //Instancia a classe criando uma compania
+    const user = new userService.User();
+
+    //Tratamento das respostas do método da classe
+    user.getUsers().then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).send({
+                message: resul.message
             })
         }
     })
@@ -192,7 +211,8 @@ const resetPassWord = (req, res) => {
             })
         } else {
             res.status(200).json({
-                message: resul.message
+                message: resul.message,
+                trueMessage: resul.trueMessage
             })
         }
     })
@@ -222,5 +242,5 @@ const redefinePassWord = (req, res) => {
 
 //Exporta as funções do controller para o ROUTER
 module.exports = {
-    createUser, AuthUser, UpdateUser, deleteUser, verifyCurriculum, updatePermission, getUser, getInfos, resetPassWord, redefinePassWord
+    createUser, AuthUser, UpdateUser, deleteUser, verifyCurriculum, updatePermission, getUser, getInfos, resetPassWord, redefinePassWord, getUsers
 }

@@ -36,7 +36,7 @@ async function verifyUserInfos() {
                     showConfirmButton: false,
                     timer: 2000
                 })
-                window.location.href = '/view/createCurriculum.html'
+                window.location.href = '/view/login.html'
             },
             error: function(err) {
                 console.log(err.responseJSON.error)

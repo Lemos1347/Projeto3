@@ -135,3 +135,8 @@ function popUpVisibility(visible) {
 
     
 }
+
+function logOut() {
+    window.sessionStorage.removeItem('auth')
+    window.location.href = '/view/login.html'
+}

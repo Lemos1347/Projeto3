@@ -476,6 +476,30 @@ class User {
 
     }
 
+    async getUsers() {
+        //Instancia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Pega do banco de dados todas as empresas cadastradas
+        const getUsers = await db.all("SELECT name, id FROM users")
+
+        if (getUsers == '') {
+            const error = {
+                type: 'error',
+                message: 'Não há nenhum usuário cadastrado'
+            }
+
+            return error
+        }
+
+        const sucess = {
+            type: 'sucess',
+            message: getUsers,
+        }
+
+        return sucess
+    }
+
     //SOMENTE PARA O TOKEN, JAMAIS FAÇA REQUISIÇÃO AQUI
     async getInfosTemp(idUser) {
         //Instacia o DB
@@ -503,14 +527,15 @@ class User {
         }
 
         //Captura as informações do DB
-        const { id, name, email } = rowsId[0]
+        const { id, name, email, isAdmin } = rowsId[0]
 
         //Retorna infos ao client
         const sucess = {
             type: 'sucess',
             name: name,
             id: idUser,
-            email: email
+            email: email,
+            isAdmin: isAdmin
         }
 
         return sucess
@@ -547,7 +572,7 @@ class User {
             const error = {
                 type: 'success',
                 message: 'Email verification was sent',
-                trueMessage: 'User not found with this email'
+                trueMessage: false
             }
             return error
         }
@@ -669,7 +694,8 @@ class User {
         //Retorna infos ao client
         const sucess = {
             type: 'sucess',
-            message: "Instruções enviadas por email"
+            message: "Instruções enviadas por email",
+            trueMessage: true
         }
 
         return sucess

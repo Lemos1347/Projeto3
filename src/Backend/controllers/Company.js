@@ -29,10 +29,10 @@ const updateCompany = (req, res) => {
     const { id, name, email, password, cnpj, phoneNumber, logo } = req.body;
 
     //Instancia a classe criando uma compania
-    const user = new companyService.Company();
+    const company = new companyService.Company();
 
     //Tratamento das respostas do método da classe
-    user.updateCompany(id, name, email, password, cnpj, phoneNumber, logo).then((resul) => {
+    company.updateCompany(id, name, email, password, cnpj, phoneNumber, logo).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -50,10 +50,10 @@ const deleteCompany = (req, res) => {
     const { id } = req.body;
 
     //Instancia a classe criando uma compania
-    const user = new userService.User();
+    const company = new companyService.Company();
 
     //Tratamento das respostas do método da classe
-    user.deleteCompany(id).then((resul) => {
+    company.deleteCompany(id).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -67,10 +67,10 @@ const deleteCompany = (req, res) => {
 
 const getCompanies = (req, res) => {
     //Instancia a classe criando uma compania
-    const user = new userService.User();
+    const company = new companyService.Company();
 
     //Tratamento das respostas do método da classe
-    user.getCompanies().then((resul) => {
+    company.getCompanies().then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
