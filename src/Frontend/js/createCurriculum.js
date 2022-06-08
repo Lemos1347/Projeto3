@@ -96,9 +96,11 @@ function generateRandomNumber() {
 }
 
 /* Criar campo para uma nova formação */
+var cont = 1
 function novaFormacao(){
+    cont++
     document.getElementById("newFormation").innerHTML +=
-    `<div class="row">
+    `<div class="row" id=${cont}>
     <div class="col-sm-12 col-md-6 listaInputs">
       <div class="row inputDiv">
         <div class="col-10 ">
@@ -123,9 +125,11 @@ function novaFormacao(){
 }
 
 /* Criar campo para uma nova experiência */
+var cont1 = 1
 function novaExperiencia(){
+  cont1 ++
     document.getElementById("newExperience").innerHTML +=
-    `<div class="row">
+    `<div class="row" id=${cont1}>
     <div class="col-sm-12 col-md-6 listaInputs">
       <div class="row inputDiv">
         <div class="col-10 ">
