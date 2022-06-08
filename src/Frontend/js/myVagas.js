@@ -3,23 +3,37 @@ let email
 let id
 
 let auth = window.sessionStorage.getItem('auth')
+window.onload = (event) => {
+    console.log('page is fully loaded');
+};
 
+function startTimer(duration) {
+    var timer = duration, seconds;
+    var setIntervalo = setInterval(function () {
+        seconds = parseInt(timer % 60, 10);
+        if (--timer <= 0) {
+            clearInterval(setIntervalo);
+            document.getElementById("curriculo").style.display = 'block';
+            document.getElementById("loader").style.display = 'none';
+        }
+    }, 1000);
+}
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
             url: "http://localhost:3001/User/Verify/Infos",
             type: "GET",
-            headers: {"Authorization": `Bearer ${auth}`},
-            success: function(resul) { 
+            headers: { "Authorization": `Bearer ${auth}` },
+            success: function (resul) {
                 console.log(resul)
                 nome = resul.name
                 email = resul.email,
-                id = resul.id
+                    id = resul.id
                 document.getElementById('userNameNavBar').innerHTML = `${nome}`
                 checkVagas()
             }
-        }).fail(function(err) {
+        }).fail(function (err) {
             console.log(err.responseJSON.message)
             window.location.href = '../view/login.html'
         })
@@ -71,12 +85,12 @@ async function checkVagas() {
 
     await $.ajax({
         url: "http://localhost:3001/Offer/OfferUser",
-        headers: {"authorization": `Bearer ${auth}`},
-        success: function(resul) { 
+        headers: { "authorization": `Bearer ${auth}` },
+        success: function (resul) {
             console.log(resul)
             vagas = resul.offers
         }
-    }).fail(function(err) {
+    }).fail(function (err) {
         console.log('teste')
         console.log(err.responseJSON.message)
     })
@@ -88,7 +102,7 @@ async function checkVagas() {
         let color = 'black'
 
         document.getElementById('containerOfAll').innerHTML += `
-        <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
+        <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" id="vaga">
             <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
                 <div class="row mainWidGet">
                     <div class="col-5 imgHubVagas">
@@ -127,7 +141,7 @@ function popUpVisibility(visible) {
 
     let displayToEdit = ''
 
-    if(visible == true) {
+    if (visible == true) {
         document.getElementById('bodyFiltersHubVagas').style.display = 'flex'
 
         document.getElementById('toScroll').scrollIntoView();
