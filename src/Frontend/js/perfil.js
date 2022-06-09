@@ -11,7 +11,6 @@ document.onreadystatechange = async function () {
             url: "http://localhost:3001/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
-                console.log(resul)
                 nome = resul.name
                 email = resul.email,
                 id = resul.id
@@ -29,8 +28,6 @@ let User
 
 async function checkUser() {
 
-    console.log(id)
-
     await $.ajax({
         url: "http://localhost:3001/User/User",
         type: "POST",
@@ -44,6 +41,14 @@ async function checkUser() {
     }).fail(function(err) {
         console.log(err.responseJSON.message)
     })
+
+    document.getElementById('nomePerfil').innerHTML = User.name
+
+    let hardSkills = User.hardSkills.split(",")
+    hardSkills.map((skill) => {
+       document.getElementById('hardSkillList').innerHTML += `<li>${skill}</li>`
+    })
+    
 
     document.getElementById('descricaoUser').innerHTML = User.name
 }

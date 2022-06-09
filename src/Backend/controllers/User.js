@@ -107,7 +107,8 @@ const verifyCurriculum = (req, res) => {
             res.status(200).json({
                 message: resul.message,
                 haveCurriculum: resul.haveCurriculum,
-                haveSoftSkills: resul.haveSoftSkills
+                haveSoftSkills: resul.haveSoftSkills,
+                curriculum: resul.curriculum
             })
         }
     })
@@ -173,7 +174,9 @@ const getInfos = (req, res) => {
                 name: resul.name,
                 id: resul.id,
                 email: resul.email,
-                isAdmin: resul.isAdmin
+                isAdmin: resul.isAdmin,
+                hardSkills: resul.hardSkills,
+                softSkills: resul.softSkills
             })
         }
     })

@@ -9,6 +9,7 @@ const companyAuth = require('../Middlewares/unsureCompany')
 
 //ROUTAS com seus respectivos controlers e middlewares
 router.post('/Create', userAuth.unsureAuthenticated, companyAuth.ensureCompany, offerController.createJobOffer)
+router.put('/Update', userAuth.unsureAuthenticated, companyAuth.ensureCompany, offerController.updateOffer)
 router.post('/Delete', offerController.deleteOffer)
 router.get('/getOffers', offerController.getOffers)
 router.get('/getOfferCompany', userAuth.unsureAuthenticated, offerController.getOfferCompany)

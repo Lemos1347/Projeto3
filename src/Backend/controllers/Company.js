@@ -99,7 +99,9 @@ const getCompany = (req, res) => {
         } else {
             res.status(200).send({
                 message: resul.message,
-                isCompany: resul.isCompany
+                isCompany: resul.isCompany,
+                name_company: resul.name_company,
+                id_company: resul.id_company
             })
         }
     })

@@ -3,13 +3,35 @@ require('express-async-errors')
 
 const createJobOffer = ( req, res ) => {
     //Pega as infos da requisição
-    const { name, type, local, description, requirements, skills, name_company, id_company } = req.body;
+    const { name, type, local, description, requirements, hardSkills, name_company, id_company } = req.body;
 
     //Instancia a classe criando uma vaga
-    const offer = new jobOfferService.jobOffer(name, type, local, description, requirements, skills, name_company, id_company);
+    const offer = new jobOfferService.jobOffer(name, type, local, description, requirements, hardSkills, name_company, id_company);
 
     //Tratamento das respostas do método da classe
     offer.createOffer().then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                message: resul.message,
+                id_offer: resul.id_offer
+            })
+        }
+    });
+}
+
+const updateOffer = ( req, res ) => {
+    //Pega as infos da requisição
+    const { id_vaga, name, type, local, description, requirements, hardSkills, softSkills, name_company, id_company } = req.body;
+
+    //Instancia a classe criando uma vaga
+    const offer = new jobOfferService.jobOffer(id_vaga, name, type, local, description, requirements, hardSkills, softSkills, name_company, id_company);
+
+    //Tratamento das respostas do método da classe
+    offer.updateOffer(id_vaga, name, type, local, description, requirements, hardSkills, softSkills, name_company, id_company).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -199,5 +221,5 @@ const verifyApply = (req, res) => {
 
 //Exporta as funções do controller para o ROUTER
 module.exports = {
-    createJobOffer, deleteOffer, getOffers, getOffer, getOfferCompany, applyOffer, offerExpanded, removeApply, verifyApply
+    createJobOffer, updateOffer, deleteOffer, getOffers, getOffer, getOfferCompany, applyOffer, offerExpanded, removeApply, verifyApply
 }

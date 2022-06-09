@@ -1,6 +1,8 @@
 let nome
 let email
 let id
+let hardSkills
+let softSkills
 
 let auth = window.sessionStorage.getItem('auth')
 
@@ -11,13 +13,23 @@ document.onreadystatechange = async function () {
             url: "http://localhost:3001/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
+                console.log(resul)
                 nome = resul.name
                 email = resul.email,
                 id = resul.id
+                hardSkills = resul.hardSkills,
+                softSkills = resul.softSkills
+                if (!hardSkills) {
+                    window.location.href = '/view/createCurriculum.html'
+                }
+                if (!softSkills) {
+                    window.location.href = '/view/testeSoftSkill.html'
+                }
                 document.getElementById('userNameNavBar').innerHTML = `${nome}`
                 checkVagas()
             }
         }).fail(function(err) {
+            console.log(err)
             console.log(err.responseJSON.message)
             window.location.href = '../view/login.html'
         })
@@ -58,7 +70,27 @@ let vagas = [
     },
 ]
 
+
 async function checkVagas() {
+    function matchPercentage(offerSoft, offerHard) {
+        $.ajax({
+            url: "http://localhost:3001/Match",
+            type: "POST",
+            data: {
+                userSoft: softSkills,
+                userHard: hardSkills,
+                offerSoft: offerSoft,
+                offerHard: offerHard
+            },
+            headers: {"Authorization": `Bearer ${auth}`},
+            success: function(resul) {
+                // match = resul.resulFinal
+                return resul.resulFinal
+            }
+        }).fail(function(err) {
+            console.log(err.responseJSON.message)
+        })
+    }
 
     await $.ajax({
         url: "http://localhost:3001/Offer/getOffers",
@@ -70,17 +102,21 @@ async function checkVagas() {
         console.log(err.responseJSON.message)
     })
 
+    matchPercentage("4,3,2,1,0,4,3,2,1,0", "Qualidade de Software,Teste de Qualidade")
+
     vagas.map((vaga) => {
 
         let color = ''
 
-        let randomNumber = generateRandomNumber()
+        let match = 0
 
-        if(randomNumber < 50) {
+        console.log(matchPercentage(vaga.softSkills, vaga.hardSkills))
+
+        if(match < 50) {
             color = 'red'
-        } else if (randomNumber > 50) {
+        } else if (match > 50) {
             color = 'green'
-        } else if (randomNumber == 50) {
+        } else if (match == 50) {
             color = 'yellow'
         }
 
@@ -108,6 +144,8 @@ async function checkVagas() {
     `
     })
 }
+
+// console.log(matchPercentage("4,3,2,1,0,4,3,2,1,0", "Qualidade de Software,Teste de Qualidade"))
 
 function redirectToVagaId(param) {
     document.location.href = `../view/vagaExpandida.html?id=${param}`

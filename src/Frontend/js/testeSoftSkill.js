@@ -1,4 +1,9 @@
 let auth;
+let nome
+let email
+let id
+let hardSkills
+let softSkills
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = function () {
     if (document.readyState == "complete") {
@@ -6,7 +11,26 @@ document.onreadystatechange = function () {
         document.getElementById('questionNumber').innerHTML = 'Questão 1/10'
         document.getElementById('questionMessage').innerHTML = Perguntas[0].pergunta
         auth = window.sessionStorage.getItem('auth')
-        console.log(auth)
+        $.ajax({
+            url: "http://localhost:3001/User/Verify/Infos",
+            headers: {"Authorization": `Bearer ${auth}`},
+            success: function(resul) { 
+                console.log(resul)
+                nome = resul.name
+                email = resul.email,
+                id = resul.id
+                hardSkills = resul.hardSkills,
+                softSkills = resul.softSkills
+                if (softSkills) {
+                    window.location.href = '/view/hubVagas.html'
+                }
+                document.getElementById('userNameNavBar').innerHTML = `${nome}`
+                checkVagas()
+            }
+        }).fail(function(err) {
+            console.log(err.responseJSON.message)
+            window.location.href = '../view/login.html'
+        })
     }
 }
 

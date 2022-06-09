@@ -6,7 +6,7 @@ const sqlite = require('sqlite')
 
 class jobOffer {
 
-    constructor(name, type, local, description, requirements, skills, name_company, id_company) {
+    constructor(name, type, local, description, requirements, hardSkills, name_company, id_company) {
         if(!this.id) {
             this.id = uuid();
         }
@@ -15,7 +15,7 @@ class jobOffer {
         this.local = local,
         this.description = description,
         this.requirements = requirements,
-        this.skills = skills,
+        this.hardSkills = hardSkills,
         this.nameCompany = name_company,
         this.idCompany = id_company
     }
@@ -60,10 +60,10 @@ class jobOffer {
             }
             return error
         }
-        if(!this.skills) {
+        if(!this.hardSkills) {
             const error = {
                 type: 'error',
-                message: 'Incorrect SoftSkills'
+                message: 'Incorrect HardSkills'
             }
             return error
         }
@@ -94,7 +94,7 @@ class jobOffer {
         }
         
         //Inserção de infos passadas no DB
-        const inserction = await db.run("INSERT INTO TB_JOBOFFER (id, name, type, location, description, requirements, skills, name_company, id_company, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.type , this.local, this.description, this.requirements, this.skills, this.nameCompany, this.idCompany]);
+        const inserction = await db.run("INSERT INTO TB_JOBOFFER (id, name, type, location, description, requirements, hardSkills, name_company, id_company, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.type , this.local, this.description, this.requirements, this.hardSkills, this.nameCompany, this.idCompany]);
 
         if (inserction.changes === 0) {
             const error = {
@@ -108,11 +108,12 @@ class jobOffer {
         const sucess = {
             type: 'sucess',
             message: 'Informations Added',
+            id_offer: this.id
         }
         return sucess
     }
 
-    async updateOffer(idOffer, name, type, location, description, requirements, skills, nameCompany, idCompany) {
+    async updateOffer(idOffer, name, type, location, description, requirements, hardSkills, softSkills, nameCompany, idCompany) {
         //Instanciação do DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
@@ -128,7 +129,7 @@ class jobOffer {
             return error
         }
 
-        const rowsId = await db.all(`SELECT * \ FROM users \ WHERE id = "${idOffer}"`);
+        const rowsId = await db.all(`SELECT * \ FROM TB_JOBOFFER \ WHERE id = "${idOffer}"`);
 
         if (!rowsId[0]){
             const error = {
@@ -153,8 +154,11 @@ class jobOffer {
         if(requirements) {
             queryComponent.push(`requirements="${requirements}"`)
         }
+        if(hardSkills) {
+            queryComponent.push(`hardSkills="${hardSkills}"`)
+        }
         if(softSkills) {
-            queryComponent.push(`skills="${skills}"`)
+            queryComponent.push(`softSkills="${softSkills}"`)
         }
         if(nameCompany) {
             queryComponent.push(`name_company="${nameCompany}"`)
@@ -164,7 +168,7 @@ class jobOffer {
             queryComponent.push(`id_company="${idCompany}"`)
         }
         //Validação se nenhum dado foi passado
-        if (!name && !type && !location && !description && !requirements && !skills && !nameCompany && !idCompany) {
+        if (!name && !type && !location && !description && !requirements && !hardSkills && !softSkills && !nameCompany && !idCompany) {
             const error = {
                 type: 'error',
                 message: 'Any Information was passed to Update'
@@ -175,7 +179,7 @@ class jobOffer {
         const queryJoined = queryComponent.join(',')
 
         //Efetua a chamada para o DB, fazendo a atualização
-        const Update = await db.run(`UPDATE TB_JOBOFFERS SET ${queryJoined}, updated_at=DateTime('now','localtime') WHERE id="${idOffer}"`)
+        const Update = await db.run(`UPDATE TB_JOBOFFER SET ${queryJoined}, updated_at=DateTime('now','localtime') WHERE id="${idOffer}"`)
 
         if (Update.changes == 0) {
             const error = {
