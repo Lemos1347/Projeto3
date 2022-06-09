@@ -49,7 +49,7 @@ const AuthUser = (req, res) => {
 
 const UpdateUser = (req, res) => {
     //Pega as infos da requisição
-    const { name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills } = req.body;
+    const { name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills, hardSkills } = req.body;
 
     const { user_id } = req
 
@@ -57,7 +57,7 @@ const UpdateUser = (req, res) => {
     const user = new userService.User();
 
     //Tratamento das respostas do método da classe
-    user.updateUser(user_id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills).then((resul) => {
+    user.updateUser(user_id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills, hardSkills).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -106,7 +106,8 @@ const verifyCurriculum = (req, res) => {
         } else {
             res.status(200).json({
                 message: resul.message,
-                haveCurriculum: resul.haveCurriculum
+                haveCurriculum: resul.haveCurriculum,
+                haveSoftSkills: resul.haveSoftSkills
             })
         }
     })

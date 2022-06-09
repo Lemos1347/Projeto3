@@ -19,7 +19,7 @@ function recoveryPassword() {
                     timer: 1500
                 })
             } else {
-                window.sessionStorage.setItem('emailForRecovery', email)
+                window.sessionStorage.setItem('emailToRecovery', email)
                 window.location.href = '/view/changePassword.html'
             }
         }

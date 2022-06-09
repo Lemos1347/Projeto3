@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/resposive-theme.css">
   <link rel="icon" href="../images/favicon.png">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -110,14 +111,14 @@
         </div>
         <div class="row">
           <div class="col-lg-10 offset-lg-1" id="newFormation">
-            <div class="row">
+            <div class="row" id = 'instru1'>
               <div class="col-sm-12 col-md-6 listaInputs">
                 <div class="row inputDiv">
                   <div class="col-10 ">
                     <span class="textGeneralInput">Formação<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="text" placeholder="Instituição de Ensino"></input>
+                    <input class="generalInput" id="instituicao1" type="text" placeholder="Instituição de Ensino"></input>
                   </div>
                 </div>
               </div>
@@ -127,18 +128,17 @@
                     <span class="textGeneralInput">Curso<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="text" placeholder="Formação acadêmica"></input>
+                    <input class="generalInput" id="curso1" type="text" placeholder="Formação acadêmica"></input>
                   </div>
                 </div>
               </div>
             </div>
-            
           </div>
           </div>
         </div>
         <div>
           <button class="newButton" type="button" onclick="novaFormacao()">+</button>
-          <button id="menos" class="newButton" type="button" onclick="menos()">-</button>
+          <button id="menos" class="newButton" type="button" onclick="menos('instru')">-</button>
         </div>
         <div class="row mt-5">
           <div class="col-10 offset-1">
@@ -149,15 +149,15 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-10 offset-lg-1">
-            <div class="row" id="newExperience">
+          <div class="col-lg-10 offset-lg-1" id="newExperience">
+            <div class="row" id = 'exp1'>
               <div class="col-sm-12 col-md-6 listaInputs">
                 <div class="row inputDiv">
                   <div class="col-10 ">
                     <span class="textGeneralInput">Empresa<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="text" placeholder="Empresa em que trabalhava"></input>
+                    <input class="generalInput" id="empresa1" type="text" placeholder="Empresa em que trabalhava"></input>
                   </div>
                 </div>
               </div>
@@ -167,7 +167,7 @@
                     <span class="textGeneralInput">Cargo<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="text" placeholder="Cargo na empresa"></input>
+                    <input class="generalInput" id="cargo1" type="text" placeholder="Cargo na empresa"></input>
                   </div>
                 </div>
                 
@@ -176,7 +176,7 @@
           </div>
           <div>
             <button class="newButton" type="button" onclick="novaExperiencia()">+</button>
-            <button id="menos1" class="newButton" type="button" onclick="menos1()">-</button>
+            <button id="menos1" class="newButton" type="button" onclick="menos1('exp')">-</button>
           </div>
         </div>
         <div class="row mt-5">

@@ -218,7 +218,7 @@ class User {
         return sucess
     }
 
-    async updateUser(idUser, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills) {
+    async updateUser(idUser, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills, hardSkills) {
 
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
@@ -267,7 +267,7 @@ class User {
             queryComponent.push(`phoneNumber="${phoneNumber}"`)
         }
         if(curriculum) {
-            queryComponent.push(`curriculum="${curriculum}"`)
+            queryComponent.push(`curriculum='${curriculum}'`)
         }
         if(typeOfUser) {
             queryComponent.push(`typeOfUser="${typeOfUser}"`)
@@ -275,8 +275,11 @@ class User {
         if(softSkills) {
             queryComponent.push(`softSkills="${softSkills}"`)
         }
+        if(hardSkills) {
+            queryComponent.push(`hardSkills="${hardSkills}"`)
+        }
         //Validar se nenhuma informação foi enviada ao servidor
-        if (!name && !email && !password && !bornDate && !gender && !cpf && !phoneNumber && !curriculum && !typeOfUser && !softSkills) {
+        if (!name && !email && !password && !bornDate && !gender && !cpf && !phoneNumber && !curriculum && !typeOfUser && !softSkills && !hardSkills) {
             const error = {
                 type: 'error',
                 message: 'Any Information was passed to Update'
@@ -373,20 +376,36 @@ class User {
 
         //Verificar se existe currículo cadastrado para aquele ID
         const curriculum = rowsId[0].curriculum
+        const softSkills = rowsId[0].softSkills
 
-        if(curriculum === "") {
-            const success = {
-                type: 'success',
-                message: "User exists, but don't have a curriculum",
+        console.log(curriculum)
+        console.log(softSkills)
+
+        let resp = {
+            type: 'success',
+        }
+
+        if(!curriculum) {
+            resp += {
                 haveCurriculum: false
             }
-            return success
+        }
+
+        if(!softSkills) {
+            resp += {
+                haveSoftSkills: false
+            }
+        }
+
+        if (!curriculum || !softSkills) {
+            return resp
         }
 
         const success = {
             type: 'success',
             message: "User exists, and have a curriculum",
-            haveCurriculum: true
+            haveCurriculum: true,
+            haveSoftSkills: true
         }
         return success
     }
