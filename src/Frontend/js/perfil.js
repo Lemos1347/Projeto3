@@ -50,7 +50,12 @@ async function checkUser() {
     })
     
 
-    document.getElementById('descricaoUser').innerHTML = User.name
+    const curriculum = JSON.parse(User.curriculum)
+
+    console.log(curriculum)
+
+    document.getElementById('descricaoUser').innerHTML = curriculum.descricao
+    document.getElementById('objetivoUser').innerHTML = curriculum.objetivo
 }
 
 function logOut() {
