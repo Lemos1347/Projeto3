@@ -9,7 +9,11 @@ async function verifyUserInfos() {
     var prefixNumber = document.getElementById("number55Input").value
     var numberNormal = numberToDb(document.getElementById("number11Input").value);
     number = prefixNumber + numberNormal
+    var inputFile = document.getElementById('imageUser').files[0]
 
+    if (inputFile.type == 'image/jpeg' || inputFile.type == 'image/png') {
+        readFile()
+    }
     const validate = validateInformations(email, cpf, senha)
     console.log(validate)
 
@@ -17,7 +21,7 @@ async function verifyUserInfos() {
         $.ajax({
             url: "http://localhost:3001/User/Register",
             type: "POST",
-            data: { 
+            data: {
                 name: nome,
                 email: email,
                 password: senha,
@@ -58,6 +62,19 @@ async function verifyUserInfos() {
             timer: 2000
         })
     }
+}
+
+function readFile() {
+  
+    if (!document.getElementById('imageUser').files || !document.getElementById('imageUser').files[0]) return;
+        
+    const FR = new FileReader();
+        
+    FR.addEventListener("load", function(evt) {
+        console.log((evt.target.result))
+    }); 
+        
+    FR.readAsDataURL(document.getElementById('imageUser').files[0]);
 }
 
 function numberFormat() {

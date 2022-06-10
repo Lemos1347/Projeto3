@@ -25,7 +25,7 @@ function changeCode(key, event) {
 }
 
 async function saveChange() {
-    console.log("teste")
+    console.log(emailExists)
     let code = document.getElementById('code1').value + document.getElementById('code2').value + document.getElementById('code3').value + document.getElementById('code4').value
     code = Number(code)
     const passWord = document.getElementById('newPass').value
@@ -61,6 +61,7 @@ async function saveChange() {
                         timer: 2000
                     })
                     window.location.href = '/view/login.html'
+                    window.sessionStorage.removeItem('emailForRecovery')
                 },
                 error: function(err) {
                     console.log(err.responseJSON.error)

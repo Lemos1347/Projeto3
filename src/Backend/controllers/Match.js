@@ -16,8 +16,12 @@ const match = (req, res) => {
     //Executa os métodos da classe previamente exportada
     var resulSoft = matchCreate.matchSoft();
     var resulHard = matchCreate.matchHard();
+
+
     //Calcula o resultadado final em decorrência dos resultados obtidos nas funções acima
     const resulFinal = (resulSoft + resulHard) / 2
+
+    console.log(resulFinal)
 
     res.status(200).send({resulFinal})
 }

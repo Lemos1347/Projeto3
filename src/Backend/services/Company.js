@@ -256,7 +256,9 @@ async updateCompany(idCompany, name, email, password, cnpj, phoneNumber, logo) {
         const sucess = {
             type: 'sucess',
             message: 'Usuário é uma empresa',
-            isCompany: true
+            isCompany: true,
+            name_company: getCompanies[0].name,
+            id_company: getCompanies[0].id
         }
         return sucess
     }

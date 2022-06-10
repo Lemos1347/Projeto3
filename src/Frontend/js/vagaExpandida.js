@@ -76,15 +76,15 @@ async function checkVaga() {
     document.getElementById('descriptionOffer').innerHTML = Offer.description
     document.getElementById('nameOffer').innerHTML = Offer.name
 
-    let requirements = Offer.requirements.split(", ")
+    let requirements = Offer.requirements.split(",")
 
     requirements.map((requirements) => {
         document.getElementById('requirementsOffer').innerHTML += `<li>${requirements}</li>`
     })
     
-    let skills = Offer.skills
-    skills = JSON.parse(skills)
-    let softSkills = skills.SoftSkills.split(", ")
+    let skills = Offer.hardSkills
+    console.log(Offer)
+    let softSkills = skills.split(",")
 
     console.log(softSkills)
 

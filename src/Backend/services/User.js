@@ -378,9 +378,6 @@ class User {
         const curriculum = rowsId[0].curriculum
         const softSkills = rowsId[0].softSkills
 
-        console.log(curriculum)
-        console.log(softSkills)
-
         let resp = {
             type: 'success',
         }
@@ -405,7 +402,8 @@ class User {
             type: 'success',
             message: "User exists, and have a curriculum",
             haveCurriculum: true,
-            haveSoftSkills: true
+            haveSoftSkills: true,
+            curriculum: curriculum,
         }
         return success
     }
@@ -546,7 +544,7 @@ class User {
         }
 
         //Captura as informações do DB
-        const { id, name, email, isAdmin } = rowsId[0]
+        const { id, name, email, isAdmin, hardSkills, softSkills } = rowsId[0]
 
         //Retorna infos ao client
         const sucess = {
@@ -554,7 +552,9 @@ class User {
             name: name,
             id: idUser,
             email: email,
-            isAdmin: isAdmin
+            isAdmin: isAdmin,
+            hardSkills: hardSkills,
+            softSkills: softSkills
         }
 
         return sucess

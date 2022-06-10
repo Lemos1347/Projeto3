@@ -1,4 +1,5 @@
 let auth;
+let idOffer
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = function () {
     if (document.readyState == "complete") {
@@ -6,7 +7,18 @@ document.onreadystatechange = function () {
         document.getElementById('questionNumber').innerHTML = 'Questão 1/10'
         document.getElementById('questionMessage').innerHTML = Perguntas[0].pergunta
         auth = window.sessionStorage.getItem('auth')
-        console.log(auth)
+        idOffer = window.sessionStorage.getItem('idOfferForSK')
+        $.ajax({
+            url: "http://localhost:3001/Company",
+            headers: {"Authorization": `Bearer ${auth}`},
+            method: "GET",
+            success: function(resul) { 
+                console.log(resul)
+            }
+        }).fail(function(err) {
+            console.log(err.responseJSON.message)
+            window.location.href = '/view/login.html'
+        })
     }
 }
 
@@ -248,10 +260,11 @@ function finalizarTeste(type) {
             })
             console.log(auth)
             $.ajax({
-                url: "http://localhost:3001/User/Update",
+                url: "http://localhost:3001/Offer/Update",
                 headers: {"Authorization": `Bearer ${auth}`},
                 type: "PUT",
                 data: { 
+                    id_vaga: idOffer,
                     softSkills: answers
                 },
                 success: async function(resul) {
@@ -263,7 +276,8 @@ function finalizarTeste(type) {
                         showConfirmButton: false,
                         timer: 2000
                     })
-                    window.location.href = '../view/hubvagas.html'
+                    window.sessionStorage.removeItem('idOfferForSK')
+                    window.location.href = '../view/myVagasCompany.html'
                     window.localStorage.removeItem('question')
                 },
                 error: function(err) {

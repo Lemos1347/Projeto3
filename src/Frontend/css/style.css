@@ -1766,6 +1766,13 @@ p.create-account-frase {
   padding: 2rem;
 }
 
+.listaSkills {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
 .listaSkills li {
   list-style: none;
 }
