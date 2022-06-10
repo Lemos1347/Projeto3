@@ -11,13 +11,11 @@ document.onreadystatechange = async function () {
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 console.log(resul)
-                name_company = resul.name_company
                 company_name = resul.name
                 companyId = resul.id
                 if (resul.isCompany == false) {
                     window.location.href = '/view/hubVagas.html'
                 }
-                document.getElementById('userNameNavBar').innerHTML = `${name_company}`
                 checkVagas()
             }
         }).fail(function(err) {
@@ -91,8 +89,8 @@ async function checkVagas() {
                     <div class="col-7">
                         <div class="divRightHubVagasComponent">
                             <p>${vaga.name}</p>
-                            <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>${vaga.location}</p>
-                            <p class="pForHubVagas d-flex"><i class="fa fa-clock-o" aria-hidden="true"></i>${vaga.type}</p>
+                            <p class="pForHubVagas"><img src="../images/locationIcon.png" style="height: 25px; width: 30px;">${vaga.location}</p>
+                            <p class="pForHubVagas"><img src="../images/workIcon.png" style="height: 25px; width: 30px;">${vaga.type}</p>
                             <div class = 'divBtnSeeMore'>
                                 <button class="btnSeeMore" onclick="redirectToVagaId('${vaga.id}')">Ver Mais</button>
                             </div>

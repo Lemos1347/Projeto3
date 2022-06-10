@@ -10,22 +10,22 @@ let cards = [
     // }
 ]
 
-function verifyCompanyInfos() {
+function verifyCompanyInfos(){
     window.location.href = '../view/testeSoftSkillCompany.html';
 }
 
 function addCards(message) {
 
     document.getElementById('inputForCard').value = ''
-
+   
     let lastCard = cards.slice(-1)
 
     if (lastCard == '') {
-        cards.push({ 'message': message, 'id': 1 })
+        cards.push({'message': message, 'id': 1})
     } else {
         var lastId = lastCard[0].id
         var id = lastId + 1
-        cards.push({ 'message': message, 'id': id })
+        cards.push({'message': message, 'id': id})
         console.log(cards)
     }
 
@@ -36,7 +36,7 @@ function deleteCard(id) {
     console.log(id)
 
     var cardDeleted = cards.filter((card) => {
-        return card.id == id
+        return card.id == id        
     })
 
     const index = cards.indexOf(cardDeleted[0]);
@@ -53,7 +53,7 @@ function renderCards() {
 
     cards.map((card) => {
 
-        console.log('teste')
+        console.log('teste') 
 
         document.getElementById('skillCard').innerHTML += `
         <div class="balao-skill d-flex">
@@ -78,15 +78,15 @@ let cards1 = [
 function addCards1(message) {
 
     document.getElementById('inputForCard1').value = ''
-
+   
     let lastCard1 = cards1.slice(-1)
 
     if (lastCard1 == '') {
-        cards1.push({ 'message': message, 'id': 1 })
+        cards1.push({'message': message, 'id': 1})
     } else {
         var lastId1 = lastCard1[0].id
         var id1 = lastId1 + 1
-        cards1.push({ 'message': message, 'id': id1 })
+        cards1.push({'message': message, 'id': id1})
         console.log(cards1)
     }
 
@@ -97,7 +97,7 @@ function deleteCard1(id) {
     console.log(id)
 
     var cardDeleted1 = cards1.filter((card) => {
-        return card.id == id
+        return card.id == id        
     })
 
     const index = cards1.indexOf(cardDeleted1[0]);
@@ -125,24 +125,20 @@ let name_company
 let id
 let auth
 
-auth = window.sessionStorage.getItem('auth');
-
-
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         console.log('teste')
+        auth = window.sessionStorage.getItem('auth')
         $.ajax({
             url: "http://localhost:3001/Company",
-            headers: { "Authorization": `Bearer ${auth}` },
+            headers: {"Authorization": `Bearer ${auth}`},
             method: "GET",
-            success: function (resul) {
+            success: function(resul) { 
                 name_company = resul.name_company,
-                    id = resul.id_company
-                    console.log(name_company);
-                document.getElementById('userNameNavBar').innerHTML = `${name_company}`
+                id = resul.id_company
             }
-        }).fail(function (err) {
+        }).fail(function(err) {
             console.log(err.responseJSON.message)
             window.location.href = '/view/login.html'
         })
@@ -173,7 +169,7 @@ function saveInfos() {
     $.ajax({
         url: "http://localhost:3001/Offer/Create",
         type: "POST",
-        headers: { "Authorization": `Bearer ${auth}` },
+        headers: {"Authorization": `Bearer ${auth}`},
         data: {
             name: name,
             type: type,
@@ -184,7 +180,7 @@ function saveInfos() {
             name_company: name_company,
             id_company: id
         },
-        success: async function (resul) {
+        success: async function(resul) {
             console.log(resul.message)
             await Swal.fire({
                 position: 'center',
@@ -196,7 +192,7 @@ function saveInfos() {
             window.sessionStorage.setItem('idOfferForSK', resul.id_offer)
             window.location.href = '/view/testeSoftSkillCompany.html'
         },
-        error: function (err) {
+        error: function(err) {
             console.log(err.responseJSON.error)
             Swal.fire({
                 position: 'center',

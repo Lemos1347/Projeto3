@@ -103,13 +103,13 @@
                 <div class="col-12">
                     <h1>Perfil</h1>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="col-10 offset-1 ">
                             <div class="imgBox">
                                 <div class="row">
                                     <div class="col-10 offset-1 perfilCaixa">
-                                        <h1 id='nomePerfil'></h1>
+                                        <h1 id = 'nomePerfil'></h1>
                                         <img src="../images/userTest.png" class="rounded-circle imgPerfil">
                                         <div class="d-flex mt-4">
                                             <i class="fa fa-briefcase" aria-hidden="true"></i>
@@ -125,47 +125,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-6 col-xl-6 mt-3">
-                            <div class="container">
-                                <div class="row" style="margin-bottom: 20px;">
-                                    <div class="col-12 containerGreyColor">
-                                        <div class="textPerfil row">
-                                            <h2 style="width: max-content; margin-top: 10px;">Sua descrição</h2>
-
-                                            <p id='descricaoUser'>Lorem Ipsum is simply dummy text of the printing and
-                                                typesetting
-                                                industry. Lorem
-                                                Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                                when
-                                                an
-                                                unknown printer took a galley of type and scrambled it to make a type
-                                                specimen
-                                                book.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row justify-content">
-                                    <div class="col-12 containerGreyColor">
-                                        <div class="textPerfil row">
-
-                                            <h2 style="width: max-content; margin-top: 10px;">Seu objetivo</h2>
-
-                                            <p id='descricaoUser'>Lorem Ipsum is simply dummy text of the printing and
-                                                typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500s, when
-                                                an
-                                                unknown printer took a galley of type and scrambled it to make a type
-                                                specimen
-                                                book.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-10 offset-1">
                             <div class="perfilSkillsBox">
                                 <div class="textPerfil row">
                                     <div class="col-6">
@@ -176,78 +138,106 @@
                                                 <li>Lorem Ipsum</li>
                                                 <li>Lorem Ipsum</li>
                                             </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="perfilSkillsBox">
-                                <div class="textPerfil row">
-                                    <div class="col-6">
+                                    <div class="col-12">
                                         <h2>Hard-Skills</h1>
-                                            <ul class="listaSkills">
-                                                <li>Lorem Ipsum</li>
-                                                <li>Lorem Ipsum</li>
-                                                <li>Lorem Ipsum</li>
-                                                <li>Lorem Ipsum</li>
-                                            </ul>
+                                        <ul class="listaSkills" id="hardSkillList">
+                                        </ul>
                                     </div>
+                                    <!-- <div class="col-6">
+                                        <h2>Skills</h2>
+                                        <ul class="listaSkills">
+                                            <li>Lorem Ipsum</li>
+                                            <li>Lorem Ipsum</li>
+                                            <li>Lorem Ipsum</li>
+                                            <li>Lorem Ipsum</li>
+                                        </ul>
+                                    </div> -->
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="editarCurriculo">
-                            <h1>Editar currículo</h1>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-10 offset-md-1 col-xl-6 offset-xl-0">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                </div>
-
-                                <div class="col-sm-12 col-md-10 offset-md-1 col-xl-6 offset-xl-0">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4 offset-lg-4">
-                                <button type="button" class="btnUpdateCurriculum">Atualizar</button>
-                            </div>
-                        </div>
-                        <div>
-                            <!-- <button type="button" class="tituloPerfil fundoBotao">
-                            <h3 class="excluirPerfil">Excluir Conta</h3>
-                        </button> -->
-                            <button class="buttonDeleteAccount">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span> Excluir Conta
-                            </button>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6 mt-3">
+                    <div class="row hyphenate">
+                        <div class="col-10 offset-1 containerGreyColor">
+                            <div class="textPerfil row">
+                                <h2 style="width: max-content; margin-top: 10px;">Sua descrição</h2>
 
+                                <p id='descricaoUser'>Lorem Ipsum is simply dummy text of the printing and typesetting
+                                    industry. Lorem
+                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                    unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content hyphenate">
+                        <div class="col-10 offset-1 containerGreyColor">
+                            <div class="textPerfil row">
+
+                                <h2 style="width: max-content; margin-top: 10px;">Seu objetivo</h2>
+
+                                <p id='descricaoUser'>Lorem Ipsum is simply dummy text of the printing and typesetting
+                                    industry. Lorem
+                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                    unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="editarCurriculo">
+                        <h1>Editar currículo</h1>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-10 offset-md-1 col-xl-6 offset-xl-0">
+                                <label class="descricao fa-pull-left" for="">Lorem<span
+                                        class="asterisco">*</span></label>
+                                <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
+                                <label class="descricao fa-pull-left" for="">Lorem<span
+                                        class="asterisco">*</span></label>
+                                <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
+                                <label class="descricao fa-pull-left" for="">Lorem<span
+                                        class="asterisco">*</span></label>
+                                <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
+                            </div>
+
+                            <div class="col-sm-12 col-md-10 offset-md-1 col-xl-6 offset-xl-0">
+                                <label class="descricao fa-pull-left" for="">Lorem<span
+                                        class="asterisco">*</span></label>
+                                <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
+                                <label class="descricao fa-pull-left" for="">Lorem<span
+                                        class="asterisco">*</span></label>
+                                <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
+                                <label class="descricao fa-pull-left" for="">Lorem<span
+                                        class="asterisco">*</span></label>
+                                <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 offset-lg-4">
+                            <button type="button" class="btnUpdateCurriculum">Atualizar</button>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- <button type="button" class="tituloPerfil fundoBotao">
+                            <h3 class="excluirPerfil">Excluir Conta</h3>
+                        </button> -->
+                        <button class="buttonDeleteAccount">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span> Excluir Conta
+                        </button>
+                    </div>
+                </div>
             </div>
+
+        </div>
     </main>
 
 
