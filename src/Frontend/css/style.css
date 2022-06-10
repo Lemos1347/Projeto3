@@ -1555,14 +1555,26 @@ p.create-account-frase {
 /* Loading Teste */
 #divLoadingTeste {
   position: absolute;
-  top: 80%;
-  left: 60%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
+  /* display: none; */
+}
+
+.loadTriangulo {
+  background: var(--cinza-claro-fundo);
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
   display: none;
 }
 
 .jelly-triangle {
-  --uib-size: 2.8rem;
+  --uib-size: 4.8rem;
   --uib-speed: 1.75s;
   --uib-color: var(--roxo-padrao);
   position: relative;
@@ -1839,6 +1851,6 @@ p.create-account-frase {
   display: block;
 }
 
-.removeNewExpirence:hover, .addNewExpirence:hover{
+.removeNewExpirence:hover, .addNewExpirence:hover {
   color: var(--roxo-hover);
 }

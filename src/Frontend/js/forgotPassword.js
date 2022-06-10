@@ -1,6 +1,6 @@
 function recoveryPassword() {
     const email = document.getElementById('emailForgot').value;
-
+    document.getElementById('loadTriangulo').style.display = 'flex';
     console.log('teste')
 
     $.ajax({
@@ -19,11 +19,13 @@ function recoveryPassword() {
                     timer: 1500
                 })
             } else {
+                document.getElementById('loadTriangulo').style.display = 'none';
                 window.sessionStorage.setItem('emailForRecovery', email)
                 window.location.href = '/view/changePassword.html'
             }
         }
     }).fail(function(err) {
+        document.getElementById('loadTriangulo').style.display = 'none';
         console.log(err.responseJSON.message)
     })
 }

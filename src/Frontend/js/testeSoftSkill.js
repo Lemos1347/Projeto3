@@ -121,9 +121,9 @@ function passPage(operationType) {
         window.localStorage.setItem('question', 0)
         passPage()
     } else if (operationType === 'pass') {
-        document.getElementById('divLoadingTeste').style.display = 'flex'
+        document.getElementById('loadTriangulo').style.display = 'flex'
         setTimeout(() => {
-            document.getElementById('divLoadingTeste').style.display = 'none'
+            document.getElementById('loadTriangulo').style.display = 'none'
             window.scroll(0, -5000)
             numQuestion = Number(numQuestion)
             var newNumQuestion = numQuestion + 1;
@@ -132,12 +132,12 @@ function passPage(operationType) {
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
-        }, "1000")
+        }, "750")
         
     } else if (operationType === 'back') {
-        document.getElementById('divLoadingTeste').style.display = 'flex'
+        document.getElementById('loadTriangulo').style.display = 'flex'
         setTimeout(() => {
-            document.getElementById('divLoadingTeste').style.display = 'none'
+            document.getElementById('loadTriangulo').style.display = 'none'
             window.scroll(0, -5000)
             numQuestion = Number(numQuestion)
             var newNumQuestion = numQuestion - 1;
@@ -146,7 +146,7 @@ function passPage(operationType) {
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
-        }, "500")
+        }, "250")
         
     }
 }
