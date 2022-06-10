@@ -1650,7 +1650,7 @@ p.create-account-frase {
 /* Fim Teste SoftSkill */
 
 /* Botões criar currículo */
-.newButton{
+.newButton {
   border-radius: 10px;
   background-color: var(--cinza-claro-fundo);
   border: 0;
@@ -1659,6 +1659,7 @@ p.create-account-frase {
   font-size: 14pt;
   border: 2px solid var(--roxo-padrao);
 }
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -1799,3 +1800,38 @@ p.create-account-frase {
 }
 
 /* Fim Minhas vagas empresa*/
+
+/*Iniicio Curriculo*/
+.addNewExpirence {
+  background: transparent;
+  border: none;
+  font-family: "nunito";
+  color: var(--roxo-padrao);
+  margin-left: auto;
+  display: block;
+}
+
+.fa-plus-circle, .fa-minus-circle {
+  color: var(--amarelo-padrao);
+  font-size: 20px;
+}
+
+.fa-plus-circle:hover, .fa-minus-circle:hover {
+  color: var(--amarelo-hover);
+}
+
+.addNewExpirence:focus {
+  border: none;
+}
+
+.removeNewExpirence {
+  background: transparent;
+  border: none;
+  font-family: "nunito";
+  color: var(--roxo-padrao);
+  display: block;
+}
+
+.removeNewExpirence:hover, .addNewExpirence:hover{
+  color: var(--roxo-hover);
+}

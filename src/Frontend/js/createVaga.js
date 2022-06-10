@@ -10,6 +10,9 @@ let cards = [
     // }
 ]
 
+function verifyCompanyInfos(){
+    window.location.href = '../view/testeSoftSkillCompany.html';
+}
 
 function addCards(message) {
 

@@ -104,6 +104,40 @@
         <div class="row mt-5">
           <div class="col-10 offset-1">
             <div class="d-flex">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <h2 class="titulo-dados-pessoais gap-3"> Sobre você</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-10 offset-lg-1">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 listaInputs">
+                <div class="row inputDiv">
+                  <div class="col-10 ">
+                    <span class="textGeneralInput">Sua descrição<span class="neededInput">*</span></span>
+                  </div>
+                  <div class="col-10">
+                    <textarea class="generalInput" type="text" placeholder="digite a sua descrição"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6 listaInputs">
+                <div class="row inputDiv">
+                  <div class="col-10 ">
+                    <span class="textGeneralInput">Seu objetivo<span class="neededInput">*</span></span>
+                  </div>
+                  <div class="col-10">
+                    <textarea class="generalInput" type="text" placeholder="digite o seu objetivo"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-10 offset-1">
+            <div class="d-flex">
               <i class="fa fa-graduation-cap" aria-hidden="true"></i>
               <h2 class="titulo-dados-pessoais gap-3"> Grau de Instrução</h2>
             </div>
@@ -111,119 +145,198 @@
         </div>
         <div class="row">
           <div class="col-lg-10 offset-lg-1" id="newFormation">
-            <div class="row" id = 'instru1'>
+            <div class="row" id='instru1'>
               <div class="col-sm-12 col-md-6 listaInputs">
                 <div class="row inputDiv">
                   <div class="col-10 ">
-                    <span class="textGeneralInput">Formação<span class="neededInput">*</span></span>
+                    <span class="textGeneralInput">Instituição<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" id="instituicao1" type="text" placeholder="Instituição de Ensino"></input>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-6 listaInputs">
-                <div class="row inputDiv">
-                  <div class="col-10 ">
-                    <span class="textGeneralInput">Curso<span class="neededInput">*</span></span>
-                  </div>
-                  <div class="col-10">
-                    <input class="generalInput" id="curso1" type="text" placeholder="Formação acadêmica"></input>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-        <div>
-          <button class="newButton" type="button" onclick="novaFormacao()">+</button>
-          <button id="menos" class="newButton" type="button" onclick="menos('instru')">-</button>
-        </div>
-        <div class="row mt-5">
-          <div class="col-10 offset-1">
-            <div class="d-flex">
-              <i class="fa fa-briefcase" aria-hidden="true"></i>
-              <h2 class="titulo-dados-pessoais gap-3">Experiência</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-10 offset-lg-1" id="newExperience">
-            <div class="row" id = 'exp1'>
-              <div class="col-sm-12 col-md-6 listaInputs">
-                <div class="row inputDiv">
-                  <div class="col-10 ">
-                    <span class="textGeneralInput">Empresa<span class="neededInput">*</span></span>
-                  </div>
-                  <div class="col-10">
-                    <input class="generalInput" id="empresa1" type="text" placeholder="Empresa em que trabalhava"></input>
+                    <input class="generalInput" type="text" placeholder="digite o nome da instituição"></input>
                   </div>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6 listaInputs">
                 <div class="row inputDiv">
                   <div class="col-10 ">
-                    <span class="textGeneralInput">Cargo<span class="neededInput">*</span></span>
+                    <span class="textGeneralInput">Diploma<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" id="cargo1" type="text" placeholder="Cargo na empresa"></input>
+                    <input class="generalInput" type="text" placeholder="Ex.: Bacharelado"></input>
                   </div>
                 </div>
-                
               </div>
-            </div>
-          </div>
-          <div>
-            <button class="newButton" type="button" onclick="novaExperiencia()">+</button>
-            <button id="menos1" class="newButton" type="button" onclick="menos1('exp')">-</button>
-          </div>
-        </div>
-        <div class="row mt-5">
-          <div class="col-10 offset-1">
-            <div class="d-flex">
-              <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
-              <h2 class="titulo-dados-pessoais gap-3">Hard Skills</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="col-sm-12 listaInputs">
+              <div class="col-sm-12 col-md-6 listaInputs">
                 <div class="row inputDiv">
                   <div class="col-10 ">
-                    <div id="skillCard" class="skills">
-
-                    </div>
+                    <span class="textGeneralInput">Área de estudos<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <form action="javascript:addCards(document.getElementById('inputForCard').value);">
-                      <input id='inputForCard' class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
-                    </form>
+                    <input class="generalInput" type="text" placeholder="Ex.: Administração"></input>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6 listaInputs">
+                <div class="row inputDiv">
+                  <div class="col-10 ">
+                    <span class="textGeneralInput">Data de início<span class="neededInput">*</span></span>
+                  </div>
+                  <div class="col-10">
+                    <input class="generalInput" type="date"></input>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6 listaInputs">
+                <div class="row inputDiv">
+                  <div class="col-10 ">
+                    <span class="textGeneralInput">Data de término<span class="neededInput">*</span></span>
+                  </div>
+                  <div class="col-10">
+                    <input class="generalInput" type="date"></input>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4 mt-5 listaInputs">
-          <!-- <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button> -->
-          <button class="btnSendCurriculum" onclick="verifyInfos()">
-            <div class="svg-wrapper-1">
-              <div class="svg-wrapper">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                  <path fill="none" d="M0 0h24v24H0z"></path>
-                  <path fill="currentColor"
-                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
-                  </path>
-                </svg>
-              </div>
-            </div>
-            <span>Salvar</span>
-          </button>
         </div>
       </div>
+      <div class="col-sm-10 col-md-10 col-lg-8 offset-sm-1 offset-md-1 offset-lg-2 container">
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-xl-6">
+            <button id="menos" class="removeNewExpirence pull-left" type="button" onclick="removerFormacao()"><i
+                class="fa fa-minus-circle" aria-hidden="true"></i> remover formação</button>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-6">
+            <button class="addNewExpirence" type="button" onclick="novaFormacao()"><i class="fa fa-plus-circle"
+                aria-hidden="true"></i> nova formação</button>
+
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-10 offset-1">
+          <div class="d-flex">
+            <i class="fa fa-briefcase" aria-hidden="true"></i>
+            <h2 class="titulo-dados-pessoais gap-3">Experiência</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1" id="newExperience">
+          <div class="row" id='exp1'>
+            <div class="col-sm-12 col-md-6 listaInputs">
+              <div class="row inputDiv">
+                <div class="col-10 ">
+                  <span class="textGeneralInput">Empresa<span class="neededInput">*</span></span>
+                </div>
+                <div class="col-10">
+                  <input class="generalInput" id="empresa1" type="text" placeholder="digite o nome da empresa"></input>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 listaInputs">
+              <div class="row inputDiv">
+                <div class="col-10 ">
+                  <span class="textGeneralInput">Cargo<span class="neededInput">*</span></span>
+                </div>
+                <div class="col-10">
+                  <input class="generalInput" id="cargo1" type="text" placeholder="digite o nome do cargo"></input>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 listaInputs">
+              <div class="row inputDiv">
+                <div class="col-10 ">
+                  <span class="textGeneralInput">Local<span class="neededInput">*</span></span>
+                </div>
+                <div class="col-10">
+                  <input class="generalInput" id="local1" type="text" placeholder="Ex.: São Paulo, São Paulo"></input>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 listaInputs">
+              <div class="row inputDiv">
+                <div class="col-10 ">
+                  <span class="textGeneralInput">Data de início<span class="neededInput">*</span></span>
+                </div>
+                <div class="col-10">
+                  <input class="generalInput" id="experienciaInicio1" type="date"></input>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 listaInputs">
+              <div class="row inputDiv">
+                <div class="col-10 ">
+                  <span class="textGeneralInput">Data de término<span class="neededInput">*</span></span>
+                </div>
+                <div class="col-10">
+                  <input class="generalInput" id="experienciaTermino1" type="date"></input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-10 col-md-10 col-lg-8 offset-sm-1 offset-md-1 offset-lg-2 container">
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-xl-6">
+              <button id="menos1" class="removeNewExpirence pull-left" type="button"
+                onclick="removerExperiencia('exp')"><i class="fa fa-minus-circle" aria-hidden="true"></i> remover
+                experiência</button>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6">
+              <button class="addNewExpirence" type="button" onclick="novaExperiencia()"><i class="fa fa-plus-circle"
+                  aria-hidden="true"></i> nova experiência</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-10 offset-1">
+          <div class="d-flex">
+            <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+            <h2 class="titulo-dados-pessoais gap-3">Hard Skills</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-sm-12 listaInputs">
+              <div class="row inputDiv">
+                <div class="col-10 ">
+                  <div id="skillCard" class="skills">
+
+                  </div>
+                </div>
+                <div class="col-10">
+                  <form action="javascript:addCards(document.getElementById('inputForCard').value);">
+                    <input id='inputForCard' class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4 mt-5 listaInputs">
+        <!-- <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button> -->
+        <button class="btnSendCurriculum" onclick="verifyInfos()">
+          <div class="svg-wrapper-1">
+            <div class="svg-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path fill="currentColor"
+                  d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
+                </path>
+              </svg>
+            </div>
+          </div>
+          <span>Salvar</span>
+        </button>
+      </div>
+    </div>
     </div>
 
   </main>

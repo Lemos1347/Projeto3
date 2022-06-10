@@ -100,30 +100,60 @@ function novaFormacao(){
       document.getElementById("menos").style.display = "inline"
     }
     document.getElementById("newFormation").innerHTML +=
-    `<div class="row" id="instru${cont}">
+    ` <div class="row" id='instru${cont}'>
     <div class="col-sm-12 col-md-6 listaInputs">
       <div class="row inputDiv">
         <div class="col-10 ">
-          <span class="textGeneralInput">Formação<span class="neededInput">*</span></span>
+          <span class="textGeneralInput">Instituição<span class="neededInput">*</span></span>
         </div>
         <div class="col-10">
-          <input class="generalInput" type="text" id="instituicao${cont}" placeholder="Instituição de Ensino"></input>
+          <input class="generalInput" type="text" id="instituicao${cont}" placeholder="digite o nome da instituição">
         </div>
       </div>
     </div>
     <div class="col-sm-12 col-md-6 listaInputs">
       <div class="row inputDiv">
         <div class="col-10 ">
-          <span class="textGeneralInput">Curso<span class="neededInput">*</span></span>
+          <span class="textGeneralInput">Diploma<span class="neededInput">*</span></span>
         </div>
         <div class="col-10">
-          <input class="generalInput" id="curso${cont}" type="text" placeholder="Formação acadêmica"></input>
+          <input class="generalInput" type="text" id="diploma${cont}" placeholder="Ex.: Bacharelado"></input>
         </div>
       </div>
     </div>
-  </div>`
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Área de estudos<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" id="curso${cont}" type="text" placeholder="Ex.: Administração"></input>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Data de início<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" type="date" id="inicio${cont}"></input>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Data de término<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" id="termino${cont}" type="date"></input>
+        </div>
+      </div>
+    </div>
+  </div>`;
 }
-function menos(){
+function removerFormacao(){
   if(cont>1){
     let a = document.getElementById(`instru${cont}`)
     a.remove()
@@ -148,14 +178,15 @@ function novaExperiencia(){
     document.getElementById("menos1").style.display = "inline"
   }
     document.getElementById("newExperience").innerHTML +=
-    `<div class="row" id="exp${cont1}">
+
+    `<div class="row" id='exp${cont1}'>
     <div class="col-sm-12 col-md-6 listaInputs">
       <div class="row inputDiv">
         <div class="col-10 ">
           <span class="textGeneralInput">Empresa<span class="neededInput">*</span></span>
         </div>
         <div class="col-10">
-          <input class="generalInput" id="empresa${cont1}" type="text" placeholder="Empresa em que trabalhava"></input>
+          <input class="generalInput" id="empresa${cont1}" type="text" placeholder="digite o nome da empresa"></input>
         </div>
       </div>
     </div>
@@ -165,14 +196,44 @@ function novaExperiencia(){
           <span class="textGeneralInput">Cargo<span class="neededInput">*</span></span>
         </div>
         <div class="col-10">
-          <input class="generalInput" id="cargo${cont1}" type="text" placeholder="Cargo na empresa"></input>
+          <input class="generalInput" id="cargo${cont1}" type="text" placeholder="digite o nome do cargo"></input>
         </div>
       </div>
     </div>
-  </div>`
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Local<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" id="local${cont1}" type="text" placeholder="Ex.: São Paulo, São Paulo"></input>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Data de início<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" id="experienciaInicio${cont1}" type="date" ></input>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 listaInputs">
+      <div class="row inputDiv">
+        <div class="col-10 ">
+          <span class="textGeneralInput">Data de término<span class="neededInput">*</span></span>
+        </div>
+        <div class="col-10">
+          <input class="generalInput" id="experienciaTermino${cont1}" type="date"></input>
+        </div>
+      </div>
+    </div>
+  </div>`;
 }
 
-function menos1(){
+function removerExperiencia(){
   if(cont1>1){
     let a = document.getElementById(`exp${cont1}`)
     a.remove()
