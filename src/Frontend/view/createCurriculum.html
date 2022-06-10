@@ -69,12 +69,9 @@
             <div class="dropdown">
               <div class="d-flex">
                 <img class="nav-img-user" src="../images/userTest.png">
-                <a class="nav-link dropdown-toggle" href="/oportunidades/">USUÁRIO</a>
+                <a class="nav-link dropdown-toggle" id='userNameNavBar' href="/oportunidades/">USUÁRIO</a>
               </div>
               <div class="dropdown-content">
-                <a href="/oportunidades/empregos">Empregos</a>
-                <a href="/oportunidades/estagios">Estágios</a>
-                <a href="/oportunidades/estudos">Estudos</a>
                 <a href="#" onclick="logOut()">Logout<i class="fa fa-sign-out" aria-hidden="true"></i></a>
               </div>
             </div>
@@ -194,7 +191,8 @@
                   <div class="col-10">
                     <input class="generalInput" type="date"></input>
                     <form action="javascript:addCards(document.getElementById('inputForCard').value);">
-                      <input id='inputForCard' class="generalInput" type="text" placeholder='Digite a skill e pressione "enter"'></input>
+                      <input id='inputForCard' class="generalInput" type="text"
+                        placeholder='Digite a skill e pressione "enter"'></input>
                     </form>
                   </div>
                 </div>
@@ -404,7 +402,7 @@
 
   <!-- JavaScript File -->
   <script src="../js/createCurriculum.js"></script>
-
+  <script src="../js/perfil.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

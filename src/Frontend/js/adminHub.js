@@ -14,19 +14,19 @@ document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
             url: "http://localhost:3001/User/Verify/Infos",
-            headers: {"Authorization": `Bearer ${auth}`},
-            success: function(resul) { 
+            headers: { "Authorization": `Bearer ${auth}` },
+            success: function (resul) {
                 nome = resul.name
                 email = resul.email,
-                id = resul.id
+                    id = resul.id
                 isAdmin = Boolean(resul.isAdmin)
                 if (isAdmin == false) {
                     window.location.href = '../view/hubVagas.html'
-                }
+                 }
                 document.getElementById('userNameNavBar').innerHTML = `${nome}`
                 checkVagas()
             }
-        }).fail(function(err) {
+        }).fail(function (err) {
             console.log(err.responseJSON.message)
             window.location.href = '../view/login.html'
         })
@@ -41,21 +41,21 @@ async function checkVagas() {
 
     await $.ajax({
         url: "http://localhost:3001/User/Users",
-        headers: {"Authorization": `Bearer ${auth}`},
-        success: function(resul) { 
+        headers: { "Authorization": `Bearer ${auth}` },
+        success: function (resul) {
             users = resul.message
         }
-    }).fail(function(err) {
+    }).fail(function (err) {
         console.log(err.responseJSON.message)
     })
 
     await $.ajax({
         url: "http://localhost:3001/Company/Companies",
-        headers: {"Authorization": `Bearer ${auth}`},
-        success: function(resul) { 
+        headers: { "Authorization": `Bearer ${auth}` },
+        success: function (resul) {
             companies = resul.message
         }
-    }).fail(function(err) {
+    }).fail(function (err) {
         console.log(err.responseJSON.message)
     })
 
@@ -115,7 +115,7 @@ function popUpVisibility(visible) {
 
     let displayToEdit = ''
 
-    if(visible == true) {
+    if (visible == true) {
         document.getElementById('bodyFiltersHubVagas').style.display = 'flex'
 
         document.getElementById('toScroll').scrollIntoView();
@@ -123,6 +123,4 @@ function popUpVisibility(visible) {
         displayToEdit = 'none'
         document.getElementById('bodyFiltersHubVagas').style.display = 'none'
     }
-
-    
 }

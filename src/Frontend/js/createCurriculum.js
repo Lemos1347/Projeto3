@@ -29,6 +29,29 @@ document.onreadystatechange = async function () {
   }
 }
 
+document.onreadystatechange = async function () {
+  if (document.readyState == "complete") {
+      $.ajax({
+          url: "http://localhost:3001/User/Verify/Infos",
+          headers: { "Authorization": `Bearer ${auth}` },
+          success: function (resul) {
+              nome = resul.name
+              email = resul.email,
+                  id = resul.id
+              isAdmin = Boolean(resul.isAdmin)
+              console.log(isAdmin)
+              // if (isAdmin == false) {
+              //     window.location.href = '../view/hubVagas.html'
+              //  }
+              document.getElementById('userNameNavBar').innerHTML = `${nome}`
+              checkVagas()
+          }
+      }).fail(function (err) {
+          console.log(err.responseJSON.message)
+          window.location.href = '../view/login.html'
+      })
+  }
+}
 
 
 function addCards(message) {
