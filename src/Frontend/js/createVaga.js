@@ -137,6 +137,7 @@ document.onreadystatechange = async function () {
             success: function(resul) { 
                 name_company = resul.name_company,
                 id = resul.id_company
+                document.getElementById("userNameNavBar").innerHTML = `${name_company}`
             }
         }).fail(function(err) {
             console.log(err.responseJSON.message)
