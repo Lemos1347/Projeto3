@@ -115,7 +115,7 @@
                     <span class="textGeneralInput">Sua descrição<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <textarea class="generalInput" type="text" placeholder="digite a sua descrição"></textarea>
+                    <textarea class="generalInput" id="descricao" type="text" placeholder="digite a sua descrição"></textarea>
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@
                     <span class="textGeneralInput">Seu objetivo<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <textarea class="generalInput" type="text" placeholder="digite o seu objetivo"></textarea>
+                    <textarea class="generalInput" type="text" id="objetivo" placeholder="digite o seu objetivo"></textarea>
                   </div>
                 </div>
               </div>
@@ -149,7 +149,7 @@
                     <span class="textGeneralInput">Instituição<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="text" placeholder="digite o nome da instituição"></input>
+                    <input class="generalInput" id="instituicao1" type="text" placeholder="digite o nome da instituição"></input>
                   </div>
                 </div>
               </div>
@@ -159,7 +159,7 @@
                     <span class="textGeneralInput">Diploma<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="text" placeholder="Ex.: Bacharelado"></input>
+                    <input class="generalInput" id="diploma1" type="text" placeholder="Ex.: Bacharelado"></input>
                   </div>
                 </div>
               </div>
@@ -169,7 +169,7 @@
                     <span class="textGeneralInput">Área de estudos<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="text" placeholder="Ex.: Administração"></input>
+                    <input class="generalInput" id="area1" type="text" placeholder="Ex.: Administração"></input>
                   </div>
                 </div>
               </div>
@@ -179,7 +179,7 @@
                     <span class="textGeneralInput">Data de início<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="date"></input>
+                    <input class="generalInput" id="dataInicio1" type="date"></input>
                   </div>
                 </div>
               </div>
@@ -189,11 +189,7 @@
                     <span class="textGeneralInput">Data de término<span class="neededInput">*</span></span>
                   </div>
                   <div class="col-10">
-                    <input class="generalInput" type="date"></input>
-                    <form action="javascript:addCards(document.getElementById('inputForCard').value);">
-                      <input id='inputForCard' class="generalInput" type="text"
-                        placeholder='Digite a skill e pressione "enter"'></input>
-                    </form>
+                    <input class="generalInput" id="dataTermino1" type="date"></input>
                   </div>
                 </div>
               </div>
@@ -313,7 +309,7 @@
                 </div>
                 <div class="col-10">
                   <form action="javascript:addCards(document.getElementById('inputForCard').value);">
-                    <input id='inputForCard' class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+                    <input id='inputForCard' class="generalInput" type="text" placeholder='Digite a skill e pressione "enter"'></input>
                   </form>
                 </div>
               </div>

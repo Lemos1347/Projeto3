@@ -1,10 +1,8 @@
-async function verifyUserInfos() {
-    var nome = document.getElementById("nomeUserCreateForm").value
-    var email = document.getElementById("emailUserCreateForm").value
-    var senha = document.getElementById("senhaUserCreateForm").value
-    var bornDate = document.getElementById("bornDateUserCreateForm").value
-    var gender = document.getElementById("genderUserCreateForm").value
-    var cpf = cpfToDb(document.getElementById("cpfUserCreateForm").value)
+async function verifyCompanyInfos() {
+    var razaoSoc = document.getElementById("company_name").value
+    var email = document.getElementById("email").value
+    var senha = document.getElementById("password").value
+    var cnpj = cnpjToDb(document.getElementById("cnpj").value)
     var number
     var prefixNumber = document.getElementById("number55Input").value
     var numberNormal = numberToDb(document.getElementById("number11Input").value);
@@ -14,22 +12,20 @@ async function verifyUserInfos() {
     // if (inputFile.type == 'image/jpeg' || inputFile.type == 'image/png') {
     //     readFile()
     // }
-    const validate = validateInformations(email, cpf, senha)
+    const validate = validateInformations(email, cnpj, senha)
     console.log(validate)
 
     if(validate === true) {
         $.ajax({
-            url: "http://localhost:3001/User/Register",
+            url: "http://localhost:3001/Company/Register",
             type: "POST",
             data: {
-                name: nome,
+                name: razaoSoc,
                 email: email,
                 password: senha,
-                bornDate: bornDate,
-                gender: gender,
-                cpf: cpf,
+                cnpj: cnpj,
                 phoneNumber: number,
-                typeOfUser: "user"
+                logo: ""
             },
             success: async function(resul) {
                 console.log(resul.message)
@@ -105,7 +101,7 @@ function formatacao(num) {
     )}-${phoneNumber.slice(7, 10)}`;
 }
 
-function cpfFormat(i){
+function cnpjFormat(i){
     var v = i.value;
     
     if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
@@ -113,10 +109,18 @@ function cpfFormat(i){
        return;
     }
     
-    i.setAttribute("maxlength", "14");
-    if (v.length == 3 || v.length == 7) i.value += ".";
-    if (v.length == 11) i.value += "-";
- 
+    i.setAttribute("maxlength", "18");
+    if (v.length == 2 || v.length == 6) i.value += ".";
+    if (v.length == 10) i.value += "/";
+    if (v.length == 15) i.value += "-";
+    
+    // const cnpjCpf = value.replace(/\D/g, '');
+    
+    // if (cnpjCpf.length === 11) {
+    //     return cnpjCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "\$1.\$2.\$3-\$4");
+    // } 
+    
+    // return cnpjCpf.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "\$1.\$2.\$3/\$4-\$5");
 }
 
 function numberToDb(number) {
@@ -127,24 +131,66 @@ function numberToDb(number) {
     return number
 } 
 
-function cpfToDb(cpf) {
+function cnpjToDb(cpf) {
     cpf = cpf.replaceAll('.', '');
     cpf = cpf.replaceAll('-', '');
+    cpf = cpf.replaceAll('/', '');
     return cpf
 }
 
-function validateInformations(email, cpf, senha) {
+function validateInformations(email, cnpj, senha) {
     if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
         return "Email inválido"
     }
 
-    function CPF(){"user_strict";function r(r){for(var t=null,n=0;9>n;++n)t+=r.toString().charAt(n)*(10-n);var i=t%11;return i=2>i?0:11-i}function t(r){for(var t=null,n=0;10>n;++n)t+=r.toString().charAt(n)*(11-n);var i=t%11;return i=2>i?0:11-i}var n=false,i=true;this.gera=function(){for(var n="",i=0;9>i;++i)n+=Math.floor(9*Math.random())+"";var o=r(n),a=n+"-"+o+t(n+""+o);return a},this.valida=function(o){for(var a=o.replace(/\D/g,""),u=a.substring(0,9),f=a.substring(9,11),v=0;10>v;v++)if(""+u+f==""+v+v+v+v+v+v+v+v+v+v+v)return n;var c=r(u),e=t(u+""+c);return f.toString()===c.toString()+e.toString()?i:n}}
-
-    let CPFvalidator = new CPF();
-
-    if(!CPFvalidator.valida(cpf)) {
-        return "CPF inválido"
+ 
+    cnpj = cnpj.replace(/[^\d]+/g,'');
+    
+    if(cnpj == '') return false;
+        
+    if (cnpj.length != 14)
+        return "CNPJ inválido";
+    
+    // Elimina CNPJs invalidos conhecidos
+    if (cnpj == "00000000000000" || 
+        cnpj == "11111111111111" || 
+        cnpj == "22222222222222" || 
+        cnpj == "33333333333333" || 
+        cnpj == "44444444444444" || 
+        cnpj == "55555555555555" || 
+        cnpj == "66666666666666" || 
+        cnpj == "77777777777777" || 
+        cnpj == "88888888888888" || 
+        cnpj == "99999999999999")
+        return "CNPJ inválido";
+            
+    // Valida DVs
+    tamanho = cnpj.length - 2
+    numeros = cnpj.substring(0,tamanho);
+    digitos = cnpj.substring(tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+            pos = 9;
     }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(0))
+        return "CNPJ inválido";
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0,tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(1))
+        return "CNPJ inválido";
+
 
     if (!senha.match(/[a-z]+/)) {
         return "Senha deve possuir letras minúsculas"
@@ -158,5 +204,6 @@ function validateInformations(email, cpf, senha) {
     if (!senha.match(/[$@#&!]+/)) {
         return "Senha deve possuir caracteres especíais"
     }
+
     return true
 }

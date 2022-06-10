@@ -130,7 +130,7 @@ function novaFormacao(){
           <span class="textGeneralInput">Instituição<span class="neededInput">*</span></span>
         </div>
         <div class="col-10">
-          <input class="generalInput" type="text" id="instituicao${cont}" placeholder="digite o nome da instituição">
+          <input class="generalInput" id="instituicao${cont}"type="text" placeholder="digite o nome da instituição"></input>
         </div>
       </div>
     </div>
@@ -140,7 +140,7 @@ function novaFormacao(){
           <span class="textGeneralInput">Diploma<span class="neededInput">*</span></span>
         </div>
         <div class="col-10">
-          <input class="generalInput" type="text" id="diploma${cont}" placeholder="Ex.: Bacharelado"></input>
+          <input class="generalInput" type="text" id = 'diploma${cont}' placeholder="Ex.: Bacharelado"></input>
         </div>
       </div>
     </div>
@@ -150,7 +150,7 @@ function novaFormacao(){
           <span class="textGeneralInput">Área de estudos<span class="neededInput">*</span></span>
         </div>
         <div class="col-10">
-          <input class="generalInput" id="curso${cont}" type="text" placeholder="Ex.: Administração"></input>
+          <input class="generalInput" id="area${cont}" type="text" placeholder="Ex.: Administração"></input>
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@ function novaFormacao(){
           <span class="textGeneralInput">Data de início<span class="neededInput">*</span></span>
         </div>
         <div class="col-10">
-          <input class="generalInput" type="date" id="inicio${cont}"></input>
+          <input class="generalInput" id="dataInicio${cont}" type="date"></input>
         </div>
       </div>
     </div>
@@ -170,7 +170,7 @@ function novaFormacao(){
           <span class="textGeneralInput">Data de término<span class="neededInput">*</span></span>
         </div>
         <div class="col-10">
-          <input class="generalInput" id="termino${cont}" type="date"></input>
+          <input class="generalInput" id="dataTermino${cont}" type="date"></input>
         </div>
       </div>
     </div>
@@ -273,13 +273,21 @@ function verifyInfos() {
   let instrucao = []
   let experiencia = []
   let hardSkills = []
+  let descricao = document.getElementById('descricao').value;
+  let objetivo = document.getElementById('objetivo').value;
 
   for(i = 1; i <= cont; i++) {
     const instituicao = document.getElementById(`instituicao${i}`).value
-    const curso = document.getElementById(`curso${i}`).value
+    const diploma = document.getElementById(`diploma${i}`).value
+    const area = document.getElementById(`area${i}`).value
+    const dataInicio = document.getElementById(`dataInicio${i}`).value
+    const dataTermino = document.getElementById(`dataTermino${i}`).value
     const inst = {
       instituicao: instituicao,
-      curso: curso
+      diploma: diploma,
+      area: area,
+      dataInicio: dataInicio,
+      dataTermino: dataTermino
     }
     instrucao.push(inst)
   }
@@ -287,9 +295,15 @@ function verifyInfos() {
   for(i = 1; i <= cont; i++) {
     const empresa = document.getElementById(`empresa${i}`).value
     const cargo = document.getElementById(`cargo${i}`).value
+    const local = document.getElementById(`local${i}`).value
+    const dataInicio = document.getElementById(`experienciaInicio${i}`).value
+    const dataTermino = document.getElementById(`experienciaTermino${i}`).value
     const exp = {
       empresa: empresa,
-      cargo: cargo
+      cargo: cargo,
+      local: local,
+      dataInicio: dataInicio,
+      dataTermino: dataTermino
     }
     experiencia.push(exp)
   }
@@ -300,7 +314,9 @@ function verifyInfos() {
 
   let curriculum = {
     instrucao: instrucao,
-    experiencia: experiencia
+    experiencia: experiencia,
+    descricao: descricao,
+    objetivo: objetivo
   }
 
   curriculum = JSON.stringify(curriculum)

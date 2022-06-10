@@ -19,11 +19,13 @@ const match = (req, res) => {
 
 
     //Calcula o resultadado final em decorrência dos resultados obtidos nas funções acima
-    const resulFinal = (resulSoft + resulHard) / 2
+    let resulFinal = (resulSoft + resulHard) / 2
 
-    console.log(resulFinal)
+    resulFinal = Number(resulFinal)
 
-    res.status(200).send({resulFinal})
+    res.status(200).json({
+        percentage: resulFinal
+    })
 }
 
 module.exports = {

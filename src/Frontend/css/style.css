@@ -1524,6 +1524,10 @@ p.create-account-frase {
   outline: 0;
 }
 
+.spaceNumber {
+  gap: 42px
+}
+
 #finalizarBtnSoftSkill {
   display: none;
 }

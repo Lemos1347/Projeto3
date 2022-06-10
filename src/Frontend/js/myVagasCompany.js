@@ -80,7 +80,7 @@ async function checkVagas() {
     })
 
     vagas.map((vaga) => {
-        console.log('teste')
+        console.log(vaga)
         document.getElementById('containerOfAll').innerHTML += `
         <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = "margin-top: 20px;">
             <div class = 'vagaComponent'>
@@ -94,7 +94,7 @@ async function checkVagas() {
                             <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>${vaga.location}</p>
                             <p class="pForHubVagas d-flex"><i class="fa fa-clock-o" aria-hidden="true"></i>${vaga.type}</p>
                             <div class = 'divBtnSeeMore'>
-                                <button class="btnSeeMore">Ver Mais</button>
+                                <button class="btnSeeMore" onclick="redirectToVagaId('${vaga.id}')">Ver Mais</button>
                             </div>
                         </div>
                     </div>
@@ -106,9 +106,5 @@ async function checkVagas() {
 }
 
 function redirectToVagaId(param) {
-    document.location.href = `../view/vagaExpandida.html?id=${param}`
-}
-
-function generateRandomNumber() {
-    return Math.floor(Math.random() * 100)
+    document.location.href = `../view/vagaExpandidaEmpresa.html?id=${param}`
 }

@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/resposive-theme.css">
   <link rel="icon" href="../images/favicon.png">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -124,7 +125,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-12 col-md-6 mt-4 listaInputs">
+          <!-- <div class="col-sm-12 col-md-6 mt-4 listaInputs">
             <div class="row inputDiv">
               <div class="col-10 ">
                 <span class="textGeneralInput">Nome fantasia<span class="neededInput">*</span></span>
@@ -133,24 +134,14 @@
                 <input class="generalInput" type="text" id="trade_name" placeholder="digite o Nome fantasia"></input>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="col-sm-12 col-md-6 listaInputs">
             <div class="row inputDiv">
               <div class="col-10 ">
                 <span class="textGeneralInput">CNPJ<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" id="cnpj" type="text" placeholder="digite o CNPJ"></input>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-6 listaInputs">
-            <div class="row inputDiv">
-              <div class="col-10 ">
-                <span class="textGeneralInput">Telefone<span class="neededInput">*</span></span>
-              </div>
-              <div class="col-10">
-                <input class="generalInput" id="phoneNumber" type="text" placeholder="digite o telefone"></input>
+                <input class="generalInput" id = "cnpj" oninput="cnpjFormat(this)" maxlength="18" type="text" style="-webkit-appearance: none;" placeholder="Digite seu CNPJ"></input>
               </div>
             </div>
           </div>
@@ -177,6 +168,25 @@
           <div class="col-sm-12 col-md-6 listaInputs">
             <div class="row inputDiv">
               <div class="col-10 ">
+                <span class="textGeneralInput">Número de Telefone<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10 d-flex spaceNumber">
+                <div class="col-3">
+                  <input class="generalInput" type="number"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    maxlength="2" placeholder="+00" id="number55Input"></input>
+                </div>
+                <div class="col-8 col-md-8">
+                  <input id="number11Input" class="generalInput" type="text"
+                    onkeydown="numberFormat()"
+                    maxlength="15" placeholder="(00) 0000-0000"></input>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
                 <span class="textGeneralInput">Logo<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
@@ -187,7 +197,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4 listaInputs">
-            <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button>
+            <button class="btnSaveCurriculum" type="button" onclick="verifyCompanyInfos()">Salvar</button>
           </div>
         </div>
       </form>
@@ -254,7 +264,7 @@
   <!-- Footer -->
 
   <!-- JavaScript File -->
-  <script src="../js/createCurriculum.js"></script>
+  <script src="../js/createEmpresa.js"></script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>

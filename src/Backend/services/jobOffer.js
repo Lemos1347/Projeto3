@@ -568,6 +568,68 @@ class jobOffer {
         return sucess
 
     }
+
+    async getUsersApplied(idUser, idOffer) {
+        console.log(idUser)
+        //Instanciação do DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Valida se o ID foi passado
+        if (!idOffer) {
+            const error = {
+                type: 'error',
+                message: "Offer ID is needed to this action"
+            }
+            return error
+        }
+
+        //Valida se existe uma vaga com o ID passado
+        const existsOffer = await db.all(`SELECT * \ FROM TB_JOBOFFER \ WHERE id="${idOffer}"`);
+        if (!existsOffer) {
+            const error = {
+                type: 'error',
+                message: "Offer with this ID really doesn't exists. SORRY :("
+            }
+            return error
+        }
+
+        var cont = 0
+        while (cont < existsOffer.length) {
+            var id = existsOffer[cont].id_company
+            if (id != String(idUser)) {
+                const error = {
+                    type: 'error',
+                    message: "Don't try to snoop into your competitor's stuff"
+                }
+                return error
+            }
+            cont++
+        }
+
+
+        
+
+        //Verifica quais usuários estão aplicados para a vaga
+        const whichOffers = await db.all(`SELECT id_users \ FROM TB_JOBOFFER_USERS \ WHERE id_vaga="${idOffer}"`);
+
+        let users = []
+
+        let count = 0
+        while (count < whichOffers.length) {
+            await db.all(`SELECT * \ FROM users \ WHERE id = "${whichOffers[count].id_users}"`).then((res) => {
+                users.push(res[0])
+            })
+            count++
+        }
+
+        //Retorna a vaga para o usuário
+        const sucess = {
+            type: 'sucess',
+            users: users
+        }
+
+        return sucess
+    }
 }
 
 module.exports = { jobOffer }
