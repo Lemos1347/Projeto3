@@ -22,7 +22,7 @@ function startTimer(duration) {
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
-            url: "http://localhost:3001/User/Verify/Infos",
+            url: "https://testematchagas.herokuapp.com/User/Verify/Infos",
             type: "GET",
             headers: { "Authorization": `Bearer ${auth}` },
             success: function (resul) {
@@ -84,7 +84,7 @@ async function checkVagas() {
     console.log(auth)
 
     await $.ajax({
-        url: "http://localhost:3001/Offer/OfferUser",
+        url: "https://testematchagas.herokuapp.com/Offer/OfferUser",
         headers: { "authorization": `Bearer ${auth}` },
         success: function (resul) {
             console.log(resul)
