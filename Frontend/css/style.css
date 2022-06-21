@@ -17,22 +17,22 @@
 
 @font-face {
   font-family: 'nunito';
-  src: url('./nunito-Regular.ttf');
+  src: url('../../.fonts/nunito-Regular.ttf');
 }
 
 @font-face {
   font-family: 'nunito-bold';
-  src: url('./nunito-Bold.ttf');
+  src: url('../../.fonts/nunito-Bold.ttf');
 }
 
 @font-face {
   font-family: 'nunito-semibold';
-  src: url('./nunito-SemiBold.ttf');
+  src: url('../../.fonts/nunito-SemiBold.ttf');
 }
 
 @font-face {
   font-family: 'nunito-italic';
-  src: url('./nunito-Italic.ttf');
+  src: url('.../../.fonts/nunito-Italic.ttf');
 }
 
 body {
