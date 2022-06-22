@@ -1,3 +1,5 @@
+
+
 :root {
   --roxo-padrao: #530084;
   --roxo-hover: #280044;
@@ -17,22 +19,22 @@
 
 @font-face {
   font-family: 'nunito';
-  src: url('../../.fonts/Nunito-Regular.fonts');
+  src: url('/fonts/nunito-Regular.ttf');
 }
 
 @font-face {
   font-family: 'nunito-bold';
-  src: url('../../.fonts/Nunito-Bold.fonts');
+  src: url('/fonts/nunito-Bold.ttf');
 }
 
 @font-face {
   font-family: 'nunito-semibold';
-  src: url('../../.fonts/Nunito-SemiBold.fonts');
+  src: url('/fonts/nunito-SemiBold.ttf');
 }
 
 @font-face {
   font-family: 'nunito-italic';
-  src: url('../../.fonts/Nunito-Italic.fonts');
+  src: url('/fonts/nunito-Italic.ttf');
 }
 
 body {
