@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const userService = require('../services/User')
 require('express-async-errors')
 
@@ -5,31 +6,53 @@ const createUser = (req, res) => {
     //Pega as infos da requisição
     const { name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser } = req.body;
 
-    //Instancia a classe criando uma vaga
-    const user = new userService.User(name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser);
+    //Valida se algum paremetro é inválido
+    const errors = validationResult(req)
 
-    //Tratamento das respostas do método da classe
-    user.generateUser().then((resul) => {
-        if(resul.type === "error") {
-            res.status(500).json({
-                error: resul.message
-            })
-        } else {
-            res.status(200).json({
-                message: resul.message
-            })
-        }
-    });
+    if (!errors.isEmpty()) {
+        res.status(400).json({
+            error: errors.errors[0].msg
+        })
+        return
+    } else {
+        //Instancia a classe criando uma vaga
+        const user = new userService.User(name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser);
 
-    return user
+        //Tratamento das respostas do método da classe
+        user.generateUser().then((resul) => {
+            if(resul.type === "error") {
+                res.status(500).json({
+                    error: resul.message
+                })
+            } else {
+                res.status(200).json({
+                    message: resul.message
+                })
+            }
+        });
+
+        return user
+    }
+
+    
 }
 
-const AuthUser = (req, res) => {
+const AuthUser =  (req, res) => {
     //Pega as infos da requisição
     const { email, password } = req.body;
 
     //Instancia a classe criando uma vaga
     const user = new userService.User();
+
+    //Valida se algum paremetro é inválido
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        res.status(400).json({
+            error: errors.errors[0].msg
+        })
+        return
+    }
 
     //Tratamento das respostas do método da classe
     user.Authentication(email, password).then((resul) => {
@@ -49,7 +72,7 @@ const AuthUser = (req, res) => {
 
 const UpdateUser = (req, res) => {
     //Pega as infos da requisição
-    const { name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills, hardSkills } = req.body;
+    const { name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills, hardSkills, imgUser } = req.body;
 
     const { user_id } = req
 
@@ -57,7 +80,7 @@ const UpdateUser = (req, res) => {
     const user = new userService.User();
 
     //Tratamento das respostas do método da classe
-    user.updateUser(user_id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills, hardSkills).then((resul) => {
+    user.updateUser(user_id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills, hardSkills, imgUser).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -72,13 +95,13 @@ const UpdateUser = (req, res) => {
 
 const deleteUser = (req, res) => {
     //Pega as infos da requisição
-    const { id } = req.body;
+    const { user_id } = req;
 
     //Instancia a classe criando uma vaga
     const user = new userService.User();
 
     //Tratamento das respostas do método da classe
-    user.deleteUser(id).then((resul) => {
+    user.deleteUser(user_id).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message
@@ -108,7 +131,8 @@ const verifyCurriculum = (req, res) => {
                 message: resul.message,
                 haveCurriculum: resul.haveCurriculum,
                 haveSoftSkills: resul.haveSoftSkills,
-                curriculum: resul.curriculum
+                curriculum: resul.curriculum,
+                isVerified: resul.isVerified
             })
         }
     })
@@ -117,6 +141,16 @@ const verifyCurriculum = (req, res) => {
 const updatePermission = (req, res) => {
     //Pega as infos da requisição
     const { id, isAdmin } = req.body;
+
+    //Valida se algum paremetro é inválido
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        res.status(400).json({
+            error: errors.errors[0].msg
+        })
+        return
+    }
 
     //Instancia a classe criando uma vaga
     const user = new userService.User();
@@ -137,13 +171,12 @@ const updatePermission = (req, res) => {
 
 const getUser = (req, res) => {
     //Pega as infos da requisição
-    const { id } = req.body
+    const { user_id } = req
 
     //Instancia a classe criando uma vaga
     const user = new userService.User();
-
     //Tratamento das respostas do método da classe
-    user.getUser(id).then((resul) => {
+    user.getUser(user_id).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 message: resul.message
@@ -176,7 +209,10 @@ const getInfos = (req, res) => {
                 email: resul.email,
                 isAdmin: resul.isAdmin,
                 hardSkills: resul.hardSkills,
-                softSkills: resul.softSkills
+                softSkills: resul.softSkills,
+                isVerified: resul.isVerified,
+                imgUser: resul.imgUser,
+                curriculum: resul.curriculum
             })
         }
     })
@@ -204,6 +240,16 @@ const resetPassWord = (req, res) => {
     //Pega as infos da requisição
     const { email } = req.body
 
+    //Valida se algum paremetro é inválido
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        res.status(400).json({
+            error: errors.errors[0].msg
+        })
+        return
+    }
+
     //Instancia a classe criando uma vaga
     const user = new userService.User();
 
@@ -226,6 +272,16 @@ const redefinePassWord = (req, res) => {
     //Pega as infos da requisição
     const { email, code, newPass } = req.body
 
+    //Valida se algum paremetro é inválido
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        res.status(400).json({
+            error: errors.errors[0].msg
+        })
+        return
+    }
+
     //Instancia a classe criando uma vaga
     const user = new userService.User();
 
@@ -244,7 +300,125 @@ const redefinePassWord = (req, res) => {
     })
 }
 
+const verifyAccount = (req, res) => {
+    //Pega as infos da requisição
+    const { token } = req.body
+
+    const { user_id } = req
+
+    //Valida se algum paremetro é inválido
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        res.status(400).json({
+            error: errors.errors[0].msg
+        })
+        return
+    }
+
+    //Instancia a classe criando uma vaga
+    const user = new userService.User();
+
+    //Tratamento das respostas do método da classe
+    user.verifyAccount(user_id, token).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                message: resul.message
+            })
+        }
+    })
+}
+
+const verifyCode = (req, res) => {
+    //Pega as infos da requisição
+    const { user_id } = req
+
+    //Instancia a classe criando uma vaga
+    const user = new userService.User();
+
+    //Tratamento das respostas do método da classe
+    user.verifyCode(user_id).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                message: resul.message
+            })
+        }
+    })
+}
+
+const sendNotification = (req, res) => {
+    //Pega as infos da requisição
+    const { qntVagas } = req.body
+
+    const { user_id } = req
+
+    //Valida se algum paremetro é inválido
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        res.status(400).json({
+            error: errors.errors[0].msg
+        })
+        return
+    }
+
+    //Instancia a classe criando uma vaga
+    const user = new userService.User();
+
+    //Tratamento das respostas do método da classe
+    user.sendNotification(user_id, qntVagas).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                message: resul.message
+            })
+        }
+    })
+}
+
+const deleteUsers = (req, res) => {
+    //Pega as infos da requisição
+    const { id } = req.body
+
+    //Valida se algum paremetro é inválido
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        res.status(400).json({
+            error: errors.errors[0].msg
+        })
+        return
+    }
+
+    //Instancia a classe criando uma vaga
+    const user = new userService.User();
+
+    //Tratamento das respostas do método da classe
+    user.deleteAdmin(id).then((resul) => {
+        if(resul.type === "error") {
+            res.status(500).json({
+                error: resul.message
+            })
+        } else {
+            res.status(200).json({
+                message: resul.message
+            })
+        }
+    })
+}
+
 //Exporta as funções do controller para o ROUTER
 module.exports = {
-    createUser, AuthUser, UpdateUser, deleteUser, verifyCurriculum, updatePermission, getUser, getInfos, resetPassWord, redefinePassWord, getUsers
+    createUser, AuthUser, UpdateUser, deleteUser, verifyCurriculum, updatePermission, getUser, getInfos, resetPassWord, redefinePassWord, getUsers, verifyAccount, verifyCode, sendNotification, deleteUsers
 }

@@ -11,7 +11,7 @@
   <meta name="description"
     content="Ache oportunidades de emprego para mulheres em STEM e tecnologia, no Brasil e no mundo.">
 
-  <title>Brazilians in Tech | Cadastrar Usuário</title>
+  <title>Brazilians in Tech | Cadastrar vaga</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -105,7 +105,51 @@
               <span class="textGeneralInput">Nome do cargo<span class="neededInput">*</span></span>
             </div>
             <div class="col-10">
-              <input class="generalInput" id="nomeCargo" type="text" placeholder="digite o nome do cargo"></input>
+              <select class="generalInput" name="Nome_vaga" id="nomeVaga">
+                <option value="" selected disabled hidden>Área que está procurando?</option>
+                
+                <option value='Administrador de Sistemas'>Administrador de Sistemas</option>
+                <option value='Administrador do Banco de Dados (DBA)'>Administrador do Banco de Dados (DBA)
+                </option>
+                <option value="Analista de BI com foco em análise de mercado e ETL">Analista de BI com foco em análise de mercado e ETL</option>
+                <option value="Analista de BI/dados">Analista de BI/dados</option>
+                <option value="Analista de Business Intelligence / analista de planejamento comercial – PCD">Analista de Business Intelligence / analista de planejamento comercial – PCD</option>
+                <option value='Analista de Mídias Sociais'>Analista de Mídias Sociais</option>
+                <option value='Analista de Segurança de Informação'>Analista de Segurança de Informação
+                </option>
+                
+                <option value='Analista de Sistemas'>Analista de Sistemas</option>
+                <option value="Analista de testes de software">Analista de testes de software</option>
+                <option value='Arquiteto de redes'>Arquiteto de redes</option>
+                <option value='Ciência de dados'>Ciência de dados</option>
+                <option value="Desenvolvedor/programador">Desenvolvedor/programador</option>
+                <option value="Desenvolvedor Frontend">Desenvolvedor Frontend</option>
+                <option value="Desenvolvedor Full-Stack">Desenvolvedor Full-Stack</option>
+                <option value='Desenvolvedor mobile'>Desenvolvedor mobile</option>
+                <option value="Desenvolvedor de software – AgroTechs">Desenvolvedor de software – AgroTechs</option>
+                <option value='Engenharia de computação'>Engenharia de computação</option>
+                <option value='Engenharia de software'>Engenharia de software</option>
+                <option value="Especialista de Business Intelligence (BI)">Especialista de Business Intelligence (BI)</option>
+                <option value='Especialista em e-Commerce'>Especialista em e-Commerce</option>
+                <option value="Executivo de vendas – tecnologias de mídias digitais">Executivo de vendas – tecnologias de mídias digitais</option>
+                <option value="Gerente de Data & Analytics">Gerente de Data & Analytics</option>
+                <option value="Gerente de engenharia de software">Gerente de engenharia de software</option>
+                <option value="Gerente de projetos">Gerente de projetos</option>
+                <option value='Gestão de Tecnologia da Informação'>Gestão de Tecnologia da Informação
+                </option>
+                <option value='Jogos Digitais'>Jogos Digitais</option>
+                <option value='Marketing Digital'>Marketing Digital</option>
+                <option value="PMO/gerente de projetos">PMO/gerente de projetos</option>
+                <option value="Profissional da área de suporte">Profissional da área de suporte</option>
+                <option value='Profissional Help Desk'>Profissional Help Desk</option>
+                <option value='Programador de Computador'>Programador de Computador</option>
+                <option value='Programador web'>Programador web</option>
+                <option value='Robótica'>Robótica</option>
+                <option value='Segurança da informação'>Segurança da informação</option>
+                <option value='Segurança de sistemas'>Segurança de sistemas</option>
+                <option value='Técnico de informática'>Técnico de informática</option>
+                <option value="UX/UI">UX/UI</option>
+              </select>
             </div>
           </div>
         </div>
@@ -172,7 +216,8 @@
                   </div>
                   <div class="col-10">
                     <form action="javascript:addCards(document.getElementById('inputForCard').value);">
-                      <input id='inputForCard' class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+                      <input id='inputForCard' class="generalInput" type="text"
+                        placeholder='Digite a skill e pressione "enter"'></input>
                     </form>
                   </div>
                 </div>
@@ -200,7 +245,8 @@
                   </div>
                   <div class="col-10">
                     <form action="javascript:addCards1(document.getElementById('inputForCard1').value);">
-                      <input id='inputForCard1' class="generalInput" type="text" placeholder="Lorem Ipsum"></input>
+                      <input id='inputForCard1' class="generalInput" type="text"
+                        placeholder='Digite a skill e pressione "enter"'></input>
                     </form>
                   </div>
                 </div>

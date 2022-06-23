@@ -122,20 +122,60 @@ function renderCards1() {
 }
 
 let name_company
+let logo_company
 let id
 let auth
+let idOffer
 
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         console.log('teste')
-        auth = window.sessionStorage.getItem('auth')
+        auth = window.localStorage.getItem('auth')
+
+        const params = new URLSearchParams(window.location.search)
+        idOffer = params.get('id')
+    
+        if (idOffer) {
+    
+            let Offer
+    
+            await $.ajax({
+                url: "http://localhost:3001/Offer/offerExpanded",
+                type: "POST",
+                data: { 
+                    id: idOffer
+                },
+                headers: {"Authorization": `Bearer ${auth}`},
+                success: function(resul) { 
+                    Offer = resul.offer[0]
+                }
+            }).fail(function(err) {
+                console.log(err.responseJSON.message)
+            })
+    
+            document.getElementById('nomeVaga').value = Offer.name
+            document.getElementById('typeVaga').value = Offer.type
+            document.getElementById('localVaga').value = Offer.location
+            document.getElementById('descriptionVaga').value = Offer.description
+
+            const hardToUpdate = Offer.hardSkills.split(",")
+            const requireToUpdate = Offer.requirements.split(",")
+            hardToUpdate.map((value) => {
+                addCards(value)
+            })
+            requireToUpdate.map((value) => {
+                addCards1(value)
+            })
+        }
+
         $.ajax({
-            url: "https://testematchagas.herokuapp.com/Company",
+            url: "http://localhost:3001/Company",
             headers: {"Authorization": `Bearer ${auth}`},
             method: "GET",
             success: function(resul) { 
                 name_company = resul.name_company,
+                logo_company = resul.logo_company
                 id = resul.id_company
                 document.getElementById("userNameNavBar").innerHTML = `${name_company}`
             }
@@ -147,7 +187,7 @@ document.onreadystatechange = async function () {
 }
 
 function saveInfos() {
-    const name = document.getElementById('nomeCargo').value;
+    const name = document.getElementById('nomeVaga').value;
     const type = document.getElementById('typeVaga').value;
     const local = document.getElementById('localVaga').value;
     const description = document.getElementById('descriptionVaga').value;
@@ -160,48 +200,82 @@ function saveInfos() {
         requirements.push(card.message)
     })
 
-    console.log(name)
-    console.log(type)
-    console.log(local)
-    console.log(description)
-    console.log(hardSkills)
-    console.log(requirements)
-
-    $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/Create",
-        type: "POST",
-        headers: {"Authorization": `Bearer ${auth}`},
-        data: {
-            name: name,
-            type: type,
-            local: local,
-            description: description,
-            requirements: requirements,
-            hardSkills: hardSkills,
-            name_company: name_company,
-            id_company: id
-        },
-        success: async function(resul) {
-            console.log(resul.message)
-            await Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: "Vaga criada com sucesso!",
-                showConfirmButton: false,
-                timer: 2000
-            })
-            window.sessionStorage.setItem('idOfferForSK', resul.id_offer)
-            window.location.href = '/view/testeSoftSkillCompany.html'
-        },
-        error: function(err) {
-            console.log(err.responseJSON.error)
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: err.responseJSON.error,
-                showConfirmButton: false,
-                timer: 2000
-            })
-        }
-    })
+    console.log(idOffer)
+    if (idOffer) {
+        $.ajax({
+            url: "http://localhost:3001/Offer/Update",
+            type: "PUT",
+            headers: {"Authorization": `Bearer ${auth}`},
+            data: {
+                id_vaga: idOffer,
+                name: name,
+                type: type,
+                local: local,
+                description: description,
+                requirements: requirements,
+                hardSkills: hardSkills,
+            },
+            success: async function(resul) {
+                console.log(resul.message)
+                await Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: "Vaga atualizada com sucesso!",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                window.localStorage.setItem('idOfferForSK', idOffer)
+                window.location.href = '/view/testeSoftSkillCompany.html'
+            },
+            error: function(err) {
+                console.log(err.responseJSON.error)
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: err.responseJSON.error,
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        })
+    } else {
+        $.ajax({
+            url: "http://localhost:3001/Offer/Create",
+            type: "POST",
+            headers: {"Authorization": `Bearer ${auth}`},
+            data: {
+                name: name,
+                type: type,
+                local: local,
+                description: description,
+                requirements: requirements,
+                hardSkills: hardSkills,
+                name_company: name_company,
+                id_company: id,
+                logo_company: logo_company
+            },
+            success: async function(resul) {
+                console.log(resul.message)
+                await Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: "Vaga criada com sucesso!",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                window.localStorage.setItem('idOfferForSK', resul.id_offer)
+                window.location.href = '/view/testeSoftSkillCompany.html'
+            },
+            error: function(err) {
+                console.log(err.responseJSON.error)
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: err.responseJSON.error,
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        })
+    }
 }

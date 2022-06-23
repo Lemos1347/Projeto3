@@ -1,10 +1,11 @@
 let nome
 let email
 let id
+let logo_company
 
 let idOffer
 
-let auth = window.sessionStorage.getItem('auth')
+let auth = window.localStorage.getItem('auth')
 
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = async function () {
@@ -12,7 +13,7 @@ document.onreadystatechange = async function () {
         const params = new URLSearchParams(window.location.search)
         idOffer = params.get('id')
         $.ajax({
-            url: "https://testematchagas.herokuapp.com/User/Verify/Infos",
+            url: "http://localhost:3001/User/Verify/Infos",
             type: "GET",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
@@ -20,7 +21,9 @@ document.onreadystatechange = async function () {
                 nome = resul.name
                 email = resul.email,
                 id = resul.id
+                imgUser = resul.imgUser
                 document.getElementById('userNameNavBar').innerHTML = `${nome}`
+                document.getElementById('imgUser').src = imgUser
                 checkVaga()
             }
         }).fail(function(err) {
@@ -36,7 +39,7 @@ async function checkVaga() {
 
     //Verifica se usuário está aplicado ou não para a determinada vaga
     await $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/VerifyApply",
+        url: "http://localhost:3001/Offer/VerifyApply",
         type: "POST",
         data: { 
             idVaga: idOffer
@@ -57,7 +60,7 @@ async function checkVaga() {
     })
 
     await $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/offerExpanded",
+        url: "http://localhost:3001/Offer/offerExpanded",
         type: "POST",
         data: { 
             id: idOffer
@@ -75,6 +78,10 @@ async function checkVaga() {
     document.getElementById('typeOffer').innerHTML = Offer.type
     document.getElementById('descriptionOffer').innerHTML = Offer.description
     document.getElementById('nameOffer').innerHTML = Offer.name
+    if (User.logo_company) {
+        document.getElementById('logoCompany').src = Offer.logo_company
+    }
+    
 
     let requirements = Offer.requirements.split(",")
 
@@ -95,7 +102,7 @@ async function checkVaga() {
 
 function applyOffer() {
     $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/Apply",
+        url: "http://localhost:3001/Offer/Apply",
         type: "POST",
         data: { 
             idVaga: idOffer
@@ -120,7 +127,7 @@ function applyOffer() {
 
 function removeOffer() {
     $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/RemoveApply",
+        url: "http://localhost:3001/Offer/RemoveApply",
         type: "DELETE",
         data: { 
             idVaga: idOffer

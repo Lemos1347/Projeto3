@@ -11,7 +11,7 @@
   <meta name="description"
     content="Ache oportunidades de emprego para mulheres em STEM e tecnologia, no Brasil e no mundo.">
 
-  <title>Brazilians in Tech | Cadastrar Empresa | Administrador</title>
+  <title>Brazilians in Tech | Cadastrar Usuário</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -40,23 +40,18 @@
       <a class="navbar-brand" href="/">
         <img src="../images/logo.png" width="100" height="50" alt="Logo Brazilians in Tech">
       </a>
-
       <button class="navbar-toggler custom-toggler collapsed" type="button" data-toggle="collapse"
         data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Abrir Navegação">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="navbar-collapse collapse" id="navbarText">
         <ul class="navbar-nav">
-
           <li class="nav-item">
             <a class="nav-link" href="/sobre/">SOBRE</a>
           </li>
-
           <li class="nav-item">
             <a class="nav-link" href="https://medium.com/brazilians-in-tech">BLOG</a>
           </li>
-
           <li class="nav-item">
             <a class="nav-link" href="/elas/">ELAS</a>
           </li>
@@ -70,6 +65,7 @@
               </div>
             </div>
           </li>
+
           <li class="nav-item">
             <a class="nav-link" href="/projetos/"><b>Projetos</b></a>
           </li>
@@ -94,7 +90,7 @@
     <div class="container justify-content-center bodyCadastroCurriculo">
       <div class="row">
         <div class="col-12">
-          <h1>Cadastro Empresa</h1>
+          <h1>Cadastro de Usuário</h1>
         </div>
       </div>
       <!-- Alert -->
@@ -134,34 +130,15 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12 col-md-6 mt-4 listaInputs">
-            <div class="row inputDiv">
-              <div class="col-10 ">
-                <span class="textGeneralInput">Razão social<span class="neededInput">*</span></span>
-              </div>
-              <div class="col-10">
-                <input class="generalInput" type="text" id="company_name" placeholder="digite a Razão Social"></input>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="col-sm-12 col-md-6 mt-4 listaInputs">
-            <div class="row inputDiv">
-              <div class="col-10 ">
-                <span class="textGeneralInput">Nome fantasia<span class="neededInput">*</span></span>
-              </div>
-              <div class="col-10">
-                <input class="generalInput" type="text" id="trade_name" placeholder="digite o Nome fantasia"></input>
-              </div>
-            </div>
-          </div> -->
+        <div class="row mt-4">
           <div class="col-sm-12 col-md-6 listaInputs">
             <div class="row inputDiv">
               <div class="col-10 ">
-                <span class="textGeneralInput">CNPJ<span class="neededInput">*</span></span>
+                <span class="textGeneralInput">Nome completo<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" id = "cnpj" oninput="cnpjFormat(this)" maxlength="18" type="text" style="-webkit-appearance: none;" placeholder="Digite seu CNPJ"></input>
+                <input class="generalInput" id="nomeUserCreateForm" type="text"
+                  placeholder="digite o seu nome completo"></input>
               </div>
             </div>
           </div>
@@ -171,17 +148,47 @@
                 <span class="textGeneralInput">E-mail<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" id="email" type="text" placeholder="digite o e-mail"></input>
+                <input class="generalInput" id="emailUserCreateForm" type="text"
+                  placeholder="digite o seu e-mail"></input>
               </div>
             </div>
           </div>
           <div class="col-sm-12 col-md-6 listaInputs">
             <div class="row inputDiv">
               <div class="col-10 ">
-                <span class="textGeneralInput">Senha<span class="neededInput">*</span></span>
+                <span class="textGeneralInput">Data de Nascimento<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input class="generalInput" id="password" type="password" placeholder="digite a senha"></input>
+                <input class="generalInput" id="bornDateUserCreateForm" type="date" placeholder="Lorem Ipsum"></input>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
+                <span class="textGeneralInput">Gênero<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10">
+                <select class='generalInput' id="genderUserCreateForm" name='Gênero'>
+                  <option value="Gênero" disabled selected>Gênero</option>
+                  <option value="Homem Cis">Homen Cis</option>
+                  <option value="Homem Trans">Homen Trans</option>
+                  <option value="Mulher Cis">Mulher Cis</option>
+                  <option value="Mulher Trans">Mulher Trans</option>
+                  <option value="Não Binário">Não Binário</option>
+                  <option value="Não Respondeu">Prefiro não responder</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 listaInputs">
+            <div class="row inputDiv">
+              <div class="col-10 ">
+                <span class="textGeneralInput">CPF<span class="neededInput">*</span></span>
+              </div>
+              <div class="col-10">
+                <input class="generalInput" id="cpfUserCreateForm" oninput="cpfFormat(this)" maxlength="11" type="text"
+                  style="-webkit-appearance: none;" placeholder="Digite seu CPF"></input>
               </div>
             </div>
           </div>
@@ -190,16 +197,15 @@
               <div class="col-10 ">
                 <span class="textGeneralInput">Número de Telefone<span class="neededInput">*</span></span>
               </div>
-              <div class="col-10 d-flex spaceNumber">
+              <div class="col-10 d-flex gap-4 gap-md-5">
                 <div class="col-3">
                   <input class="generalInput" type="number"
                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                     maxlength="2" placeholder="+00" id="number55Input"></input>
                 </div>
                 <div class="col-8 col-md-8">
-                  <input id="number11Input" class="generalInput" type="text"
-                    onkeydown="numberFormat()"
-                    maxlength="15" placeholder="(00) 0000-0000"></input>
+                  <input id="number11Input" class="generalInput" type="text" onkeydown="numberFormat()" maxlength="15"
+                    placeholder="(00) 0000-0000"></input>
                 </div>
               </div>
             </div>
@@ -207,10 +213,10 @@
           <div class="col-sm-12 col-md-6 listaInputs">
             <div class="row inputDiv">
               <div class="col-10 ">
-                <span class="textGeneralInput">Logo<span class="neededInput">*</span></span>
+                <span class="textGeneralInput">Imagem de perfil<span class="neededInput">*</span></span>
               </div>
               <div class="col-10">
-                <input id="logo" type="file"></input>
+               <input type="file" id='imageUser'>
               </div>
             </div>
           </div>
@@ -218,7 +224,7 @@
         <div class="row">
           <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4 mt-5 listaInputs">
             <!-- <button class="btnSaveCurriculum" type="button" onclick="verifyInfos()">Salvar</button> -->
-            <button onclick="verifyCompanyInfos()" type="button" class="btnSendCurriculum">
+            <button onclick="verifyUserInfos()" type="button" class="btnSendCurriculum">
               <div class="svg-wrapper-1" style="margin-left: auto;">
                 <div class="svg-wrapper">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -229,7 +235,7 @@
                   </svg>
                 </div>
               </div>
-              <span style="margin-right: auto;">Atualizar</span>
+              <span style="margin-right: auto;">Salvar</span>
             </button>
           </div>
         </div>
@@ -297,7 +303,7 @@
   <!-- Footer -->
 
   <!-- JavaScript File -->
-  <script src="../js/createEmpresa.js"></script>
+  <script src="../js/editUser.js"></script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>

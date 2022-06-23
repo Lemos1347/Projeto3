@@ -2,20 +2,22 @@ let nome
 let email
 let id
 let cont = 1
+let logo_company
 
 let user = []
 
 let idOffer
 
-let auth = window.sessionStorage.getItem('auth')
+let auth = window.localStorage.getItem('auth')
 
 const getCandidatos = () => {
     user.map((user) => {
+        console.log(user)
         document.getElementById("newUser").innerHTML += `<div class="col-lg-3 col-md-4 col-sm-12">
             <div class="container-ver-vaga-perfil">
             <div class="d-flex">
                 <div>Candidato ${cont}</div>
-                <btn class="btn-ver"><i class="fa fa-eye" aria-hidden="true"></i></btn>
+                <button class="btn-ver" onclick="redirectUserPage('${idOffer}','${user.id}')"><i class="fa fa-eye" aria-hidden="true"></i></button>
             </div>
             </div>
         </div>`
@@ -29,16 +31,20 @@ document.onreadystatechange = async function () {
         const params = new URLSearchParams(window.location.search)
         idOffer = params.get('id')
         $.ajax({
-            url: "https://testematchagas.herokuapp.com/Company",
+            url: "http://localhost:3001/Company",
             type: "GET",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 console.log(resul)
                 isCompany = resul.isCompany
+                nome = resul.name_company
+                logo_company = resul.logo_company
 
                 if (isCompany === false) {
                     window.location.href = "view/hubVagas.html"
                 }
+
+                document.getElementById('companyLogo').src = logo_company
                 document.getElementById('userNameNavBar').innerHTML = `${nome}`
                 checkVaga()
             }
@@ -56,7 +62,7 @@ async function checkVaga() {
     console.log(idOffer)
 
     await $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/offerExpanded",
+        url: "http://localhost:3001/Offer/offerExpanded",
         type: "POST",
         data: { 
             id: idOffer
@@ -70,7 +76,7 @@ async function checkVaga() {
     })
 
     $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/usersApplied",
+        url: "http://localhost:3001/Offer/usersApplied",
         type: "POST",
         headers: {"Authorization": `Bearer ${auth}`},
         data: {idVaga: idOffer},
@@ -89,6 +95,7 @@ async function checkVaga() {
     document.getElementById('typeOffer').innerHTML = Offer.type
     document.getElementById('descriptionOffer').innerHTML = Offer.description
     document.getElementById('nameOffer').innerHTML = Offer.name
+    document.getElementById('vagaCompanyLogo').src = Offer.logo_company
 
     let requirements = Offer.requirements.split(",")
 
@@ -105,4 +112,35 @@ async function checkVaga() {
     softSkills.map((softSkills) => {
         document.getElementById('softSkillsOffer').innerHTML += `<li>${softSkills}</li>`
     })
+}
+
+function deleteOffer() {
+    $.ajax({
+        url: "http://localhost:3001/Offer/Delete",
+        type: "DELETE",
+        headers: {"Authorization": `Bearer ${auth}`},
+        data: {id: idOffer},
+        success: async function(resul) { 
+            await Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: resul.message,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            window.location.href = '/view/myVagasCompany.html'
+        }
+    }).fail(function(err) {
+        console.log(err)
+    })
+}
+
+function editOffer() {
+    window.location.href = `/view/createVaga.html?id=${idOffer}`
+}
+
+function redirectUserPage(idVaga, idUser) {
+    console.log(idVaga)
+    console.log(idUser)
+    window.location.href = `/view/perfilUsuaria.html?userId=${idUser}&vagaId=${idVaga}`
 }

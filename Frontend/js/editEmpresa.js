@@ -1,9 +1,53 @@
-var auth;
+var auth = window.localStorage.getItem('auth')
+var nome
+var numero
+var cnpj
+var email
+
+/* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
+document.onreadystatechange = async function () {
+    if (document.readyState == "complete") {
+        await $.ajax({
+            url: "http://localhost:3001/Company",
+            type: "GET",
+            headers: {"Authorization": `Bearer ${auth}`},
+            success: function(resul) { 
+                console.log(resul)
+                nome = resul.name_company
+                numero = resul.phoneNumber
+                cnpj = resul.cnpj
+                email = resul.email
+                var isVerified = resul.isVerified
+                var logo = resul.logo
+
+                if(!Boolean(isVerified)) {
+                    window.location.href = '/view/verifyAccount.html'
+                }
+
+                document.getElementById('userNameNavBar').innerHTML = `${nome}`
+                if (logo) {
+                    document.getElementById('userImage').src = logo
+                }
+            }
+        }).fail(function(err) {
+            console.log(err.responseJSON.message)
+            window.location.href = '/view/login.html'
+        })
+
+        // console.log(User)
+        document.getElementById("company_name").value = nome
+        document.getElementById("email").value = email
+        document.getElementById("cnpj").value = formatCnpjCpf(String(cnpj))
+        var firstNumber = String(numero).slice(0, 2);
+        var restNumber = String(numero).slice(2)
+        document.getElementById("number55Input").value = firstNumber
+        document.getElementById("number11Input").value = formatacaoNumberFirst(restNumber)
+    }
+}
 
 async function verifyCompanyInfos() {
     var razaoSoc = document.getElementById("company_name").value
     var email = document.getElementById("email").value
-    var senha = document.getElementById("password").value
     var cnpj = cnpjToDb(document.getElementById("cnpj").value)
     var number
     var prefixNumber = document.getElementById("number55Input").value
@@ -11,50 +55,33 @@ async function verifyCompanyInfos() {
     number = prefixNumber + numberNormal
     var inputFile = document.getElementById('logo').files[0]
 
-    const validate = validateInformations(email, cnpj, senha)
+    const validate = validateInformations(email, cnpj)
     console.log(validate)
 
     if (validate === true) {
-        window.scroll(0, -5000)
-        document.getElementById('loadTriangulo').style.display = 'flex';
         $.ajax({
-            url: "http://localhost:3001/Company/Register",
-            type: "POST",
+            url: "http://localhost:3001/Company/Update",
+            type: "PUT",
+            headers: {"Authorization": `Bearer ${auth}`},
             data: {
                 name: razaoSoc,
                 email: email,
-                password: senha,
                 cnpj: cnpj,
                 phoneNumber: number,
-                logo: ""
             },
             success: async function (resul) {
                 console.log(resul.message)
-                document.getElementById('loadTriangulo').style.display = 'none';
                 await Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: "Conta criada com sucesso!",
+                    title: "Conta atualizada com sucesso!",
                     showConfirmButton: false,
                     timer: 2000
                 })
-                $.post("http://localhost:3001/User/Login",
-                    {
-                        email: email,
-                        password: senha
-                    }
-                    , function (msg) {
-                        if (msg.token) {
-                            window.localStorage.setItem('auth', msg.token)
-                            auth = msg.token
-                            encodeImageFileAsURL(inputFile)
-                        }
-                    }).fail(function (err) {
-                        console.log(err.responseJSON.error)
-                    })
+                encodeImageFileAsURL(inputFile)
+                window.location.href = '/view/perfilCompany.html'
             },
             error: function (err) {
-                document.getElementById('loadTriangulo').style.display = 'none';
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -98,21 +125,7 @@ function encodeImageFileAsURL(element) {
             })
         }
     } else {
-        $.ajax({
-            url: "http://localhost:3001/User/Update",
-            type: "PUT",
-            headers: { "Authorization": `Bearer ${auth}` },
-            data: {
-                logo: ''
-            },
-            success: async function (resul) {
-                console.log('Imagem no Banco')
-                window.location.href = '/view/verifyAccount.html'
-            },
-            error: function (err) {
-                console.log(err.responseJSON.error)
-            }
-        })
+        console.log('Nenhuma logo passada')
     }
 
 
@@ -159,14 +172,6 @@ function cnpjFormat(i) {
     if (v.length == 2 || v.length == 6) i.value += ".";
     if (v.length == 10) i.value += "/";
     if (v.length == 15) i.value += "-";
-
-    // const cnpjCpf = value.replace(/\D/g, '');
-
-    // if (cnpjCpf.length === 11) {
-    //     return cnpjCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "\$1.\$2.\$3-\$4");
-    // } 
-
-    // return cnpjCpf.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "\$1.\$2.\$3/\$4-\$5");
 }
 
 function numberToDb(number) {
@@ -237,19 +242,33 @@ function validateInformations(email, cnpj, senha) {
     if (resultado != digitos.charAt(1))
         return "CNPJ inválido";
 
-
-    if (!senha.match(/[a-z]+/)) {
-        return "Senha deve possuir letras minúsculas"
-    }
-    if (!senha.match(/[A-Z]+/)) {
-        return "Senha deve possuir letras maiúsculas"
-    }
-    if (!senha.match(/[0-9]+/)) {
-        return "Senha deve possuir números"
-    }
-    if (!senha.match(/[$@#&!]+/)) {
-        return "Senha deve possuir caracteres especíais"
-    }
-
+    
     return true
+}
+
+function formatCnpjCpf(value) {
+  const cnpjCpf = value.replace(/\D/g, '');
+  
+  if (cnpjCpf.length === 11) {
+    return cnpjCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "\$1.\$2.\$3-\$4");
+  } 
+  
+  return cnpjCpf.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "\$1.\$2.\$3/\$4-\$5");
+}
+
+function formatacaoNumberFirst(num) {
+    const phoneNumber = num;
+    const length = phoneNumber.length;
+
+    //Efetuando Validações
+    if (length < 3) {
+        return phoneNumber;
+    } 
+
+
+    if (length < 8) {
+      return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2)}`;
+    }
+
+    return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2,7)}-${phoneNumber.slice(7, 11)}`;
 }

@@ -35,6 +35,7 @@
         id="lgpdy-sc-banner"></script>
     <!-- JavaScript File -->
     <script src="../js/hubVagas.js"></script>
+    <script src="../js/logOut.js"></script>
 </head>
 
 <body>
@@ -61,7 +62,7 @@
                     <li class="nav-item dropdown">
                         <div class="dropdown">
                             <div class="d-flex">
-                                <img class="nav-img-user" src="../images/userTest.png">
+                                <img class="nav-img-user" id = 'userImage' src="../images/userTest.png">
                                 <a class="nav-link dropdown-toggle" id="userNameNavBar" href="/oportunidades/">Null</a>
                             </div>
                             <div class="dropdown-content">
@@ -88,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row d-flex justify-content-center bodyHubVagas" id='containerOfAll'>
+            <div class="row d-flex justify-content-center bodyHubVagas">
                 <div class="col-sm-12">
                     <h1>Vagas</h1>
                 </div>
@@ -97,8 +98,11 @@
                         <button class="btnForFiltrarIcon" onclick="popUpVisibility(true)"><i class="fa fa-sliders"
                                 aria-hidden="true"></i></button>
                         <img src='../images/searchIcon.png' class="searchIcon">
-                        <input type='text' placeholder="Pesquise..." class="inputSearchHubVagas">
+                        <input type='text' placeholder="Pesquise..." onkeyup="searchInput(this.value)" class="inputSearchHubVagas">
                     </div>
+                </div>
+                <div id = 'containerOfAll' style="display: flex; flex-wrap: wrap;">
+
                 </div>
             </div>
     </div>

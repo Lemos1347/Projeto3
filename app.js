@@ -17,12 +17,14 @@ const UserRouter = require('./Routes/User')
 const CompanyRouter = require('./Routes/Company')
 const OfferRouter = require('./Routes/jobOffer')
 const MatchRouter = require('./Routes/Match')
+const ApplyRouter = require('./Routes/Apply')
 
 app.use('/User', UserRouter);
 app.use('/Company', CompanyRouter);
 app.use('/Offer', OfferRouter);
 app.use('/Match', MatchRouter);
-app.use(express.static("./Frontend"))
+app.use('/Apply', ApplyRouter);
+app.use(express.static("../Frontend"))
 app.use((err, req, res, next) => {    
     if (err instanceof Error) {
         console.log()
@@ -38,5 +40,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Servidor rodando na porta http://localhost:${PORT}`);
 })

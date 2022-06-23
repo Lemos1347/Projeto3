@@ -1,21 +1,32 @@
 let auth
 let company_name
 let companyId
+let isVerified
+let logo_company
 
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
-        auth = window.sessionStorage.getItem('auth')
+        auth = window.localStorage.getItem('auth')
         $.ajax({
-            url: "https://testematchagas.herokuapp.com/Company",
+            url: "http://localhost:3001/Company",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 console.log(resul)
-                company_name = resul.name
+                company_name = resul.name_company
                 companyId = resul.id
+                isVerified = resul.isVerified
+                logo_company = resul.logo_company
                 if (resul.isCompany == false) {
                     window.location.href = '/view/hubVagas.html'
                 }
+
+                if (!Boolean(isVerified)) {
+                    window.location.href = '/view/verifyAccount.html'
+                }
+
+                document.getElementById('userNameNavBar').innerHTML = company_name
+                document.getElementById('companyLogo').src = logo_company
                 checkVagas()
             }
         }).fail(function(err) {
@@ -66,7 +77,7 @@ let vagas = [
 
 async function checkVagas() {
     await $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/getOfferCompany",
+        url: "http://localhost:3001/Offer/getOfferCompany",
         headers: { "authorization": `Bearer ${auth}` },
         success: function (resul) {
             console.log(resul)
@@ -78,13 +89,17 @@ async function checkVagas() {
     })
 
     vagas.map((vaga) => {
-        console.log(vaga)
+
+        if (!vaga.logo_company) {
+            vaga.logo_company = "../images/userTest.png"
+        }
+        
         document.getElementById('containerOfAll').innerHTML += `
         <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = "margin-top: 20px;">
             <div class = 'vagaComponent'>
                 <div class="row mainWidGet">
                     <div class="col-5 imgHubVagas">
-                        <img src = '../images/userTest.png'>
+                        <img src = ${vaga.logo_company} style = "width: 100px; heigth: 100px; border-radius: 50%;">
                     </div>
                     <div class="col-7">
                         <div class="divRightHubVagasComponent">

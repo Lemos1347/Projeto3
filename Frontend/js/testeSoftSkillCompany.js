@@ -6,10 +6,10 @@ document.onreadystatechange = function () {
         window.localStorage.setItem('question', 0)
         document.getElementById('questionNumber').innerHTML = 'Questão 1/10'
         document.getElementById('questionMessage').innerHTML = Perguntas[0].pergunta
-        auth = window.sessionStorage.getItem('auth')
-        idOffer = window.sessionStorage.getItem('idOfferForSK')
+        auth = window.localStorage.getItem('auth')
+        idOffer = window.localStorage.getItem('idOfferForSK')
         $.ajax({
-            url: "https://testematchagas.herokuapp.com/Company",
+            url: "http://localhost:3001/Company",
             headers: {"Authorization": `Bearer ${auth}`},
             method: "GET",
             success: function(resul) { 
@@ -109,28 +109,28 @@ function passPage(operationType) {
         window.localStorage.setItem('question', 0)
         passPage()
     } else if (operationType === 'pass') {
-        document.getElementById('divLoadingTeste').style.display = 'flex'
-        setTimeout(() => {
-            document.getElementById('divLoadingTeste').style.display = 'none'
-            window.scroll(0, -5000)
+        document.getElementById('loadTriangulo').style.display = 'flex'
+        window.scroll(0, -5000)
+        setTimeout(() => {   
             numQuestion = Number(numQuestion)
             var newNumQuestion = numQuestion + 1;
             window.localStorage.setItem('question', newNumQuestion)
             let answer = verifyAnswer()
+            document.getElementById('loadTriangulo').style.display = 'none'
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
-        }, "1500")
+        }, "750")
         
     } else if (operationType === 'back') {
-        document.getElementById('divLoadingTeste').style.display = 'flex'
+        document.getElementById('loadTriangulo').style.display = 'flex'
+        window.scroll(0, -5000)
         setTimeout(() => {
-            document.getElementById('divLoadingTeste').style.display = 'none'
-            window.scroll(0, -5000)
             numQuestion = Number(numQuestion)
             var newNumQuestion = numQuestion - 1;
             window.localStorage.setItem('question', newNumQuestion)
             let answer = verifyAnswer()
+            document.getElementById('loadTriangulo').style.display = 'none'
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
@@ -193,13 +193,11 @@ function resetAnswers() {
 }
 
 function changeBtns(visible) {
-
     // let answer = verifyAnswer();
     // recordAnswer(9, answer)
 
     let forFinalizar
     let forBtns
-
     if(visible == true) {
         forFinalizar = true
         forBtns = false
@@ -260,7 +258,7 @@ function finalizarTeste(type) {
             })
             console.log(auth)
             $.ajax({
-                url: "https://testematchagas.herokuapp.com/Offer/Update",
+                url: "http://localhost:3001/Offer/Update",
                 headers: {"Authorization": `Bearer ${auth}`},
                 type: "PUT",
                 data: { 
@@ -276,7 +274,7 @@ function finalizarTeste(type) {
                         showConfirmButton: false,
                         timer: 2000
                     })
-                    window.sessionStorage.removeItem('idOfferForSK')
+                    window.localStorage.removeItem('idOfferForSK')
                     window.location.href = '../view/myVagasCompany.html'
                     window.localStorage.removeItem('question')
                 },

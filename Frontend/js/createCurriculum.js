@@ -1,4 +1,6 @@
-let auth = window.sessionStorage.getItem('auth')
+let auth = window.localStorage.getItem('auth')
+let curriculum
+let isVerified
 
 let cards = [
     // {
@@ -14,18 +16,23 @@ let cards = [
 document.onreadystatechange = async function () {
   if (document.readyState == "complete") {
     $.ajax({
-      url: "https://testematchagas.herokuapp.com/User/Verify/Curriculum",
-      type: "GET",
+      url: "http://localhost:3001/User/Verify/Infos",
       headers: {"Authorization": `Bearer ${auth}`},
-      success: function(resul) {
-        if (resul.haveCurriculum === true) {
-          document.location.href = '../view/hubVagas.html'
-        }
+      success: function(resul) { 
+          console.log(resul)
+          curriculum = resul.curriculum
+          isVerified = resul.isVerified
+          if (!Boolean(isVerified)) {
+            window.location.href = '/view/verifyAccount.html'
+          }
+          if (curriculum) {
+            window.location.href = '/view/hubVagas.html'
+          }
       }
-    }).fail(function(err) {
-      console.log(err.responseJSON.error)
-      errorMessage(err.responseJSON.error)
-    })
+  }).fail(function(err) {
+      console.log(err.responseJSON.message)
+      window.location.href = '../view/login.html'
+  })
   }
 }
 
@@ -299,7 +306,7 @@ function verifyInfos() {
   curriculum = JSON.stringify(curriculum)
 
   $.ajax({
-    url: "https://testematchagas.herokuapp.com/User/Update",
+    url: "http://localhost:3001/User/Update",
     type: "PUT",
     headers: {"Authorization": `Bearer ${auth}`},
     data: { 
@@ -327,4 +334,8 @@ function verifyInfos() {
         })
     }
   })
+}
+
+function skipCreate(){
+  window.location = "/view/hubVagas.html";
 }

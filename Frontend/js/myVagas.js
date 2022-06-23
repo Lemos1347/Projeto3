@@ -1,8 +1,12 @@
 let nome
 let email
 let id
+let hardSkills
+let softSkills
+let isVerified
+let imgUser
 
-let auth = window.sessionStorage.getItem('auth')
+let auth = window.localStorage.getItem('auth')
 window.onload = (event) => {
     console.log('page is fully loaded');
 };
@@ -22,15 +26,27 @@ function startTimer(duration) {
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
-            url: "https://testematchagas.herokuapp.com/User/Verify/Infos",
+            url: "http://localhost:3001/User/Verify/Infos",
             type: "GET",
             headers: { "Authorization": `Bearer ${auth}` },
             success: function (resul) {
                 console.log(resul)
                 nome = resul.name
                 email = resul.email,
-                    id = resul.id
+                id = resul.id
+                hardSkills = resul.hardSkills,
+                softSkills = resul.softSkills,
+                isVerified = Boolean(resul.isVerified),
+                imgUser = resul.imgUser
+
+                if(!isVerified) {
+                    window.location.href = '/view/verifyAccount.html'
+                }
+
                 document.getElementById('userNameNavBar').innerHTML = `${nome}`
+                if (imgUser) {
+                    document.getElementById('userImage').src = imgUser 
+                }
                 checkVagas()
             }
         }).fail(function (err) {
@@ -84,7 +100,7 @@ async function checkVagas() {
     console.log(auth)
 
     await $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/OfferUser",
+        url: "http://localhost:3001/Offer/OfferUser",
         headers: { "authorization": `Bearer ${auth}` },
         success: function (resul) {
             console.log(resul)
@@ -97,33 +113,45 @@ async function checkVagas() {
 
     console.log(nome, id, email)
 
-    vagas.map((vaga) => {
+    console.log(vagas)
 
-        let color = 'black'
+    if (vagas == "") {
+        document.getElementById('containerOfAll').innerHTML += `<h3 class = "" style = "margin-top: 120px;">OPS! Verificamos que você ainda não se candidatou a nenhuma vaga. Recomandamos a você acessar a página de "VAGAS".</h3>`
+    } else {
+        vagas.map((vaga) => {
 
-        document.getElementById('containerOfAll').innerHTML += `
-        <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" id="vaga">
-            <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
-                <div class="row mainWidGet">
-                    <div class="col-5 imgHubVagas">
-                        <img src = '../images/userTest.png' style = "width: 100px;">
-                    </div>
-                    <div class="col-7">
-                        <div class="divRightHubVagasComponent">
-                            <h1 class="nomeVagaHubVagas">${vaga.name}</h1>
-                            <p class="pForHubVagas"><i class="fa fa-map-marker" aria-hidden="true"></i>São Paulo</p>
-                            <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>${vaga.type}</p>
-                            <p class="pForHubVagas d-flex"><i class="fa fa-info-circle info-circle-yellow" aria-hidden="true"></i>${vaga.status}</p>
-                            <div class = 'divBtnSeeMore'>
-                                <button class="btnSeeMore" type="button" onclick="redirectToVagaId('${vaga.id}')">Ver Mais</button>
+            if (!vaga.logo_company) {
+                vaga.logo_company = "../images/userTest.png"
+            }
+
+            let color = 'black'
+    
+            document.getElementById('containerOfAll').innerHTML += `
+            <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" id="vaga">
+                <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
+                    <div class="row mainWidGet">
+                        <div class="col-5 imgHubVagas">
+                            <img src = ${vaga.logo_company} style = "width: 100px; heigth: 100px; border-radius: 50%;">
+                        </div>
+                        <div class="col-7">
+                            <div class="divRightHubVagasComponent">
+                                <h1 class="nomeVagaHubVagas">${vaga.name}</h1>
+                                <p class="pForHubVagas"><i class="fa fa-map-marker" aria-hidden="true"></i>São Paulo</p>
+                                <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>${vaga.type}</p>
+                                <p class="pForHubVagas d-flex"><i class="fa fa-info-circle info-circle-yellow" aria-hidden="true"></i>${vaga.status}</p>
+                                <div class = 'divBtnSeeMore'>
+                                    <button class="btnSeeMore" type="button" onclick="redirectToVagaId('${vaga.id}')">Ver Mais</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    `
-    })
+        `
+        })
+    }
+
+   
 }
 
 function redirectToVagaId(param) {

@@ -4,15 +4,16 @@ let email
 let id
 let hardSkills
 let softSkills
+let isVerified
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = function () {
     if (document.readyState == "complete") {
         window.localStorage.setItem('question', 0)
         document.getElementById('questionNumber').innerHTML = 'Questão 1/10'
         document.getElementById('questionMessage').innerHTML = Perguntas[0].pergunta
-        auth = window.sessionStorage.getItem('auth')
+        auth = window.localStorage.getItem('auth')
         $.ajax({
-            url: "https://testematchagas.herokuapp.com/User/Verify/Infos",
+            url: "http://localhost:3001/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 console.log(resul)
@@ -21,6 +22,10 @@ document.onreadystatechange = function () {
                 id = resul.id
                 hardSkills = resul.hardSkills,
                 softSkills = resul.softSkills
+                isVerified = resul.isVerified
+                if (!isVerified) {
+                    window.location.href = '/view/verifyAccount.html'
+                }
                 if (softSkills) {
                     window.location.href = '/view/hubVagas.html'
                 }
@@ -122,13 +127,14 @@ function passPage(operationType) {
         passPage()
     } else if (operationType === 'pass') {
         document.getElementById('loadTriangulo').style.display = 'flex'
+        window.scroll(0, -5000)
+
         setTimeout(() => {
-            document.getElementById('loadTriangulo').style.display = 'none'
-            window.scroll(0, -5000)
             numQuestion = Number(numQuestion)
             var newNumQuestion = numQuestion + 1;
             window.localStorage.setItem('question', newNumQuestion)
             let answer = verifyAnswer()
+            document.getElementById('loadTriangulo').style.display = 'none'
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
@@ -136,13 +142,13 @@ function passPage(operationType) {
         
     } else if (operationType === 'back') {
         document.getElementById('loadTriangulo').style.display = 'flex'
+        window.scroll(0, -5000)
         setTimeout(() => {
-            document.getElementById('loadTriangulo').style.display = 'none'
-            window.scroll(0, -5000)
             numQuestion = Number(numQuestion)
             var newNumQuestion = numQuestion - 1;
             window.localStorage.setItem('question', newNumQuestion)
             let answer = verifyAnswer()
+            document.getElementById('loadTriangulo').style.display = 'none'
             recordAnswer(numQuestion, answer)
             resetAnswers()
             renderQuestion(newNumQuestion)
@@ -271,7 +277,7 @@ function finalizarTeste(type) {
             })
             console.log(auth)
             $.ajax({
-                url: "https://testematchagas.herokuapp.com/User/Update",
+                url: "http://localhost:3001/User/Update",
                 headers: {"Authorization": `Bearer ${auth}`},
                 type: "PUT",
                 data: { 
@@ -286,7 +292,7 @@ function finalizarTeste(type) {
                         showConfirmButton: false,
                         timer: 2000
                     })
-                    window.location.href = '../view/hubvagas.html'
+                    window.location.href = '../view/hubVagas.html'
                     window.localStorage.removeItem('question')
                 },
                 error: function(err) {
@@ -310,8 +316,4 @@ function finalizarTeste(type) {
         document.getElementById('containerModalConfirm').style.display = 'none'
     }
     
-}
-
-function updateSoftSkills() {
-
 }

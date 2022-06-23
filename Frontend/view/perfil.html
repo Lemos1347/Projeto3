@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/resposive-theme.css">
     <link rel="icon" href="../images/favicon.png">
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -70,7 +72,7 @@
                     <li class="nav-item dropdown">
                         <div class="dropdown">
                             <div class="d-flex">
-                                <img class="nav-img-user" src="../images/userTest.png">
+                                <img class="nav-img-user" id="userImage" src="../images/userTest.png">
                                 <a class="nav-link dropdown-toggle" id="userNameNavBar"
                                     href="/oportunidades/">USUÁRIO</a>
                             </div>
@@ -95,7 +97,6 @@
                         <a href="perfil.html">
                             <i class="fa fa-home" aria-hidden="true"></i>
                         </a>
-                        //Minhas Vagas
                     </div>
                 </div>
             </div>
@@ -110,17 +111,8 @@
                                 <div class="row">
                                     <div class="col-10 offset-1 perfilCaixa">
                                         <h1 id='nomePerfil'></h1>
-                                        <img src="../images/userTest.png" class="rounded-circle imgPerfil">
-                                        <div class="d-flex mt-4">
-                                            <i class="fa fa-briefcase" aria-hidden="true"></i>
-                                            <h2 class="titulo-dados-pessoais gap-3 perfilCaixa__caption"> Engenheiro de
-                                                Software</h2>
-                                        </div>
-                                        <div class="d-flex mt-4">
-                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                            <h2 class="titulo-dados-pessoais gap-3 perfilCaixa__caption"> São Paulo, SP
-                                            </h2>
-                                        </div>
+                                        <img src="../images/userTest.png" id="userPhoto" class="rounded-circle imgPerfil">
+                                     
                                     </div>
                                 </div>
                             </div>
@@ -132,15 +124,7 @@
                                         <div class="textPerfil row">
                                             <h2 style="width: max-content; margin-top: 10px;">Sua descrição</h2>
 
-                                            <p id='descricaoUser'>Lorem Ipsum is simply dummy text of the printing and
-                                                typesetting
-                                                industry. Lorem
-                                                Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                                when
-                                                an
-                                                unknown printer took a galley of type and scrambled it to make a type
-                                                specimen
-                                                book.
+                                            <p id='descricaoUser'>Currículo não cadastrado!
                                             </p>
                                         </div>
                                     </div>
@@ -152,13 +136,7 @@
 
                                             <h2 style="width: max-content; margin-top: 10px;">Seu objetivo</h2>
 
-                                            <p id='objetivoUser'>Lorem Ipsum is simply dummy text of the printing and
-                                                typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500s, when
-                                                an
-                                                unknown printer took a galley of type and scrambled it to make a type
-                                                specimen
-                                                book.
+                                            <p id='objetivoUser'>Currículo não cadastrado!
                                             </p>
                                         </div>
                                     </div>
@@ -171,10 +149,7 @@
                                     <div class="col-12">
                                         <h2>Hard-Skills</h1>
                                             <ul class="listaSkills" id = "hardSkillList" style="gap: 40px;">
-                                                <!-- <li>Lorem Ipsum</li>
-                                                <li>Lorem Ipsum</li>
-                                                <li>Lorem Ipsum</li>
-                                                <li>Lorem Ipsum</li> -->
+                                                Currículo não cadastrado!
                                             </ul>
                                     </div>
                                 </div>
@@ -198,46 +173,17 @@
                     </div>
 
                     <div>
-                        <div class="editarCurriculo">
-                            <h1>Editar currículo</h1>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-10 offset-md-1 col-xl-6 offset-xl-0">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                </div>
-
-                                <div class="col-sm-12 col-md-10 offset-md-1 col-xl-6 offset-xl-0">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                    <label class="descricao fa-pull-left" for="">Lorem<span
-                                            class="asterisco">*</span></label>
-                                    <input class="inputeditarvagas" placeholder="Lorem Ipsum" type="text">
-                                </div>
-                            </div>
-
-
-                        </div>
+                        
                         <div class="row">
                             <div class="col-lg-4 offset-lg-4">
-                                <button type="button" class="btnUpdateCurriculum">Atualizar</button>
+                                <button type="button" class="btnUpdateCurriculum" onclick="redirectEdit()">Editar</button>
                             </div>
                         </div>
                         <div>
                             <!-- <button type="button" class="tituloPerfil fundoBotao">
                             <h3 class="excluirPerfil">Excluir Conta</h3>
                         </button> -->
-                            <button class="buttonDeleteAccount">
+                            <button class="buttonDeleteAccount" onclick="deleteAccount()">
                                 <span></span>
                                 <span></span>
                                 <span></span>
@@ -312,6 +258,7 @@
 
     <!-- JavaScript File -->
     <script src="../js/perfil.js"></script>
+    <script src="../js/logOut.js"></script>
 
     <!-- Bootstrap core JavaScript -->
     <script src="../vendor/jquery/jquery.min.js"></script>

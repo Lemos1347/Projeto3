@@ -5,9 +5,10 @@ const sqlite3 = require('sqlite3').verbose();
 const sqlite = require('sqlite')
 const nodemailer = require('nodemailer')
 const SMTP_CONFIG = require('../dao/smtp')
+const htmlEmail = require('../dao/htmlEmail')
 
 class User {
-    constructor (name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser) {
+    constructor (name, email, password, bornDate, gender, cpf, phoneNumber, typeOfUser, imgUser) {
         if(!this.id) {
             this.id = uuid();
         }
@@ -19,6 +20,7 @@ class User {
         this.cpf = cpf;
         this.phoneNumber = phoneNumber;
         this.typeOfUser = typeOfUser
+        this.imgUser = imgUser
         this.curriculum = "";
     }
 
@@ -56,66 +58,16 @@ class User {
             return error
         }
 
-        //Validação se nenhum dado passado foi igual a ""
-
-        if (!this.email) {
-            const error = {
-                type: 'error',
-                message: 'Incorrect Email'
-            }
-            return error
-        }
-
-        if (!this.name) {
-            const error = {
-                type: 'error',
-                message: 'Incorrect Name'
-            }
-            return error
-        }
-
-        if (!this.password) {
-            const error = {
-                type: 'error',
-                message: 'Incorrect Password'
-            }
-            return error
-        }
-
-        if (!this.bornDate) {
-            const error = {
-                type: 'error',
-                message: 'Incorrect BornDate'
-            }
-            return error
-        }
-
-        if (!this.gender) {
-            const error = {
-                type: 'error',
-                message: 'Incorrect Gender'
-            }
-            return error
-        }
-
-        if (!this.cpf) {
-            const error = {
-                type: 'error',
-                message: 'Incorrect CPF'
-            }
-            return error
-        }
-
-        if (!this.phoneNumber) {
-            const error = {
-                type: 'error',
-                message: 'Incorrect Phone Number'
-            }
-            return error
-        }
+        //Gera o token de verificação
+        let tokenToVerify = jwt.sign({
+            email: this.id
+        }, "3c353a34bb6ecf261b49db8ba1293577", {
+            subject: this.id,
+            expiresIn: "5m"
+        });
 
         //Inserção das informações dentro do DB
-        const inserction = await db.run("INSERT INTO users (id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.email , this.password, this.bornDate, this.gender, this.cpf, this.phoneNumber, this.curriculum, this.typeOfUser])
+        const inserction = await db.run("INSERT INTO users (id, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, isVerified, imgUser, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.email , this.password, this.bornDate, this.gender, this.cpf, this.phoneNumber, this.curriculum, this.typeOfUser, false, this.imgUser])
         
         //Verifica se a inserção foi bem sucedido e assim retorna SUCESSO ou ERRO ao usuário
         if (inserction.changes === 0) {
@@ -125,6 +77,31 @@ class User {
             }
             return error
         }
+
+        //Envia o email ao usuário
+        const transporter = nodemailer.createTransport({
+            host: SMTP_CONFIG.host,
+            port: SMTP_CONFIG.port,
+            secure: false,
+            auth: {
+                user: SMTP_CONFIG.user,
+                pass: SMTP_CONFIG.pass
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        })
+
+        const mailSent = await transporter.sendMail({
+            text: 'Texto do Email',
+            subject: 'Ativação',
+            from: "Noreply Matchagas <noreply@matchagas.com>",
+            to: `${this.email}`,
+            html: htmlEmail.emailRegister(tokenToVerify)
+        })
+        
+        console.log(mailSent)
+
         const sucess = {
             type: 'success',
             message: {
@@ -137,24 +114,6 @@ class User {
     }
 
     async Authentication(emailAuth, passwordAuth) {
-
-        //Validar os dados passados
-        if (!emailAuth) {
-            const error = {
-                type: 'error',
-                message: 'Email are required'
-            }
-            return error
-        }
-
-        if (!passwordAuth) {
-            const error = {
-                type: 'error',
-                message: 'Password are required'
-            }
-            return error
-        }
-
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
         //Requisição de busca na tabela "users" para verificar a existência de um usuário com o email indicado no LOGIN
@@ -218,7 +177,7 @@ class User {
         return sucess
     }
 
-    async updateUser(idUser, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills, hardSkills) {
+    async updateUser(idUser, name, email, password, bornDate, gender, cpf, phoneNumber, curriculum, typeOfUser, softSkills, hardSkills, imgUser) {
 
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
@@ -278,8 +237,11 @@ class User {
         if(hardSkills) {
             queryComponent.push(`hardSkills="${hardSkills}"`)
         }
+        if(imgUser) {
+            queryComponent.push(`imgUser="${imgUser}"`)
+        }
         //Validar se nenhuma informação foi enviada ao servidor
-        if (!name && !email && !password && !bornDate && !gender && !cpf && !phoneNumber && !curriculum && !typeOfUser && !softSkills && !hardSkills) {
+        if (!name && !email && !password && !bornDate && !gender && !cpf && !phoneNumber && !curriculum && !typeOfUser && !softSkills && !hardSkills && !imgUser) {
             const error = {
                 type: 'error',
                 message: 'Any Information was passed to Update'
@@ -403,6 +365,7 @@ class User {
             message: "User exists, and have a curriculum",
             haveCurriculum: true,
             haveSoftSkills: true,
+            isVerified: rowsId[0].isVerified,
             curriculum: curriculum,
         }
         return success
@@ -461,15 +424,6 @@ class User {
     async getUser(id) {
         //Instacia o DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
-
-        //Validação infos passadas na REQ
-        if (!id) {
-            const error = {
-                type: 'error',
-                message: 'ID is needed to this action'
-            }
-            return error
-        }
 
         //Verfica se o ID pertence a algum Usuário
         const rowsId = await db.all(`SELECT * \ FROM users \ WHERE id = "${id}"`);
@@ -544,7 +498,7 @@ class User {
         }
 
         //Captura as informações do DB
-        const { id, name, email, isAdmin, hardSkills, softSkills } = rowsId[0]
+        const { id, name, email, isAdmin, hardSkills, softSkills, isVerified, imgUser, curriculum } = rowsId[0]
 
         //Retorna infos ao client
         const sucess = {
@@ -554,7 +508,10 @@ class User {
             email: email,
             isAdmin: isAdmin,
             hardSkills: hardSkills,
-            softSkills: softSkills
+            softSkills: softSkills,
+            isVerified: isVerified,
+            imgUser: imgUser, 
+            curriculum: curriculum
         }
 
         return sucess
@@ -615,86 +572,10 @@ class User {
 
         const mailSent = await transporter.sendMail({
             text: 'Texto do Email',
-            subject: 'Assunto da mensagem',
+            subject: 'Esqueci minha senha',
             from: "Noreply Matchagas <noreply@matchagas.com>",
             to: `${email}`,
-            html: `
-            <!doctype html>
-            <html lang="en-US">
-
-            <head>
-                <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-                <title>Reset Password Email Template</title>
-                <meta name="description" content="Reset Password Email Template.">
-                <style type="text/css">
-                    a:hover {text-decoration: underline !important;}
-                </style>
-            </head>
-
-            <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-                <!--100% body table-->
-                <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-                    style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-                    <tr>
-                        <td>
-                            <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                                align="center" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="height:80px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">
-                                    <a href="https://braziliansintech.com" title="logo" target="_blank">
-                                        <img width="160" src="https://braziliansintech.com/static/img/logo.png" title="logo" alt="logo">
-                                    </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height:20px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                            style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
-                                            <tr>
-                                                <td style="height:40px;">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding:0 35px;">
-                                                    <h1 style="color:#F3C42E; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Você esqueceu sua senha?</h1>
-                                                    <span
-                                                        style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                                    <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">Se você não solicitou nenhuma alteração de senha somente ignore está mensagem e se possível nos avise o quando antes para evitarmos tal situação com os demais. Caso a solicitação tenha sido feita, abaixo se encontra o código de verificação que você utilizará na aplicação para redefinição da senha.</p>
-                                                <label style="display:inline-block; vertical-align:middle; font-family:'Rubik',sans-serif;color:#455056; font-size:15px;line-height:24px; margin:0;">Código de Redefinição: </label>
-                                                    <label href="javascript:void(0);"
-                                                        style="background:#530084;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">${resetCode}</label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="height:40px;">&nbsp;</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                <tr>
-                                    <td style="height:20px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">
-                                        <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong>www.braziliansintech.com</strong></p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height:80px;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <!--/100% body table-->
-            </body>
-
-            </html>
-            `
+            html: htmlEmail.forgotPassword(resetCode)
         })
 
         //Salva o código enviado para o usuário no Banco de Dados
@@ -707,8 +588,6 @@ class User {
             }
             return error
         }
-
-        
 
         //Retorna infos ao client
         const sucess = {
@@ -723,29 +602,6 @@ class User {
     async resetPasswordByCode(email, resetCode, newPass) {
         //Instacia o DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
-
-        //Verifica se nada passado na requisição foi igual a ""
-        if(!email) {
-            const error = {
-                type: 'error',
-                message: 'Email is needed to this action'
-            }
-            return error
-        }
-        if(!resetCode) {
-            const error = {
-                type: 'error',
-                message: "You don't have permission to this action"
-            }
-            return error
-        }
-        if(!newPass) {
-            const error = {
-                type: 'error',
-                message: "You need to pass a new password to this action"
-            }
-            return error
-        }
 
         //Verifica qual o Código passado para o usuário
         const code = await db.all(`SELECT resetPassCode FROM users WHERE email="${email}"`)
@@ -787,6 +643,302 @@ class User {
             validation: true
         }
         return success
+    }
+
+    async verifyAccount(userId, token) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        const userExists = await db.all(`SELECT isVerified FROM users WHERE id="${userId}"`)
+        const companyExists = await db.all(`SELECT isVerified FROM TB_COMPANY WHERE id="${userId}"`)
+
+        //Verifica se o usuário passado existe
+        if (!userExists[0] && !companyExists[0]) {
+            const error = {
+                type: 'error',
+                message: "Usuário passado não existe"
+            }
+            return error
+        }
+
+        let type
+
+        if(userExists[0]) {
+            console.log('teste')
+            type = 'user'
+        }
+
+        if (companyExists[0]) {
+            console.log('teste1')
+            type = 'company'
+        }
+
+        if (type == 'user') {
+            //Verifica se o usuário já foi verificado
+            if (Boolean(userExists[0].isVerified)) {
+                const error = {
+                    type: 'error',
+                    message: "Usuário passado já foi validado"
+                }
+                return error
+            }
+
+            //Verifica a validade do token
+            try {
+                //Verifica o Token
+                const { sub } = jwt.verify(token, "3c353a34bb6ecf261b49db8ba1293577")
+        
+                //Valida se o usuário é o proprietário do token
+                if (sub != userId) {
+                    const error = {
+                        type: 'error',
+                        message: "Token Expirado! Por favor gere um novo."
+                    }
+                    return error
+                }
+
+                const validateUser = await db.run(`UPDATE users SET isVerified=true WHERE id = "${userId}"`);
+
+                if (validateUser.changes === 0) {
+                    const error = {
+                        type: 'error',
+                        message: 'Database Error, please try again later'
+                    }
+                    return error
+                }
+
+                const success = {
+                    type: 'success',
+                    message: "Usuário Validado"
+                }
+                return success
+            } catch(err) {
+                //Retorna o erro caso o token não seja válido
+                const error = {
+                    type: 'error',
+                    message: "Token Expirado! Por favor gere um novo."
+                }
+                return error
+            }
+        } else if (type == 'company') {
+            //Verifica se o usuário já foi verificado
+            if (Boolean(companyExists[0].isVerified)) {
+                const error = {
+                    type: 'error',
+                    message: "Empresa passada já foi validada"
+                }
+                return error
+            }
+
+            //Verifica a validade do token
+            try {
+                //Verifica o Token
+                const { sub } = jwt.verify(token, "3c353a34bb6ecf261b49db8ba1293577")
+        
+                //Valida se o usuário é o proprietário do token
+                if (sub != userId) {
+                    const error = {
+                        type: 'error',
+                        message: "Token Expirado! Por favor gere um novo."
+                    }
+                    return error
+                }
+
+                const validateUser = await db.run(`UPDATE TB_COMPANY SET isVerified=true WHERE id = "${userId}"`);
+
+                if (validateUser.changes === 0) {
+                    const error = {
+                        type: 'error',
+                        message: 'Database Error, please try again later'
+                    }
+                    return error
+                }
+
+                const success = {
+                    type: 'success',
+                    message: "Usuário Validado"
+                }
+                return success
+            } catch(err) {
+                //Retorna o erro caso o token não seja válido
+                const error = {
+                    type: 'error',
+                    message: "Token Expirado! Por favor gere um novo."
+                }
+                return error
+            }
+        }
+        
+    }
+
+    async verifyCode(userId) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        const userExists = await db.all(`SELECT email FROM users WHERE id="${userId}"`)
+
+        if (!userExists[0]) {
+            const error = {
+                type: 'error',
+                message: "Usuário passado não existe"
+            }
+            return error
+        }
+
+        //Verifica se o usuário já foi verificado
+        if (Boolean(userExists[0].isVerified)) {
+            const error = {
+                type: 'error',
+                message: "Usuário passado já foi validado"
+            }
+            return error
+        }
+
+        //Gera o token de verificação
+        let tokenToVerify = jwt.sign({
+            email: userId
+        }, "3c353a34bb6ecf261b49db8ba1293577", {
+            subject: userId,
+            expiresIn: "5m"
+        });
+
+        //Envia o email ao usuário
+        const transporter = nodemailer.createTransport({
+            host: SMTP_CONFIG.host,
+            port: SMTP_CONFIG.port,
+            secure: false,
+            auth: {
+                user: SMTP_CONFIG.user,
+                pass: SMTP_CONFIG.pass
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        })
+
+        const mailSent = await transporter.sendMail({
+            text: 'Texto do Email',
+            subject: 'Ativação',
+            from: "Noreply Matchagas <noreply@matchagas.com>",
+            to: `${userExists[0].email}`,
+            html: htmlEmail.emailRegister(tokenToVerify)
+        })
+
+        console.log(mailSent)
+
+        const success = {
+            type: 'success',
+            message: "Mensagem Reenviada"
+        }
+        return success
+    }
+
+    async sendNotification(userId, qntVagas) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Verifica a existência do usuário
+        const userExists = await db.all(`SELECT email FROM users WHERE id="${userId}"`)
+
+        if (!userExists[0]) {
+            const error = {
+                type: 'error',
+                message: "Usuário passado não existe"
+            }
+            return error
+        }
+
+        //Envia o email ao usuário
+        const transporter = nodemailer.createTransport({
+            host: SMTP_CONFIG.host,
+            port: SMTP_CONFIG.port,
+            secure: false,
+            auth: {
+                user: SMTP_CONFIG.user,
+                pass: SMTP_CONFIG.pass
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        })
+
+        const mailSent = transporter.sendMail({
+            text: 'Texto do Email',
+            subject: 'Novidades',
+            from: "Noreply Matchagas <noreply@matchagas.com>",
+            to: `${userExists[0].email}`,
+            html: htmlEmail.notificationUser(qntVagas)
+        })
+
+        const success = {
+            type: 'success',
+            message: "Mensagem enviada"
+        }
+        return success
+    }
+
+    async deleteAdmin(id) {
+        //Instacia o DB
+        const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
+
+        //Busca pelo ID em Users e Companies
+        const rowsIdUsers = await db.all(`SELECT * \ FROM users \ WHERE id = "${id}"`);
+        const rowsIdCompanies = await db.all(`SELECT * \ FROM TB_COMPANY \ WHERE id = "${id}"`);
+
+        if (!rowsIdUsers[0] && !rowsIdCompanies[0]) {
+            const error = {
+                type: 'error',
+                message: 'User not found'
+            }
+            return error
+        }
+
+        //Se o usuário passado for uma company
+        if (rowsIdUsers[0]) {
+            const deleteUser = await db.run(`DELETE FROM users WHERE id="${id}"`)
+
+            if (deleteUser.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+    
+            const success = {
+                type: "success",
+                message: "Usuário deletado",
+            }
+
+            return success
+        }
+
+        //Se o usuário passado for um user
+        if (rowsIdCompanies[0]) {
+            //Deleta a empresa
+            const deleteCompany = await db.run(`DELETE FROM TB_COMPANY WHERE id="${id}"`)
+
+            //Deleta todas as vagas que essa empresa possui
+            const deletedVagas = await db.run(`DELETE FROM TB_JOBOFFER WHERE id_company="${id}"`)
+
+            //Deleta todas as candidaturas que estão relacionadas a essa empresa
+            const deletedApplies = await db.run(`DELETE FROM TB_JOBOFFER_USERS WHERE id_company="${id}"`)
+
+            if (deleteCompany.changes == 0 && deletedVagas.changes == 0 && deletedApplies.changes == 0) {
+                const error = {
+                    type: 'error',
+                    message: 'Database Error, please try again later'
+                }
+                return error
+            }
+    
+            const success = {
+                type: "success",
+                message: "Empresa deletada",
+            }
+
+            return success
+        }
     }
 }
 

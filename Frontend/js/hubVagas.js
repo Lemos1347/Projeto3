@@ -3,33 +3,42 @@ let email
 let id
 let hardSkills
 let softSkills
+let isVerified
+let imgUser
+let qntOffersGood = 0
 
-let auth = window.sessionStorage.getItem('auth')
+let auth = window.localStorage.getItem('auth')
 
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
-            url: "https://testematchagas.herokuapp.com/User/Verify/Infos",
+            url: "http://localhost:3001/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
-                console.log(resul)
                 nome = resul.name
                 email = resul.email,
                 id = resul.id
                 hardSkills = resul.hardSkills,
-                softSkills = resul.softSkills
-                if (!hardSkills) {
-                    window.location.href = '/view/createCurriculum.html'
+                softSkills = resul.softSkills,
+                isVerified = Boolean(resul.isVerified),
+                imgUser = resul.imgUser
+
+                if(!isVerified) {
+                    window.location.href = '/view/verifyAccount.html'
                 }
-                if (!softSkills) {
-                    window.location.href = '/view/testeSoftSkill.html'
+
+                if (!hardSkills || !softSkills) {
+                    document.getElementById('containerOfAll').innerHTML += "<p class = 'mt-5'>Lembramos que você não finalizou o cadastro das suas informações como currículo ou teste de SoftSkills, sendo assim não conseguimos lhe oferecer uma informação a respeito de quantos porcento determinada vaga se assemelha ao seu perfil, porém todas as vagas que possuímos estão disponibilizadas para você ainda assim.</p>"
                 }
+
                 document.getElementById('userNameNavBar').innerHTML = `${nome}`
-                checkVagas()
+                if (imgUser) {
+                    document.getElementById('userImage').src = imgUser 
+                }
+                loadVagas()
             }
         }).fail(function(err) {
-            console.log(err)
             console.log(err.responseJSON.message)
             window.location.href = '../view/login.html'
         })
@@ -70,40 +79,24 @@ let vagas = [
     },
 ]
 
+vagasFiltered = []
 
+function searchInput(valToSearch) {
+    if (valToSearch == "") {
+        vagasFiltered = vagas
+        document.getElementById('containerOfAll').innerHTML = ''
+    } else {
+        vagasFiltered = vagas.filter((val) => {
+            return val.name.toLowerCase().includes(valToSearch.toLowerCase())
+        })
+        document.getElementById('containerOfAll').innerHTML = ''
+    }
+    checkVagas()
+}
 
-
-async function checkVagas() {
-
-    // let match
-
-    // async function generateMatch(offerSoft, offerHard) {
-    //     await $.ajax({
-    //         url: "https://testematchagas.herokuapp.com/Match",
-    //         type: "POST",
-    //         datatype: 'json',
-    //         data: {
-    //             userSoft: softSkills,
-    //             userHard: hardSkills,
-    //             offerSoft: offerSoft,
-    //             offerHard: offerHard
-    //         },
-    //         headers: {"Authorization": `Bearer ${auth}`},
-    //         success: function(resul) {
-    //             match = resul.percentage
-    //             return match
-    //         }
-    //     }).fail(function(err) {
-    //         console.log(err.responseJSON.message)
-    //     })
-    // }
-    
-    // generateMatch("4,3,2,1,0,4,3,2,1,0", "Qualidade de Software,Teste de Qualidade").then(() => {
-    //     console.log(resul2)
-    // })
-
+async function loadVagas() {
     await $.ajax({
-        url: "https://testematchagas.herokuapp.com/Offer/getOffers",
+        url: "http://localhost:3001/Offer/getOffers",
         headers: {"Authorization": `Bearer "${auth}"`},
         success: function(resul) { 
             vagas = resul.offers
@@ -112,42 +105,50 @@ async function checkVagas() {
         console.log(err.responseJSON.message)
     })
 
-    // console.log(matchPercentage("4,3,2,1,0,4,3,2,1,0", "Qualidade de Software,Teste de Qualidade"))
-
-    vagas.map((vaga) => {
-        $.ajax({
-            url: "https://testematchagas.herokuapp.com/Match",
+    var count = 0
+    while (count < vagas.length) {
+        await $.ajax({
+            url: "http://localhost:3001/Match",
             type: "POST",
             datatype: 'json',
             data: {
                 userSoft: softSkills,
                 userHard: hardSkills,
-                offerSoft: vaga.softSkills,
-                offerHard: vaga.hardSkills + "," + vaga.requirements
+                offerSoft: vagas[count].softSkills,
+                offerHard: vagas[count].hardSkills + "," + vagas[count].requirements
             },
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) {
                 var match = resul.percentage
-                let color = ''
+                vagas[count].match = resul.percentage
+            }
+        }).fail(function(err) {
+            console.log(err.responseJSON.message)
+        })
+        count++
+    }
 
-                console.log(match)
-                if(match < 40) {
-                    color = 'red'
-                } else if (match > 60) {
-                    color = 'green'
-                } else if (match > 40 && match < 60) {
-                    color = 'yellow'
-                } else {
-                    color = ''
-                }
+    vagasFiltered = vagas
+
+    checkVagas()
+}
+
+
+async function checkVagas() {
+    vagasFiltered.map((vaga) => {
     
-                document.getElementById('containerOfAll').innerHTML += `
+        if (!vaga.logo_company) {
+            vaga.logo_company = "../images/userTest.png"
+        }
+
+        if (!hardSkills || !softSkills) {
+            document.getElementById('containerOfAll').innerHTML += `
                 <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = "margin-top: 40px;">
-                    <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
+                    <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--cinza-fundo), -2px 4px 5px var(--cinza-fundo);">
                     <h3 class="empresaVagaHubVagas">${vaga.name_company}</h3>
                         <div class="row mainWidGet">
                             <div class="col-5 imgHubVagas">
-                                <img src = '../images/userTest.png' style = "width: 100px;">
+                                <img src = ${vaga.logo_company} style = "width: 100px; heigth: 100px; border-radius: 50%;">
                             </div>
                             <div class="col-7">
                                 <div class="divRightHubVagasComponent">
@@ -163,56 +164,65 @@ async function checkVagas() {
                     </div>
                 </div>
             `
+        } else {
+            if(vaga.match < 40) {
+                color = 'red'
+            } else if (vaga.match > 60) {
+                color = 'green'
+                qntOffersGood = qntOffersGood + 1
+            } else if (vaga.match > 40 && vaga.match < 60) {
+                color = 'yellow'
+            } else {
+                color = ''
             }
-        }).fail(function(err) {
-            console.log(err.responseJSON.message)
-        })
 
-        // console.log(matchPercentage(vaga.softSkills, vaga.hardSkills))
-
-        // generateMatch(vaga.softSkills, vaga.hardSkills).then(() => {
-
-        //     let color = ''
-
-        //     console.log(match)
-        //     if(match < 50) {
-        //         color = 'red'
-        //     } else if (match > 50) {
-        //         color = 'green'
-        //     } else if (match == 50) {
-        //         color = 'yellow'
-        //     }
-
-        //     document.getElementById('containerOfAll').innerHTML += `
-        //     <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = "margin-top: 40px;">
-        //         <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
-        //         <h3 class="empresaVagaHubVagas">${vaga.name_company}</h3>
-        //             <div class="row mainWidGet">
-        //                 <div class="col-5 imgHubVagas">
-        //                     <img src = '../images/userTest.png' style = "width: 100px;">
-        //                 </div>
-        //                 <div class="col-7">
-        //                     <div class="divRightHubVagasComponent">
-        //                         <h1 class="nomeVagaHubVagas">${vaga.name}</h1>
-        //                         <p class="pForHubVagas"><i class="fa fa-map-marker" aria-hidden="true"></i>${vaga.location}</p>
-        //                         <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>${vaga.type}</p>
-        //                         <div class = 'divBtnSeeMore'>
-        //                             <button class="btnSeeMore" onclick = "redirectToVagaId('${vaga.id}')">Ver Mais</button>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // `
-        // })
+            document.getElementById('containerOfAll').innerHTML += `
+            <div class = "col-sm-12 col-md-6 col-lg-4 bodyVagaComponent" style = "margin-top: 40px;">
+                <div class = 'vagaComponent' style="box-shadow:  2px 4px 5px var(--shadow-${color}), -2px 4px 5px var(--shadow-${color});">
+                <h3 class="empresaVagaHubVagas">${vaga.name_company}</h3>
+                    <div class="row mainWidGet">
+                        <div class="col-5 imgHubVagas">
+                            <img src = "${vaga.logo_company}" style = "width: 100px; heigth: 100px; border-radius: 50%;">
+                        </div>
+                        <div class="col-7">
+                            <div class="divRightHubVagasComponent">
+                                <h1 class="nomeVagaHubVagas">${vaga.name}</h1>
+                                <p class="pForHubVagas"><i class="fa fa-map-marker" aria-hidden="true"></i>${vaga.location}</p>
+                                <p class="pForHubVagas d-flex"><i class="fa fa-briefcase briefcase-yellow" aria-hidden="true"></i>${vaga.type}</p>
+                                <div class = 'divBtnSeeMore'>
+                                    <button class="btnSeeMore" onclick = "redirectToVagaId('${vaga.id}')">Ver Mais</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+        }
     })
 }
 
-// console.log(matchPercentage("4,3,2,1,0,4,3,2,1,0", "Qualidade de Software,Teste de Qualidade"))
-
 function redirectToVagaId(param) {
-    document.location.href = `../view/vagaExpandida.html?id=${param}`
+    if(window.localStorage.getItem('3e3c48b00c353bd2e99423f6a173a4b4') >= 100) {
+        $.ajax({
+            url: "http://localhost:3001/User/SendNotify",
+            type: "POST",
+            datatype: "json",
+            data: {
+                qntVagas: qntOffersGood
+            },
+            headers: {"Authorization": `Bearer ${auth}`},
+            success: function () {
+                console.log('Noficação Enviada')
+                window.localStorage.setItem('3e3c48b00c353bd2e99423f6a173a4b4', 0)
+                document.location.href = `../view/vagaExpandida.html?id=${param}`
+            }
+        }).fail(function(err) {
+            console.log(err)
+        })
+    } else {
+        document.location.href = `../view/vagaExpandida.html?id=${param}`
+    }
 }
 
 function generateRandomNumber() {
@@ -220,10 +230,6 @@ function generateRandomNumber() {
 }
 
 function popUpVisibility(visible) {
-
-    console.log('Foi')
-    console.log(visible)
-
     let displayToEdit = ''
 
     if(visible == true) {
@@ -236,9 +242,4 @@ function popUpVisibility(visible) {
     }
 
     
-}
-
-function logOut() {
-    window.sessionStorage.removeItem('auth')
-    window.location.href = '/view/login.html'
 }

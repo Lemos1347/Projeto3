@@ -32,6 +32,7 @@
   <link rel="icon" href="../images/favicon.png">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/resposive-theme.css">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -61,7 +62,7 @@
           <li class="nav-item dropdown">
             <div class="dropdown">
               <div class="d-flex">
-                <img class="nav-img-user" src="../images/userTest.png">
+                <img class="nav-img-user" id = 'companyLogo' src="../images/userTest.png">
                 <a class="nav-link dropdown-toggle" id="userNameNavBar" href="/oportunidades/">Null</a>
               </div>
               <div class="dropdown-content">
@@ -93,7 +94,7 @@
           <div class="container mb-4 cardForVagaExpandida">
             <div class="row">
               <div class="col-sm-12 mt-4 d-flex justify-content-center mt-4">
-                <img class="imgVagaExpandida" src="../images/userTest.png" style="width: 160px;">
+                <img class="imgVagaExpandida" id = 'vagaCompanyLogo' src="../images/userTest.png" style="width: 160px; height: 160px; border-radius: 50%;">
               </div>
 
               <div class="col-sm-12 mt-4">
@@ -162,11 +163,11 @@
       <div class="row">
         <div class="col-sm-12 offset-md-4 col-md-4 col-lg-3 offset-lg-6">
 
-          <button class="candidatarBtn">Editar</button>
+          <button class="candidatarBtn" onclick="editOffer()">Editar</button>
         </div>
         <div class="col-sm-12 col-md-4 col-lg-3">
 
-          <button class="removeCandidatarBtn">Excluir</button>
+          <button class="removeCandidatarBtn" onclick="deleteOffer()">Excluir</button>
         </div>
 
       </div>
@@ -282,8 +283,7 @@
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../js/vagaExpandidaCompany.js"></script>
-
-
+  <script src="../js/logOut.js"></script>
 </body>
 
 </html>

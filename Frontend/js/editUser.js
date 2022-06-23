@@ -1,9 +1,73 @@
-var auth
+var auth = window.localStorage.getItem('auth')
+var User
+
+/* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
+document.onreadystatechange = async function () {
+    if (document.readyState == "complete") {
+        // $.ajax({
+        //     url: "http://localhost:3001/User/Verify/Infos",
+        //     headers: {"Authorization": `Bearer ${auth}`},
+        //     success: function(resul) { 
+        //         nome = resul.name
+        //         email = resul.email,
+        //         id = resul.id
+        //         hardSkills = resul.hardSkills,
+        //         softSkills = resul.softSkills,
+        //         isVerified = Boolean(resul.isVerified),
+        //         imgUser = resul.imgUser
+
+        //         if(!isVerified) {
+        //             window.location.href = '/view/verifyAccount.html'
+        //         }
+
+        //         document.getElementById('userNameNavBar').innerHTML = `${nome}`
+        //         if (imgUser) {
+        //             document.getElementById('userImage').src = imgUser 
+        //         }
+        //     }
+        // }).fail(function(err) {
+        //     console.log(err.responseJSON.message);
+        //     // window.location.href = '../view/login.html'
+        // })
+
+        await $.ajax({
+            url: "http://localhost:3001/User/User",
+            type: "POST",
+            headers: {"Authorization": `Bearer ${auth}`},
+            success: function(resul) { 
+                User = resul.user
+
+                if(!Boolean(User.isVerified)) {
+                    window.location.href = '/view/verifyAccount.html'
+                }
+
+                document.getElementById('userNameNavBar').innerHTML = `${nome}`
+                if (User.imgUser) {
+                    document.getElementById('userImage').src = imgUser 
+                }
+            }
+        }).fail(function(err) {
+            console.log(err.responseJSON.message)
+            window.location.href = '/view/login.html'
+        })
+
+        console.log(User)
+        document.getElementById('nomeUserCreateForm').value = User.name
+        document.getElementById('emailUserCreateForm').value = User.email
+        document.getElementById('bornDateUserCreateForm').value = User.bornDate
+        document.getElementById('genderUserCreateForm').value = User.gender
+        document.getElementById("cpfUserCreateForm").value = formatCnpjCpf(String(User.cpf))
+        var firstNumber = String(User.phoneNumber).slice(0, 2);
+        var restNumber = String(User.phoneNumber).slice(2)
+        console.log(firstNumber, restNumber)
+        document.getElementById("number55Input").value = firstNumber
+        document.getElementById("number11Input").value = formatacaoNumberFirst(restNumber)
+    }
+}
 
 async function verifyUserInfos() {
     var nome = document.getElementById("nomeUserCreateForm").value
     var email = document.getElementById("emailUserCreateForm").value
-    var senha = document.getElementById("senhaUserCreateForm").value
     var bornDate = document.getElementById("bornDateUserCreateForm").value
     var gender = document.getElementById("genderUserCreateForm").value
     var cpf = cpfToDb(document.getElementById("cpfUserCreateForm").value)
@@ -13,53 +77,34 @@ async function verifyUserInfos() {
     number = prefixNumber + numberNormal
     var inputFile = document.getElementById('imageUser').files[0]
 
-    const validate = validateInformations(email, cpf, senha)
+    const validate = validateInformations(email, cpf)
     console.log(validate)
 
     if (validate === true) {
-        window.scroll(0, -5000)
-        document.getElementById('loadTriangulo').style.display = 'flex';
         $.ajax({
-            url: "http://localhost:3001/User/Register",
-            type: "POST",
+            url: "http://localhost:3001/User/Update",
+            type: "PUT",
+            headers: {"Authorization": `Bearer ${auth}`},
             data: {
                 name: nome,
                 email: email,
-                password: senha,
                 bornDate: bornDate,
                 gender: gender,
                 cpf: cpf,
                 phoneNumber: number,
-                typeOfUser: "user",
             },
             success: async function (resul) {
-                document.getElementById('loadTriangulo').style.display = 'none';
                 await Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: "Conta criada com sucesso!",
+                    title: "Conta atualizada com sucesso!",
                     showConfirmButton: false,
                     timer: 2000
                 })
-                window.localStorage.setItem('3e3c48b00c353bd2e99423f6a173a4b4', 0)
-                $.post("http://localhost:3001/User/Login",
-                    {
-                        email: email,
-                        password: senha
-                    }
-                    , function (msg) {
-                        if (msg.token) {
-                            window.localStorage.setItem('auth', msg.token)
-                            auth = msg.token
-                            encodeImageFileAsURL(inputFile)
-                        }
-                    }).fail(function (err) {
-                        console.log(err.responseJSON.error)
-                    })
-                console.log(resul.message)
+                encodeImageFileAsURL(inputFile)
+                window.location.href = '/view/hubVagas.html'
             },
             error: function (err) {
-                document.getElementById('loadTriangulo').style.display = 'none';
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -103,25 +148,38 @@ function encodeImageFileAsURL(element) {
             })
         }
     } else {
-        $.ajax({
-            url: "http://localhost:3001/User/Update",
-            type: "PUT",
-            headers: { "Authorization": `Bearer ${auth}` },
-            data: {
-                imgUser: ''
-            },
-            success: async function (resul) {
-                console.log('Imagem no Banco')
-                window.location.href = '/view/verifyAccount.html'
-            },
-            error: function (err) {
-                console.log(err.responseJSON.error)
-            }
-        })
+        console.log('Teste')
     }
 
 
     reader.readAsDataURL(element);
+}
+
+function formatCnpjCpf(value) {
+  const cnpjCpf = value.replace(/\D/g, '');
+  
+  if (cnpjCpf.length === 11) {
+    return cnpjCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "\$1.\$2.\$3-\$4");
+  } 
+  
+  return cnpjCpf.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "\$1.\$2.\$3/\$4-\$5");
+}
+
+function formatacaoNumberFirst(num) {
+    const phoneNumber = num;
+    const length = phoneNumber.length;
+
+    //Efetuando Validações
+    if (length < 3) {
+        return phoneNumber;
+    } 
+
+
+    if (length < 8) {
+      return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2)}`;
+    }
+
+    return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2,7)}-${phoneNumber.slice(7, 11)}`;
 }
 
 function numberFormat() {
@@ -179,7 +237,7 @@ function cpfToDb(cpf) {
     return cpf
 }
 
-function validateInformations(email, cpf, senha, file) {
+function validateInformations(email, cpf) {
     if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
         return "Email inválido"
     }
@@ -190,19 +248,6 @@ function validateInformations(email, cpf, senha, file) {
 
     if (!CPFvalidator.valida(cpf)) {
         return "CPF inválido"
-    }
-
-    if (!senha.match(/[a-z]+/)) {
-        return "Senha deve possuir letras minúsculas"
-    }
-    if (!senha.match(/[A-Z]+/)) {
-        return "Senha deve possuir letras maiúsculas"
-    }
-    if (!senha.match(/[0-9]+/)) {
-        return "Senha deve possuir números"
-    }
-    if (!senha.match(/[$@#&!]+/)) {
-        return "Senha deve possuir caracteres especíais"
     }
 
     return true

@@ -3,10 +3,10 @@ require('express-async-errors')
 
 const createJobOffer = ( req, res ) => {
     //Pega as infos da requisição
-    const { name, type, local, description, requirements, hardSkills, name_company, id_company } = req.body;
+    const { name, type, local, description, requirements, hardSkills, name_company, id_company, logo_company } = req.body;
 
     //Instancia a classe criando uma vaga
-    const offer = new jobOfferService.jobOffer(name, type, local, description, requirements, hardSkills, name_company, id_company);
+    const offer = new jobOfferService.jobOffer(name, type, local, description, requirements, hardSkills, name_company, id_company, logo_company);
 
     //Tratamento das respostas do método da classe
     offer.createOffer().then((resul) => {

@@ -6,7 +6,7 @@ const sqlite = require('sqlite')
 
 class jobOffer {
 
-    constructor(name, type, local, description, requirements, hardSkills, name_company, id_company) {
+    constructor(name, type, local, description, requirements, hardSkills, name_company, id_company, logo_company) {
         if(!this.id) {
             this.id = uuid();
         }
@@ -18,6 +18,7 @@ class jobOffer {
         this.hardSkills = hardSkills,
         this.nameCompany = name_company,
         this.idCompany = id_company
+        this.logoCompany = logo_company
     }
 
     async createOffer() {
@@ -94,7 +95,7 @@ class jobOffer {
         }
         
         //Inserção de infos passadas no DB
-        const inserction = await db.run("INSERT INTO TB_JOBOFFER (id, name, type, location, description, requirements, hardSkills, name_company, id_company, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.type , this.local, this.description, this.requirements, this.hardSkills, this.nameCompany, this.idCompany]);
+        const inserction = await db.run("INSERT INTO TB_JOBOFFER (id, name, type, location, description, requirements, hardSkills, name_company, id_company, logo_company, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,DateTime('now','localtime'),DateTime('now','localtime'))", [this.id, this.name, this.type , this.local, this.description, this.requirements, this.hardSkills, this.nameCompany, this.idCompany, this.logoCompany]);
 
         if (inserction.changes === 0) {
             const error = {
@@ -570,7 +571,6 @@ class jobOffer {
     }
 
     async getUsersApplied(idUser, idOffer) {
-        console.log(idUser)
         //Instanciação do DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 

@@ -4,13 +4,14 @@ function recoveryPassword() {
     console.log('teste')
 
     $.ajax({
-        url: "https://testematchagas.herokuapp.com/User/Reset/Password",
+        url: "http://localhost:3001/User/Reset/Password",
         method: "POST",
         data: {
             email: email
         },
         success: function(resul) { 
             if(resul.trueMessage === false) {
+                document.getElementById('loadTriangulo').style.display = 'none';
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -20,7 +21,7 @@ function recoveryPassword() {
                 })
             } else {
                 document.getElementById('loadTriangulo').style.display = 'none';
-                window.sessionStorage.setItem('emailForRecovery', email)
+                window.localStorage.setItem('emailForRecovery', email)
                 window.location.href = '/view/changePassword.html'
             }
         }

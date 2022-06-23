@@ -3,7 +3,7 @@ let emailExists
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
-        emailExists = window.sessionStorage.getItem('emailForRecovery');
+        emailExists = window.localStorage.getItem('emailForRecovery');
 
         if (!emailExists) {
             window.location.href = '/view/forgotPassword.html'
@@ -44,7 +44,7 @@ async function saveChange() {
     } else {
         if (passWord === confirmPass) {
             $.ajax({
-                url: "https://testematchagas.herokuapp.com/User/Redefine/Password",
+                url: "http://localhost:3001/User/Redefine/Password",
                 type: "PUT",
                 data: { 
                     email: emailExists,
@@ -61,7 +61,7 @@ async function saveChange() {
                         timer: 2000
                     })
                     window.location.href = '/view/login.html'
-                    window.sessionStorage.removeItem('emailForRecovery')
+                    window.localStorage.removeItem('emailForRecovery')
                 },
                 error: function(err) {
                     console.log(err.responseJSON.error)
