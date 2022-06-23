@@ -78,7 +78,7 @@ async function checkVaga() {
     document.getElementById('typeOffer').innerHTML = Offer.type
     document.getElementById('descriptionOffer').innerHTML = Offer.description
     document.getElementById('nameOffer').innerHTML = Offer.name
-    if (User.logo_company) {
+    if (Offer.logo_company) {
         document.getElementById('logoCompany').src = Offer.logo_company
     }
     
