@@ -13,7 +13,7 @@ let auth = window.localStorage.getItem('auth')
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
-            url: "http://localhost:3001/User/Verify/Infos",
+            url: "https://matchagas.herokuapp.com/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 nome = resul.name
@@ -96,7 +96,7 @@ function searchInput(valToSearch) {
 
 async function loadVagas() {
     await $.ajax({
-        url: "http://localhost:3001/Offer/getOffers",
+        url: "https://matchagas.herokuapp.com/Offer/getOffers",
         headers: {"Authorization": `Bearer "${auth}"`},
         success: function(resul) { 
             vagas = resul.offers
@@ -108,7 +108,7 @@ async function loadVagas() {
     var count = 0
     while (count < vagas.length) {
         await $.ajax({
-            url: "http://localhost:3001/Match",
+            url: "https://matchagas.herokuapp.com/Match",
             type: "POST",
             datatype: 'json',
             data: {
@@ -205,7 +205,7 @@ async function checkVagas() {
 function redirectToVagaId(param) {
     if(window.localStorage.getItem('3e3c48b00c353bd2e99423f6a173a4b4') >= 100) {
         $.ajax({
-            url: "http://localhost:3001/User/SendNotify",
+            url: "https://matchagas.herokuapp.com/User/SendNotify",
             type: "POST",
             datatype: "json",
             data: {

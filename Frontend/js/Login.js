@@ -14,7 +14,7 @@ pressEnter.addEventListener("keydown", function (e) {
 });
 
 function verifyLogin() {
-    $.post("http://localhost:3001/User/Login",
+    $.post("https://matchagas.herokuapp.com/User/Login",
     {"email" : $("#email").val(), 
     "password" : $("#passWord").val()}
     , function(msg){
@@ -22,7 +22,7 @@ function verifyLogin() {
             window.localStorage.setItem('auth', msg.token)
             if (msg.typeOfUser == 'user') {
                 $.ajax({
-                    url: "http://localhost:3001/User/Verify/Curriculum",
+                    url: "https://matchagas.herokuapp.com/User/Verify/Curriculum",
                     type: "GET",
                     headers: {"Authorization": `Bearer ${msg.token}`},
                     success: function(resul) {

@@ -20,7 +20,7 @@ async function verifyUserInfos() {
         window.scroll(0, -5000)
         document.getElementById('loadTriangulo').style.display = 'flex';
         $.ajax({
-            url: "http://localhost:3001/User/Register",
+            url: "https://matchagas.herokuapp.com/User/Register",
             type: "POST",
             data: {
                 name: nome,
@@ -42,7 +42,7 @@ async function verifyUserInfos() {
                     timer: 2000
                 })
                 window.localStorage.setItem('3e3c48b00c353bd2e99423f6a173a4b4', 0)
-                $.post("http://localhost:3001/User/Login",
+                $.post("https://matchagas.herokuapp.com/User/Login",
                     {
                         email: email,
                         password: senha
@@ -87,7 +87,7 @@ function encodeImageFileAsURL(element) {
     if (element) {
         reader.onloadend = function () {
             $.ajax({
-                url: "http://localhost:3001/User/Update",
+                url: "https://matchagas.herokuapp.com/User/Update",
                 type: "PUT",
                 headers: { "Authorization": `Bearer ${auth}` },
                 data: {
@@ -104,7 +104,7 @@ function encodeImageFileAsURL(element) {
         }
     } else {
         $.ajax({
-            url: "http://localhost:3001/User/Update",
+            url: "https://matchagas.herokuapp.com/User/Update",
             type: "PUT",
             headers: { "Authorization": `Bearer ${auth}` },
             data: {

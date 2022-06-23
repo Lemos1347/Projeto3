@@ -16,7 +16,7 @@ let cards = [
 document.onreadystatechange = async function () {
   if (document.readyState == "complete") {
     $.ajax({
-      url: "http://localhost:3001/User/Verify/Infos",
+      url: "https://matchagas.herokuapp.com/User/Verify/Infos",
       headers: {"Authorization": `Bearer ${auth}`},
       success: function(resul) { 
           console.log(resul)
@@ -306,7 +306,7 @@ function verifyInfos() {
   curriculum = JSON.stringify(curriculum)
 
   $.ajax({
-    url: "http://localhost:3001/User/Update",
+    url: "https://matchagas.herokuapp.com/User/Update",
     type: "PUT",
     headers: {"Authorization": `Bearer ${auth}`},
     data: { 

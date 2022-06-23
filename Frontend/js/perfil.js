@@ -12,7 +12,7 @@ const auth = window.localStorage.getItem('auth')
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
-            url: "http://localhost:3001/User/Verify/Infos",
+            url: "https://matchagas.herokuapp.com/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 nome = resul.name
@@ -45,7 +45,7 @@ let User
 async function checkUser() {
 
     await $.ajax({
-        url: "http://localhost:3001/User/User",
+        url: "https://matchagas.herokuapp.com/User/User",
         type: "POST",
         headers: {"Authorization": `Bearer ${auth}`},
         success: function(resul) { 
@@ -82,7 +82,7 @@ async function checkUser() {
 
 function deleteAccount() {
     $.ajax({
-        url: "http://localhost:3001/User/Delete",
+        url: "https://matchagas.herokuapp.com/User/Delete",
         headers: {"Authorization": `Bearer ${auth}`},
         type: "DELETE",
         success: async function(resul) { 

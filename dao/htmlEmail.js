@@ -47,7 +47,7 @@ const emailRegister = (token) => {
                                                 style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                             <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">Seu cadastro em nossa plataforma foi bem sucedido, mas para podermos continuar precisamos verificar a sua identidade, portanto informe o código abaixo para a nossa plataforma</p>
                                         <label style="display:inline-block; vertical-align:middle; font-family:'Rubik',sans-serif;color:#455056; font-size:15px;line-height:24px; margin:0;">Link de Redefinição: </label>
-                                            <a href="http://localhost:3001/view/verifyAccount.html?token=${token}" style="background:#530084;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Clique Aqui</a>
+                                            <a href="https://matchagas.herokuapp.com/view/verifyAccount.html?token=${token}" style="background:#530084;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Clique Aqui</a>
                                         </td>
                                     </tr>
                                     <tr>

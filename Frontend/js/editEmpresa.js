@@ -8,7 +8,7 @@ var email
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         await $.ajax({
-            url: "http://localhost:3001/Company",
+            url: "https://matchagas.herokuapp.com/Company",
             type: "GET",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
@@ -60,7 +60,7 @@ async function verifyCompanyInfos() {
 
     if (validate === true) {
         $.ajax({
-            url: "http://localhost:3001/Company/Update",
+            url: "https://matchagas.herokuapp.com/Company/Update",
             type: "PUT",
             headers: {"Authorization": `Bearer ${auth}`},
             data: {
@@ -109,7 +109,7 @@ function encodeImageFileAsURL(element) {
     if (element) {
         reader.onloadend = function () {
             $.ajax({
-                url: "http://localhost:3001/Company/Update",
+                url: "https://matchagas.herokuapp.com/Company/Update",
                 type: "PUT",
                 headers: { "Authorization": `Bearer ${auth}` },
                 data: {

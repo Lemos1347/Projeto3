@@ -8,7 +8,7 @@ let auth = window.localStorage.getItem('auth')
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
-            url: "http://localhost:3001/Company",
+            url: "https://matchagas.herokuapp.com/Company",
             type: "GET",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
@@ -35,7 +35,7 @@ document.onreadystatechange = async function () {
         idVaga = params.get('vagaId')
         console.log(idUser)
         $.ajax({
-            url: "http://localhost:3001/Apply/User",
+            url: "https://matchagas.herokuapp.com/Apply/User",
             type: "POST",
             headers: {"Authorization": `Bearer ${auth}`},
             data: {
@@ -69,7 +69,7 @@ document.onreadystatechange = async function () {
 
 function accept() {
     $.ajax({
-        url: "http://localhost:3001/Apply",
+        url: "https://matchagas.herokuapp.com/Apply",
         type: "POST",
         headers: {"Authorization": `Bearer ${auth}`},
         data: {
@@ -100,7 +100,7 @@ function accept() {
 
 function decline() {
     $.ajax({
-        url: "http://localhost:3001/Apply",
+        url: "https://matchagas.herokuapp.com/Apply",
         type: "POST",
         headers: {"Authorization": `Bearer ${auth}`},
         data: {
@@ -133,7 +133,7 @@ function decline() {
 
 function loadStatus() {
     $.ajax({
-        url: "http://localhost:3001/Apply/Status",
+        url: "https://matchagas.herokuapp.com/Apply/Status",
         type: "POST",
         headers: {"Authorization": `Bearer ${auth}`},
         data: {

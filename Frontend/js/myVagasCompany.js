@@ -9,7 +9,7 @@ document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         auth = window.localStorage.getItem('auth')
         $.ajax({
-            url: "http://localhost:3001/Company",
+            url: "https://matchagas.herokuapp.com/Company",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 console.log(resul)
@@ -77,7 +77,7 @@ let vagas = [
 
 async function checkVagas() {
     await $.ajax({
-        url: "http://localhost:3001/Offer/getOfferCompany",
+        url: "https://matchagas.herokuapp.com/Offer/getOfferCompany",
         headers: { "authorization": `Bearer ${auth}` },
         success: function (resul) {
             console.log(resul)

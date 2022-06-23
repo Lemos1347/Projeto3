@@ -141,7 +141,7 @@ document.onreadystatechange = async function () {
             let Offer
     
             await $.ajax({
-                url: "http://localhost:3001/Offer/offerExpanded",
+                url: "https://matchagas.herokuapp.com/Offer/offerExpanded",
                 type: "POST",
                 data: { 
                     id: idOffer
@@ -170,7 +170,7 @@ document.onreadystatechange = async function () {
         }
 
         $.ajax({
-            url: "http://localhost:3001/Company",
+            url: "https://matchagas.herokuapp.com/Company",
             headers: {"Authorization": `Bearer ${auth}`},
             method: "GET",
             success: function(resul) { 
@@ -203,7 +203,7 @@ function saveInfos() {
     console.log(idOffer)
     if (idOffer) {
         $.ajax({
-            url: "http://localhost:3001/Offer/Update",
+            url: "https://matchagas.herokuapp.com/Offer/Update",
             type: "PUT",
             headers: {"Authorization": `Bearer ${auth}`},
             data: {
@@ -240,7 +240,7 @@ function saveInfos() {
         })
     } else {
         $.ajax({
-            url: "http://localhost:3001/Offer/Create",
+            url: "https://matchagas.herokuapp.com/Offer/Create",
             type: "POST",
             headers: {"Authorization": `Bearer ${auth}`},
             data: {

@@ -7,7 +7,7 @@ document.onreadystatechange = async function () {
         auth = window.localStorage.getItem('auth')
 
         await $.ajax({
-            url: "http://localhost:3001/Company",
+            url: "https://matchagas.herokuapp.com/Company",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 console.log(resul)
@@ -26,7 +26,7 @@ document.onreadystatechange = async function () {
 
         if (isCompany) {
             $.ajax({
-                url: "http://localhost:3001/Company",
+                url: "https://matchagas.herokuapp.com/Company",
                 headers: {"Authorization": `Bearer ${auth}`},
                 success: function(resul) { 
                     var isVerified = resul.isVerified
@@ -40,7 +40,7 @@ document.onreadystatechange = async function () {
             })
         } else {
             $.ajax({
-                url: "http://localhost:3001/User/Verify/Infos",
+                url: "https://matchagas.herokuapp.com/User/Verify/Infos",
                 headers: {"Authorization": `Bearer ${auth}`},
                 success: function(resul) { 
                     var isVerified = Boolean(resul.isVerified)
@@ -61,7 +61,7 @@ document.onreadystatechange = async function () {
         if (token) {
             document.getElementById('text-lock').style.display = 'block'
             $.ajax({
-                url: "http://localhost:3001/User/VerifyAccount",
+                url: "https://matchagas.herokuapp.com/User/VerifyAccount",
                 headers: {"Authorization": `Bearer ${auth}`},
                 data: {
                     token: token
@@ -100,7 +100,7 @@ document.onreadystatechange = async function () {
 function resend() {
     if (isCompany) {
         $.ajax({
-            url: "http://localhost:3001/Company/VerifyCode",
+            url: "https://matchagas.herokuapp.com/Company/VerifyCode",
             headers: {"Authorization": `Bearer ${auth}`},
             data: {
                 token: token
@@ -127,7 +127,7 @@ function resend() {
         })
     } else {
         $.ajax({
-            url: "http://localhost:3001/User/VerifyCode",
+            url: "https://matchagas.herokuapp.com/User/VerifyCode",
             headers: {"Authorization": `Bearer ${auth}`},
             data: {
                 token: token
@@ -159,7 +159,7 @@ function resend() {
 function start(){
     if (isCompany) {
         $.ajax({
-            url: "http://localhost:3001/Company",
+            url: "https://matchagas.herokuapp.com/Company",
             headers: {"Authorization": `Bearer ${auth}`},
             success: async function(resul) { 
                 var isVerified = resul.isVerified
@@ -181,7 +181,7 @@ function start(){
         })
     } else {
         $.ajax({
-            url: "http://localhost:3001/User/Verify/Infos",
+            url: "https://matchagas.herokuapp.com/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: async function(resul) { 
                 var isVerified = Boolean(resul.isVerified)

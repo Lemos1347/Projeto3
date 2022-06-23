@@ -18,7 +18,7 @@ async function verifyCompanyInfos() {
         window.scroll(0, -5000)
         document.getElementById('loadTriangulo').style.display = 'flex';
         $.ajax({
-            url: "http://localhost:3001/Company/Register",
+            url: "https://matchagas.herokuapp.com/Company/Register",
             type: "POST",
             data: {
                 name: razaoSoc,
@@ -38,7 +38,7 @@ async function verifyCompanyInfos() {
                     showConfirmButton: false,
                     timer: 2000
                 })
-                $.post("http://localhost:3001/User/Login",
+                $.post("https://matchagas.herokuapp.com/User/Login",
                     {
                         email: email,
                         password: senha
@@ -82,7 +82,7 @@ function encodeImageFileAsURL(element) {
     if (element) {
         reader.onloadend = function () {
             $.ajax({
-                url: "http://localhost:3001/Company/Update",
+                url: "https://matchagas.herokuapp.com/Company/Update",
                 type: "PUT",
                 headers: { "Authorization": `Bearer ${auth}` },
                 data: {
@@ -99,7 +99,7 @@ function encodeImageFileAsURL(element) {
         }
     } else {
         $.ajax({
-            url: "http://localhost:3001/User/Update",
+            url: "https://matchagas.herokuapp.com/User/Update",
             type: "PUT",
             headers: { "Authorization": `Bearer ${auth}` },
             data: {

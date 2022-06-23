@@ -13,7 +13,7 @@ let auth = window.localStorage.getItem('auth')
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
-            url: "http://localhost:3001/User/Verify/Infos",
+            url: "https://matchagas.herokuapp.com/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 nome = resul.name
@@ -44,7 +44,7 @@ let companies = []
 async function checkVagas() {
 
     await $.ajax({
-        url: "http://localhost:3001/User/Users",
+        url: "https://matchagas.herokuapp.com/User/Users",
         headers: {"Authorization": `Bearer ${auth}`},
         success: function(resul) { 
             users = resul.message
@@ -54,7 +54,7 @@ async function checkVagas() {
     })
 
     await $.ajax({
-        url: "http://localhost:3001/Company/Companies",
+        url: "https://matchagas.herokuapp.com/Company/Companies",
         headers: {"Authorization": `Bearer ${auth}`},
         success: function(resul) { 
             companies = resul.message
@@ -160,7 +160,7 @@ function popUpVisibility(visible) {
 
 async function deleteUser(id) {
     await $.ajax({
-        url: "http://localhost:3001/User/Delete/Admin",
+        url: "https://matchagas.herokuapp.com/User/Delete/Admin",
         type: "DELETE",
         headers: {"Authorization": `Bearer ${auth}`},
         data: {

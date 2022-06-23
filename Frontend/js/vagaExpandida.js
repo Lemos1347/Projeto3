@@ -13,7 +13,7 @@ document.onreadystatechange = async function () {
         const params = new URLSearchParams(window.location.search)
         idOffer = params.get('id')
         $.ajax({
-            url: "http://localhost:3001/User/Verify/Infos",
+            url: "https://matchagas.herokuapp.com/User/Verify/Infos",
             type: "GET",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
@@ -39,7 +39,7 @@ async function checkVaga() {
 
     //Verifica se usuário está aplicado ou não para a determinada vaga
     await $.ajax({
-        url: "http://localhost:3001/Offer/VerifyApply",
+        url: "https://matchagas.herokuapp.com/Offer/VerifyApply",
         type: "POST",
         data: { 
             idVaga: idOffer
@@ -60,7 +60,7 @@ async function checkVaga() {
     })
 
     await $.ajax({
-        url: "http://localhost:3001/Offer/offerExpanded",
+        url: "https://matchagas.herokuapp.com/Offer/offerExpanded",
         type: "POST",
         data: { 
             id: idOffer
@@ -102,7 +102,7 @@ async function checkVaga() {
 
 function applyOffer() {
     $.ajax({
-        url: "http://localhost:3001/Offer/Apply",
+        url: "https://matchagas.herokuapp.com/Offer/Apply",
         type: "POST",
         data: { 
             idVaga: idOffer
@@ -127,7 +127,7 @@ function applyOffer() {
 
 function removeOffer() {
     $.ajax({
-        url: "http://localhost:3001/Offer/RemoveApply",
+        url: "https://matchagas.herokuapp.com/Offer/RemoveApply",
         type: "DELETE",
         data: { 
             idVaga: idOffer

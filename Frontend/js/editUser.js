@@ -5,7 +5,7 @@ var User
 document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         // $.ajax({
-        //     url: "http://localhost:3001/User/Verify/Infos",
+        //     url: "https://matchagas.herokuapp.com/User/Verify/Infos",
         //     headers: {"Authorization": `Bearer ${auth}`},
         //     success: function(resul) { 
         //         nome = resul.name
@@ -31,7 +31,7 @@ document.onreadystatechange = async function () {
         // })
 
         await $.ajax({
-            url: "http://localhost:3001/User/User",
+            url: "https://matchagas.herokuapp.com/User/User",
             type: "POST",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
@@ -82,7 +82,7 @@ async function verifyUserInfos() {
 
     if (validate === true) {
         $.ajax({
-            url: "http://localhost:3001/User/Update",
+            url: "https://matchagas.herokuapp.com/User/Update",
             type: "PUT",
             headers: {"Authorization": `Bearer ${auth}`},
             data: {
@@ -132,7 +132,7 @@ function encodeImageFileAsURL(element) {
     if (element) {
         reader.onloadend = function () {
             $.ajax({
-                url: "http://localhost:3001/User/Update",
+                url: "https://matchagas.herokuapp.com/User/Update",
                 type: "PUT",
                 headers: { "Authorization": `Bearer ${auth}` },
                 data: {

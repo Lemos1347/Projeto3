@@ -4,7 +4,7 @@ function recoveryPassword() {
     console.log('teste')
 
     $.ajax({
-        url: "http://localhost:3001/User/Reset/Password",
+        url: "https://matchagas.herokuapp.com/User/Reset/Password",
         method: "POST",
         data: {
             email: email

@@ -44,7 +44,7 @@ async function saveChange() {
     } else {
         if (passWord === confirmPass) {
             $.ajax({
-                url: "http://localhost:3001/User/Redefine/Password",
+                url: "https://matchagas.herokuapp.com/User/Redefine/Password",
                 type: "PUT",
                 data: { 
                     email: emailExists,

@@ -13,7 +13,7 @@ document.onreadystatechange = function () {
         document.getElementById('questionMessage').innerHTML = Perguntas[0].pergunta
         auth = window.localStorage.getItem('auth')
         $.ajax({
-            url: "http://localhost:3001/User/Verify/Infos",
+            url: "https://matchagas.herokuapp.com/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 console.log(resul)
@@ -277,7 +277,7 @@ function finalizarTeste(type) {
             })
             console.log(auth)
             $.ajax({
-                url: "http://localhost:3001/User/Update",
+                url: "https://matchagas.herokuapp.com/User/Update",
                 headers: {"Authorization": `Bearer ${auth}`},
                 type: "PUT",
                 data: { 

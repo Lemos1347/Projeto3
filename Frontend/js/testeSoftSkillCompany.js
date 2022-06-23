@@ -9,7 +9,7 @@ document.onreadystatechange = function () {
         auth = window.localStorage.getItem('auth')
         idOffer = window.localStorage.getItem('idOfferForSK')
         $.ajax({
-            url: "http://localhost:3001/Company",
+            url: "https://matchagas.herokuapp.com/Company",
             headers: {"Authorization": `Bearer ${auth}`},
             method: "GET",
             success: function(resul) { 
@@ -258,7 +258,7 @@ function finalizarTeste(type) {
             })
             console.log(auth)
             $.ajax({
-                url: "http://localhost:3001/Offer/Update",
+                url: "https://matchagas.herokuapp.com/Offer/Update",
                 headers: {"Authorization": `Bearer ${auth}`},
                 type: "PUT",
                 data: { 

@@ -12,7 +12,7 @@ document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         auth = window.localStorage.getItem('auth')
         $.ajax({
-            url: "http://localhost:3001/Company",
+            url: "https://matchagas.herokuapp.com/Company",
             headers: {"Authorization": `Bearer ${auth}`},
             success: function(resul) { 
                 console.log(resul)
@@ -79,7 +79,7 @@ function formatacao(num) {
 
 function deleteAccount() {
     $.ajax({
-        url: "http://localhost:3001/Company/Delete",
+        url: "https://matchagas.herokuapp.com/Company/Delete",
         headers: {"Authorization": `Bearer ${auth}`},
         type: "DELETE",
         success: async function(resul) { 

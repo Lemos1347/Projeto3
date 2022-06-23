@@ -24,7 +24,7 @@ app.use('/Company', CompanyRouter);
 app.use('/Offer', OfferRouter);
 app.use('/Match', MatchRouter);
 app.use('/Apply', ApplyRouter);
-app.use(express.static("../Frontend"))
+app.use(express.static("./Frontend"))
 app.use((err, req, res, next) => {    
     if (err instanceof Error) {
         console.log()
