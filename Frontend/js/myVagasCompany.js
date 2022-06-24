@@ -3,6 +3,7 @@ let company_name
 let companyId
 let isVerified
 let logo_company
+var vagasFiltered = []
 
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
 document.onreadystatechange = async function () {
@@ -11,7 +12,7 @@ document.onreadystatechange = async function () {
         $.ajax({
             url: "https://matchagas.herokuapp.com/Company",
             headers: {"Authorization": `Bearer ${auth}`},
-            success: function(resul) { 
+            success: async function(resul) { 
                 console.log(resul)
                 company_name = resul.name_company
                 companyId = resul.id
@@ -27,6 +28,21 @@ document.onreadystatechange = async function () {
 
                 document.getElementById('userNameNavBar').innerHTML = company_name
                 document.getElementById('companyLogo').src = logo_company
+
+                await $.ajax({
+                    url: "https://matchagas.herokuapp.com/Offer/getOfferCompany",
+                    headers: { "authorization": `Bearer ${auth}` },
+                    success: function (resul) {
+                        console.log(resul)
+                        vagas = resul.offers
+                        console.log(vagas)
+                    }
+                }).fail(function (err) {
+                    console.log(err.responseJSON.message)
+                })
+
+                vagasFiltered = vagas
+
                 checkVagas()
             }
         }).fail(function(err) {
@@ -75,20 +91,66 @@ let vagas = [
     },
 ]
 
-async function checkVagas() {
-    await $.ajax({
-        url: "https://matchagas.herokuapp.com/Offer/getOfferCompany",
-        headers: { "authorization": `Bearer ${auth}` },
-        success: function (resul) {
-            console.log(resul)
-            vagas = resul.offers
-            console.log(vagas)
+function searchInput(valToSearch) {
+    if (valToSearch == "") {
+        vagasFiltered = vagas
+        document.getElementById('containerOfAll').innerHTML = ''
+    } else {
+        if (vagasFiltered == '') {
+            vagasFiltered = vagas
         }
-    }).fail(function (err) {
-        console.log(err.responseJSON.message)
-    })
+        vagasFiltered = vagasFiltered.filter((val) => {
+            return val.name.toLowerCase().includes(valToSearch.toLowerCase())
+        })
+        document.getElementById('containerOfAll').innerHTML = ''
+    }
+    checkVagas()
+}
 
-    vagas.map((vaga) => {
+function orderedFilters(valToSearch1, valToSearch2) {
+    document.getElementById('applytBtn').style.display = 'none'
+    document.getElementById('declineBtn').style.display = 'block'
+    var vagasFiltered1 = []
+    var vagasFiltered2 = []
+    if (valToSearch1 == "Selecione") {
+        vagasFiltered = vagas
+        document.getElementById('containerOfAll').innerHTML = ''
+    } else {
+        vagasFiltered1 = vagasFiltered.filter((val) => {
+            return val.type.toLowerCase().includes(valToSearch1.toLowerCase())
+        })
+        document.getElementById('containerOfAll').innerHTML = ''
+    }
+
+    if (valToSearch2 == "Selecione") {
+        vagasFiltered = vagas
+        document.getElementById('containerOfAll').innerHTML = ''
+    } else {
+        vagasFiltered2 = vagasFiltered.filter((val) => {
+            return val.location.toLowerCase().includes(valToSearch2.toLowerCase())
+        })
+        document.getElementById('containerOfAll').innerHTML = ''
+    }
+
+    vagasFiltered = vagasFiltered1.concat(vagasFiltered2)
+
+    vagasFiltered = [...new Set(vagasFiltered)];
+    checkVagas()
+}
+
+function clearFilter() {
+    console.log('teste')
+    document.getElementById('applytBtn').style.display = 'block'
+    document.getElementById('declineBtn').style.display = 'none'
+    document.getElementById('type').value = 'Selecione'
+    document.getElementById('localVaga').value = 'Selecione'
+    vagasFiltered = vagas
+    document.getElementById('containerOfAll').innerHTML = ''
+    checkVagas()
+}
+
+async function checkVagas() {
+    vagasFiltered.map((vaga) => {
 
         if (!vaga.logo_company) {
             vaga.logo_company = "../images/userTest.png"
@@ -120,4 +182,16 @@ async function checkVagas() {
 
 function redirectToVagaId(param) {
     document.location.href = `../view/vagaExpandidaEmpresa.html?id=${param}`
+}
+
+var filter = false
+function popUpVisibility() {
+    filter = !filter;
+    if (filter == true) {
+        document.getElementById('filterVagas').style.display = 'flex'
+
+    } else {
+
+        document.getElementById('filterVagas').style.display = 'none'
+    }
 }

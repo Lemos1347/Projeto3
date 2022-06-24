@@ -7,6 +7,11 @@ let email
 let id
 let isAdmin
 
+let companiesAndUsers = []
+let companiesAndUsersFiltered = []
+let users = []
+let companies = []
+
 let auth = window.localStorage.getItem('auth')
 
 /* A adição dessa função que "escuta" um evento permite que verifiquemos se a página foi carregada */
@@ -15,7 +20,7 @@ document.onreadystatechange = async function () {
         $.ajax({
             url: "https://matchagas.herokuapp.com/User/Verify/Infos",
             headers: {"Authorization": `Bearer ${auth}`},
-            success: function(resul) { 
+            success: async function(resul) { 
                 nome = resul.name
                 email = resul.email,
                 id = resul.id
@@ -28,6 +33,29 @@ document.onreadystatechange = async function () {
                 if (imgUser) {
                     document.getElementById('userImage').src = imgUser 
                 }
+
+                await $.ajax({
+                    url: "https://matchagas.herokuapp.com/User/Users",
+                    headers: {"Authorization": `Bearer ${auth}`},
+                    success: function(resul) { 
+                        users = resul.message
+                    }
+                }).fail(function(err) {
+                    console.log(err.responseJSON.message)
+                })
+            
+                await $.ajax({
+                    url: "https://matchagas.herokuapp.com/Company/Companies",
+                    headers: {"Authorization": `Bearer ${auth}`},
+                    success: function(resul) { 
+                        companies = resul.message
+                    }
+                }).fail(function(err) {
+                    console.log(err.responseJSON.message)
+                })
+
+                companiesAndUsers = users.concat(companies)
+                companiesAndUsersFiltered = companiesAndUsers
                 checkVagas()
             }
         }).fail(function(err) {
@@ -37,38 +65,24 @@ document.onreadystatechange = async function () {
     }
 }
 
-let companiesAndUsers = []
-let users = []
-let companies = []
+function searchInput(valToSearch) {
+    if (valToSearch == "") {
+        companiesAndUsersFiltered = companiesAndUsers
+        document.getElementById('containerOfAll').innerHTML = ''
+    } else {
+        if (companiesAndUsersFiltered == '') {
+            companiesAndUsersFiltered = companiesAndUsers
+        }
+        companiesAndUsersFiltered = companiesAndUsersFiltered.filter((val) => {
+            return val.name.toLowerCase().includes(valToSearch.toLowerCase())
+        })
+        document.getElementById('containerOfAll').innerHTML = ''
+    }
+    checkVagas()
+}
 
 async function checkVagas() {
-
-    await $.ajax({
-        url: "https://matchagas.herokuapp.com/User/Users",
-        headers: {"Authorization": `Bearer ${auth}`},
-        success: function(resul) { 
-            users = resul.message
-        }
-    }).fail(function(err) {
-        console.log(err.responseJSON.message)
-    })
-
-    await $.ajax({
-        url: "https://matchagas.herokuapp.com/Company/Companies",
-        headers: {"Authorization": `Bearer ${auth}`},
-        success: function(resul) { 
-            companies = resul.message
-        }
-    }).fail(function(err) {
-        console.log(err.responseJSON.message)
-    })
-
-    console.log(users)
-    console.log(companies)
-    companiesAndUsers = users.concat(companies)
-    console.log(companiesAndUsers)
-    
-    companiesAndUsers.map((user) => {
+    companiesAndUsersFiltered.map((user) => {
         document.getElementById('containerOfAll').innerHTML += `
         <div class="col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
             <div class='vagaComponent'>
@@ -89,50 +103,6 @@ async function checkVagas() {
         </div>
     `
     })
-
-    // users.map((user) => {
-    //     document.getElementById('containerOfAll').innerHTML += `
-    //     <div class="col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
-    //         <div class='vagaComponent'>
-    //             <div class="row mainWidGet">
-    //                 <div class="col-5 imgHubVagas">
-    //                     <img src='../images/userTest.png'>
-    //                 </div>
-    //                 <div class="col-7">
-    //                     <div class="divRightHubVagasComponent" style="justify-content: space-between;">
-    //                         <h1 class="nomeVagaHubVagas" style="font-size: 15pt;">${user.name}</h1>
-    //                         <div class='divBtnSeeMore'>
-    //                             <button class="btnSeeMoreTrash" onclick = "deleteUser('${user.id}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // `
-    // })
-
-    // companies.map((company) => {
-    //     document.getElementById('containerOfAll').innerHTML += `
-    //     <div class="col-sm-12 col-md-6 col-lg-4 bodyVagaComponent">
-    //         <div class='vagaComponent'>
-    //             <div class="row mainWidGet">
-    //                 <div class="col-5 imgHubVagas">
-    //                     <img src='../images/userTest.png'>
-    //                 </div>
-    //                 <div class="col-7">
-    //                     <div class="divRightHubVagasComponent" style="justify-content: space-between;">
-    //                         <h1 class="nomeVagaHubVagas" style="font-size: 15pt;">${company.name}</h1>
-    //                         <div class='divBtnSeeMore'>
-    //                         <button class="btnSeeMoreTrash" onclick="deleteUser('${company.id}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // `
-    // })
 }
 
 function redirectToVagaId(param) {

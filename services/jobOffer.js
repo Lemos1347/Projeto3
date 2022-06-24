@@ -114,7 +114,7 @@ class jobOffer {
         return sucess
     }
 
-    async updateOffer(idOffer, name, type, location, description, requirements, hardSkills, softSkills, nameCompany, idCompany) {
+    async updateOffer(idOffer, name, type, location, description, requirements, hardSkills, softSkills, nameCompany, logoCompany, idCompany) {
         //Instanciação do DB
         const db = await sqlite.open({ filename: './database/matchagas.db', driver: sqlite3.Database });
 
@@ -164,12 +164,15 @@ class jobOffer {
         if(nameCompany) {
             queryComponent.push(`name_company="${nameCompany}"`)
         }
+        if(logoCompany) {
+            queryComponent.push(`logo_company="${logoCompany}"`)
+        }
 
         if(idCompany) {
             queryComponent.push(`id_company="${idCompany}"`)
         }
         //Validação se nenhum dado foi passado
-        if (!name && !type && !location && !description && !requirements && !hardSkills && !softSkills && !nameCompany && !idCompany) {
+        if (!name && !type && !location && !description && !requirements && !hardSkills && !softSkills && !nameCompany && !logoCompany && !idCompany) {
             const error = {
                 type: 'error',
                 message: 'Any Information was passed to Update'

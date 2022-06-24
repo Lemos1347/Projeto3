@@ -5,6 +5,7 @@ let hardSkills
 let softSkills
 let isVerified
 let imgUser
+var vagasFiltered = []
 
 let auth = window.localStorage.getItem('auth')
 window.onload = (event) => {
@@ -29,7 +30,7 @@ document.onreadystatechange = async function () {
             url: "https://matchagas.herokuapp.com/User/Verify/Infos",
             type: "GET",
             headers: { "Authorization": `Bearer ${auth}` },
-            success: function (resul) {
+            success: async function (resul) {
                 console.log(resul)
                 nome = resul.name
                 email = resul.email,
@@ -47,6 +48,21 @@ document.onreadystatechange = async function () {
                 if (imgUser) {
                     document.getElementById('userImage').src = imgUser 
                 }
+
+                await $.ajax({
+                    url: "https://matchagas.herokuapp.com/Offer/OfferUser",
+                    headers: { "authorization": `Bearer ${auth}` },
+                    success: function (resul) {
+                        console.log(resul)
+                        vagas = resul.offers
+                    }
+                }).fail(function (err) {
+                    console.log('teste')
+                    console.log(err.responseJSON.message)
+                })
+
+                vagasFiltered = vagas
+
                 checkVagas()
             }
         }).fail(function (err) {
@@ -95,30 +111,73 @@ let vagas = [
     },
 ]
 
+function searchInput(valToSearch) {
+    if(vagas) {
+        if (valToSearch == "") {
+            vagasFiltered = vagas
+            document.getElementById('containerOfAll').innerHTML = ''
+        } else {
+            if (vagasFiltered == '') {
+                vagasFiltered = vagas
+            }
+            vagasFiltered = vagasFiltered.filter((val) => {
+                return val.name.toLowerCase().includes(valToSearch.toLowerCase())
+            })
+            document.getElementById('containerOfAll').innerHTML = ''
+        }
+        checkVagas()
+    }
+}
+
+function orderedFilters(valToSearch1, valToSearch2) {
+    document.getElementById('applytBtn').style.display = 'none'
+    document.getElementById('declineBtn').style.display = 'block'
+    var vagasFiltered1 = []
+    var vagasFiltered2 = []
+    if (valToSearch1 == "Selecione") {
+        vagasFiltered = vagas
+        document.getElementById('containerOfAll').innerHTML = ''
+    } else {
+        vagasFiltered1 = vagasFiltered.filter((val) => {
+            return val.type.toLowerCase().includes(valToSearch1.toLowerCase())
+        })
+        document.getElementById('containerOfAll').innerHTML = ''
+    }
+
+    if (valToSearch2 == "Selecione") {
+        vagasFiltered = vagas
+        document.getElementById('containerOfAll').innerHTML = ''
+    } else {
+        vagasFiltered2 = vagasFiltered.filter((val) => {
+            return val.location.toLowerCase().includes(valToSearch2.toLowerCase())
+        })
+        document.getElementById('containerOfAll').innerHTML = ''
+    }
+
+    vagasFiltered = vagasFiltered1.concat(vagasFiltered2)
+
+    vagasFiltered = [...new Set(vagasFiltered)];
+    checkVagas()
+}
+
+function clearFilter() {
+    document.getElementById('applytBtn').style.display = 'block'
+    document.getElementById('declineBtn').style.display = 'none'
+    document.getElementById('type').value = 'Selecione'
+    document.getElementById('localVaga').value = 'Selecione'
+    vagasFiltered = vagas
+    document.getElementById('containerOfAll').innerHTML = ''
+    checkVagas()
+}
+
 async function checkVagas() {
 
     console.log(auth)
 
-    await $.ajax({
-        url: "https://matchagas.herokuapp.com/Offer/OfferUser",
-        headers: { "authorization": `Bearer ${auth}` },
-        success: function (resul) {
-            console.log(resul)
-            vagas = resul.offers
-        }
-    }).fail(function (err) {
-        console.log('teste')
-        console.log(err.responseJSON.message)
-    })
-
-    console.log(nome, id, email)
-
-    console.log(vagas)
-
     if (vagas == "") {
         document.getElementById('containerOfAll').innerHTML += `<h3 class = "" style = "margin-top: 120px;">OPS! Verificamos que você ainda não se candidatou a nenhuma vaga. Recomandamos a você acessar a página de "VAGAS".</h3>`
     } else {
-        vagas.map((vaga) => {
+        vagasFiltered.map((vaga) => {
 
             if (!vaga.logo_company) {
                 vaga.logo_company = "../images/userTest.png"
@@ -162,19 +221,14 @@ function generateRandomNumber() {
     return Math.floor(Math.random() * 100)
 }
 
-function popUpVisibility(visible) {
+var filter = false
+function popUpVisibility() {
+    filter = !filter;
+    if (filter == true) {
+        document.getElementById('filterVagas').style.display = 'flex'
 
-    console.log('Foi')
-    console.log(visible)
-
-    let displayToEdit = ''
-
-    if (visible == true) {
-        document.getElementById('bodyFiltersHubVagas').style.display = 'flex'
-
-        document.getElementById('toScroll').scrollIntoView();
     } else {
-        displayToEdit = 'none'
-        document.getElementById('bodyFiltersHubVagas').style.display = 'none'
+
+        document.getElementById('filterVagas').style.display = 'none'
     }
 }

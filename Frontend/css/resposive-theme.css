@@ -50,4 +50,7 @@
      .d-sm-none {
          display: none !important;
      }
+     .bodyVagaComponent {
+        width: 100%;
+      }
  }

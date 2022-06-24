@@ -14,31 +14,31 @@ document.onreadystatechange = async function () {
     if (document.readyState == "complete") {
         $.ajax({
             url: "https://matchagas.herokuapp.com/User/Verify/Infos",
-            headers: {"Authorization": `Bearer ${auth}`},
-            success: function(resul) { 
+            headers: { "Authorization": `Bearer ${auth}` },
+            success: function (resul) {
                 nome = resul.name
                 email = resul.email,
-                id = resul.id
+                    id = resul.id
                 hardSkills = resul.hardSkills,
-                softSkills = resul.softSkills,
-                isVerified = Boolean(resul.isVerified),
-                imgUser = resul.imgUser
+                    softSkills = resul.softSkills,
+                    isVerified = Boolean(resul.isVerified),
+                    imgUser = resul.imgUser
 
-                if(!isVerified) {
+                if (!isVerified) {
                     window.location.href = '/view/verifyAccount.html'
                 }
 
                 if (!hardSkills || !softSkills) {
-                    document.getElementById('containerOfAll').innerHTML += "<p class = 'mt-5'>Lembramos que você não finalizou o cadastro das suas informações como currículo ou teste de SoftSkills, sendo assim não conseguimos lhe oferecer uma informação a respeito de quantos porcento determinada vaga se assemelha ao seu perfil, porém todas as vagas que possuímos estão disponibilizadas para você ainda assim.</p>"
+                    document.getElementById('containerOfAll').innerHTML += "<p class = 'mt-5'>Lembramos que você não finalizou o cadastro das suas informações como currículo ou teste de SoftSkills, sendo assim não conseguimos lhe oferecer uma informação a respeito de quantos porcento determinada vaga se assemelha ao seu perfil, porém todas as vagas que possuímos estão disponibilizadas para você ainda assim.</p><div class='col-12'> <button onclick='cadastrarCurriculo()' class='creatCurriculoAfter'>Cadastrar currículo</button></div>"
                 }
 
                 document.getElementById('userNameNavBar').innerHTML = `${nome}`
                 if (imgUser) {
-                    document.getElementById('userImage').src = imgUser 
+                    document.getElementById('userImage').src = imgUser
                 }
                 loadVagas()
             }
-        }).fail(function(err) {
+        }).fail(function (err) {
             console.log(err.responseJSON.message)
             window.location.href = '../view/login.html'
         })
@@ -55,7 +55,7 @@ let vagas = [
         'nome': 'Analista de Sistemas 2',
         'matchPer': 60,
         'id': 2
-        
+
     },
     {
         'nome': 'Analista de Sistemas 3',
@@ -79,14 +79,21 @@ let vagas = [
     },
 ]
 
-vagasFiltered = []
+var vagasFiltered = []
+vagasFiltered = vagas
 
+function cadastrarCurriculo() {
+    window.location = "../view/createCurriculum.html";
+}
 function searchInput(valToSearch) {
     if (valToSearch == "") {
         vagasFiltered = vagas
         document.getElementById('containerOfAll').innerHTML = ''
     } else {
-        vagasFiltered = vagas.filter((val) => {
+        if (vagasFiltered == '') {
+            vagasFiltered = vagas
+        }
+        vagasFiltered = vagasFiltered.filter((val) => {
             return val.name.toLowerCase().includes(valToSearch.toLowerCase())
         })
         document.getElementById('containerOfAll').innerHTML = ''
@@ -94,14 +101,57 @@ function searchInput(valToSearch) {
     checkVagas()
 }
 
+function orderedFilters(valToSearch1, valToSearch2) {
+    document.getElementById('applytBtn').style.display = 'none'
+    document.getElementById('declineBtn').style.display = 'block'
+    var vagasFiltered1 = []
+    var vagasFiltered2 = []
+    if (valToSearch1 == "Selecione") {
+        vagasFiltered = vagas
+        document.getElementById('containerOfAll').innerHTML = ''
+    } else {
+        vagasFiltered1 = vagasFiltered.filter((val) => {
+            return val.type.toLowerCase().includes(valToSearch1.toLowerCase())
+        })
+        document.getElementById('containerOfAll').innerHTML = ''
+    }
+
+    if (valToSearch2 == "Selecione") {
+        vagasFiltered = vagas
+        document.getElementById('containerOfAll').innerHTML = ''
+    } else {
+        vagasFiltered2 = vagasFiltered.filter((val) => {
+            return val.location.toLowerCase().includes(valToSearch2.toLowerCase())
+        })
+        document.getElementById('containerOfAll').innerHTML = ''
+    }
+
+    vagasFiltered = vagasFiltered1.concat(vagasFiltered2)
+
+    vagasFiltered = [...new Set(vagasFiltered)];
+    checkVagas()
+}
+
+function clearFilter() {
+    console.log('teste')
+    document.getElementById('applytBtn').style.display = 'block'
+    document.getElementById('declineBtn').style.display = 'none'
+    document.getElementById('type').value = 'Selecione'
+    document.getElementById('localVaga').value = 'Selecione'
+    vagasFiltered = vagas
+    document.getElementById('containerOfAll').innerHTML = ''
+    checkVagas()
+}
+
+
 async function loadVagas() {
     await $.ajax({
         url: "https://matchagas.herokuapp.com/Offer/getOffers",
-        headers: {"Authorization": `Bearer "${auth}"`},
-        success: function(resul) { 
+        headers: { "Authorization": `Bearer "${auth}"` },
+        success: function (resul) {
             vagas = resul.offers
         }
-    }).fail(function(err) {
+    }).fail(function (err) {
         console.log(err.responseJSON.message)
     })
 
@@ -117,12 +167,12 @@ async function loadVagas() {
                 offerSoft: vagas[count].softSkills,
                 offerHard: vagas[count].hardSkills + "," + vagas[count].requirements
             },
-            headers: {"Authorization": `Bearer ${auth}`},
-            success: function(resul) {
+            headers: { "Authorization": `Bearer ${auth}` },
+            success: function (resul) {
                 var match = resul.percentage
                 vagas[count].match = resul.percentage
             }
-        }).fail(function(err) {
+        }).fail(function (err) {
             console.log(err.responseJSON.message)
         })
         count++
@@ -136,7 +186,7 @@ async function loadVagas() {
 
 async function checkVagas() {
     vagasFiltered.map((vaga) => {
-    
+
         if (!vaga.logo_company) {
             vaga.logo_company = "../images/userTest.png"
         }
@@ -165,7 +215,7 @@ async function checkVagas() {
                 </div>
             `
         } else {
-            if(vaga.match < 40) {
+            if (vaga.match < 40) {
                 color = 'red'
             } else if (vaga.match > 60) {
                 color = 'green'
@@ -203,7 +253,7 @@ async function checkVagas() {
 }
 
 function redirectToVagaId(param) {
-    if(window.localStorage.getItem('3e3c48b00c353bd2e99423f6a173a4b4') >= 100) {
+    if (window.localStorage.getItem('3e3c48b00c353bd2e99423f6a173a4b4') >= 100) {
         $.ajax({
             url: "https://matchagas.herokuapp.com/User/SendNotify",
             type: "POST",
@@ -211,13 +261,13 @@ function redirectToVagaId(param) {
             data: {
                 qntVagas: qntOffersGood
             },
-            headers: {"Authorization": `Bearer ${auth}`},
+            headers: { "Authorization": `Bearer ${auth}` },
             success: function () {
                 console.log('Noficação Enviada')
                 window.localStorage.setItem('3e3c48b00c353bd2e99423f6a173a4b4', 0)
                 document.location.href = `../view/vagaExpandida.html?id=${param}`
             }
-        }).fail(function(err) {
+        }).fail(function (err) {
             console.log(err)
         })
     } else {
@@ -229,17 +279,14 @@ function generateRandomNumber() {
     return Math.floor(Math.random() * 100)
 }
 
-function popUpVisibility(visible) {
-    let displayToEdit = ''
+var filter = false
+function popUpVisibility() {
+    filter = !filter;
+    if (filter == true) {
+        document.getElementById('filterVagas').style.display = 'flex'
 
-    if(visible == true) {
-        document.getElementById('bodyFiltersHubVagas').style.display = 'flex'
-
-        document.getElementById('toScroll').scrollIntoView();
     } else {
-        displayToEdit = 'none'
-        document.getElementById('bodyFiltersHubVagas').style.display = 'none'
-    }
 
-    
+        document.getElementById('filterVagas').style.display = 'none'
+    }
 }

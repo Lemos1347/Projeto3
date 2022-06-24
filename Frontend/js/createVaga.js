@@ -178,6 +178,9 @@ document.onreadystatechange = async function () {
                 logo_company = resul.logo_company
                 id = resul.id_company
                 document.getElementById("userNameNavBar").innerHTML = `${name_company}`
+                if (logo_company) {
+                    document.getElementById("companyLogo").src = `${logo_company}`
+                }
             }
         }).fail(function(err) {
             console.log(err.responseJSON.message)
@@ -214,6 +217,7 @@ function saveInfos() {
                 description: description,
                 requirements: requirements,
                 hardSkills: hardSkills,
+                logo_company: logo_company
             },
             success: async function(resul) {
                 console.log(resul.message)

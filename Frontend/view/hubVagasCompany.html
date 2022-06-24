@@ -40,7 +40,7 @@
 <body>
     <nav class="navbar fixed-top navbar-expand-lg bg-light">
         <div class="container">
-            <a class="navbar-brand" href="hubVagas.html">
+            <a class="navbar-brand" href="hubVagasCompany.html">
                 <img src="../images/logo.png" width="100" height="50" alt="Logo Brazilians in Tech">
             </a>
             <button class="navbar-toggler custom-toggler collapsed" type="button" data-toggle="collapse"
@@ -100,35 +100,37 @@
                         <input type='text' placeholder="Pesquise..." class="inputSearchHubVagas">
                     </div>
                 </div>
+                <!-- Filter-->
+                <div class="row filter-background justify-content-center" id="filterVagas">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                        <select class='generalInput' id="type" name='Tipo'>
+                            <option value="Tempo integral" selected>Tempo integral</option>
+                            <option value="Meio período">Meio período</option>
+                            <option value="Freelance">Freelance</option>
+                            <option value="Temporário">Temporário</option>
+                            <option value="Estágio">Estágio</option>
+                            <option value="Aprendiz">Aprendiz</option>
+                            <option value="Trainee">Trainee</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+
+                        <select class='generalInput' id="localVaga" name='Gênero'>
+                            <option value="Presencial" selected>Presencial</option>
+                            <option value="Remoto">Remoto</option>
+                            <option value="Hibrído">Hibrído</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-2"><button 
+                        class="btnAplicar" id='applytBtn'>Aplicar</button></div>
+                <div class="col-sm-12 col-md-6 col-lg-2"><button
+                        class="btnRemover" id='declineBtn'>Remover</button></div>
+                </div>
             </div>
     </div>
     </main>
     <!-- Filter-->
-    <section class="bodyFiltersHubVagas" id='bodyFiltersHubVagas'>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 btnForFiltroHubVagas">
-                    <button class="btnToCloseFilter" onclick="popUpVisibility(false)">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <div class="col-sm-12 titleFiltroHubVagas">
-                    <h1>Filtro</h1>
-                </div>
-                <div class="col-sm-12 d-flex justify-content-center" style="gap: 60px; margin-top: 20px;">
-                    <button class="btnForFiltro">A - Z</button>
-                    <button class="btnForFiltro">Z - A</button>
-                </div>
-                <div class="col-sm-12 d-flex justify-content-center" style="gap: 60px; margin-top: 50px;">
-                    <button class="btnForFiltro">+Recentes</button>
-                    <button class="btnForFiltro">+Antigas</button>
-                </div>
-                <div class="col-sm-12 d-flex justify-content-center">
-                    <button class="btnToApplyFiltro">Aplicar</button>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <!-- Footer-->
     <footer class="footer mt-auto">
         <div class="container">
@@ -136,19 +138,19 @@
                 <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
                     <ul class="list-inline mb-2">
                         <li class="list-inline-item">
-                            <a href="/sobre/">Sobre</a>
+                            <a href="https://braziliansintech.com/sobre/">Sobre</a>
                         </li>
                         <li class="list-inline-item">&sdot;</li>
                         <li class="list-inline-item">
-                            <a href="/contato/">Contato</a>
+                            <a href="https://braziliansintech.com/contato/">Contato</a>
                         </li>
                         <li class="list-inline-item">&sdot;</li>
                         <li class="list-inline-item">
-                            <a href="/termos/">Termos de Uso</a>
+                            <a href="https://braziliansintech.com/termos/">Termos de Uso</a>
                         </li>
                         <li class="list-inline-item">&sdot;</li>
                         <li class="list-inline-item">
-                            <a href="/privacidade/">Política de Privacidade</a>
+                            <a href="https://braziliansintech.com/privacidade/">Política de Privacidade</a>
                         </li>
                     </ul>
 
@@ -159,7 +161,7 @@
                 <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
-                            <a href="/contato/" target="_blank">
+                            <a href="https://braziliansintech.com/contato/" target="_blank">
                                 <i class="far fa-envelope fa-2x fa-fw"></i>
                             </a>
                         </li>
@@ -187,6 +189,8 @@
         </div>
     </footer>
     <!-- Footer -->
+    <!-- JavaScript File -->
+    <script src="../js/logOut.js"></script>
 
     <!-- Bootstrap core JavaScript -->
     <script src="../vendor/jquery/jquery.min.js"></script>

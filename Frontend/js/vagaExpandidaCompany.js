@@ -43,8 +43,9 @@ document.onreadystatechange = async function () {
                 if (isCompany === false) {
                     window.location.href = "view/hubVagas.html"
                 }
-
-                document.getElementById('companyLogo').src = logo_company
+                if (logo_company) {
+                    document.getElementById('companyLogo').src = logo_company
+                }
                 document.getElementById('userNameNavBar').innerHTML = `${nome}`
                 checkVaga()
             }
@@ -95,7 +96,9 @@ async function checkVaga() {
     document.getElementById('typeOffer').innerHTML = Offer.type
     document.getElementById('descriptionOffer').innerHTML = Offer.description
     document.getElementById('nameOffer').innerHTML = Offer.name
-    document.getElementById('vagaCompanyLogo').src = Offer.logo_company
+    if (Offer.logo_company) {
+        document.getElementById('vagaCompanyLogo').src = Offer.logo_company
+    }
 
     let requirements = Offer.requirements.split(",")
 

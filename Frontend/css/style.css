@@ -23,6 +23,7 @@
   src: url(https://fonts.gstatic.com/s/nunito/v24/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshdTQ3iazbXWjgeg.woff) format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
 @font-face {
   font-family: 'nunito-bold';
   font-style: normal;
@@ -31,6 +32,7 @@
   src: url(https://fonts.gstatic.com/s/nunito/v24/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmdTQ3iazbXWjgeg.woff) format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
 @font-face {
   font-family: 'nunito-semibold';
   font-style: normal;
@@ -39,6 +41,7 @@
   src: url(https://fonts.gstatic.com/s/nunito/v24/XRXI3I6Li01BKofiOc5wtlZ2di8HDGUmdTQ3iazbXWjgeg.woff) format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
 @font-face {
   font-family: 'nunito-italic';
   font-style: italic;
@@ -68,6 +71,24 @@ main {
 /* Navbar */
 nav {
   box-shadow: 0px 8px 16px 0px var(--shadow-black);
+}
+
+.nav-btn {
+  background-color: var(--amarelo-padrao);
+  height: max-content;
+  width: max-content;
+  border-radius: 25px;
+  padding: 10px 25px;
+  color: var(--branco-padrao) !important;
+}
+
+.nav-btn:hover {
+  background-color: var(--amarelo-hover);
+  color: var(--branco-padrao) !important;
+}
+
+.nav-link:hover {
+  color: var(--roxo-padrao) !important;
 }
 
 .nav-img-user {
@@ -141,7 +162,7 @@ nav {
   font-size: 20px;
 }
 
-.fa-home, .fa-envelope, .fa-phone-square, .fa-file-text, .fa-key {
+.fa-home, .envelope-amarelo, .fa-phone-square, .fa-file-text, .fa-key {
   color: var(--amarelo-padrao);
   font-size: 25px;
   margin-right: 10px;
@@ -221,6 +242,23 @@ h2 {
 .bodyHubVagas {
   margin-top: 25px;
   text-align: center;
+}
+
+.creatCurriculoAfter {
+  width: max-content;
+  height: max-content;
+  padding: 5px 60px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border: none;
+  background-color: var(--amarelo-padrao);
+  color: var(--branco-padrao);
+  border-radius: 25px;
+}
+
+.creatCurriculoAfter:hover {
+  background-color: var(--amarelo-hover);
 }
 
 .img-perfil {
@@ -511,7 +549,16 @@ h2 {
   }
 }
 
-
+.filter-background {
+  height: max-content;
+  padding: 15px 0px 0px 0px;
+  background-color: var(--cinza-claro-fundo);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  border-radius: 5px;
+  align-items: center;
+  display: none;
+}
 
 .listFilters {
   display: flex;
@@ -524,6 +571,29 @@ h2 {
 .searchIcon {
   position: absolute;
   margin-left: -165px;
+}
+.btnAplicar {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--amarelo-padrao);
+  border: none;
+  border-radius: 25px;
+  color: var(--branco-padrao);
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.btnRemover {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--roxo-padrao);
+  border: none;
+  border-radius: 25px;
+  color: var(--branco-padrao);
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .inputSearchHubVagas {
@@ -572,6 +642,7 @@ h2 {
 
 .divRightHubVagasComponent p {
   text-align: start;
+
 }
 
 .divRightHubVagasComponent p img {
@@ -1164,9 +1235,18 @@ body#login {
   background-size: cover !important;
 }
 
+.inputsLogin {
+  height: 50px;
+  border-radius: 12px !important;
+  width: 100%;
+  border: 2px solid var(--roxo-padrao);
+  padding-left: 20px;
+  font-family: 'nunito';
+  background-color: var(--cinza-claro-fundo);
+}
 .inputLogin {
   height: 50px;
-  border-radius: 12px;
+  border-radius: 12px !important;
   width: 80%;
   border: 2px solid var(--roxo-padrao);
   padding-left: 20px;
@@ -1232,6 +1312,12 @@ input:focus {
   border-radius: 23px;
   color: var(--branco-padrao);
   font-family: 'nunito';
+}
+.fa-eye, .fa-eye-slash{
+  position: absolute;
+  margin-top: 15px;
+  display: block;
+  right: 5%;
 }
 
 .btnEntrarLogin:hover {
@@ -1380,17 +1466,17 @@ p.create-account-frase {
 .btn-ver {
   color: var(--branco-padrao);
   background-color: var(--amarelo-padrao);
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 10px;
   margin-left: auto;
+  border: none;
 }
 
 .btn-ver i {
   font-size: 20px;
   text-align: center;
   align-items: center;
-  margin-left: 5px;
 }
 
 /*Fim*/
@@ -1617,7 +1703,7 @@ p.create-account-frase {
 /* Loading Teste */
 #divLoadingTeste {
   position: absolute;
-  top: 25%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   /* display: none; */
@@ -1948,7 +2034,7 @@ p.create-account-frase {
   align-items: center;
 }
 
-.btnAceitarUsuaria:hover{
+.btnAceitarUsuaria:hover {
   background-color: var(--amarelo-hover);
 }
 
@@ -1964,6 +2050,109 @@ p.create-account-frase {
   align-items: center;
 }
 
-.btnRecusarUsuaria:hover{
+.btnRecusarUsuaria:hover {
   background-color: var(--roxo-hover);
 }
+
+/*INDEX*/
+.border-index {
+  border: 10px solid var(--roxo-padrao);
+  border-radius: 20px;
+  height: 100%;
+  min-height: 500px;
+}
+
+.bolha-vermelhar {
+  height: 25px;
+  width: 25px;
+  background-color: #EC6D61;
+  border-radius: 25px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.bolha-amarelo {
+  height: 25px;
+  width: 25px;
+  background-color: #EDC358;
+  border-radius: 25px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.bolha-verde {
+  height: 25px;
+  width: 25px;
+  background-color: #5BC44E;
+  border-radius: 25px;
+  margin-top: 15px;
+  margin-left: 10px;
+
+}
+
+#hr-index {
+  height: 5px !important;
+  color: var(--roxo-padrao);
+
+}
+
+hr {
+  opacity: 1 !important;
+}
+
+.titulo-index {
+  margin-top: 9%;
+}
+
+.titulo-index span {
+  color: var(--amarelo-padrao);
+
+}
+
+.btn-index {
+  background-color: var(--amarelo-padrao);
+  height: max-content;
+  padding: 10px 80px;
+  border-radius: 30px;
+  border: none;
+}
+
+.border-index a {
+  text-decoration: none;
+  color: var(--branco-padrao);
+}
+
+.btn-index:hover {
+  background-color: var(--amarelo-hover);
+}
+
+.frase-index {
+  margin-bottom: 40px;
+}
+
+.container-index {
+  width: 100%;
+  background-color: var(--cinza-claro-fundo);
+  max-height: 320px;
+  min-height: 220px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.titulo-card {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+}
+
+.decricao-card {
+  text-align: left;
+  font-size: 16px;
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 0 !important;
+}
+
+/*INDEX*/

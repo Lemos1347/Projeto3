@@ -8,8 +8,8 @@ document.onreadystatechange = async function () {
 
         await $.ajax({
             url: "https://matchagas.herokuapp.com/Company",
-            headers: {"Authorization": `Bearer ${auth}`},
-            success: function(resul) { 
+            headers: { "Authorization": `Bearer ${auth}` },
+            success: function (resul) {
                 console.log(resul)
                 if (resul.isCompany == true) {
                     isCompany = true
@@ -17,7 +17,7 @@ document.onreadystatechange = async function () {
                     isCompany = false
                 }
             }
-        }).fail(function(err) {
+        }).fail(function (err) {
             console.log(err);
             window.location.href = '../view/login.html'
         })
@@ -27,47 +27,47 @@ document.onreadystatechange = async function () {
         if (isCompany) {
             $.ajax({
                 url: "https://matchagas.herokuapp.com/Company",
-                headers: {"Authorization": `Bearer ${auth}`},
-                success: function(resul) { 
+                headers: { "Authorization": `Bearer ${auth}` },
+                success: function (resul) {
                     var isVerified = resul.isVerified
                     if (Boolean(isVerified)) {
                         window.location.href = '/view/myVagasCompany.html'
                     }
                 }
-            }).fail(function(err) {
+            }).fail(function (err) {
                 console.log(err.responseJSON.message);
                 window.location.href = '../view/login.html'
             })
         } else {
             $.ajax({
                 url: "https://matchagas.herokuapp.com/User/Verify/Infos",
-                headers: {"Authorization": `Bearer ${auth}`},
-                success: function(resul) { 
+                headers: { "Authorization": `Bearer ${auth}` },
+                success: function (resul) {
                     var isVerified = Boolean(resul.isVerified)
 
-                    if(isVerified) {
+                    if (isVerified) {
                         window.location.href = '/view/createCurriculum.html'
                     }
                 }
-            }).fail(function(err) {
+            }).fail(function (err) {
                 console.log(err)
                 window.location.href = '../view/login.html'
-            }) 
+            })
         }
-        
+
         const params = new URLSearchParams(window.location.search)
         token = params.get('token')
-    
+
         if (token) {
             document.getElementById('text-lock').style.display = 'block'
             $.ajax({
                 url: "https://matchagas.herokuapp.com/User/VerifyAccount",
-                headers: {"Authorization": `Bearer ${auth}`},
+                headers: { "Authorization": `Bearer ${auth}` },
                 data: {
                     token: token
                 },
                 method: "POST",
-                success: async function(resul) { 
+                success: async function (resul) {
                     console.log(resul)
                     document.getElementById('text-lock').style.display = 'none'
                     document.getElementById('text-unlock').style.display = 'block'
@@ -79,7 +79,7 @@ document.onreadystatechange = async function () {
                         timer: 1500
                     })
                 }
-            }).fail(async function(err) {
+            }).fail(async function (err) {
                 console.log(err.responseJSON.error)
                 await Swal.fire({
                     position: 'center',
@@ -98,15 +98,18 @@ document.onreadystatechange = async function () {
 }
 
 function resend() {
+    document.getElementById("loadTriangulo").style.display = "block";
     if (isCompany) {
         $.ajax({
             url: "https://matchagas.herokuapp.com/Company/VerifyCode",
-            headers: {"Authorization": `Bearer ${auth}`},
+            headers: { "Authorization": `Bearer ${auth}` },
             data: {
                 token: token
             },
             method: "GET",
-            success: async function(resul) { 
+            success: async function (resul) {
+                document.getElementById("loadTriangulo").style.display = "none";
+
                 await Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -115,7 +118,8 @@ function resend() {
                     timer: 1500
                 })
             }
-        }).fail(async function(err) {
+        }).fail(async function (err) {
+            document.getElementById("loadTriangulo").style.display = "none";
             console.log(err.responseJSON.error)
             await Swal.fire({
                 position: 'center',
@@ -128,12 +132,13 @@ function resend() {
     } else {
         $.ajax({
             url: "https://matchagas.herokuapp.com/User/VerifyCode",
-            headers: {"Authorization": `Bearer ${auth}`},
+            headers: { "Authorization": `Bearer ${auth}` },
             data: {
                 token: token
             },
             method: "GET",
-            success: async function(resul) { 
+            success: async function (resul) {
+                document.getElementById("loadTriangulo").style.display = "none";
                 await Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -142,7 +147,8 @@ function resend() {
                     timer: 1500
                 })
             }
-        }).fail(async function(err) {
+        }).fail(async function (err) {
+            document.getElementById("loadTriangulo").style.display = "none";
             console.log(err.responseJSON.error)
             await Swal.fire({
                 position: 'center',
@@ -151,18 +157,20 @@ function resend() {
                 showConfirmButton: false,
                 timer: 1500
             })
-        }) 
+        })
     }
-    
+
 }
 
-function start(){
+function start() {
+    document.getElementById("loadTriangulo").style.display = "block";
     if (isCompany) {
         $.ajax({
             url: "https://matchagas.herokuapp.com/Company",
-            headers: {"Authorization": `Bearer ${auth}`},
-            success: async function(resul) { 
+            headers: { "Authorization": `Bearer ${auth}` },
+            success: async function (resul) {
                 var isVerified = resul.isVerified
+                document.getElementById("loadTriangulo").style.display = "none";
                 if (!Boolean(isVerified)) {
                     await Swal.fire({
                         position: 'center',
@@ -175,18 +183,19 @@ function start(){
                     window.location.href = '../view/myVagasCompany.html'
                 }
             }
-        }).fail(function(err) {
+        }).fail(function (err) {
+            document.getElementById("loadTriangulo").style.display = "none";
             console.log(err.responseJSON.message);
             window.location.href = '../view/login.html'
         })
     } else {
         $.ajax({
             url: "https://matchagas.herokuapp.com/User/Verify/Infos",
-            headers: {"Authorization": `Bearer ${auth}`},
-            success: async function(resul) { 
+            headers: { "Authorization": `Bearer ${auth}` },
+            success: async function (resul) {
                 var isVerified = Boolean(resul.isVerified)
-
-                if(!isVerified) {
+                document.getElementById("loadTriangulo").style.display = "none";
+                if (!isVerified) {
                     await Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -198,8 +207,9 @@ function start(){
                     window.location.href = '../view/createCurriculum.html'
                 }
             }
-        }).fail(function(err) {
+        }).fail(function (err) {
+            document.getElementById("loadTriangulo").style.display = "none";
             window.location.href = '../view/login.html'
-        }) 
+        })
     }
 }

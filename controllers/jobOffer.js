@@ -25,13 +25,13 @@ const createJobOffer = ( req, res ) => {
 
 const updateOffer = ( req, res ) => {
     //Pega as infos da requisição
-    const { id_vaga, name, type, local, description, requirements, hardSkills, softSkills, name_company, id_company } = req.body;
+    const { id_vaga, name, type, local, description, requirements, hardSkills, softSkills, name_company, logo_company, id_company } = req.body;
 
     //Instancia a classe criando uma vaga
-    const offer = new jobOfferService.jobOffer(id_vaga, name, type, local, description, requirements, hardSkills, softSkills, name_company, id_company);
+    const offer = new jobOfferService.jobOffer();
 
     //Tratamento das respostas do método da classe
-    offer.updateOffer(id_vaga, name, type, local, description, requirements, hardSkills, softSkills, name_company, id_company).then((resul) => {
+    offer.updateOffer(id_vaga, name, type, local, description, requirements, hardSkills, softSkills, name_company, logo_company, id_company).then((resul) => {
         if(resul.type === "error") {
             res.status(500).json({
                 error: resul.message

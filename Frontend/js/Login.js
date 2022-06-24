@@ -1,10 +1,3 @@
-// $(document).ready(function(){
-//     //Inicia os valores quando o botão for clicado
-//     $(".btnEntrarLogin").click(function(){
-//         console.log('rodou')
-//         var email = $(".inputLogin").val();
-//         alert(email);
-//     });
 
 var pressEnter = document.getElementById('passWord')
 pressEnter.addEventListener("keydown", function (e) {
@@ -65,3 +58,15 @@ function errorMessage(content) {
         document.getElementById('alertContainer').style.display = 'none'
     }, "4000")
 }
+var activateSenha = false;
+
+$( "#see" ).click(function() {
+    activateSenha = !activateSenha;
+    if(activateSenha == true){
+        $("#passWord").attr("type", "text");
+        $( "#see" ).removeClass( "fa fa-eye" ).addClass( "fa fa-eye-slash" );
+    }else{
+        $("#passWord").attr("type", "password");
+        $( "#see" ).removeClass( "fa fa-eye-slash" ).addClass( "fa fa-eye" );
+    }
+  });

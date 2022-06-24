@@ -207,3 +207,15 @@ function validateInformations(email, cpf, senha, file) {
 
     return true
 }
+var activateSenha = false;
+
+$( "#see" ).click(function() {
+    activateSenha = !activateSenha;
+    if(activateSenha == true){
+        $("#senhaUserCreateForm").attr("type", "text");
+        $( "#see" ).removeClass( "fa fa-eye" ).addClass( "fa fa-eye-slash" );
+    }else{
+        $("#senhaUserCreateForm").attr("type", "password");
+        $( "#see" ).removeClass( "fa fa-eye-slash" ).addClass( "fa fa-eye" );
+    }
+  });

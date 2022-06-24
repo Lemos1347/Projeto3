@@ -253,3 +253,16 @@ function validateInformations(email, cnpj, senha) {
 
     return true
 }
+
+var activateSenha = false;
+
+$( "#see" ).click(function() {
+    activateSenha = !activateSenha;
+    if(activateSenha == true){
+        $("#password").attr("type", "text");
+        $( "#see" ).removeClass( "fa fa-eye" ).addClass( "fa fa-eye-slash" );
+    }else{
+        $("#password").attr("type", "password");
+        $( "#see" ).removeClass( "fa fa-eye-slash" ).addClass( "fa fa-eye" );
+    }
+  });

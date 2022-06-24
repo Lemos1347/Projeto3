@@ -26,6 +26,9 @@
         href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
         rel='stylesheet' type='text/css'>
 
+    <!-- FontAwesomo 4-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/resposive-theme.css">
@@ -36,7 +39,7 @@
 
     <nav class="navbar fixed-top navbar-expand-lg bg-light">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="../index.html">
                 <img src="../images/logo.png" width="100" height="50" alt="Logo Brazilians in Tech">
             </a>
 
@@ -49,7 +52,7 @@
                 <ul class="navbar-nav">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/sobre/">SOBRE</a>
+                        <a class="nav-link" href="https://braziliansintech.com/sobre/">SOBRE</a>
                     </li>
 
                     <li class="nav-item">
@@ -57,34 +60,25 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/elas/">ELAS</a>
+                        <a class="nav-link" href="https://braziliansintech.com/elas/">ELAS</a>
                     </li>
-
-                    <li class="nav-item dropdown">
-                        <div class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="/oportunidades/">OPORTUNIDADES</a>
-                            <div class="dropdown-content">
-                                <a href="/oportunidades/empregos">Empregos</a>
-                                <a href="/oportunidades/estagios">Estágios</a>
-                                <a href="/oportunidades/estudos">Estudos</a>
-                            </div>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://braziliansintech.com/projetos/"><b>Projetos</b></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/projetos/"><b>Projetos</b></a>
+                        <a class="nav-link" href="https://braziliansintech.com/eventos/">EVENTOS</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/eventos/">EVENTOS</a>
+                        <a class="nav-link" href="https://braziliansintech.com/bitcapacita2020/">BiT Capacita</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/bitcapacita2020/">BiT Capacita</a>
+                        <a class="nav-link" href="userTypeAccount.html"><b>Sign up</b></a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link" href="/participe/"><b>PARTICIPE</b></a>
+                        <a class="nav-link nav-btn" href="login.html"><b>Log in</b></a>
                     </li>
                 </ul>
             </div>
@@ -115,21 +109,29 @@
                                 </span>
                             </div>
                             <div class="input-group mb-3 justify-content-center">
-                                <input placeholder="digite o seu email" type="text" id="email" class="inputLogin"
-                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <div class="col-10">
+                                    <input placeholder="digite o seu email" type="text" id="email" class="inputsLogin"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                </div>
                             </div>
-                            <div>
+                            
+                            
                                 <div class="col-10 offset-1 mt-2">
                                     <span class="span-login" style="margin-left: 8px;">
                                         senha<span class="asterisco">*</span>
                                     </span>
                                 </div>
                                 <div class="input-group mb-3 justify-content-center">
-                                    <input placeholder="digite a sua senha" type="password" id='passWord'
-                                        class="inputLogin" aria-label="Sizing example input"
-                                        aria-describedby="inputGroup-sizing-default">
+                                    <div class="col-10" style="position: relative;">
+                                        <i id="see" class="fa fa-eye" aria-hidden="true"></i>
+                                        <input placeholder="digite a sua senha" type="password" id='passWord'
+                                            class="inputsLogin" aria-label="Sizing example input"
+                                            aria-describedby="inputGroup-sizing-default">
+                                    </div>
                                 </div>
-                            </div>
+
+
+                           
                             <div style="margin-top: -15px;">
                                 <div class="col-10 offset-1 divOptionsLogin">
                                     <div class="remember-me">
@@ -137,12 +139,14 @@
                                         <span class="connectedSpan">manter-me logado</span>
                                     </div>
                                     <a href="forgotPassword.html" class="linkForgetPassword"><span class="forgetSpan"
-                                            style="line-height: 40px;text-decoration: underline;">esqueci a senha?</span></a>
+                                            style="line-height: 40px;text-decoration: underline;">esqueci a
+                                            senha?</span></a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <p id="cadastrar">Ainda não tem uma conta? <a href="userTypeAccount.html">Registrar-se</a></p>
+                                    <p id="cadastrar">Ainda não tem uma conta? <a
+                                            href="userTypeAccount.html">Registrar-se</a></p>
                                 </div>
                             </div>
                             <div class="col-sm-12 mt-4 justify-content-center">
@@ -151,22 +155,6 @@
                                         onclick="verifyLogin()">Entrar</button>
                                 </div>
                             </div>
-                            <!-- <div class="col-12 mt-4">
-                                <div class="lineForLogin">
-                                    <hr style="height: 1px; background-color: rgb(0, 0, 0); border: none; width: 20%;">
-                                    <span style="padding-bottom: 7px;">ou continue com</span>
-                                    <hr style="width: 20%; background-color: black;">
-                                </div>
-                            </div> -->
-                            <!-- <div class="col-sm-12 mt-4 d-flex flex-direction-row justify-content-center"
-                                style="gap: 30px;margin-bottom: 40px;">
-                                <div>
-                                    <img src="../images/Logo-Gmail.png" width="55px" height="55px">
-                                </div>
-                                <div>
-                                    <img src="../images/Logo-Facebook.png" width="55px" height="55px">
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -182,19 +170,19 @@
                 <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
                     <ul class="list-inline mb-2">
                         <li class="list-inline-item">
-                            <a href="/sobre/">Sobre</a>
+                            <a href="https://braziliansintech.com/sobre/">Sobre</a>
                         </li>
                         <li class="list-inline-item">&sdot;</li>
                         <li class="list-inline-item">
-                            <a href="/contato/">Contato</a>
+                            <a href="https://braziliansintech.com/contato/">Contato</a>
                         </li>
                         <li class="list-inline-item">&sdot;</li>
                         <li class="list-inline-item">
-                            <a href="/termos/">Termos de Uso</a>
+                            <a href="https://braziliansintech.com/termos/">Termos de Uso</a>
                         </li>
                         <li class="list-inline-item">&sdot;</li>
                         <li class="list-inline-item">
-                            <a href="/privacidade/">Política de Privacidade</a>
+                            <a href="https://braziliansintech.com/privacidade/">Política de Privacidade</a>
                         </li>
                     </ul>
 
@@ -205,7 +193,7 @@
                 <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
-                            <a href="/contato/" target="_blank">
+                            <a href="https://braziliansintech.com/contato/" target="_blank">
                                 <i class="far fa-envelope fa-2x fa-fw"></i>
                             </a>
                         </li>
@@ -233,13 +221,13 @@
         </div>
     </footer>
     <!-- Footer -->
-
-    <!-- JavaScript File -->
-    <script src="../js/Login.js"></script>
-
     <!-- Bootstrap core JavaScript -->
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript File -->
+    <script src="../js/Login.js"></script>
+
+
 
 
 </body>
